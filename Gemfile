@@ -7,7 +7,7 @@ gem 'devise', '1.1.2'
 gem 'haml'
 gem 'rspec',        '>= 2.0.0.beta.22'
 gem 'rspec-rails',  '>= 2.0.0.beta.22'
-gem 'formtastic',   :git => "git://github.com/justinfrench/formtastic.git", :branch => "rails3"
+gem 'formtastic',   :git => "git://github.com/justinfrench/formtastic.git", :branch => "1.1-stable"
 gem 'rails3-generators'
 gem 'paperclip'
 
