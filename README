@@ -1,0 +1,13 @@
+Thredded
+====================
+
+Thredded is an open source messageboard / forum that was born years ago as a small php script that's grown to something a little more involved. 
+
+This is it's 3rd Rails-based incarnation, with hopes that all the bad cruft can be left out and something more enjoyable and open will rise from old and "less good" code.
+
+--------------------
+
+Requirements:
+
+- mongodb installed and running
+- ensure that config/thredded_config.yml exists with site and application specific settings (config/thredded_config_sample.yml may be copied or moved into the proper location)
