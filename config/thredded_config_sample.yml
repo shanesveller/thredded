@@ -1,0 +1,20 @@
+DEFAULTS: &DEFAULTS
+  site_name: "My Messageboard"
+  email: "My Messageboard Mail-Bot <noreply@mysite.com>"
+  subject_prefix: "[My Messageboard] "
+  multi_site: true
+ 
+development:
+  domain: localhost:3000
+  address: http://localhost:3000
+  <<: *DEFAULTS
+  
+test:
+  domain: test:3000
+  address: http://test:3000
+  <<: *DEFAULTS
+ 
+production:
+  domain: domain.com
+  address: http://domain.com
+  <<: *DEFAULTS
