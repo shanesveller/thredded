@@ -11,6 +11,9 @@ gem 'formtastic',   :git => "git://github.com/justinfrench/formtastic.git", :bra
 gem 'rails3-generators'
 gem 'paperclip'
 
+# Rack Middleware
+gem 'rack-tidy'
+
 # Deploy with Capistrano
 # gem 'capistrano'
 
