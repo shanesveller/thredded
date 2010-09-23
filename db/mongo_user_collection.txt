@@ -1,0 +1,37 @@
+user = { '_id': ObjectID('...'),
+          'name': "carl",
+          'email': "carl@email.com",
+          'password': "...",
+          'password_confirmation': "...",
+		  'time_zone': 'Eastern Time (US & Canada)',
+		  
+		  // general user information
+		  'location': 'Boston, MA',
+		  'website': 'http://google.com',
+		  'birthday': '1977-03-01',
+		
+		  // general profile settings
+		  'hide_avatars': true,
+		  'hide_your_email': true,
+
+          'created_at': Wed Apr 28 14:34:50 -0000 2010,
+          'updated_at': Wed Apr 28 14:34:50 -0000 2010,
+          'deleted_at': Wed May 12 10:22:00 -0000 2010,
+
+          'memberships': [
+            {'messageboard_id': ObjectID('...'),
+             'role': 'member',
+             'invitations': 0,
+             'access_key': '* 3b6Q6skmvJk0kmzVKkHFBwyLK9bj4EeSRCCBfhHJ',
+             'post_count': 4543,
+			 'email_token': 'skmvJk0k',
+			 'notify_on': ['private_message','new_thread','new_post', 'at_mention']
+
+			 'last_active_at': Wed Apr 28 14:34:50 -0000 2010,
+             'created_at': Wed Apr 28 14:34:50 -0000 2010,
+             'updated_at': Wed Apr 28 14:34:50 -0000 2010,
+             'deleted_at': Wed May 12 10:22:00 -0000 2010
+            }
+
+          ]
+}
