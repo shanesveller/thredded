@@ -1,0 +1,49 @@
+topic = { '_id': ObjectID('...'),
+          'messageboard_id': ObjectID('...'),
+          'user': "username1",
+          'last_user': "username3",
+          'title': "subject title header etc",
+          'post_count': 23,
+          // 'status': ['locked', 'pinned'],
+          // 'categories': ['nws', 'comedy gold', 'sports', 'politics'],
+          // 'not_work_safe': true,
+          // 'private': true,
+          // 'private_user_ids': [ObjectID('...'), ObjectID('...'), ObjectID('...')],
+          // 'subscribers': ["email1@domain.com", "email2@domain.com", "email3@domain.com"],
+          'created_at': Wed Apr 28 14:34:50 -0000 2010,
+          'updated_at': Wed Apr 28 14:34:50 -0000 2010,
+          'deleted_at': Wed May 12 10:22:00 -0000 2010,
+
+          'posts': [
+            
+            {'user': "username1",
+             'content': "Lots of text goes here ...",
+             'ip': '24.192.34.10',
+             'created_at': Wed Apr 28 14:34:50 -0000 2010,
+             'updated_at': Wed Apr 28 14:34:50 -0000 2010,
+             'deleted_at': Wed May 12 10:22:00 -0000 2010
+            },
+
+            {'user': "username3",
+             'content': "Lots of text goes here ...",
+             'ip': '24.192.34.10',
+             'created_at': Wed Apr 28 14:34:50 -0000 2010,
+             'updated_at': Wed Apr 28 14:34:50 -0000 2010,
+             'deleted_at': Wed May 12 10:22:00 -0000 2010
+            },
+
+            {'user': "username2",
+             'content': "Lots of text goes here ...",
+             'ip': '24.192.34.10',
+             'created_at': Wed Apr 28 14:34:50 -0000 2010,
+             'updated_at': Wed Apr 28 14:34:50 -0000 2010,
+             'deleted_at': Wed May 12 10:22:00 -0000 2010
+            }
+
+          ]
+}
+db.topics.save(topic)
+db.topics.ensureIndex({'updated_at':1})
+db.topics.ensureIndex({'categories':1})
+db.topics.ensureIndex({'status':1})
+db.topics.ensureIndex({'private_users':1})
