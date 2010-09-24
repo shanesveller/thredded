@@ -13,6 +13,7 @@ user = { '_id': ObjectID('...'),
 		  // general profile settings
 		  'hide_avatars': true,
 		  'hide_your_email': true,
+          'filter_cursing': false,
 
           'created_at': Wed Apr 28 14:34:50 -0000 2010,
           'updated_at': Wed Apr 28 14:34:50 -0000 2010,
@@ -22,10 +23,23 @@ user = { '_id': ObjectID('...'),
             {'messageboard_id': ObjectID('...'),
              'role': 'member',
              'invitations': 0,
-             'access_key': '* 3b6Q6skmvJk0kmzVKkHFBwyLK9bj4EeSRCCBfhHJ',
+             'access_key': '3b6Q6skmvJk0kmzVKkHFBwyLK9bj4EeSRCCBfhHJ',
              'post_count': 4543,
 			 'email_token': 'skmvJk0k',
 			 'notify_on': ['private_message','new_thread','new_post', 'at_mention']
+
+			 'last_active_at': Wed Apr 28 14:34:50 -0000 2010,
+             'created_at': Wed Apr 28 14:34:50 -0000 2010,
+             'updated_at': Wed Apr 28 14:34:50 -0000 2010,
+             'deleted_at': Wed May 12 10:22:00 -0000 2010
+            }
+            {'messageboard_id': ObjectID('...'),
+             'role': 'admin',
+             'invitations': 0,
+             'access_key': 'HdMdeqjXFlqMzYMfWUtthBnJoceOH6TIkZCPqDy5',
+             'post_count': 1235,
+			 'email_token': 'xCtOvjJl',
+			 'notify_on': ['private_message','at_mention']
 
 			 'last_active_at': Wed Apr 28 14:34:50 -0000 2010,
              'created_at': Wed Apr 28 14:34:50 -0000 2010,
