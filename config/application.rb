@@ -58,11 +58,8 @@ module Thredded
     config.filter_parameters += [:password, :password_confirmation]
     
     # Rack middlewares to use
-    
-    
     config.middleware.delete ActionDispatch::Flash
     config.middleware.insert_before Warden::Manager, ActionDispatch::Flash
     config.middleware.insert_before ActionDispatch::Flash, Rack::Tidy, 'indent-spaces' => 2
-    
   end
 end 
