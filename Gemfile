@@ -1,13 +1,13 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.0'
-gem 'mongoid', :git => 'git://github.com/mongoid/mongoid.git'
-gem 'bson_ext', '1.0.9'
-gem 'devise', '1.1.2'
+gem 'rails',			'3.0.0'
+gem 'mongoid',			:git => 'git://github.com/mongoid/mongoid.git'
+gem 'bson_ext',			'1.0.9'
+gem 'devise',			:git => "git://github.com/plataformatec/devise.git"
 gem 'haml'
-gem 'rspec',        '>= 2.0.0.beta.22'
-gem 'rspec-rails',  '>= 2.0.0.beta.22'
-gem 'formtastic',   :git => "git://github.com/justinfrench/formtastic.git", :branch => "1.1-stable"
+gem 'rspec',			:git => "git://github.com/rspec/rspec"
+gem 'rspec-rails',		:git => "git://github.com/rspec/rspec-rails"
+gem 'formtastic',   	:git => "git://github.com/justinfrench/formtastic.git", :branch => "1.1-stable"
 gem 'rails3-generators'
 gem 'paperclip'
 
@@ -18,7 +18,7 @@ gem 'rack-tidy'
 # gem 'capistrano'
 
 # To use debugger
-gem 'ruby-debug'
+## gem 'ruby-debug'
 
 # :test specific gems
 group :test do
@@ -33,4 +33,10 @@ end
 # :development specific gems
 group :development do
   gem 'mongrel'
+  # convenience gems in dev environment
+  gem 'wirble'
+  gem 'hirb'
+  gem 'awesome_print', :require => 'ap'
 end
+
+

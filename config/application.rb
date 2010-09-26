@@ -2,11 +2,11 @@ require File.expand_path('../boot', __FILE__)
 
 # goodbye, activerecord
 # require 'rails/all'
+require "rack/tidy"
 require "mongoid/railtie"
 require "action_controller/railtie"
 require "action_mailer/railtie"
 require "active_resource/railtie"
-require "rack/tidy"
 
 # If you have a Gemfile, require the gems listed there, including any gems
 # you've limited to :test, :development, or :production.
@@ -43,7 +43,7 @@ module Thredded
       g.orm                 :mongoid
       g.template_engine     :erb
       g.test_framework      :rspec, :fixture => true,
-                            :views => false, 
+                            :views => false,
                             :fixture => true
       g.fixture_replacement :factory_girl, :dir => "spec/factories"
     end
@@ -58,6 +58,11 @@ module Thredded
     config.filter_parameters += [:password, :password_confirmation]
     
     # Rack middlewares to use
-    config.middleware.use Rack::Tidy, 'indent-spaces' => 2
+    
+    
+    config.middleware.delete ActionDispatch::Flash
+    config.middleware.insert_before Warden::Manager, ActionDispatch::Flash
+    config.middleware.insert_before ActionDispatch::Flash, Rack::Tidy, 'indent-spaces' => 2
+    
   end
-end
+end 
