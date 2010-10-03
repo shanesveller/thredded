@@ -4,8 +4,8 @@
 module THREDDED
   def self.[](key)
     unless @config
-      raw_config = File.read(RAILS_ROOT + "/config/thredded_config.yml")
-      @config = YAML.load(raw_config)[RAILS_ENV].symbolize_keys
+      raw_config = File.read(Rails.root.to_s + "/config/thredded_config.yml")
+      @config = YAML.load(raw_config)[Rails.env].symbolize_keys
     end
     @config[key]
   end

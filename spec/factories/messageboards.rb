@@ -1,9 +1,7 @@
-# Read about factories at http://github.com/thoughtbot/factory_girl
-
 Factory.define :messageboard do |f|
-  f.name "MyString"
-  f.description "MyString"
-  f.theme "MyString"
-  f.security "MyString"
-  f.topic_count 1
+  f.name "default"
+  f.description "This is a description of the messageboard"
+  f.theme "default"
+  f.security :public
+  f.topic_count 0
 end

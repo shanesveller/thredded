@@ -15,10 +15,6 @@ end
 
 # Database
 
-Given /^no user exists with an email of "(.*)"$/ do |email|
-  assert_nil  User.find(:first, :conditions => {:email => email})
-end
-
 Given /^I signed up with "(.*)\/(.*)"$/ do |email, password|
   user = Factory :user,
     :email                 => email,
