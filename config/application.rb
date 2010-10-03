@@ -2,7 +2,7 @@ require File.expand_path('../boot', __FILE__)
 
 # goodbye, activerecord
 # require 'rails/all'
-require "rack/tidy"
+# require "rack/tidy"
 require "mongoid/railtie"
 require "action_controller/railtie"
 require "action_mailer/railtie"
@@ -60,6 +60,6 @@ module Thredded
     # Rack middlewares to use
     config.middleware.delete ActionDispatch::Flash
     config.middleware.insert_before Warden::Manager, ActionDispatch::Flash
-    config.middleware.insert_before ActionDispatch::Flash, Rack::Tidy, 'indent-spaces' => 2
+#   config.middleware.insert_before ActionDispatch::Flash, Rack::Tidy, 'indent-spaces' => 2
   end
 end 
