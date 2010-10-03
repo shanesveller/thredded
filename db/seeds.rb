@@ -1,7 +1,12 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
 # Examples:
-#
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
+
+# remember - to run this ... 
+# rake db:seed
+
+Messageboard.create(  :name => "default", 
+                      :description => "this is a default messageboard. you can change this description at any time",
+                      :theme => "default",
+                      :topic_count => 0,
+                      :security => :public  )

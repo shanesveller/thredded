@@ -1,8 +1,8 @@
 class HomeController < ApplicationController
 
   def index
-    # flash.now[:notice] = "hi"
     @users = User.all
+    @messageboard_name = params[:id].present? ? params[:id] : THREDDED[:default_messageboard_name]
   end
 
 end

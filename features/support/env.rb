@@ -48,6 +48,7 @@ ActionController::Base.allow_rescue = false
 # block that will explicitly put your database in a known state.
 # Cucumber::Rails::World.use_transactional_fixtures = false
 
+require 'ruby-debug'
 
 require 'factory_girl'
 require 'factory_girl/step_definitions'

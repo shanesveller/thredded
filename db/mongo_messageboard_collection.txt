@@ -1,0 +1,13 @@
+messageboard = { 
+		  '_id': ObjectID('...'),
+		  'user_id': ObjectID('...'),
+          'name': 'default',
+          'description': 'this is a default messageboard. you can change this description at any time',
+		  'theme': 'default',
+		  'security': 'public', // 'private', 'logged_in'
+		  'topic_count': 4000,
+
+          'created_at': Wed Apr 28 14:34:50 -0000 2010,
+          'updated_at': Wed Apr 28 14:34:50 -0000 2010,
+          'deleted_at': Wed May 12 10:22:00 -0000 2010
+}

@@ -2,7 +2,8 @@ DEFAULTS: &DEFAULTS
   site_name: "My Messageboard"
   email: "My Messageboard Mail-Bot <noreply@mysite.com>"
   subject_prefix: "[My Messageboard] "
-  default_board: "default"
+  default_messageboard_name: "default"
+  default_messageboard_home: "home" # or "topics"
   multi_site: false
   multi_site_location: "path" # or "subdomain"
  
