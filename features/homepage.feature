@@ -15,7 +15,7 @@ Feature: Visiting the homepage
       And I set the default messageboard home to "topics"
       And I set the default messageboard to "thredded"
     When I go to the homepage
-    Then I should see "thredded home"
+    Then I should see "thredded threads"
     And I should be signed out
 
   Scenario: The default messageboard is private 
@@ -40,5 +40,5 @@ Feature: Visiting the homepage
       And I set the default messageboard to "thredded"
       And I have signed in with "confirmed@person.com/password"
     When I go to the homepage
-    Then I should see "thredded home"
+    Then I should see "thredded threads"
     And I should be signed in
