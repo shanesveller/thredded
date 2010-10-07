@@ -1,3 +1,8 @@
 AfterConfiguration do |config|
-  THREDDED = Hash.new
+  unless @after_conf
+    THREDDED = Hash.new
+    THREDDED[:site_name] = "My Messageboard Site"
+  else
+    @after_conf = true
+  end
 end

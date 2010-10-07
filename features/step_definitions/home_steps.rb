@@ -1,3 +1,7 @@
+Then /^I should see a list of threads$/ do
+  page.should have_css('#topic_listing')
+end
+
 Then /^I should see the main site homepage$/ do
   page.should have_css('#site_home')
 end

@@ -4,7 +4,6 @@ Feature: Sign in
   Should be able to sign in
 
     Scenario: User is not signed up
-      Given no user exists with an email of "fake@person.com"
       When I go to the sign in page
       And I sign in as "fake@person.com/password"
       Then I should see "Invalid email or password."
