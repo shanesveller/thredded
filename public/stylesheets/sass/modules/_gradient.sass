@@ -1,12 +1,5 @@
-#
-@mixin gradient($first, $second) {
-#
-background: $second;
-#
-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$first', endColorstr='$second');
-#
-background: -webkit-gradient(linear, left top, left bottom, from($first), to($second));
-#
-background: -moz-linear-gradient(top, $first, $second);
-#
-}
+=box_gradient(!top,!bottom)
+  background-image = "-moz-linear-gradient(top, #{!top}, #{!bottom})"
+  background-image = "-webkit-gradient(linear,left top,left bottom,color-stop(0, #{!top}),color-stop(1, #{!bottom}))"
+  -ms-filter = "\"progid:DXImageTransform.Microsoft.gradient(startColorStr=’#{!top}’, EndColorStr=’#{!bottom}’)\""
+  *filter = "progid:DXImageTransform.Microsoft.gradient(startColorStr=’#{!top}’, EndColorStr=’#{!bottom}’)"

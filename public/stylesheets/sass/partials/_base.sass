@@ -1,8 +1,34 @@
 body
   text-align: center
+  background: #FFFFCC
+  color: #333
+  font-family: Arial, Verdana, Tahoma, Helvetica, sans-serif
   a
     color: maroon
     text-decoration: none
     &:hover
       text-decoration: underline
-      
+  h1
+    color: #8B1A1A
+    +text_shadow("1", "1", "0", "#fff")
+    font-family: 'Yanone Kaffeesatz', arial, serif
+    font-size: 38px
+    line-height: 44px
+    margin-bottom: 12px
+    margin-left: 12px
+  form
+    label
+      font-size: 11px
+      display: block
+      text-transform: uppercase
+      letter-spacing: 2px
+      margin: 12px 0 12px 6px
+    input
+      &[type="text"], &[type="password"]
+        border: solid 1px #ffffcc
+        +round-corners("5px")
+        +box-shadow("2px", "2px", "1px", "#AAA")
+        background: #FFFFCC
+        padding: 12px
+        font-size: 24px
+        
