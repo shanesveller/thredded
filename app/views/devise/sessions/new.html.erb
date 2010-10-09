@@ -1,6 +1,9 @@
+<% content_for :page_id do %>session_mgmt<% end %>
+<% content_for :page_title do %><%= THREDDED[:site_name] %> | Log In<% end %>
+
 <h1>Log in</h1>
 
-<%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :class => "login"}) do |f| %>
+<%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :class => "session_mgmt"}) do |f| %>
   <p><%= f.label :email %>
   <%= f.text_field :email %></p>
 

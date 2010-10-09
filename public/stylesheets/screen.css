@@ -1,0 +1,270 @@
+/* ................................................................................ */
+/* ............................................................ http://thredded.com */
+/* .............................................. http://github.com/jayroh/thredded */
+/* ...................................................... http://twitter.com/jayroh */
+/* ................................................................................ */
+/* line 14, ../../../../../../../../Users/Joel/.rvm/gems/ree-1.8.7-2010.02@thredded3/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-weight: inherit;
+  font-style: inherit;
+  font-size: 100%;
+  font-family: inherit;
+  vertical-align: baseline;
+}
+
+/* line 17, ../../../../../../../../Users/Joel/.rvm/gems/ree-1.8.7-2010.02@thredded3/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+body {
+  line-height: 1;
+  color: black;
+  background: white;
+}
+
+/* line 19, ../../../../../../../../Users/Joel/.rvm/gems/ree-1.8.7-2010.02@thredded3/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+  list-style: none;
+}
+
+/* line 21, ../../../../../../../../Users/Joel/.rvm/gems/ree-1.8.7-2010.02@thredded3/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  vertical-align: middle;
+}
+
+/* line 23, ../../../../../../../../Users/Joel/.rvm/gems/ree-1.8.7-2010.02@thredded3/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+/* line 25, ../../../../../../../../Users/Joel/.rvm/gems/ree-1.8.7-2010.02@thredded3/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+  quotes: "" "";
+}
+/* line 96, ../../../../../../../../Users/Joel/.rvm/gems/ree-1.8.7-2010.02@thredded3/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+}
+
+/* line 27, ../../../../../../../../Users/Joel/.rvm/gems/ree-1.8.7-2010.02@thredded3/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+a img {
+  border: none;
+}
+
+/* ----------- Clearfix --------------- */
+/* line 3, sass/partials/_clearfix.sass */
+.clearfix {
+  *display: inline-block;
+}
+/* line 5, sass/partials/_clearfix.sass */
+.clearfix:after {
+  content: " ";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+/* ----------- Clearfix as mixin --------------- */
+@font-face {
+  font-family: "ChunkFive";
+  src: url(/fonts/chunkfive/Chunkfive-webfont.eot);
+  src: local("☺"), url(/fonts/chunkfive/Chunkfive-webfont.woff) format('woff'), url(/fonts/chunkfive/Chunkfive-webfont.ttf) format('truetype'), url(/fonts/chunkfive/Chunkfive-webfont.svg#webfontb5K2fJwj) format('svg');
+}
+
+/* line 2, sass/partials/_base.sass */
+body {
+  text-align: center;
+  background: #ded8c7;
+  color: #393027;
+  font-family: Arial, Verdana, Tahoma, Helvetica, sans-serif;
+}
+/* line 7, sass/partials/_base.sass */
+body article, body aside, body figure, body footer, body header, body hgroup, body nav, body section {
+  display: block;
+}
+/* line 9, sass/partials/_base.sass */
+body a {
+  color: #8c1a1a;
+  text-decoration: none;
+  border-bottom: dotted 1px #8c1a1a;
+}
+/* line 13, sass/partials/_base.sass */
+body h1 {
+  color: #42351e;
+  font-family: "ChunkFive", arial, serif;
+  text-shadow: white -1px -1px 0;
+  font-size: 38px;
+  line-height: 38px;
+  margin-bottom: 6px;
+  margin-left: 12px;
+}
+
+/* line 2, sass/partials/_layout.sass */
+body > section, body > footer {
+  text-align: left;
+  margin: 80px auto 0;
+  width: 800px;
+  display: block;
+}
+
+/* line 1, sass/partials/_header.sass */
+body > header {
+  text-align: left;
+  width: 100%;
+}
+/* line 4, sass/partials/_header.sass */
+body > header nav {
+  line-height: 38px;
+  padding: 0 10px;
+  text-shadow: #1f1b16 1px 1px 0;
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #6f5e4c), color-stop(100%, #635444));
+  background-image: -moz-linear-gradient(top, #6f5e4c 0%, #635444 100%);
+  background-image: linear-gradient(top, #6f5e4c 0%, #635444 100%);
+}
+/* line 10, sass/partials/_header.sass */
+body > header nav ul li {
+  display: inline-block;
+  padding: 0 10px;
+}
+/* line 13, sass/partials/_header.sass */
+body > header nav ul li a {
+  color: #faf7ee;
+  font-family: "Yanone Kaffeesatz", arial, serif;
+  text-transform: uppercase;
+  font-size: 22px;
+  border: none;
+}
+/* line 19, sass/partials/_header.sass */
+body > header nav ul li a:hover {
+  text-decoration: none;
+}
+
+/* line 2, sass/partials/_footer.sass */
+body > footer p {
+  font-size: 10px;
+}
+
+/* line 2, sass/partials/_thredded_common.sass */
+#session_mgmt section {
+  text-align: center;
+}
+
+/* line 5, sass/partials/_thredded_common.sass */
+form.session_mgmt {
+  background: white;
+  border: solid 1px #faf7ee;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -o-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -khtml-border-radius: 10px;
+  border-radius: 10px;
+  padding: 24px 12px;
+  width: 400px;
+  margin: 0 auto;
+  text-align: left;
+}
+/* line 13, sass/partials/_thredded_common.sass */
+form.session_mgmt p {
+  margin-bottom: 18px;
+}
+/* line 15, sass/partials/_thredded_common.sass */
+form.session_mgmt p:last-child {
+  margin-bottom: 0;
+}
+/* line 17, sass/partials/_thredded_common.sass */
+form.session_mgmt label {
+  color: #8c1a1a;
+  font-size: 11px;
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0px 0 6px 6px;
+  cursor: pointer;
+}
+/* line 26, sass/partials/_thredded_common.sass */
+form.session_mgmt input[type="text"], form.session_mgmt input[type="password"] {
+  border: solid 1px #faf7ee;
+  color: #88837b;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -o-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -khtml-border-radius: 10px;
+  border-radius: 10px;
+  -moz-box-shadow: #635444 2px 2px 0 0;
+  -webkit-box-shadow: #635444 2px 2px 0 0;
+  -o-box-shadow: #635444 2px 2px 0 0;
+  box-shadow: #635444 2px 2px 0 0;
+  background: #faf7ee;
+  padding: 12px;
+  font-size: 24px;
+  width: 372px;
+}
+/* line 35, sass/partials/_thredded_common.sass */
+form.session_mgmt input:focus {
+  color: #302614;
+}
+/* line 37, sass/partials/_thredded_common.sass */
+form.session_mgmt input[type="checkbox"] {
+  float: left;
+  margin-top: -2px;
+}
+/* line 40, sass/partials/_thredded_common.sass */
+form.session_mgmt input[type="button"], form.session_mgmt input[type="submit"] {
+  border: solid 1px #7f1b1b;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -o-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -khtml-border-radius: 10px;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  font-size: 11px;
+  letter-spacing: 2px;
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #992222), color-stop(100%, #790f0f));
+  background-image: -moz-linear-gradient(top, #992222 0%, #790f0f 100%);
+  background-image: linear-gradient(top, #992222 0%, #790f0f 100%);
+  padding: 5px 10px;
+  text-shadow: #1f1b16 1px 1px 0;
+  text-transform: lowercase;
+  width: 100%;
+}
+/* line 52, sass/partials/_thredded_common.sass */
+form.session_mgmt input[type="button"]:focus, form.session_mgmt input[type="submit"]:focus {
+  font-weight: bold;
+  outline: 0;
+}
+/* line 55, sass/partials/_thredded_common.sass */
+form.session_mgmt input[type="button"]:active, form.session_mgmt input[type="submit"]:active {
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #4c0707), color-stop(100%, #582121));
+  background-image: -moz-linear-gradient(top, #4c0707 0%, #582121 100%);
+  background-image: linear-gradient(top, #4c0707 0%, #582121 100%);
+}
+
+/* line 57, sass/partials/_thredded_common.sass */
+p.shared_links {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: 12px;
+  padding-left: 12px;
+}
+/* line 63, sass/partials/_thredded_common.sass */
+p.shared_links a {
+  margin-right: 10px;
+}

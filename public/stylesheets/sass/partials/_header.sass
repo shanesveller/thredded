@@ -4,16 +4,17 @@ body > header
   nav
     line-height: 38px
     padding: 0 10px
-    +box_gradient("#6B4226", "#5E2605")
-    +text_shadow("1", "1", "0", "#000000")
+    +text-shadow(#1f1b16, 1px, 1px, 0)
+    +linear-gradient(color-stops(#6f5e4c, #635444))
     ul
       li
         display: inline-block
         padding: 0 10px
         a
-          color: #fff
+          color: #faf7ee
           font-family: 'Yanone Kaffeesatz', arial, serif
           text-transform: uppercase
           font-size: 22px
+          border: none
           &:hover
             text-decoration: none

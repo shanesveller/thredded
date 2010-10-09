@@ -1,34 +1,20 @@
++font-face("ChunkFive", font-files("/fonts/chunkfive/Chunkfive-webfont.woff", woff, "/fonts/chunkfive/Chunkfive-webfont.ttf", truetype, "/fonts/chunkfive/Chunkfive-webfont.svg#webfontb5K2fJwj", svg), "/fonts/chunkfive/Chunkfive-webfont.eot")
 body
   text-align: center
-  background: #FFFFCC
-  color: #333
+  background: #ded8c7
+  color: #393027
   font-family: Arial, Verdana, Tahoma, Helvetica, sans-serif
+  article,aside,figure,footer,header,hgroup,nav,section
+    display: block
   a
-    color: maroon
+    color: #8c1a1a
     text-decoration: none
-    &:hover
-      text-decoration: underline
+    border-bottom: dotted 1px #8c1a1a
   h1
-    color: #8B1A1A
-    +text_shadow("1", "1", "0", "#fff")
-    font-family: 'Yanone Kaffeesatz', arial, serif
+    color: #42351e
+    font-family: 'ChunkFive', arial, serif
+    +text-shadow(#ffffff, -1px, -1px, 0)
     font-size: 38px
-    line-height: 44px
-    margin-bottom: 12px
+    line-height: 38px
+    margin-bottom: 6px
     margin-left: 12px
-  form
-    label
-      font-size: 11px
-      display: block
-      text-transform: uppercase
-      letter-spacing: 2px
-      margin: 12px 0 12px 6px
-    input
-      &[type="text"], &[type="password"]
-        border: solid 1px #ffffcc
-        +round-corners("5px")
-        +box-shadow("2px", "2px", "1px", "#AAA")
-        background: #FFFFCC
-        padding: 12px
-        font-size: 24px
-        
