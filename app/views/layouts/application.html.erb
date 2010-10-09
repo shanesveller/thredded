@@ -7,13 +7,26 @@
   <%= csrf_meta_tag %>
 </head>
 <body id="<%= yield :page_id %>">
-	<ul class="login">
-	  <%= render 'devise/menu/registration_items' %>
-	  <%= render 'devise/menu/login_items' %>
-	</ul>
-	<p class="notice" style="color: green"><%= notice %></p>
-	<p class="alert" style="color: red"><%= alert %></p>
-	<%= yield %>
+	<header>
+		
+		<nav>
+			<ul>
+			  <%= render 'devise/menu/registration_items' %>
+			  <%= render 'devise/menu/login_items' %>
+			</ul>
+		</nav>
 
+	</header>
+
+	<section>
+		<p class="notice" style="color: green"><%= notice %></p>
+		<p class="alert" style="color: red"><%= alert %></p>
+
+		<%= yield %>
+	</section>
+
+	<footer>
+		<p class="copy">&copy; A <a href="http://joeloliveira.com">WeatherField</a> / <a href="http://the47th.com">47th</a> Joint</p>
+	</footer>
 </body>
 </html>
