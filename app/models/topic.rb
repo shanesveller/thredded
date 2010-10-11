@@ -2,7 +2,6 @@ class Topic
   include Mongoid::Document
   include Mongoid::Timestamps
   
-  field :permission, :type => String
   field :user, :type => String
   field :last_user, :type => String
   field :title, :type => String
@@ -14,6 +13,8 @@ class Topic
 
   embedded_in :messageboard, :inverse_of => :topics
   embeds_many :posts
+  
+  accepts_nested_attributes_for :posts
   
   attr_accessible :user, :title
 end

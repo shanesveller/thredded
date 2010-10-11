@@ -4,7 +4,9 @@ Thredded::Application.routes.draw do
   devise_for :users
   resources :users, :only => :show
   resources :messageboards do
-    resources :topics
+    resources :topics do
+      resources :posts
+    end
   end
   
   # The priority is based upon order of creation:

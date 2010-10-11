@@ -16,6 +16,8 @@ class Messageboard
   validates_length_of     :name, :within => 1..16, :message => "should be between 1 and 16 characters" 
 
   embeds_many :topics
+  
+  accepts_nested_attributes_for :topics
 
   def to_param
     "#{name.downcase}"
