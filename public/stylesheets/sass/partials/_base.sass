@@ -4,6 +4,7 @@ body
   background: #ded8c7
   color: #393027
   font-family: Arial, Verdana, Tahoma, Helvetica, sans-serif
+  line-height: 100%
   article,aside,figure,footer,header,hgroup,nav,section
     display: block
   a
@@ -18,3 +19,20 @@ body
     line-height: 38px
     margin-bottom: 6px
     margin-left: 12px
+
+p.notice, p.alert
+  :font-weight bold
+  :border solid 1px
+  :padding 12px 16px
+  :background #fff
+  :font-size 12px
+  :margin-bottom 12px
+  +border-radius(5px)
+  &:empty
+    :display none
+p.notice
+  :color #42a81a
+  :border-color #42a81a
+p.alert
+  :color #c51c12
+  :border-color #c51c12
