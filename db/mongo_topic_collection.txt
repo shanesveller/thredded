@@ -4,7 +4,7 @@ topic = { '_id': ObjectID('...'),
           'last_user': 'username3',
           'title': 'subject title header etc',
           'post_count': 23,
-       // 'attributes': ['locked', 'pinned', 'nws'],
+       // 'attribs': ['locked', 'pinned', 'nws'],
        // 'categories': ['nws', 'comedy gold', 'sports', 'politics'],
        // 'tags': ['user','entered','meta','information']
        // 'subscribers': ['email1@domain.com', 'email2@domain.com', 'email3@domain.com'],
