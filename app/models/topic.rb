@@ -11,7 +11,7 @@ class Topic
   field :tags, :type => Array, :default => []
   field :subscribers, :type => Array, :default => []
 
-  embedded_in :messageboard, :inverse_of => :topics
+  references_one :messageboard
   embeds_many :posts
   
   accepts_nested_attributes_for :posts
