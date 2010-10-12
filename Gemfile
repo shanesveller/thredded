@@ -11,6 +11,7 @@ gem 'formtastic',       :git => "git://github.com/justinfrench/formtastic.git", 
 gem 'rails3-generators'
 gem 'paperclip'
 gem 'theme_support'
+gem 'omniauth', :git => "git://github.com/intridea/omniauth.git", :tag => "v0.1.3"
 
 # Rack Middleware
 gem 'rack-tidy'
