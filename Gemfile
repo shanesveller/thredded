@@ -1,17 +1,16 @@
 source 'http://rubygems.org'
 
-gem 'rails',            '3.0.0'
-gem 'mongoid',          :git => 'git://github.com/mongoid/mongoid.git'
+gem 'rails',            '3.0.1'
+gem 'mongoid',          :git => 'git://github.com/mongoid/mongoid.git', :branch => "association_refactor"
 gem 'bson_ext',         '1.0.9'
 gem 'devise',           :git => "git://github.com/plataformatec/devise.git" 
 gem 'compass'
-gem 'rspec',            :git => "git://github.com/rspec/rspec"
-gem 'rspec-rails',      :git => "git://github.com/rspec/rspec-rails"
-gem 'formtastic',       :git => "git://github.com/justinfrench/formtastic.git", :branch => "1.1-stable"
+gem 'rspec',            '2.0.0'
+gem 'rspec-rails',      '2.0.1'
 gem 'rails3-generators'
 gem 'paperclip'
 gem 'theme_support'
-gem 'omniauth', :git => "git://github.com/intridea/omniauth.git", :tag => "v0.1.3"
+gem 'omniauth',         :git => "git://github.com/intridea/omniauth.git", :tag => "v0.1.3"
 
 # Rack Middleware
 gem 'rack-tidy'
