@@ -4,8 +4,8 @@ class Messageboard
 
   field :name, :type => String
   field :description, :type => String
-  field :theme, :type => String  
-  field :topic_count, :type => Integer
+  field :theme, :type => String, :default => "default" 
+  field :topic_count, :type => Integer, :default => 0
   field :security, :type => Symbol
   SECURED_WITH = [:public, :private, :logged_in]
 
@@ -15,9 +15,7 @@ class Messageboard
   validates_uniqueness_of :name, :message => "must be a unique board name. Try again."
   validates_length_of     :name, :within => 1..16, :message => "should be between 1 and 16 characters" 
 
-  referenced_in :topic
-  
-  accepts_nested_attributes_for :topics
+  references_many :topics
 
   def to_param
     "#{name.downcase}"
