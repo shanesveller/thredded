@@ -8,6 +8,9 @@ Thredded::Application.routes.draw do
       resources :posts
     end
   end
+
+  match ':messageboard_id'        => 'messageboards#show'
+  match ':messageboard_id/topics' => 'topics#index', :as => :topics
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
