@@ -7,7 +7,7 @@ class Messageboard
   field :theme, :type => String, :default => "default" 
   field :topic_count, :type => Integer, :default => 0
   field :security, :type => Symbol
-  SECURED_WITH = [:public, :private, :logged_in]
+  SECURED_WITH = [:private, :logged_in, :member_to_post, :logged_in_to_post, :public]
 
   validates_inclusion_of :security, :in => SECURED_WITH
   validates_presence_of   :name
