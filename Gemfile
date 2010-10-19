@@ -2,7 +2,8 @@ source 'http://rubygems.org'
 
 gem 'rails',            '3.0.1'
 gem 'mongoid',          :git => 'git://github.com/mongoid/mongoid.git', :branch => "association_refactor"
-gem 'bson_ext',         '1.0.9'
+gem 'bson_ext',         '1.1.1'
+gem 'mongo',            '1.1.1'
 gem 'devise',           :git => "git://github.com/plataformatec/devise.git" 
 gem 'compass'
 gem 'rspec',            '2.0.0'
