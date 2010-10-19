@@ -15,11 +15,11 @@ gem 'omniauth',         :git => "git://github.com/intridea/omniauth.git", :tag =
 
 # Rack Middleware
 gem 'rack-tidy'
-
-# Deploy with Capistrano
-# gem 'capistrano'
-
-# :test specific gems
+#
+# # Deploy with Capistrano
+gem 'capistrano'
+#
+# # :test specific gems
 group :test do
   gem 'ZenTest'
   gem 'factory_girl_rails'
@@ -30,8 +30,8 @@ group :test do
   gem 'spork'
   gem 'launchy'
 end
-
-# :development specific gems
+#
+#                 # :development specific gems
 group :development do
   gem 'ruby-debug'
   gem 'mongrel'
