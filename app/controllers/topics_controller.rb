@@ -11,9 +11,11 @@ class TopicsController < ApplicationController
   
   def new
     @topic = Topic.new
+    @topic.posts.build
   end
 
   def create
+    debugger
     @topic = messageboard.topics.create(params[:topic])
     redirect_to messageboard_topics_path(messageboard)
   end

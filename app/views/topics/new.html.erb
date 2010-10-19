@@ -1,7 +1,14 @@
 <% form_for([messageboard, @topic]) do |f| %>
   <p>
-    <%= f.label :title %>
-    <%= f.text_field :title %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+  </p>
+  <br/>
+  <p>
+    <% f.fields_for :posts do |post_form| %>
+      <%= post_form.label :content %>:<br/>
+      <%= post_form.text_area :content, :rows => 5 %>
+    <% end %>
   </p>
   <%= f.submit "Submit" %>
 <% end %>
