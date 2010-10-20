@@ -15,9 +15,8 @@ class TopicsController < ApplicationController
   end
 
   def create
-    debugger
     @topic = messageboard.topics.create(params[:topic])
-    redirect_to messageboard_topics_path(messageboard)
+    redirect_to topics_path(messageboard)
   end
 
   def edit
