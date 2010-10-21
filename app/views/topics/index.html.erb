@@ -2,7 +2,7 @@
   <article>
     <h1><%= link_to t.title, messageboard_topic_path(messageboard, t) %></h1>
     <cite class="started_by"><%= link_to t.user "/users/#{t.user}" %></cite> 
-    <time datetime="<%= t.created_at.strftime("%m/%d/%Y %I:%M%p") %>"><%= t.created_at %></time>
+    <time datetime="<%= t.created_at %>"><%= t.created_at %></time>
 
     <cite class="updated_by"><%= link_to t.last_user "/users/#{t.last_user}" %></cite> 
     <time datetime="<%= t.updated_at %>"><%= t.updated_at %></time>
