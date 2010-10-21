@@ -15,7 +15,6 @@ class TopicsController < ApplicationController
   end
 
   def create
-    debugger
     @topic = messageboard.topics.new(params[:topic])
     @topic.posts << Post.new(params[:topic][:posts_attributes]["0"])
     @topic.posts.first.user = current_user.name

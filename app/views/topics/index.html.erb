@@ -1,16 +1,10 @@
-<table width="500px">
-  <tr>
-    <td>Topic</td>
-    <td>Posted By</td>
-    <td>Posted</td>
-  </tr>
-
 <% @topics.each do |t| %>
-  <tr>
-    <td><%= link_to t.title, messageboard_topic_path(:id => t.id) %></td>
-    <td><%= t.user %></td>
-    <td><%= t.created_at%></td>
-  </tr>
-<% end %>
+  <article>
+    <h1><%= link_to t.title, messageboard_topic_path(messageboard, t) %></h1>
+    <cite class="started_by"><%= link_to t.user "/users/#{t.user}" %></cite> 
+    <time datetime="<%= t.created_at.strftime("%m/%d/%Y %I:%M%p") %>"><%= t.created_at %></time>
 
-</table>
+    <cite class="updated_by"><%= link_to t.last_user "/users/#{t.last_user}" %></cite> 
+    <time datetime="<%= t.updated_at %>"><%= t.updated_at %></time>
+  </article>
+<% end %>
