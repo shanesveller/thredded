@@ -1,6 +1,16 @@
+<table width="500px">
+  <tr>
+    <td>Topic</td>
+    <td>Posted By</td>
+    <td>Posted</td>
+  </tr>
+
 <% @topics.each do |t| %>
-
-  <p><%= t.title %></p>
-
-
+  <tr>
+    <td><%= link_to t.title, messageboard_topic_path(:id => t.id) %></td>
+    <td><%= t.user %></td>
+    <td><%= t.created_at%></td>
+  </tr>
 <% end %>
+
+</table>

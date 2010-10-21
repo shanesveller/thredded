@@ -16,7 +16,11 @@ class TopicsController < ApplicationController
 
   def create
     debugger
-    @topic = messageboard.topics.create(params[:topic])
+    @topic = messageboard.topics.new(params[:topic])
+    @topic.posts << Post.new(params[:topic][:posts_attributes]["0"])
+    @topic.posts.first.user = current_user.name
+    @topic.posts.first.ip = request.remote_ip
+    @topic.save!
     redirect_to messageboard_topics_path(messageboard)
   end
 
