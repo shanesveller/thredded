@@ -15,7 +15,7 @@ When /^I set the default messageboard to "([^"]*)"$/ do |board_name|
   THREDDED[:default_messageboard_name] = board_name 
 end
 
-Given /^a ([a-z\_]*) messageboard exists named "([^"]*)"$/ do |security_type, board_name|
+Given /^a "([a-z\_]*)" messageboard exists named "([^"]*)"$/ do |security_type, board_name|
   messageboard = Factory :messageboard,
     :name                  => board_name,
     :security              => security_type.to_sym
