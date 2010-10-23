@@ -19,6 +19,7 @@ class Messageboard
   validates_length_of     :name, :within => 1..16, :message => "should be between 1 and 16 characters" 
 
   references_many :topics
+  references_many :users, :stored_as => :array, :inverse_of => :messageboards
 
   def to_param
     "#{name.downcase}"

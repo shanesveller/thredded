@@ -57,9 +57,9 @@ module Thredded
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password, :password_confirmation]
     
-    # Rack middlewares to use
-    config.middleware.delete ActionDispatch::Flash
-    config.middleware.insert_before Warden::Manager, ActionDispatch::Flash
+#   Rack middlewares to use
+#   config.middleware.delete ActionDispatch::Flash
+#   config.middleware.insert_before Warden::Manager, ActionDispatch::Flash
 #   config.middleware.insert_before ActionDispatch::Flash, Rack::Tidy, 'indent-spaces' => 2
   end
 end 

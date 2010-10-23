@@ -14,16 +14,22 @@
 			<ul>
 			  <%= render 'devise/menu/registration_items' %>
 			  <%= render 'devise/menu/login_items' %>
-                          <%= render 'topics/menu/new_topic' %>
+              <% # render 'topics/menu/new_topic' %>
 			</ul>
 		</nav>
 
 	</header>
 
 	<section>
-		<p class="notice" style="color: green"><%= notice %></p>
-		<p class="alert" style="color: red"><%= alert %></p>
-
+		
+		<% [:info, :error, :notice, :alert, :warning].each do |key| %>
+			<% if flash[key] %>
+				<div class="<%= key %>" id="flash">
+					<%= flash[key] %>
+				</div>
+			<% end %>
+		<% end %>
+		
 		<%= yield %>
 	</section>
 
