@@ -17,6 +17,10 @@ m = Messageboard.create( :name => "default",
                          :topic_count => 0,
                          :security => :public,
                          :posting_permission => :anonymous)
+# make u a member of m
+u.messageboards << m
+u.save
+
 
 # build topic
 t = Topic.create( :user => "admin", :title => "Welcome to your site's very first thread" )
