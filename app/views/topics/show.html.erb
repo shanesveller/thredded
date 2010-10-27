@@ -6,4 +6,12 @@
 
 <% end %>
 
+<br/> <br/> <br/> <br/>
 
+<% form_for [messageboard, topic, @post] do |f| %>
+  <p>
+  <%= f.label :your_content %>:<br/>
+    <%= f.text_area :content, :rows => 5 %>
+  </p>
+  <%= f.submit "Submit" %>
+<% end %>
