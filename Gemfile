@@ -5,6 +5,7 @@ gem 'mongoid',          :git => 'git://github.com/mongoid/mongoid.git' # , :bran
 gem 'bson_ext',         '1.1.1'
 gem 'mongo',            '1.1.1'
 gem 'devise',           :git => "git://github.com/plataformatec/devise.git" 
+gem 'cancan'
 gem 'compass'
 gem 'rspec',            '2.0.0'
 gem 'rspec-rails',      '2.0.1'

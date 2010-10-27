@@ -20,7 +20,8 @@ class Messageboard
 
   references_many :topics
   references_many :users, :stored_as => :array, :inverse_of => :messageboards
-
+  referenced_in :role
+  
   def to_param
     "#{name.downcase}"
   end
