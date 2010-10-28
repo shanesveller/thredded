@@ -2,7 +2,7 @@ Thredded::Application.routes.draw do
 
   root :to => "home#index"
   devise_for :users
-  resources :users, :only => :show
+  resources :users
   resources :messageboards do
     resources :topics do
       resources :posts

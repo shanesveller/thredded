@@ -6,9 +6,11 @@
 # rake db:seed
 
 # build first user
-u = User.create(:name => "admin",
+u = User.new(:name => "admin",
                 :email => "admin@admin.com",
                 :password => "admin@admin.com")
+u.superadmin = true
+u.save
 
 # build messagebaord
 m = Messageboard.create( :name => "default", 
