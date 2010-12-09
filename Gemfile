@@ -1,18 +1,18 @@
 source 'http://rubygems.org'
 
-gem 'rails',            '3.0.1'
+gem 'rails',            '3.0.3'
 gem 'mongoid',          :git => 'git://github.com/mongoid/mongoid.git' # , :branch => "association_refactor"
-gem 'bson_ext',         '1.1.1'
-gem 'mongo',            '1.1.1'
+gem 'bson_ext',         '1.1.4'
+gem 'mongo',            '1.1.4'
 gem 'devise',           :git => "git://github.com/plataformatec/devise.git" 
 gem 'cancan',           :git => "git://github.com/bowsersenior/cancan.git" # TODO: Once 1.5 is released switch to ryanb's master repo
 gem 'compass'
-gem 'rspec',            '2.0.0'
-gem 'rspec-rails',      '2.0.1'
+gem 'rspec',            '2.2.0'
+gem 'rspec-rails',      '2.2.1'
 gem 'rails3-generators'
 gem 'paperclip'
 gem 'theme_support'
-gem 'omniauth',         :git => "git://github.com/intridea/omniauth.git", :tag => "v0.1.3"
+gem 'omniauth',         '0.1.6'
 
 # Rack Middleware
 gem 'rack-tidy'
