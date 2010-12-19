@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe MessageboardController do
+describe MessageboardsController do
 
 end

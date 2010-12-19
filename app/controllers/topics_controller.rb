@@ -1,4 +1,6 @@
 class TopicsController < ApplicationController
+  theme 'plainole'
+  layout 'application'
   before_filter :pad_params, :only => [:create, :update]
   helper_method :messageboard, :topic
 

@@ -1,7 +1,5 @@
-# Read about factories at http://github.com/thoughtbot/factory_girl
-
-Factory.define :post do |f|
-  f.user "MyString"
-  f.content "MyString"
-  f.ip "MyString"
+Factory.define :post, :class => Post, :default_strategy => :build do |f|
+  f.user "username"
+  f.content "This is a post by someone called ... originally enough .. 'username'"
+  f.ip "127.0.0.1"
 end

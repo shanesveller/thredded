@@ -29,8 +29,5 @@ t = Topic.create( :user => "admin", :title => "Welcome to your site's very first
 t.messageboard = m
 
 # build posts
-p1 = t.posts.build(:content => "There's not a whole lot here for now.")
-p2 = t.posts.build(:content => "So why not do something about it?") 
-p1.user = p2.user = u.name
-p1.ip   = p2.ip   = "127.0.0.1"
-t.save
+p1 = t.posts.create(:content => "There's not a whole lot here for now.", :user => "joel", :ip => "127.0.0.1")
+p2 = t.posts.create(:content => "So why not do something about it?", :user => "sara", :ip => "127.0.0.1") 

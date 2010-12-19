@@ -7,11 +7,11 @@ gem 'mongo',            '1.1.4'
 gem 'devise',           :git => "git://github.com/plataformatec/devise.git" 
 gem 'cancan',           :git => "git://github.com/bowsersenior/cancan.git" # TODO: Once 1.5 is released switch to ryanb's master repo
 gem 'compass'
-gem 'rspec',            '2.2.0'
-gem 'rspec-rails',      '2.2.1'
+gem 'rspec',            '2.3.0'
+gem 'rspec-rails',      '2.3.0'
 gem 'rails3-generators'
 gem 'paperclip'
-gem 'theme_support'
+gem 'themes_for_rails' 
 gem 'omniauth',         '0.1.6'
 
 # Rack Middleware

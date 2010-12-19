@@ -21,15 +21,7 @@
 	</header>
 
 	<section id="contentwrap">
-		
-		<% [:info, :error, :notice, :alert, :warning].each do |key| %>
-			<% if flash[key] %>
-				<div class="<%= key %>" id="flash">
-					<%= flash[key] %>
-				</div>
-			<% end %>
-		<% end %>
-		
+		<% render :partial => "shared/error_msgs" %>
 		<%= yield %>
 	</section>
 

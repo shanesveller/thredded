@@ -1,5 +1,7 @@
 class MessageboardsController < ApplicationController
-
+  theme 'plainole'
+  layout 'application'
+  
   def index
     @messageboards = Messageboard.all
     @messageboard_name = @messageboard.present? ? @messageboard.name : THREDDED[:default_messageboard_name]
