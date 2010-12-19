@@ -1,0 +1,38 @@
+#topics_listing #contentwrap {
+  > h1, > h2 {
+    font-family: Palatino, "Palatino Linotype", "Hoefler Text", Times, "Times New Roman", serif; 
+  }
+  > h1 { font-size: 20px; font-weight: normal; text-transform: uppercase; margin-bottom: 4px; }
+  > h2 { font-size: 14px; font-weight: normal; text-transform: lowercase; letter-spacing: 2px; margin-bottom: 20px; }
+}
+#topics {
+  .title, .started, .updated, .posts { float: left; display: block; width: 15.5%; line-height: 20px; overflow: hidden; }
+  .title { width: 53.5% }
+
+  article {
+    clear: both;
+    position: relative;
+    height: 24px;
+    padding: 10px 0;
+
+    cite, time {
+      position: absolute;
+      left: 53.5%;
+      top: 10px; 
+
+      &.updated_by, &.updated_at { left: 69%; }
+    }
+    time {
+      font-size: 10px;
+      top: 31px;
+      width: 13%;
+    }
+
+    .posts {
+      left:84.5%;
+      position:absolute;
+      top:10px;
+    }
+  }
+
+}
