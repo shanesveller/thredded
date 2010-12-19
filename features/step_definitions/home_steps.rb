@@ -1,5 +1,5 @@
 Then /^I should see a list of threads$/ do
-  page.should have_css('#topic_listing')
+  page.should have_css('#topics_listing')
 end
 
 Then /^I should see the main site homepage$/ do
