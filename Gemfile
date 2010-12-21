@@ -30,6 +30,7 @@ group :test do
   gem 'cucumber-rails'
   gem 'spork'
   gem 'launchy'
+  gem 'fuubar'
 end
 #
 #                 # :development specific gems
