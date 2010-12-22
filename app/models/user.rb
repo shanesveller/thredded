@@ -16,14 +16,19 @@ class User
   validates_uniqueness_of :name, :email, :case_sensitive => false
   attr_accessible :name, :email, :password, :password_confirmation
 
-  # TODO: needs specs
   def superadmin?
     self.superadmin
   end
 
-  # TODO: needs specs
   def admins?(messageboard)
-    self.roles.where(:messageboard_id => messageboard.id).any_in(:level => [:admin, :superadmin]).size > 0
+    superadmin? || self.roles.for(messageboard).as([:admin]).size > 0
   end
 
+  def moderates?(messageboard)
+    superadmin? || self.roles.for(messageboard).as([:admin, :moderator]).size > 0
+  end
+
+  def member_of?(messageboard)
+    superadmin? || self.roles.for(messageboard).as([:admin, :moderator, :member]).size > 0
+  end
 end

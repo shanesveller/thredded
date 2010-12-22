@@ -9,6 +9,7 @@ class Ability
     # admin       - a moderator that can do anything for a given messageboard
     # moderator   - member that can create/update categories. can post on some/all of the messageboards
     # member      - user that's participating in a given messageboard
+
     
     if user.superadmin?
       can :manage, :all

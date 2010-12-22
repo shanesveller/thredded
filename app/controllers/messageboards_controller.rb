@@ -1,4 +1,6 @@
 class MessageboardsController < ApplicationController
+  load_and_authorize_resource
+
   theme 'plainole'
   layout 'application'
   
