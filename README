@@ -11,3 +11,23 @@ Requirements:
 
 - mongodb installed and running
 - ensure that config/thredded_config.yml exists with site and application specific settings (config/thredded_config_sample.yml may be copied or moved into the proper location)
+
+--------------------
+
+Running Autotest:
+
+- bundle install will get all the required gems installed
+- make sure to add the following line to your ~/.autotest file:
+
+  require 'autotest/growl'
+
+- cd APP_ROOT
+- guard start &
+
+for just RSpec coverage from autotest
+
+  autotest 
+
+for both RSpec and Cucumber
+
+  AUTOFEATURE=true autotest
