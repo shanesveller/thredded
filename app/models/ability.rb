@@ -18,9 +18,9 @@ class Ability
     end
     
     can :read, Messageboard do |messageboard|
-      (messageboard.security == :private && user.member_of?(messageboard)) ||
-      (messageboard.security == :logged_in && user.valid?) ||
-      messageboard.security == :anonymous
+      (messageboard.restricted_to_private?    && user.member_of?(messageboard)) ||
+      (messageboard.restricted_to_logged_in?  && user.valid?) ||
+      messageboard.public?
     end
     
     can :read, Topic do |topic|

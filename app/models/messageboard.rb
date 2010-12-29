@@ -22,6 +22,18 @@ class Messageboard
   references_many :users, :stored_as => :array, :inverse_of => :messageboards
   references_one :role
   
+  def restricted_to_private?
+    security == :private
+  end
+  
+  def restricted_to_logged_in?
+    security == :logged_in
+  end
+  
+  def public?
+    security == :public
+  end
+  
   def to_param
     "#{name.downcase}"
   end

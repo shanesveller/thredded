@@ -14,6 +14,7 @@ Feature: Add a new thread
       Then I should see "This is a new thread"
        And I should see "Content for this new thread will show up here"
 
+
   Scenario: The user adds a private thread
      Given a messageboard that I am a member of
        And another member named "John"
