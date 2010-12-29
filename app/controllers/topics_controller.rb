@@ -1,4 +1,5 @@
 class TopicsController < ApplicationController
+  load_and_authorize_resource
   theme 'plainole'
   layout 'application'
   before_filter :pad_params, :only => [:create, :update]

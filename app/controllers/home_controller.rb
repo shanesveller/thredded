@@ -3,7 +3,7 @@ class HomeController < ApplicationController
   layout 'application'
 
   def index
-    
+
     if @messageboard = Messageboard.first(:conditions => { :name => THREDDED[:default_messageboard_name] })
       if THREDDED[:default_messageboard_home] == 'topics' && @messageboard.security == :private && current_user.nil?
         flash[:alert] = "This messageboard is private. Please log in."

@@ -31,4 +31,9 @@ class User
   def member_of?(messageboard)
     superadmin? || self.roles.for(messageboard).as([:admin, :moderator, :member]).size > 0
   end
+
+  def logged_in?
+    valid?
+  end
+
 end

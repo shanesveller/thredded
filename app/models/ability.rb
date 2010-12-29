@@ -2,6 +2,7 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+
     user ||= User.new # anonymous visitor
     
     # roles per messageboard
@@ -9,13 +10,43 @@ class Ability
     # admin       - a moderator that can do anything for a given messageboard
     # moderator   - member that can create/update categories. can post on some/all of the messageboards
     # member      - user that's participating in a given messageboard
-
+    # logged_in   - herp
+    # anonymous   - derp
     
     if user.superadmin?
       can :manage, :all
-    else
-      can :read, :all
     end
+    
+    can :read, Messageboard do |messageboard|
+      (messageboard.security == :private && user.member_of?(messageboard)) ||
+      (messageboard.security == :logged_in && user.valid?) ||
+      messageboard.security == :anonymous
+    end
+    
+    can :read, Topic do |topic|
+      true
+    end
+    
+    
+
+    # if messageboard is private
+    #   - members can read topics listing
+    #
+    # if messageboard is logged_in
+    #   - logged_in can read
+    #
+    # if messageboard is public
+    #   - anonymous can read
+    
+    # if posting permission is members
+    #   - members can post
+    #
+    # if posting permission is logged_in
+    #   - logged in can post
+    #
+    # if posting permission is anonymous
+    #   - anonymous can post
+
 
   end
 end

@@ -7,6 +7,7 @@
     <%= javascript_include_tag :defaults %>
     <%= csrf_meta_tag %>
   </head>
+  <!-- default plainole layout -->
   <body id="<%= yield :page_id %>">
 
     <header>
@@ -21,7 +22,7 @@
     </header>
 
     <section id="contentwrap">
-      <% render :partial => "shared/error_msgs" %>
+      <%= render :partial => "shared/error_msgs" %>
       <%= yield %>
     </section>
 
