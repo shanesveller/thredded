@@ -9,6 +9,16 @@ module NavigationHelpers
     case page_name
     when /the homepage/
       '/'
+    when /the topic listing page/i
+      m = Messageboard.first
+      messageboard_topics_path(m)
+    when /the most recently updated thread on "([^\"]+)"/i
+      m = Messageboard.where(:name =>$1).first
+      t = m.topics.latest.first
+      messageboard_topic_path(m, t)
+    when /the add a new thread page for "([^\"]+)"/i
+      m = Messageboard.where(:name =>$1).first
+      new_messageboard_topic_path(m)
     when /the sign up page/i
       new_user_registration_path
     when /the sign in page/i
