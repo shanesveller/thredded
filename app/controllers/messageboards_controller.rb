@@ -11,7 +11,7 @@ class MessageboardsController < ApplicationController
   end
 
   def show
-#    redirect_to topics_path(@messageboard)
+    redirect_to topics_path(@messageboard)
   end
 
   # ======================================

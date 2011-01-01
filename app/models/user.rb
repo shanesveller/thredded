@@ -31,6 +31,11 @@ class User
   def member_of?(messageboard)
     superadmin? || self.roles.for(messageboard).as([:admin, :moderator, :member]).size > 0
   end
+  
+  def member_of(messageboard, as=:member)
+    roles << Role.create(:level => as, :messageboard => messageboard)
+    self.save
+  end
 
   def logged_in?
     valid?

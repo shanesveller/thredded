@@ -23,7 +23,8 @@ class Ability
       messageboard.public?
     end
     
-    can :read, Topic do |topic|
+    # TODO: Update Topic to allow those when necessary
+    can :manage, Topic do |topic|
       true
     end
     

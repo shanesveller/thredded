@@ -13,9 +13,13 @@ class Topic
   field :subscribers, :type => Array, :default => []
   field :permission, :type => Symbol, :default => :public
   
+  validates_numericality_of :post_count, :greater_than => 0
+  
   attr_accessible :title, :user, :last_user
 
   referenced_in :messageboard
   embeds_many :posts
   accepts_nested_attributes_for :posts
+  
+  scope :latest, desc(:updated_at)
 end

@@ -4,20 +4,20 @@
 <h1><%= messageboard.name %></h1>
 <h2><%= messageboard.description %></h2>
 <section id="topics">
-
-  <div class="title">Topic Title</div>
-  <div class="started">Started</div>
-  <div class="updated">Updated</div>
-  <div class="posts">Posts</div>
-
-  <% @topics.each do |t| %>
-    <article>
-      <h1><%= link_to t.title, messageboard_topic_path(messageboard, t) %></h1>
-      <cite class="started_by"><%= link_to t.user, user_path(t.user) %></cite> 
-      <time class="started_at" datetime="<%= t.created_at %>"><%= t.created_at %></time>
-      <cite class="updated_by"><%= link_to t.last_user, user_path(t.last_user)  %></cite> 
-      <time class="updated_at" datetime="<%= t.updated_at %>"><%= t.updated_at %></time>
-      <div  class="posts"><%= t.post_count %></div>
-    </article>
-  <% end %>
+	<header>
+		<div class="title">Topic Title</div>
+	  	<div class="started">Started</div>
+	  	<div class="updated">Updated</div>
+	  	<div class="posts">Posts</div>
+	</header>
+	<% @topics.each do |t| %>
+	  <article>
+	    <h1><%= link_to t.title, messageboard_topic_path(messageboard, t) %></h1>
+	    <cite class="started_by"><%= link_to t.user, user_path(t.user) %></cite> 
+	    <time class="started_at" datetime="<%= t.created_at %>"><%= t.created_at %></time>
+	    <cite class="updated_by"><%= link_to t.last_user, user_path(t.last_user)  %></cite> 
+	    <time class="updated_at" datetime="<%= t.updated_at %>"><%= t.updated_at %></time>
+	    <div  class="post_count"><%= t.post_count %></div>
+	  </article>
+	<% end %>
 </section>

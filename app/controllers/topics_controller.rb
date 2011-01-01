@@ -6,7 +6,7 @@ class TopicsController < ApplicationController
   helper_method :messageboard, :topic
 
   def index
-    @topics = Topic.all
+    @topics = messageboard.topics.latest
   end
 
   def show
@@ -19,10 +19,11 @@ class TopicsController < ApplicationController
   end
 
   def create
-    @topic = messageboard.topics.new(params[:topic])
+    @topic = Topic.new(params[:topic])
     p = Post.new(params[:topic][:posts_attributes]["0"])
     @topic.posts << pad_post(p)
-    @topic.save!
+    @topic.messageboard = messageboard
+    pad_topic(@topic).save!
     redirect_to messageboard_topics_path(messageboard)
   end
 
@@ -47,7 +48,7 @@ class TopicsController < ApplicationController
   end
 
   def current_user_name 
-    @current_user_name ||= current_user.nil? ? "anonymous commenter" : current_user.name
+    @current_user_name ||= current_user.nil? ? "anonymous" : current_user.name
   end
 
   # ======================================
@@ -62,12 +63,13 @@ class TopicsController < ApplicationController
     def pad_topic(t)
       t.last_user = current_user_name
       t.post_count += 1
+      t
     end
 
     def pad_post(p)
       p.user = current_user_name
       p.ip = request.remote_ip
-      return p
+      p
     end
 
 end
