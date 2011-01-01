@@ -29,6 +29,7 @@ group :test do
   gem 'shoulda'
   gem 'cucumber',		'0.10.0'
   gem 'cucumber-rails',	'0.3.2'
+  gem 'timecop'
   gem 'spork'
   gem 'growl'
   gem 'rb-fsevent'
