@@ -16,5 +16,14 @@ describe Post do
 
       topic.post_count.should == 2
     end
+    
+    it "updates the topic updated_at field to that of the new post" do
+      topic = Factory(:topic)
+      topic.posts.create(:content => "posting here", :user => "sal", :ip => "127.0.0.1")
+      topic.posts.create(:content => "posting some more", :user => "sdjg", :ip => "127.0.0.3")
+      last_post = topic.posts.last
+      
+      topic.updated_at.should == last_post.created_at
+    end
   end
 end

@@ -68,4 +68,24 @@ describe User do
     end
   end
 
+  describe "#member_of(messageboard)" do
+    it "sets the user as a member of messageboard" do
+      tam = Factory(:user, :name => "tam")
+      mi = Factory(:messageboard)
+      tam.member_of(mi)
+      tam.reload
+    
+      tam.member_of?(mi).should == true
+    end
+    
+    it "makes the user an admin" do
+      stephen = Factory(:user, :name => "stephen")
+      mi = Factory(:messageboard)
+      stephen.member_of(mi, :admin)
+      stephen.reload
+      
+      stephen.admins?(mi).should == true
+    end
+  end
+
 end
