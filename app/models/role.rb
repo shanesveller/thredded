@@ -3,7 +3,9 @@ class Role
   field :level, :type => Symbol
 
   referenced_in :messageboard
-  references_many :users, :stored_as => :array, :inverse_of => :roles
+
+  referenced_in :user
+#  references_many :users
 
   ROLES = [:superadmin, :admin, :moderator, :member]
   validates_presence_of   :level

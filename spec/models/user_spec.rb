@@ -17,8 +17,9 @@ describe User do
   describe "#admins?(messageboard)" do
     it "returns true for an admin" do
       stu = Factory(:user)
-      thredded = Factory(:messageboard)
-      stu.roles << Factory(:role, :level => :admin, :messageboard => thredded)
+      thredded = Factory(:messageboard, :name => "board")
+      r = Factory(:role, :level => :admin, :messageboard => thredded)
+      stu.roles << r
       stu.reload
 
       stu.admins?(thredded).should == true
