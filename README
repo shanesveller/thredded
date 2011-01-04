@@ -10,6 +10,7 @@ This is it's 3rd Rails-based incarnation, with hopes that all the bad cruft can 
 Requirements:
 
 - mongodb installed and running
+- ensure that config/mongoid.yml exists. Usually for development environment the default that comes with this app should work.  If not, check connection information.
 - ensure that config/thredded_config.yml exists with site and application specific settings (config/thredded_config_sample.yml may be copied or moved into the proper location)
 
 --------------------
@@ -17,6 +18,8 @@ Requirements:
 Running Autotest:
 
 - bundle install will get all the required gems installed
+- make sure you have `growlnotify` installed (can be found in Extras folder of the Growl dmg - http://growl.info/index.php)
+- are you sure config/thredded_config.yml exists?  What about mongoid.yml? Promise?
 - make sure to add the following line to your ~/.autotest file:
 
   require 'autotest/growl'
