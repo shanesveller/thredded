@@ -3,7 +3,7 @@ source 'http://rubygems.org'
 gem 'rails',            '3.0.3'
 gem 'bson_ext',         '1.1.5'
 gem 'mongo',            '1.1.5'
-gem 'mongoid',          :git => 'git://github.com/mongoid/mongoid.git' , :branch => "refactor"
+gem 'mongoid',          :git => 'git://github.com/mongoid/mongoid.git' , :branch => "safe_master"
 gem 'devise',           :git => "git://github.com/plataformatec/devise.git" 
 gem 'cancan',           :git => "git://github.com/bowsersenior/cancan.git" # TODO: Once 1.5 is released switch to ryanb's master repo
 gem 'compass'

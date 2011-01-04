@@ -5,7 +5,7 @@ class Role
   referenced_in :messageboard
 
   referenced_in :user
-#  references_many :users
+  references_many :users
 
   ROLES = [:superadmin, :admin, :moderator, :member]
   validates_presence_of   :level

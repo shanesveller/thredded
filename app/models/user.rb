@@ -11,8 +11,8 @@ class User
   field :superadmin, :type => Boolean, :default => false
   references_many :messageboards, :stored_as => :array, :inverse_of => :users
   
-#  referenced_in :role
-  references_many :roles
+  referenced_in :role
+  references_many :roles #, :stored_as => :array, :inverse_of => :users
   
   validates_presence_of :name
   validates_uniqueness_of :name, :email, :case_sensitive => false
