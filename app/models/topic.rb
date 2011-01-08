@@ -12,14 +12,22 @@ class Topic
   field :tags, :type => Array, :default => []
   field :subscribers, :type => Array, :default => []
   field :permission, :type => Symbol, :default => :public
+ 
+  # associations
+  embeds_many :posts
+  references_many :users, :stored_as => :array, :inverse_of => :topics # private threads will reference users
+  referenced_in :messageboard
   
+  # lock it down
+  attr_accessible :title, :user, :last_user, :user_ids
+
+  # validations
   validates_numericality_of :post_count, :greater_than => 0
   
-  attr_accessible :title, :user, :last_user
-
-  referenced_in :messageboard
-  embeds_many :posts
-  accepts_nested_attributes_for :posts
-  
+  # scopes
   scope :latest, desc(:updated_at)
+  
+  # misc
+  accepts_nested_attributes_for :posts
+
 end

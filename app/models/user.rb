@@ -12,6 +12,7 @@ class User
   references_many :messageboards, :stored_as => :array, :inverse_of => :users
   
   referenced_in :role
+  referenced_in :topics
   references_many :roles #, :stored_as => :array, :inverse_of => :users
   
   validates_presence_of :name
