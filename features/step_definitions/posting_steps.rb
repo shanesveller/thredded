@@ -1,9 +1,11 @@
 Given /^a messageboard named "([^"]*)" that I, "([^"]*)", am a member of$/ do |messageboard, name|
-  u = Factory :user,
-    :name                  => name,
-    :email                 => "email@email.com",
-    :password              => "password",
-    :password_confirmation => "password"
+  if !u = User.where(:name => name).first
+    u = Factory :user,
+      :name                  => name,
+      :email                 => "email@email.com",
+      :password              => "password",
+      :password_confirmation => "password"
+  end
   m = Factory :messageboard,
     :name                  => messageboard,
     :security              => :public
@@ -37,8 +39,12 @@ Then /^the topic listing should look like the following:$/ do |topics_table|
   # topics_table.diff!(actual_table)
 end
 
-Given /^another member named "([^"]*)"$/ do |arg1|
-  pending # express the regexp above with the code you wish you had
+Given /^another member named "([^"]*)" exists$/ do |name|
+  u = Factory :user,
+    :name                  => name,
+    :email                 => "#{name}@email.com",
+    :password              => "password",
+    :password_confirmation => "password"
 end
 
 When /^I enter a recipient named "([^"]*)", a title "([^"]*)" and content "([^"]*)"$/ do |arg1, arg2, arg3|
