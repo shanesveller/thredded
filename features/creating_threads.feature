@@ -27,8 +27,9 @@ Feature: Add a new thread
            | topic 1     | joel    | joel    | 1     |
 
   Scenario: The user adds a private thread
-     Given a messageboard named "thredded" that I, "joel", am a member of
-       And another member named "John"
+     Given I am signed in as "joel"
+       And a messageboard named "thredded" that I, "joel", am a member of
+       And another member named "john" exists
       When I go to the add a private thread page
        And I enter a recipient named "john", a title "Hello John" and content "This is a private thread"
        And I submit the form

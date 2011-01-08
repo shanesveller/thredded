@@ -3,6 +3,7 @@
 
 <h1><%= messageboard.name %></h1>
 <h2><%= messageboard.description %></h2>
+<p id="new_topic"><%= link_to "Create a New Thread", new_messageboard_topic_path(messageboard) %></p>
 <section id="topics">
 	<header>
 		<div class="title">Topic Title</div>
