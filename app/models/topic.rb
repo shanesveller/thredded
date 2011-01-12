@@ -23,7 +23,8 @@ class Topic
 
   # validations
   validates_numericality_of :post_count, :greater_than => 0
-  
+  validates_presence_of :messageboard_id
+
   # scopes
   scope :latest, desc(:updated_at)
   

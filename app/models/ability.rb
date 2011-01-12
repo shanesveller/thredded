@@ -23,10 +23,22 @@ class Ability
       messageboard.public?
     end
     
-    # TODO: Update Topic to allow those when necessary
-    can :manage, Topic do |topic|
-      true
+    can :read, Topic do |topic|
+      topic.public? && topic.messageboard.public? ||
+      topic.private? && topic.users.include?(user) ||
+      user.member_of?(topic.messageboard)
     end
+
+    can :create, Topic do |topic|
+      (topic.messageboard.restricted_to_private?    && user.member_of?(topic.messageboard)) ||
+      (topic.messageboard.restricted_to_logged_in?  && user.valid?) ||
+      topic.messageboard.public?
+    end
+
+    # TODO: Update Topic to allow those when necessary
+    # can :manage, Topic do |topic|
+    #   true
+    # end
     
     
 
