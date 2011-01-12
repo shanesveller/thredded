@@ -44,22 +44,51 @@ describe Topic do
 
   end
 
+  context "when its parent messageboard is for logged in users only" do
+    before(:each) do
+      @messageboard = Factory(:messageboard, :security => :logged_in)
+      @topic = Factory(:topic, :messageboard => @messageboard)
+    end
+
+    it "is not readable by anonymous visitors" do
+      @user = User.new  # this user is not valid, so - not logged in
+      ability = Ability.new(@user)
+      ability.can?(:read, @topic).should be_false
+    end
+
+    it "is readable by a logged in user" do
+      @user = Factory(:user) # user is valid, so - logged in
+      ability = Ability.new(@user)
+      ability.can?(:read, @topic).should be_true
+    end
+  end
+
   context "when its parent messageboard is private" do
     
-    it "is not readable by non members of the board" do
+    before(:each) do
       @messageboard = Factory(:messageboard, :security => :private)
-      @topic = Factory(:topic, :messageboard => @messageboard)
+    end
 
+    it "is not readable by non members of the board" do
+      @topic = Factory(:topic, :messageboard => @messageboard)
       ability = Ability.new(@user2)
       ability.can?(:read, @topic).should be_false
     end
 
     it "cannot be created by a non member of the board" do
-      pending "ability.rb needs to reflect this expectation"
-      @messageboard = Factory(:messageboard, :security => :private)
-
+      @topic = Topic.new
+      @topic.messageboard = @messageboard
       ability = Ability.new(@user2)
-      ability.can?(:create, Topic).should be_false
+      ability.can?(:create, @topic).should be_false
+    end
+
+    it "can be created by a member of the board" do
+      @topic = Topic.new
+      @topic.messageboard = @messageboard
+      @member = Factory(:user, :name => "coolkid")
+      @member.member_of(@messageboard)
+      ability = Ability.new(@member)
+      ability.can?(:create, @topic).should be_true
     end
 
   end

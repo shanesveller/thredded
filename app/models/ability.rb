@@ -24,9 +24,12 @@ class Ability
     end
     
     can :read, Topic do |topic|
-      topic.public? && topic.messageboard.public? ||
-      topic.private? && topic.users.include?(user) ||
-      user.member_of?(topic.messageboard)
+      topic.messageboard.public? && topic.public? ||
+      topic.messageboard.public? && topic.private? && topic.users.include?(user) ||
+      topic.messageboard.restricted_to_logged_in? && user.logged_in? && topic.public? ||
+      topic.messageboard.restricted_to_logged_in? && user.logged_in? && topic.private? && topic.users.include?(user) ||
+      topic.messageboard.restricted_to_private? && user.member_of?(topic.messageboard) && topic.public? ||
+      topic.messageboard.restricted_to_private? && user.member_of?(topic.messageboard) && topic.private? && topic.users.include?(user) 
     end
 
     can :create, Topic do |topic|
