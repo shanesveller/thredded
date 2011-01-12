@@ -5,7 +5,7 @@ gem 'bson_ext',         '1.1.5'
 gem 'mongo',            '1.1.5'
 gem 'mongoid',          :git => 'git://github.com/mongoid/mongoid.git' , :branch => "safe_master"
 gem 'devise',           :git => "git://github.com/plataformatec/devise.git" 
-gem 'cancan',           :git => "git://github.com/bowsersenior/cancan.git" # TODO: Once 1.5 is released switch to ryanb's master repo
+gem 'cancan' 
 gem 'compass'
 gem 'rspec',            '2.3.0'
 gem 'rspec-rails',      '2.3.1'
