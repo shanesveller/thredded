@@ -30,7 +30,7 @@ Feature: Add a new thread
      Given I am signed in as "joel"
        And a messageboard named "thredded" that I, "joel", am a member of
        And another member named "john" exists
-      When I go to the add a private thread page
+      When I go to the add a new thread page for "thredded"
        And I enter a recipient named "john", a title "Hello John" and content "This is a private thread"
        And I submit the form
        And I go to the most recently updated thread

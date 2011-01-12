@@ -1,5 +1,5 @@
 class TopicsController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource :only => [:index, :show, :edit]
   theme 'plainole'
   layout 'application'
   before_filter :pad_params, :only => [:create, :update]
@@ -14,7 +14,7 @@ class TopicsController < ApplicationController
   end
 
   def new
-    @topic = Topic.new
+    @topic = messageboard.topics.build
     @topic.posts.build
   end
 
