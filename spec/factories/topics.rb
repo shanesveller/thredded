@@ -3,7 +3,7 @@ Factory.define :topic do |t|
   t.user "admin"
   t.last_user "admin"
   t.title "Topic started by the admin"
-  t.post_count 0
+  t.post_count 1
 
   # t.association :posts, :factory => :post
 end

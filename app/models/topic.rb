@@ -30,4 +30,12 @@ class Topic
   # misc
   accepts_nested_attributes_for :posts
 
+  def public? 
+    self.users.empty?
+  end
+
+  def private?
+    self.users.present?
+  end
+
 end
