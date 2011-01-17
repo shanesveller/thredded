@@ -7,8 +7,8 @@ gem 'mongoid',          :git => 'git://github.com/mongoid/mongoid.git' , :branch
 gem 'devise',           :git => "git://github.com/plataformatec/devise.git" 
 gem 'cancan' 
 gem 'compass'
-gem 'rspec',            '2.3.0'
-gem 'rspec-rails',      '2.3.1'
+gem 'rspec',            '2.4.0'
+gem 'rspec-rails',      '2.4.1'
 gem 'rails3-generators'
 gem 'paperclip'
 gem 'themes_for_rails' 
