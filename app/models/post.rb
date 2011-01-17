@@ -10,12 +10,14 @@ class Post
   validates_presence_of :content
   after_create :modify_parent_topic
 
-  attr_accessible :content, :user
+  attr_accessible :content, :user, :ip
 
-  def modify_parent_topic
-    topic.last_user   = user 
-    topic.post_count  += 1
-    topic.save
-  end
+  private
+
+    def modify_parent_topic
+      topic.last_user   = user 
+      topic.post_count  += 1
+      topic.save
+    end
 
 end

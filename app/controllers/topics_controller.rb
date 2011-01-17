@@ -3,6 +3,8 @@ class TopicsController < ApplicationController
   theme 'plainole'
   layout 'application'
   before_filter :pad_params, :only => [:create, :update]
+  before_filter :pad_post, :only => :create
+  before_filter :pad_topic, :only => :create
   helper_method :messageboard, :topic
 
   def index
@@ -20,10 +22,9 @@ class TopicsController < ApplicationController
 
   def create
     @topic = Topic.new(params[:topic])
-    p = Post.new(params[:topic][:posts_attributes]["0"])
-    @topic.posts << pad_post(p)
+    @topic.posts.create(params[:topic][:posts_attributes]["0"])
     @topic.messageboard = messageboard
-    pad_topic(@topic).save!
+    @topic.save!
     redirect_to messageboard_topics_path(messageboard)
   end
 
@@ -60,17 +61,14 @@ class TopicsController < ApplicationController
       params[:topic][:last_user] = current_user_name
     end
 
-    def pad_topic(t)
-      t.last_user = current_user_name
-      t.post_count += 1
-      t
+    def pad_topic
+      params[:topic][:last_user] = current_user_name
+      params[:topic][:post_count] = 1
     end
 
-    def pad_post(p)
-      p.user = current_user_name
-      p.ip = request.remote_ip
-      p.created_at = p.updated_at = Time.zone_default.now
-      p
+    def pad_post
+      params[:topic][:posts_attributes]["0"][:ip] = request.remote_ip
+      params[:topic][:posts_attributes]["0"][:user] = current_user_name
     end
 
 end
