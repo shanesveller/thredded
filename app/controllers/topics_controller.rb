@@ -69,6 +69,7 @@ class TopicsController < ApplicationController
     def pad_post(p)
       p.user = current_user_name
       p.ip = request.remote_ip
+      p.created_at = p.updated_at = Time.zone_default.now
       p
     end
 

@@ -1,17 +1,24 @@
-<h1><%= topic.title %></h1> 
+<% content_for :page_id do %>topics_posts<% end %>
+<% content_for :page_title do %><%= THREDDED[:site_name] %> | <%= topic.title %> | Posts<% end %>
 
-<% topic.posts.each do |p| %>
+<%= render :partial => "shared/header" %>
 
-  <%= p.content %>
+<section id="content">
+  <header>
+    <h1><%= topic.title %></h1> 
+  </header>
 
-<% end %>
+  <% topic.posts.each do |p| %>
+    <%= p.user %><br/>
+    <%= p.created_at %><br/>
+    <%= p.content %>
+  <% end %>
 
-<br/> <br/> <br/> <br/>
-
-<%= form_for [messageboard, topic, @post] do |f| %>
-  <p>
-  <%= f.label :your_content %>:<br/>
-    <%= f.text_area :content, :rows => 5 %>
-  </p>
-  <%= f.submit "Submit" %>
-<% end %>
+  <%= form_for [messageboard, topic, @post] do |f| %>
+    <p>
+    <%= f.label :your_content %>:<br/>
+      <%= f.text_area :content, :rows => 5 %>
+    </p>
+    <%= f.submit "Submit" %>
+  <% end %>
+</section>
