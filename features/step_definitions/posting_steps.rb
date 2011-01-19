@@ -21,6 +21,18 @@ When /^I submit the form$/ do
   click_button "Create New Topic"
 end
 
+Given /^a thread already exists on "([^"]*)"$/ do |board|
+  m = Messageboard.where(:name => board).first
+  t = m.topics.create(:last_user => "admin", :title => "thready thread", :user => "admin", :post_count => 1)
+  t.posts.create(:content => "FIRST!", :user => "admin")
+end
+
+When /^I submit some drivel like "([^"]*)"$/ do |content|
+  fill_in "post_content", :with => content
+  click_button "Submit"
+end
+
+
 Given /^I create the following new topics:$/ do |topics_table|
   u = User.first
   m = Messageboard.first

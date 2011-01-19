@@ -4,11 +4,9 @@ class PostsController < ApplicationController
   layout 'application'
   before_filter :pad_post, :only => :create
 
-  # TODO: NEEDS SOME F#CKING CUKES.
-  #
   def create
     p = topic.posts.create(params[:post])
-    render :text => p.to_yaml
+    redirect_to messageboard_topic_path(topic.messageboard, topic)
   end
 
   def update

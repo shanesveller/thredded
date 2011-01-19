@@ -33,7 +33,7 @@ Feature: Add a new thread
       When I go to the add a new thread page for "thredded"
        And I enter a recipient named "john", a title "Hello John" and content "This is a private thread"
        And I submit the form
-       And I go to the most recently updated thread
+       And I go to the most recently updated thread on "thredded"
       Then I should see "Joel and John"
        And I should see "Hello John"
        And I should see "This is a private thread"
