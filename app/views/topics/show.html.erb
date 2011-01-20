@@ -6,6 +6,9 @@
 <section id="content">
   <header>
     <h1><%= topic.title %></h1> 
+    <% if topic.users_to_sentence %>
+      <cite><%= topic.users_to_sentence %></cite>
+    <% end %>
   </header>
 
   <% topic.posts.each do |p| %>

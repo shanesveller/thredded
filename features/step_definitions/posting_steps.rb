@@ -51,15 +51,15 @@ Then /^the topic listing should look like the following:$/ do |topics_table|
 end
 
 Given /^another member named "([^"]*)" exists$/ do |name|
-  u = Factory :user,
-    :name                  => name,
-    :email                 => "#{name}@email.com",
-    :password              => "password",
-    :password_confirmation => "password"
+  u = User.create(:name                  => name,
+                  :email                 => "#{name}@email.com",
+                  :password              => "password",
+                  :password_confirmation => "password")
 end
 
-When /^I enter a recipient named "([^"]*)", a title "([^"]*)" and content "([^"]*)"$/ do |arg1, arg2, arg3|
-  pending # express the regexp above with the code you wish you had
+When /^I enter a recipient named "([^"]*)", a title "([^"]*)" and content "([^"]*)"$/ do |username, title, content|
+  fill_in "Usernames", :with => username
+  And  %{I enter a title "#{title}" with content "#{content}"}
 end
 
 Given /^a private thread exists between "([^"]*)" and "([^"]*)" titled "([^"]*)"$/ do |arg1, arg2, arg3|

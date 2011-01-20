@@ -20,6 +20,7 @@ class Topic
   
   # lock it down
   attr_accessible :title, :user, :last_user, :user_ids
+  attr_accessor :usernames
 
   # validations
   validates_numericality_of :post_count, :greater_than => 0
@@ -37,6 +38,20 @@ class Topic
 
   def private?
     self.users.present?
+  end
+
+  def add_user(name_or_obj)
+    if name_or_obj.class == String
+      @user = User.where(:name => name_or_obj).first
+    elsif name_or_obj.class == User
+      @user = name_or_obj
+    end
+
+    self.users << @user
+  end
+
+  def users_to_sentence
+    @users_to_sentence ||= self.users.collect{ |u| u.name.capitalize }.to_sentence
   end
 
 end

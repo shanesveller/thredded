@@ -24,6 +24,7 @@ end
 
 Given /^I am signed up and confirmed as "(.*)\/(.*)"$/ do |email, password|
   user = Factory :user,
+    :name                  => email.split('@').first,
     :email                 => email,
     :password              => password,
     :password_confirmation => password

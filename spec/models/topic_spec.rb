@@ -93,4 +93,27 @@ describe Topic do
 
   end
 
+  describe ".add_user" do
+    before(:each) do
+      @topic = Factory(:topic, :post_count => 1, :messageboard => @messageboard)
+      @joel  = Factory(:user, :name => "joel")
+    end
+    it "should add a user by their username" do
+      @topic.add_user("joel")
+      @topic.users.should include(@joel)
+    end
+    it "should add a user with a User object" do
+      @topic.add_user(@joel)
+      @topic.users.should include(@joel)
+    end
+  end
+
+  describe ".users_to_sentence" do
+    it "should list out the users in a topic in a human readable format" do
+      @topic = Factory(:topic, :post_count => 1, :messageboard => @messageboard)
+      @topic.users = [@user1, @user2]
+
+      @topic.users_to_sentence.should == "User1 and User2"
+    end
+  end
 end
