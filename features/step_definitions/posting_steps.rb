@@ -47,8 +47,7 @@ Given /^I create the following new topics:$/ do |topics_table|
 end
 
 Then /^the topic listing should look like the following:$/ do |topics_table|
-  topics_table.diff!(tableish('#topics header, #topics article','h1 a,.started_by a,.updated_by a,.post_count, div'))
-  # topics_table.diff!(actual_table)
+  topics_table.diff!(tableish('#content header, #content article','h1 a,.started_by a,.updated_by a,.post_count, div'))
 end
 
 Given /^another member named "([^"]*)" exists$/ do |name|
