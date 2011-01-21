@@ -9,6 +9,7 @@ class User
 
   field :name, :type => String
   field :superadmin, :type => Boolean, :default => false
+  field :posts_count, :type => Integer, :default => 0
   references_many :messageboards, :stored_as => :array, :inverse_of => :users
   
   referenced_in :role

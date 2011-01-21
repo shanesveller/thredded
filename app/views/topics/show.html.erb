@@ -13,8 +13,10 @@
 
   <% topic.posts.each do |p| %>
     <article>
+      <header>
       <cite><%= p.user %></cite>
       <abbr class="timeago" title="<%= p.created_at.strftime("%Y-%m-%dT%I:%M:%SZ") %>"><%= p.created_at.strftime("%B %d, %Y") %></abbr>
+      </header>
       <p><%= p.content %></p>
     </article>
   <% end %>

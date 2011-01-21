@@ -399,6 +399,6 @@ section#contentwrap {
   border-bottom: dashed 1px gray;
 }
 /* line 8, sass/partials/_posts.scss */
-#topics_posts #content article:last-child {
+#topics_posts #content article:last {
   border: none;
 }
