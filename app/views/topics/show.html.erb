@@ -12,9 +12,11 @@
   </header>
 
   <% topic.posts.each do |p| %>
-    <%= p.user %>
-    <%= p.created_at %>
-    <%= p.content %>
+    <article>
+      <cite><%= p.user %></cite>
+      <abbr class="timeago" title="<%= p.created_at.strftime("%Y-%m-%dT%I:%M:%SZ") %>"><%= p.created_at.strftime("%B %d, %Y") %></abbr>
+      <p><%= p.content %></p>
+    </article>
   <% end %>
 
   <%= form_for [messageboard, topic, @post] do |f| %>

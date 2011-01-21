@@ -1,0 +1,12 @@
+#topics_posts {
+
+  #content article {
+    padding: 0 0 15px 0;
+    margin-bottom: 15px;
+    border-bottom: dashed 1px gray;
+
+    &:last-child {
+      border: none;
+    }
+  }
+}

@@ -391,3 +391,14 @@ section#contentwrap {
   position: absolute;
   top: 10px;
 }
+
+/* line 3, sass/partials/_posts.scss */
+#topics_posts #content article {
+  padding: 0 0 15px 0;
+  margin-bottom: 15px;
+  border-bottom: dashed 1px gray;
+}
+/* line 8, sass/partials/_posts.scss */
+#topics_posts #content article:last-child {
+  border: none;
+}
