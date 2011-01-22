@@ -11,6 +11,7 @@ gem 'rspec',            '2.4.0'
 gem 'rspec-rails',      '2.4.1'
 gem 'rails3-generators'
 gem 'paperclip'
+gem 'gravtastic'
 gem 'themes_for_rails' 
 gem 'omniauth',         '0.1.6'
 
