@@ -312,10 +312,10 @@ section#contentwrap {
   width: 64%;
   padding: 2% 2.5% 5%;
   background: #fff;
-  -moz-box-shadow: 3px 3px 5px #666666;
-  -webkit-box-shadow: 3px 3px 5px #666666;
-  -o-box-shadow: 3px 3px 5px #666666;
-  box-shadow: 3px 3px 5px #666666;
+  -moz-box-shadow: #666666 3px 3px 5px 0;
+  -webkit-box-shadow: #666666 3px 3px 5px 0;
+  -o-box-shadow: #666666 3px 3px 5px 0;
+  box-shadow: #666666 3px 3px 5px 0;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   -o-border-radius: 5px;
@@ -366,24 +366,25 @@ section#contentwrap {
   font-size: 14px;
 }
 /* line 48, sass/partials/_topics.scss */
-#topics_listing #contentwrap section#content article cite, #topics_listing #contentwrap section#content article time {
+#topics_listing #contentwrap section#content article cite, #topics_listing #contentwrap section#content article time, #topics_listing #contentwrap section#content article abbr {
   position: absolute;
   left: 53.5%;
   top: 10px;
 }
 /* line 53, sass/partials/_topics.scss */
-#topics_listing #contentwrap section#content article cite a, #topics_listing #contentwrap section#content article time a {
+#topics_listing #contentwrap section#content article cite a, #topics_listing #contentwrap section#content article time a, #topics_listing #contentwrap section#content article abbr a {
   font-size: 12px;
 }
 /* line 54, sass/partials/_topics.scss */
-#topics_listing #contentwrap section#content article cite.updated_by, #topics_listing #contentwrap section#content article cite.updated_at, #topics_listing #contentwrap section#content article time.updated_by, #topics_listing #contentwrap section#content article time.updated_at {
+#topics_listing #contentwrap section#content article cite.updated_by, #topics_listing #contentwrap section#content article cite.updated_at, #topics_listing #contentwrap section#content article time.updated_by, #topics_listing #contentwrap section#content article time.updated_at, #topics_listing #contentwrap section#content article abbr.updated_by, #topics_listing #contentwrap section#content article abbr.updated_at {
   left: 69%;
 }
 /* line 56, sass/partials/_topics.scss */
-#topics_listing #contentwrap section#content article time {
+#topics_listing #contentwrap section#content article time, #topics_listing #contentwrap section#content article abbr {
   font-size: 10px;
   top: 31px;
   width: 13%;
+  border: none;
 }
 /* line 63, sass/partials/_topics.scss */
 #topics_listing #contentwrap section#content article .post_count {
@@ -394,11 +395,48 @@ section#contentwrap {
 
 /* line 3, sass/partials/_posts.scss */
 #topics_posts #content article {
-  padding: 0 0 15px 0;
-  margin-bottom: 15px;
-  border-bottom: dashed 1px gray;
+  padding: 15px 0 0;
+  margin-bottom: 10px;
+  border-top: solid 2px #eee;
+  clear: both;
+  overflow: hidden;
 }
-/* line 8, sass/partials/_posts.scss */
+/* line 10, sass/partials/_posts.scss */
 #topics_posts #content article:last {
+  border: none;
+}
+/* line 14, sass/partials/_posts.scss */
+#topics_posts #content article header {
+  float: left;
+  text-align: left;
+  background: #eee;
+  padding: 10px;
+  overflow: hidden;
+  margin-right: 15px;
+  margin-top: -15px;
+  width: 120px;
+}
+/* line 24, sass/partials/_posts.scss */
+#topics_posts #content article header a {
+  color: #999;
+  text-decoration: none;
+  margin-bottom: 10px;
+  display: block;
+}
+/* line 30, sass/partials/_posts.scss */
+#topics_posts #content article header a img {
+  display: block;
+  width: 48px;
+  height: auto;
+  border: solid 4px #fff;
+  margin-bottom: 5px;
+  margin-left: -4px;
+}
+/* line 42, sass/partials/_posts.scss */
+#topics_posts #content article header abbr {
+  display: block;
+  clear: both;
+  font-size: 11px;
+  margin-bottom: 10px;
   border: none;
 }

@@ -13,9 +13,14 @@
 
   <% topic.posts.each do |p| %>
     <article>
-      <header>
-      <cite><%= p.user %></cite>
-      <abbr class="timeago" title="<%= p.created_at.strftime("%Y-%m-%dT%I:%M:%SZ") %>"><%= p.created_at.strftime("%B %d, %Y") %></abbr>
+      <header>	
+        <abbr class="timeago" title="<%= p.created_at.strftime("%Y-%m-%dT%I:%M:%S-0500") %>"><%= p.created_at.strftime("%B %d, %Y") %></abbr>
+		<cite>
+			<a href="/users/<%= p.user %>">
+				<%= image_tag p.gravatar_url %>
+				<%= p.user %>
+			</a>
+		</cite>
       </header>
       <p><%= p.content %></p>
     </article>

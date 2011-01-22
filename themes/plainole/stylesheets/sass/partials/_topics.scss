@@ -45,7 +45,7 @@
       }
     }
 
-    cite, time {
+    cite, time, abbr {
       position: absolute;
       left: 53.5%;
       top: 10px; 
@@ -53,11 +53,11 @@
       a { font-size: 12px; }
       &.updated_by, &.updated_at { left: 69%; }
     }
-    time {
+    time, abbr {
       font-size: 10px;
       top: 31px;
       width: 13%;
-
+      border: none;
     }
 
     .post_count {
