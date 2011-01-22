@@ -40,5 +40,14 @@ describe Post do
       
       topic.updated_at.should == last_post.created_at
     end
+    
+    it "sets the post user's email on creation" do
+      joel  =  Factory(:user, :name => "joel", :email => "joel@thredded.com", :password => "password")
+      topic = Factory(:topic, :post_count => 1, :messageboard => @messageboard)
+      topic.posts.create(:content => "I should have a gravatar", :user => "joel")
+      
+      topic.posts.last.user_email.should == "joel@thredded.com"
+    end
+    
   end
 end
