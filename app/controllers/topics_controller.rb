@@ -63,20 +63,18 @@ class TopicsController < ApplicationController
     end
 
     def pad_topic
-
       # TODO: Refactor.  Make faster
       # If there are usernames in the form. add them 
       # to the topic, make it automatically private
       @users = Array.new
       if params[:topic][:usernames].present?
         params[:topic][:usernames].split(',').each do |name|
-          user = User.where(:name => name).first
+          user = User.where(:name => name.strip).first
           @users << user if user.present?
         end
         @users << current_user if @users.size > 0
       end
       params[:topic].delete(:usernames)
-  
       params[:topic][:last_user] = current_user_name
       params[:topic][:post_count] = 1
     end
