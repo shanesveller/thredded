@@ -32,7 +32,6 @@ When /^I submit some drivel like "([^"]*)"$/ do |content|
   click_button "Submit"
 end
 
-
 Given /^I create the following new topics:$/ do |topics_table|
   u = User.first
   m = Messageboard.first
@@ -62,7 +61,10 @@ When /^I enter a recipient named "([^"]*)", a title "([^"]*)" and content "([^"]
   And  %{I enter a title "#{title}" with content "#{content}"}
 end
 
-Given /^a private thread exists between "([^"]*)" and "([^"]*)" titled "([^"]*)"$/ do |arg1, arg2, arg3|
-  pending # express the regexp above with the code you wish you had
+Given /^a private thread exists between "([^"]*)" and "([^"]*)" titled "([^"]*)"$/ do |user1, user2, title|
+  @topic = Factory(:topic, :messageboard => Messageboard.first, :title => title, :user => user1)
+  @user1 = Factory(:user, :name => user1)
+  @user2 = Factory(:user, :name => user2)
+  @topic.posts << Factory(:post, :user => user1)
+  @topic.users = [@user1, @user2]
 end
-

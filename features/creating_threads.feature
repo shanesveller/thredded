@@ -39,7 +39,7 @@ Feature: Add a new thread
        And I should see "This is a private thread"
 
   Scenario: A user cannot see a private thread
-     Given a messageboard named "thredded" that I, "joel", am a member of
+     Given a messageboard named "ja" that I, "joel", am a member of
        And a private thread exists between "Sal" and "John" titled "This is a private thread"
-      When I go to the messageboard topic listing
+      When I go to the topic listing page
       Then I should not see "This is a private thread"
