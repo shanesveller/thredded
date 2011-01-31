@@ -5,11 +5,14 @@ Given /^I am logged in and visiting a "(.*)" messageboard$/ do |security|
 end
 
 Given /^I am a member of the messageboard$/ do
-  pending # express the regexp above with the code you wish you had
+  user = User.first
+  user.member_of(Messageboard.first)
+  user.reload
 end
 
 Given /^I am not a member of the messageboard$/ do
-  pending # express the regexp above with the code you wish you had
+  user = User.last
+  user.roles.delete_all
 end
 
 Given /^I am an anonymous visitor of the messageboard$/ do

@@ -8,7 +8,11 @@ class TopicsController < ApplicationController
   helper_method :messageboard, :topic
 
   def index
+    # CHECK ABILITY ON MESSAGEBOARD - NOT TOPICS
+#    flash[:error] = "You are not authorized to access this page." and redirect_to root_path unless can? :read, messageboard
+    authorize! :index, messageboard
     @topics = messageboard.topics.latest
+
   end
 
   def show
@@ -56,7 +60,7 @@ class TopicsController < ApplicationController
   # ======================================
 
   private
-
+  
     def pad_params
       params[:topic][:user] = current_user_name
       params[:topic][:last_user] = current_user_name

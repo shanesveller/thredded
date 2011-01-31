@@ -9,6 +9,10 @@ module NavigationHelpers
     case page_name
     when /the homepage/
       '/'
+    when /a "([^\"]+)" messageboard/i
+      m = Factory(:messageboard, :security => $1.to_sym)
+      t = Factory(:topic, :messageboard => m)
+      messageboard_topics_path(m)
     when /the add a new thread page for "([^\"]+)"/i
       m = Messageboard.where(:name =>$1).first
       new_messageboard_topic_path(m)
