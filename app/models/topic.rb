@@ -33,11 +33,11 @@ class Topic
   accepts_nested_attributes_for :posts
 
   def public? 
-    self.users.empty?
+    self.users.empty? if self.users
   end
 
   def private?
-    self.users.present?
+    self.users.present? if self.users
   end
 
   def add_user(name_or_obj)
