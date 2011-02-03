@@ -1,9 +1,9 @@
 source 'http://rubygems.org'
 
 gem 'rails',            '3.0.3'
-gem 'bson_ext',         '1.1.5'
-gem 'mongo',            '1.1.5'
-gem 'mongoid',          :git => 'git://github.com/mongoid/mongoid.git' , :branch => "safe_master"
+gem 'bson_ext',         '1.2'
+gem 'mongo',            '1.2'
+gem 'mongoid',          '2.0.0.rc.7'
 gem 'devise',           :git => "git://github.com/plataformatec/devise.git" 
 gem 'cancan' 
 gem 'compass'

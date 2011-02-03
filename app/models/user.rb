@@ -10,11 +10,12 @@ class User
   field :name, :type => String
   field :superadmin, :type => Boolean, :default => false
   field :posts_count, :type => Integer, :default => 0
-  references_many :messageboards, :stored_as => :array, :inverse_of => :users
+  references_many :messageboards, :inverse_of => :users
   
   referenced_in :role
-  referenced_in :topics
   references_many :roles #, :stored_as => :array, :inverse_of => :users
+
+  references_and_referenced_in_many :topics
   
   validates_presence_of :name
   validates_uniqueness_of :name, :email, :case_sensitive => false

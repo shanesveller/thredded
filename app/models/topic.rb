@@ -15,7 +15,7 @@ class Topic
  
   # associations
   embeds_many :posts
-  references_many :users, :stored_as => :array, :inverse_of => :topics # private threads will reference users
+  references_and_referenced_in_many :users # , :inverse_of => :topics # private threads will reference users
   referenced_in :messageboard
   
   # lock it down
@@ -33,11 +33,11 @@ class Topic
   accepts_nested_attributes_for :posts
 
   def public? 
-    self.users.empty?
+    self.users.empty? if self.users
   end
 
   def private?
-    self.users.present?
+    self.users.present? if self.users
   end
 
   def add_user(name_or_obj)

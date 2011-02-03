@@ -19,7 +19,7 @@ class Messageboard
   validates_length_of     :name, :within => 1..16, :message => "should be between 1 and 16 characters" 
 
   references_many :topics
-  references_many :users, :stored_as => :array, :inverse_of => :messageboards
+  references_many :users, :inverse_of => :messageboards
   references_one :role
   
   def restricted_to_private?
