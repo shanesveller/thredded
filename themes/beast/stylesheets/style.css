@@ -47,6 +47,7 @@ a {
   font-size: 100%;
   vertical-align: baseline;
   background: transparent;
+  color: #24B;
 }
 
 /* line 27, sass/partials/_boilerplate.scss */
@@ -278,38 +279,16 @@ body {
   background: #bbb;
 }
 
-/* line 6, sass/partials/_layout.scss */
+/* line 5, sass/partials/_layout.scss */
 section#contentwrap {
   font-family: "Gill Sans", Calibri, "Trebuchet MS", sans-serif;
-  margin: 40px auto;
-  width: 920px;
+  margin: 40px 2.5%;
+  width: 95%;
 }
-
-/* line 1, sass/partials/_topics.scss */
-#contentwrap header[role="banner"] {
-  float: right;
-  width: 28%;
-}
-/* line 7, sass/partials/_topics.scss */
-#contentwrap header[role="banner"] h1 {
-  font-size: 20px;
-  font-weight: bold;
-  text-transform: uppercase;
-  margin-bottom: 15px;
-}
-/* line 8, sass/partials/_topics.scss */
-#contentwrap header[role="banner"] h2 {
-  font-size: 14px;
-  font-weight: normal;
-  text-transform: lowercase;
-  letter-spacing: 2px;
-  margin-bottom: 20px;
-}
-
-/* line 11, sass/partials/_topics.scss */
-#contentwrap section#content {
+/* line 10, sass/partials/_layout.scss */
+section#contentwrap section#content {
   overflow: hidden;
-  width: 64%;
+  width: 68%;
   padding: 2% 2.5% 5%;
   background: #fff;
   -moz-box-shadow: #666666 3px 3px 5px 0;
@@ -323,15 +302,132 @@ section#contentwrap {
   -khtml-border-radius: 5px;
   border-radius: 5px;
 }
-/* line 20, sass/partials/_topics.scss */
-#contentwrap section#content header h1 {
+/* line 19, sass/partials/_layout.scss */
+section#contentwrap section#content header h1 {
   font-size: 20px;
   font-weight: bold;
   text-transform: uppercase;
   margin-bottom: 15px;
 }
 
-/* line 31, sass/partials/_topics.scss */
+/* line 1, sass/partials/_header.scss */
+#contentwrap header[role="banner"] {
+  float: right;
+  width: 25%;
+}
+/* line 7, sass/partials/_header.scss */
+#contentwrap header[role="banner"] h1 {
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+}
+/* line 8, sass/partials/_header.scss */
+#contentwrap header[role="banner"] h2 {
+  font-size: 14px;
+  font-weight: normal;
+  text-transform: lowercase;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+}
+
+/* line 2, sass/partials/_categories.scss */
+#category_listing section#contentwrap section#content > header h1 {
+  margin-bottom: 6px;
+}
+/* line 3, sass/partials/_categories.scss */
+#category_listing section#contentwrap section#content > header h2 {
+  margin-bottom: 16px;
+  font-weight: normal;
+  color: #888;
+  font-size: 14px;
+}
+
+/* line 7, sass/partials/_categories.scss */
+#categories > header {
+  overflow: hidden;
+}
+/* line 10, sass/partials/_categories.scss */
+#categories > header > div {
+  background: #333;
+  border: none;
+  color: #fff;
+  font-size: 11px;
+  float: left;
+  line-height: 28px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+/* line 20, sass/partials/_categories.scss */
+#categories > header > div.category {
+  width: 69%;
+  padding-left: 1%;
+  border-bottom: solid 1px #000;
+}
+/* line 21, sass/partials/_categories.scss */
+#categories > header > div.last_post {
+  width: 30%;
+  border-bottom: solid 1px #000;
+}
+/* line 24, sass/partials/_categories.scss */
+#categories > .category {
+  border: solid 1px #ddd;
+  border-top: none;
+  clear: both;
+  display: block;
+  padding: 1%;
+  position: relative;
+}
+/* line 32, sass/partials/_categories.scss */
+#categories > .category header {
+  font-size: 12px;
+}
+/* line 35, sass/partials/_categories.scss */
+#categories > .category header h2 {
+  font-size: 16px;
+  font-weight: normal;
+}
+/* line 38, sass/partials/_categories.scss */
+#categories > .category p {
+  font-size: 12px;
+  margin-top: 6px;
+}
+/* line 40, sass/partials/_categories.scss */
+#categories > .category footer {
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  left: 70%;
+  top: 0px;
+  width: 26%;
+  padding: 2%;
+  background: #eee;
+}
+/* line 50, sass/partials/_categories.scss */
+#categories > .category footer a {
+  color: #333;
+  font-size: 12px;
+  text-decoration: none;
+}
+/* line 55, sass/partials/_categories.scss */
+#categories > .category footer cite {
+  display: block;
+  clear: both;
+}
+
+/* line 62, sass/partials/_categories.scss */
+#category_listing #content > footer {
+  border: solid 1px #ddd;
+  border-top: none;
+  padding: 1%;
+}
+/* line 67, sass/partials/_categories.scss */
+#category_listing #content > footer a {
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* line 7, sass/partials/_topics.scss */
 #topics_listing #contentwrap section#content .title,
 #topics_listing #contentwrap section#content .started,
 #topics_listing #contentwrap section#content .updated,
@@ -344,49 +440,49 @@ section#contentwrap {
   line-height: 24px;
   overflow: hidden;
 }
-/* line 32, sass/partials/_topics.scss */
+/* line 8, sass/partials/_topics.scss */
 #topics_listing #contentwrap section#content .title {
   width: 52.5%;
   padding-left: 1%;
 }
-/* line 34, sass/partials/_topics.scss */
+/* line 10, sass/partials/_topics.scss */
 #topics_listing #contentwrap section#content article {
   clear: both;
   position: relative;
   height: 40px;
   padding: 10px 0;
 }
-/* line 40, sass/partials/_topics.scss */
+/* line 16, sass/partials/_topics.scss */
 #topics_listing #contentwrap section#content article h1 {
   width: 48%;
 }
-/* line 42, sass/partials/_topics.scss */
+/* line 18, sass/partials/_topics.scss */
 #topics_listing #contentwrap section#content article h1 a {
   font-weight: normal;
   font-size: 14px;
 }
-/* line 48, sass/partials/_topics.scss */
+/* line 24, sass/partials/_topics.scss */
 #topics_listing #contentwrap section#content article cite, #topics_listing #contentwrap section#content article time, #topics_listing #contentwrap section#content article abbr {
   position: absolute;
   left: 53.5%;
   top: 10px;
 }
-/* line 53, sass/partials/_topics.scss */
+/* line 29, sass/partials/_topics.scss */
 #topics_listing #contentwrap section#content article cite a, #topics_listing #contentwrap section#content article time a, #topics_listing #contentwrap section#content article abbr a {
   font-size: 12px;
 }
-/* line 54, sass/partials/_topics.scss */
+/* line 30, sass/partials/_topics.scss */
 #topics_listing #contentwrap section#content article cite.updated_by, #topics_listing #contentwrap section#content article cite.updated_at, #topics_listing #contentwrap section#content article time.updated_by, #topics_listing #contentwrap section#content article time.updated_at, #topics_listing #contentwrap section#content article abbr.updated_by, #topics_listing #contentwrap section#content article abbr.updated_at {
   left: 69%;
 }
-/* line 56, sass/partials/_topics.scss */
+/* line 32, sass/partials/_topics.scss */
 #topics_listing #contentwrap section#content article time, #topics_listing #contentwrap section#content article abbr {
   font-size: 10px;
   top: 31px;
   width: 13%;
   border: none;
 }
-/* line 63, sass/partials/_topics.scss */
+/* line 39, sass/partials/_topics.scss */
 #topics_listing #contentwrap section#content article .post_count {
   left: 84.5%;
   position: absolute;

@@ -1,7 +1,7 @@
 class MessageboardsController < ApplicationController
   before_filter :messageboard, :only => :show
   load_and_authorize_resource
-  theme 'plainole'
+  theme 'beast'
   layout 'application'
   helper_method :messageboard, :topic
   

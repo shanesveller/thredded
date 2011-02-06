@@ -1,0 +1,24 @@
+body {
+  background: #bbb;
+}
+
+section#contentwrap {
+  font-family: "Gill Sans", Calibri, "Trebuchet MS", sans-serif;
+  margin: 40px 2.5%;
+  width: 95%; 
+
+  section#content {
+    overflow: hidden;
+    width: 68%;
+    padding: 2% 2.5% 5%;
+    background: #fff;
+    @include box-shadow(#666, 3px, 3px, 5px);
+    @include border-radius(5px);
+
+    header {
+      h1 {
+        font-size: 20px; font-weight: bold; text-transform: uppercase; margin-bottom: 15px;
+      }
+    }
+  }
+}
