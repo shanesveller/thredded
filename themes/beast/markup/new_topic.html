@@ -19,22 +19,37 @@
         </nav>
       </header>
 
+      <section id="content">
 
-      <form>
-        <p>
-          <label for="topic_title">Title</label>
-          <input id="topic_title" name="topic[title]" size="30" type="text" />
-        </p>
-        <p>
-          <label for="topic_usernames">Usernames</label>
-          <input id="topic_usernames" name="topic[usernames]" size="30" type="text" />
-        </p>
-        <p>
-          <label for="topic_posts_attributes_0_content">Content</label>:<br/>
-          <textarea cols="40" id="topic_posts_attributes_0_content" name="topic[posts_attributes][0][content]" rows="5"></textarea>
-        </p>
-        <input id="topic_submit" name="commit" type="submit" value="Create New Topic" />
-      </form>
+        <header>
+          <nav>
+            <ul>
+              <li><a href="#">Forums</a> &rarr; </li>
+              <li><a href="#">General Discussion</a> &rarr; </li>
+            </ul>
+          </nav>
+          <h1>New Topic</h1>
+          <h2>by Joel</h2>
+        </header>
+
+        <form>
+          <p class="title">
+            <label for="topic_title">Title</label>
+            <input id="topic_title" name="topic[title]" size="30" type="text" placeholder="Topic Title" />
+          </p>
+          <div id="more">
+            <p class="private_users">
+              <label for="topic_usernames">Usernames</label>
+              <input id="topic_usernames" name="topic[usernames]" size="30" type="text" />
+            </p>
+          </div>
+          <p class="content">
+            <label for="topic_posts_attributes_0_content">Content</label>
+            <textarea cols="40" id="topic_posts_attributes_0_content" name="topic[posts_attributes][0][content]" rows="5"></textarea>
+          </p>
+          <input id="topic_submit" name="commit" type="submit" value="Create New Topic" />
+        </form>
+      </section>
 
 
     </section>

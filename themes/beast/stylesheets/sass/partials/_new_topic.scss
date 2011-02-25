@@ -1,0 +1,21 @@
+#topics_new {
+  label { display: block; clear: both; font-size: 12px; text-transform: lowercase; }
+  label[for="topic_title"] { display: none; }
+
+  p.title {
+    padding: 1%;
+    background: #999;
+    @include border-radius(4px);
+    width: 98%;
+
+    input { 
+      border: none; 
+      border-top: #333; 
+      border-left: #333; 
+      font-size: 16px; 
+      display: block;
+      width: 100%;
+      line-height: 24px;
+    }
+  }
+}

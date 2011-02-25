@@ -25,22 +25,27 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 
 /* line 23, sass/partials/_boilerplate.scss */
+body {
+  font-family: "Lucida Grande", "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+
+/* line 25, sass/partials/_boilerplate.scss */
 nav ul {
   list-style: none;
 }
 
-/* line 24, sass/partials/_boilerplate.scss */
+/* line 26, sass/partials/_boilerplate.scss */
 blockquote, q {
   quotes: none;
 }
 
-/* line 25, sass/partials/_boilerplate.scss */
+/* line 27, sass/partials/_boilerplate.scss */
 blockquote:before, blockquote:after, q:before, q:after {
   content: '';
   content: none;
 }
 
-/* line 26, sass/partials/_boilerplate.scss */
+/* line 28, sass/partials/_boilerplate.scss */
 a {
   margin: 0;
   padding: 0;
@@ -50,14 +55,14 @@ a {
   color: #24B;
 }
 
-/* line 27, sass/partials/_boilerplate.scss */
+/* line 29, sass/partials/_boilerplate.scss */
 ins {
   background-color: #ff9;
   color: #000;
   text-decoration: none;
 }
 
-/* line 28, sass/partials/_boilerplate.scss */
+/* line 30, sass/partials/_boilerplate.scss */
 mark {
   background-color: #ff9;
   color: #000;
@@ -65,24 +70,24 @@ mark {
   font-weight: bold;
 }
 
-/* line 29, sass/partials/_boilerplate.scss */
+/* line 31, sass/partials/_boilerplate.scss */
 del {
   text-decoration: line-through;
 }
 
-/* line 30, sass/partials/_boilerplate.scss */
+/* line 32, sass/partials/_boilerplate.scss */
 abbr[title], dfn[title] {
   border-bottom: 1px dotted;
   cursor: help;
 }
 
-/* line 31, sass/partials/_boilerplate.scss */
+/* line 33, sass/partials/_boilerplate.scss */
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
-/* line 32, sass/partials/_boilerplate.scss */
+/* line 34, sass/partials/_boilerplate.scss */
 hr {
   display: block;
   height: 1px;
@@ -92,69 +97,69 @@ hr {
   padding: 0;
 }
 
-/* line 33, sass/partials/_boilerplate.scss */
+/* line 35, sass/partials/_boilerplate.scss */
 input, select {
   vertical-align: middle;
 }
 
-/* line 35, sass/partials/_boilerplate.scss */
+/* line 37, sass/partials/_boilerplate.scss */
 select, input, textarea, button {
   font: 99% sans-serif;
 }
 
-/* line 38, sass/partials/_boilerplate.scss */
+/* line 40, sass/partials/_boilerplate.scss */
 h1, h2, h3, h4, h5, h6 {
   font-weight: bold;
 }
 
-/* line 39, sass/partials/_boilerplate.scss */
+/* line 41, sass/partials/_boilerplate.scss */
 html {
   overflow-y: scroll;
 }
 
-/* line 40, sass/partials/_boilerplate.scss */
+/* line 42, sass/partials/_boilerplate.scss */
 ul, ol {
   margin-left: 1.8em;
 }
 
-/* line 41, sass/partials/_boilerplate.scss */
+/* line 43, sass/partials/_boilerplate.scss */
 ol {
   list-style-type: decimal;
 }
 
-/* line 43, sass/partials/_boilerplate.scss */
+/* line 45, sass/partials/_boilerplate.scss */
 nav ul, nav li {
   margin: 0;
 }
 
-/* line 44, sass/partials/_boilerplate.scss */
+/* line 46, sass/partials/_boilerplate.scss */
 small {
   font-size: 85%;
 }
 
-/* line 45, sass/partials/_boilerplate.scss */
+/* line 47, sass/partials/_boilerplate.scss */
 strong, th {
   font-weight: bold;
 }
 
-/* line 46, sass/partials/_boilerplate.scss */
+/* line 48, sass/partials/_boilerplate.scss */
 td, td img {
   vertical-align: top;
 }
 
-/* line 47, sass/partials/_boilerplate.scss */
+/* line 49, sass/partials/_boilerplate.scss */
 sub {
   vertical-align: sub;
   font-size: smaller;
 }
 
-/* line 48, sass/partials/_boilerplate.scss */
+/* line 50, sass/partials/_boilerplate.scss */
 sup {
   vertical-align: super;
   font-size: smaller;
 }
 
-/* line 49, sass/partials/_boilerplate.scss */
+/* line 51, sass/partials/_boilerplate.scss */
 pre {
   padding: 15px;
   white-space: pre;
@@ -163,47 +168,47 @@ pre {
   word-wrap: break-word;
 }
 
-/* line 50, sass/partials/_boilerplate.scss */
+/* line 52, sass/partials/_boilerplate.scss */
 textarea {
   overflow: auto;
 }
 
-/* line 51, sass/partials/_boilerplate.scss */
+/* line 53, sass/partials/_boilerplate.scss */
 .ie6 legend, .ie7 legend {
   margin-left: -7px;
 }
 
-/* line 52, sass/partials/_boilerplate.scss */
+/* line 54, sass/partials/_boilerplate.scss */
 input[type="radio"] {
   vertical-align: text-bottom;
 }
 
-/* line 53, sass/partials/_boilerplate.scss */
+/* line 55, sass/partials/_boilerplate.scss */
 input[type="checkbox"] {
   vertical-align: bottom;
 }
 
-/* line 54, sass/partials/_boilerplate.scss */
+/* line 56, sass/partials/_boilerplate.scss */
 .ie7 input[type="checkbox"] {
   vertical-align: baseline;
 }
 
-/* line 55, sass/partials/_boilerplate.scss */
+/* line 57, sass/partials/_boilerplate.scss */
 .ie6 input {
   vertical-align: text-bottom;
 }
 
-/* line 56, sass/partials/_boilerplate.scss */
+/* line 58, sass/partials/_boilerplate.scss */
 label, input[type=button], input[type=submit], button {
   cursor: pointer;
 }
 
-/* line 57, sass/partials/_boilerplate.scss */
+/* line 59, sass/partials/_boilerplate.scss */
 button, input, select, textarea {
   margin: 0;
 }
 
-/* line 59, sass/partials/_boilerplate.scss */
+/* line 61, sass/partials/_boilerplate.scss */
 input:invalid, textarea:invalid {
   border-radius: 1px;
   -moz-box-shadow: 0px 0px 5px red;
@@ -211,24 +216,24 @@ input:invalid, textarea:invalid {
   box-shadow: 0px 0px 5px red;
 }
 
-/* line 61, sass/partials/_boilerplate.scss */
+/* line 63, sass/partials/_boilerplate.scss */
 .no-boxshadow input:invalid,
 .no-boxshadow textarea:invalid {
   background-color: #f0dddd;
 }
 
-/* line 65, sass/partials/_boilerplate.scss */
+/* line 67, sass/partials/_boilerplate.scss */
 button {
   width: auto;
   overflow: visible;
 }
 
-/* line 66, sass/partials/_boilerplate.scss */
+/* line 68, sass/partials/_boilerplate.scss */
 .ie7 img {
   -ms-interpolation-mode: bicubic;
 }
 
-/* line 68, sass/partials/_boilerplate.scss */
+/* line 70, sass/partials/_boilerplate.scss */
 .ir {
   display: block;
   text-indent: -999em;
@@ -238,25 +243,25 @@ button {
   direction: ltr;
 }
 
-/* line 69, sass/partials/_boilerplate.scss */
+/* line 71, sass/partials/_boilerplate.scss */
 .hidden {
   display: none;
   visibility: hidden;
 }
 
-/* line 70, sass/partials/_boilerplate.scss */
+/* line 72, sass/partials/_boilerplate.scss */
 .visuallyhidden {
   position: absolute !important;
   clip: rect(1px 1px 1px 1px);
   clip: rect(1px, 1px, 1px, 1px);
 }
 
-/* line 71, sass/partials/_boilerplate.scss */
+/* line 73, sass/partials/_boilerplate.scss */
 .invisible {
   visibility: hidden;
 }
 
-/* line 72, sass/partials/_boilerplate.scss */
+/* line 74, sass/partials/_boilerplate.scss */
 .clearfix:before, .clearfix:after {
   content: "\0020";
   display: block;
@@ -264,12 +269,12 @@ button {
   visibility: hidden;
 }
 
-/* line 73, sass/partials/_boilerplate.scss */
+/* line 75, sass/partials/_boilerplate.scss */
 .clearfix:after {
   clear: both;
 }
 
-/* line 74, sass/partials/_boilerplate.scss */
+/* line 76, sass/partials/_boilerplate.scss */
 .clearfix {
   zoom: 1;
 }
@@ -281,33 +286,45 @@ body {
 
 /* line 5, sass/partials/_layout.scss */
 section#contentwrap {
-  font-family: "Gill Sans", Calibri, "Trebuchet MS", sans-serif;
   margin: 40px 2.5%;
   width: 95%;
 }
-/* line 10, sass/partials/_layout.scss */
+/* line 9, sass/partials/_layout.scss */
 section#contentwrap section#content {
   overflow: hidden;
   width: 68%;
-  padding: 2% 2.5% 5%;
+  padding: 2% 2% 5% 2%;
   background: #fff;
-  -moz-box-shadow: #666666 3px 3px 5px 0;
-  -webkit-box-shadow: #666666 3px 3px 5px 0;
-  -o-box-shadow: #666666 3px 3px 5px 0;
-  box-shadow: #666666 3px 3px 5px 0;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -o-border-radius: 5px;
-  -ms-border-radius: 5px;
-  -khtml-border-radius: 5px;
-  border-radius: 5px;
+  border-right: solid 4px #888;
+  border-bottom: solid 4px #888;
 }
-/* line 19, sass/partials/_layout.scss */
+/* line 18, sass/partials/_layout.scss */
 section#contentwrap section#content header h1 {
   font-size: 20px;
   font-weight: bold;
   text-transform: uppercase;
-  margin-bottom: 15px;
+  margin-bottom: 6px;
+}
+/* line 19, sass/partials/_layout.scss */
+section#contentwrap section#content header h2 {
+  margin-bottom: 16px;
+  font-weight: normal;
+  color: #888;
+  font-size: 12px;
+}
+/* line 20, sass/partials/_layout.scss */
+section#contentwrap section#content header nav {
+  overflow: hidden;
+  margin-bottom: 16px;
+  padding: 4px;
+  background: #f9f9f9;
+  font-size: 11px;
+  color: #999;
+}
+/* line 21, sass/partials/_layout.scss */
+section#contentwrap section#content header nav ul li {
+  float: left;
+  margin-right: 10px;
 }
 
 /* line 1, sass/partials/_header.scss */
@@ -317,37 +334,25 @@ section#contentwrap section#content header h1 {
 }
 /* line 7, sass/partials/_header.scss */
 #contentwrap header[role="banner"] h1 {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: bold;
   text-transform: uppercase;
   margin-bottom: 15px;
 }
 /* line 8, sass/partials/_header.scss */
 #contentwrap header[role="banner"] h2 {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: normal;
   text-transform: lowercase;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   margin-bottom: 20px;
 }
 
 /* line 2, sass/partials/_categories.scss */
-#category_listing section#contentwrap section#content > header h1 {
-  margin-bottom: 6px;
-}
-/* line 3, sass/partials/_categories.scss */
-#category_listing section#contentwrap section#content > header h2 {
-  margin-bottom: 16px;
-  font-weight: normal;
-  color: #888;
-  font-size: 14px;
-}
-
-/* line 7, sass/partials/_categories.scss */
 #categories > header {
   overflow: hidden;
 }
-/* line 10, sass/partials/_categories.scss */
+/* line 5, sass/partials/_categories.scss */
 #categories > header > div {
   background: #333;
   border: none;
@@ -358,41 +363,42 @@ section#contentwrap section#content header h1 {
   text-transform: uppercase;
   letter-spacing: 2px;
 }
-/* line 20, sass/partials/_categories.scss */
+/* line 15, sass/partials/_categories.scss */
 #categories > header > div.category {
   width: 69%;
   padding-left: 1%;
   border-bottom: solid 1px #000;
 }
-/* line 21, sass/partials/_categories.scss */
+/* line 16, sass/partials/_categories.scss */
 #categories > header > div.last_post {
   width: 30%;
   border-bottom: solid 1px #000;
 }
-/* line 24, sass/partials/_categories.scss */
+/* line 19, sass/partials/_categories.scss */
 #categories > .category {
+  background: transparent url(../images/comment.gif) 16px 11px no-repeat;
   border: solid 1px #ddd;
   border-top: none;
   clear: both;
   display: block;
-  padding: 1%;
+  padding: 1% 1% 1% 5%;
   position: relative;
 }
-/* line 32, sass/partials/_categories.scss */
+/* line 28, sass/partials/_categories.scss */
 #categories > .category header {
   font-size: 12px;
 }
-/* line 35, sass/partials/_categories.scss */
+/* line 31, sass/partials/_categories.scss */
 #categories > .category header h2 {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: normal;
 }
-/* line 38, sass/partials/_categories.scss */
+/* line 34, sass/partials/_categories.scss */
 #categories > .category p {
   font-size: 12px;
   margin-top: 6px;
 }
-/* line 40, sass/partials/_categories.scss */
+/* line 36, sass/partials/_categories.scss */
 #categories > .category footer {
   position: absolute;
   right: 0px;
@@ -403,25 +409,25 @@ section#contentwrap section#content header h1 {
   padding: 2%;
   background: #eee;
 }
-/* line 50, sass/partials/_categories.scss */
+/* line 46, sass/partials/_categories.scss */
 #categories > .category footer a {
   color: #333;
   font-size: 12px;
   text-decoration: none;
 }
-/* line 55, sass/partials/_categories.scss */
+/* line 51, sass/partials/_categories.scss */
 #categories > .category footer cite {
   display: block;
   clear: both;
 }
 
-/* line 62, sass/partials/_categories.scss */
+/* line 58, sass/partials/_categories.scss */
 #category_listing #content > footer {
   border: solid 1px #ddd;
   border-top: none;
   padding: 1%;
 }
-/* line 67, sass/partials/_categories.scss */
+/* line 63, sass/partials/_categories.scss */
 #category_listing #content > footer a {
   font-weight: bold;
   text-decoration: none;
@@ -535,4 +541,38 @@ section#contentwrap section#content header h1 {
   font-size: 11px;
   margin-bottom: 10px;
   border: none;
+}
+
+/* line 2, sass/partials/_new_topic.scss */
+#topics_new label {
+  display: block;
+  clear: both;
+  font-size: 12px;
+  text-transform: lowercase;
+}
+/* line 3, sass/partials/_new_topic.scss */
+#topics_new label[for="topic_title"] {
+  display: none;
+}
+/* line 5, sass/partials/_new_topic.scss */
+#topics_new p.title {
+  padding: 1%;
+  background: #999;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -o-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -khtml-border-radius: 4px;
+  border-radius: 4px;
+  width: 98%;
+}
+/* line 11, sass/partials/_new_topic.scss */
+#topics_new p.title input {
+  border: none;
+  border-top: #333;
+  border-left: #333;
+  font-size: 16px;
+  display: block;
+  width: 100%;
+  line-height: 24px;
 }
