@@ -1,4 +1,4 @@
-#categories {
+section#contentwrap #categories {
   > header {
     overflow: hidden;
 
@@ -28,7 +28,9 @@
     header {
       font-size: 12px;
 
-      h2 { font-size: 14px; font-weight: normal; }
+      h2 { font-size: 14px; font-weight: normal; margin-bottom: 4px; }
+      h2 a { text-decoration: none; font-weight: bold; }
+      h2 a:hover { text-decoration: underline; }
     }
 
     p { font-size: 12px; margin-top: 6px; }
@@ -48,6 +50,7 @@
         font-size: 12px;
         text-decoration: none;
       }
+
       cite {
         display: block;
         clear: both;
@@ -61,4 +64,5 @@
   padding: 1%;
 
   a { font-weight: bold; text-decoration: none; }
+  a:hover { text-decoration: underline; }
 }

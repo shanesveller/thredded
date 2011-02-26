@@ -349,11 +349,11 @@ section#contentwrap section#content header nav ul li {
 }
 
 /* line 2, sass/partials/_categories.scss */
-#categories > header {
+section#contentwrap #categories > header {
   overflow: hidden;
 }
 /* line 5, sass/partials/_categories.scss */
-#categories > header > div {
+section#contentwrap #categories > header > div {
   background: #333;
   border: none;
   color: #fff;
@@ -364,18 +364,18 @@ section#contentwrap section#content header nav ul li {
   letter-spacing: 2px;
 }
 /* line 15, sass/partials/_categories.scss */
-#categories > header > div.category {
+section#contentwrap #categories > header > div.category {
   width: 69%;
   padding-left: 1%;
   border-bottom: solid 1px #000;
 }
 /* line 16, sass/partials/_categories.scss */
-#categories > header > div.last_post {
+section#contentwrap #categories > header > div.last_post {
   width: 30%;
   border-bottom: solid 1px #000;
 }
 /* line 19, sass/partials/_categories.scss */
-#categories > .category {
+section#contentwrap #categories > .category {
   background: transparent url(../images/comment.gif) 16px 11px no-repeat;
   border: solid 1px #ddd;
   border-top: none;
@@ -385,21 +385,31 @@ section#contentwrap section#content header nav ul li {
   position: relative;
 }
 /* line 28, sass/partials/_categories.scss */
-#categories > .category header {
+section#contentwrap #categories > .category header {
   font-size: 12px;
 }
 /* line 31, sass/partials/_categories.scss */
-#categories > .category header h2 {
+section#contentwrap #categories > .category header h2 {
   font-size: 14px;
   font-weight: normal;
+  margin-bottom: 4px;
 }
-/* line 34, sass/partials/_categories.scss */
-#categories > .category p {
+/* line 32, sass/partials/_categories.scss */
+section#contentwrap #categories > .category header h2 a {
+  text-decoration: none;
+  font-weight: bold;
+}
+/* line 33, sass/partials/_categories.scss */
+section#contentwrap #categories > .category header h2 a:hover {
+  text-decoration: underline;
+}
+/* line 36, sass/partials/_categories.scss */
+section#contentwrap #categories > .category p {
   font-size: 12px;
   margin-top: 6px;
 }
-/* line 36, sass/partials/_categories.scss */
-#categories > .category footer {
+/* line 38, sass/partials/_categories.scss */
+section#contentwrap #categories > .category footer {
   position: absolute;
   right: 0px;
   bottom: 0px;
@@ -409,28 +419,32 @@ section#contentwrap section#content header nav ul li {
   padding: 2%;
   background: #eee;
 }
-/* line 46, sass/partials/_categories.scss */
-#categories > .category footer a {
+/* line 48, sass/partials/_categories.scss */
+section#contentwrap #categories > .category footer a {
   color: #333;
   font-size: 12px;
   text-decoration: none;
 }
-/* line 51, sass/partials/_categories.scss */
-#categories > .category footer cite {
+/* line 54, sass/partials/_categories.scss */
+section#contentwrap #categories > .category footer cite {
   display: block;
   clear: both;
 }
 
-/* line 58, sass/partials/_categories.scss */
+/* line 61, sass/partials/_categories.scss */
 #category_listing #content > footer {
   border: solid 1px #ddd;
   border-top: none;
   padding: 1%;
 }
-/* line 63, sass/partials/_categories.scss */
+/* line 66, sass/partials/_categories.scss */
 #category_listing #content > footer a {
   font-weight: bold;
   text-decoration: none;
+}
+/* line 67, sass/partials/_categories.scss */
+#category_listing #content > footer a:hover {
+  text-decoration: underline;
 }
 
 /* line 7, sass/partials/_topics.scss */
@@ -549,30 +563,96 @@ section#contentwrap section#content header nav ul li {
   clear: both;
   font-size: 12px;
   text-transform: lowercase;
+  margin: 10px 0 4px 0;
+  color: #888;
+  font-size: 12px;
 }
 /* line 3, sass/partials/_new_topic.scss */
 #topics_new label[for="topic_title"] {
   display: none;
 }
 /* line 5, sass/partials/_new_topic.scss */
-#topics_new p.title {
-  padding: 1%;
-  background: #999;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
-  -o-border-radius: 4px;
-  -ms-border-radius: 4px;
-  -khtml-border-radius: 4px;
-  border-radius: 4px;
+#topics_new textarea {
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -o-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -khtml-border-radius: 3px;
+  border-radius: 3px;
+  border: solid 1px #999;
+  font-size: 18px;
+  line-height: 26px;
+  padding: 6px;
   width: 98%;
+  color: #333;
 }
-/* line 11, sass/partials/_new_topic.scss */
+/* line 15, sass/partials/_new_topic.scss */
 #topics_new p.title input {
-  border: none;
-  border-top: #333;
-  border-left: #333;
-  font-size: 16px;
-  display: block;
-  width: 100%;
+  border: solid 1px #999;
+  color: #333;
+  font-size: 26px;
   line-height: 24px;
+  padding: 10px 6px 6px;
+  width: 98%;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -o-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -khtml-border-radius: 3px;
+  border-radius: 3px;
+}
+/* line 25, sass/partials/_new_topic.scss */
+#topics_new p.submit input {
+  border: solid 1px #999;
+  font-size: 14px;
+  font-weight: bold;
+  margin: 15px 0 0;
+  line-height: 18px;
+  padding: 5px 6px 3px;
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #ffffff), color-stop(100%, #bfbfbf));
+  background-image: -moz-linear-gradient(top, #ffffff 0%, #bfbfbf 100%);
+  background-image: linear-gradient(top, #ffffff 0%, #bfbfbf 100%);
+}
+/* line 38, sass/partials/_new_topic.scss */
+#topics_new #drawer #attributes {
+  display: none;
+  padding: 10px;
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #bfbfbf), color-stop(100%, #999999));
+  background-image: -moz-linear-gradient(top, #bfbfbf 0%, #999999 100%);
+  background-image: linear-gradient(top, #bfbfbf 0%, #999999 100%);
+}
+/* line 44, sass/partials/_new_topic.scss */
+#topics_new #drawer #attributes label {
+  margin: 0;
+  display: block;
+  float: left;
+  width: 150px;
+  line-height: 24px;
+  color: #fff;
+  text-shadow: #111111 1px 1px 1px 1px 1px;
+}
+/* line 55, sass/partials/_new_topic.scss */
+#topics_new #drawer .handle a {
+  background: #999;
+  font-size: 11px;
+  margin-left: 10px;
+  padding: 1px 10px 5px;
+  display: block;
+  -moz-border-radius-bottomleft: 3px;
+  -webkit-border-bottom-left-radius: 3px;
+  -o-border-bottom-left-radius: 3px;
+  -ms-border-bottom-left-radius: 3px;
+  -khtml-border-bottom-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+  -moz-border-radius-bottomright: 3px;
+  -webkit-border-bottom-right-radius: 3px;
+  -o-border-bottom-right-radius: 3px;
+  -ms-border-bottom-right-radius: 3px;
+  -khtml-border-bottom-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  width: 28px;
+  color: #fff;
+  text-decoration: none;
+  outline: none;
+  text-shadow: #111111 1px 1px 1px;
 }
