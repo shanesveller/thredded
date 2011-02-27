@@ -4,7 +4,7 @@
   .title, 
   .started, 
   .updated, 
-  .posts { background: #444; color:#fff; float: left; display: block; width: 15.5%; line-height: 24px; overflow: hidden; }
+  .posts { background: #444; color:#fff; float: left; display: block; width: 15.5%; line-height: 24px; overflow: hidden; font-size: 11px; }
   .title { width: 52.5%; padding-left:1%; }
 
   article {
@@ -12,9 +12,13 @@
     position: relative;
     height: 40px;
     padding: 10px 0;
+    background: transparent url(../images/comment.gif) 9px 13px no-repeat;
+
+    &:nth-child(2n+1) { background-color: #F9F9F9; }
 
     h1 { 
-      width: 48%; 
+      width: 44%; 
+      margin-left: 4%;
       a {
         font-weight: normal;
         font-size: 14px;

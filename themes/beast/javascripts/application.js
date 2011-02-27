@@ -4,9 +4,17 @@ jQuery(document).ready(function() {
 
   jQuery('.handle a').bind('click', function(){
     
-    jQuery('#attributes').slideDown('fast', function(){
-      return true;
-    });
+    if (jQuery('#attributes').is(':hidden'))
+    {
+      jQuery('#attributes').slideDown('fast', function(){
+        jQuery('.handle a').html('Less');
+      });
+    } else {
+      jQuery('#attributes').slideUp('fast', function(){
+        jQuery('.handle a').html('More');
+      });
+    }
+
     return false;
   });
 });

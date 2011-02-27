@@ -37,18 +37,28 @@
 
     #attributes { 
       display: none; 
-      padding: 10px;
+      margin-top: -2px;
+      padding: 9px 7px 7px 7px;
+      width: 98%;
       @include linear-gradient(color-stops(#bfbfbf, #999));
 
-    
+      p { padding-bottom: 10px; margin-bottom: 10px; border-bottom: dotted 1px #c0c0c0; }
+      p:last-child { padding-bottom: 0px; margin-bottom: 0px; border: none; }
+
       label {
         margin: 0;
         display: block;
         float: left;
-        width: 150px;
+        width: 18%;
         line-height: 24px;
         color: #fff;
         @include text-shadow(#111, 1px 1px 1px);
+
+        span { font-size: 10px; }
+      }
+
+      input {
+        width: 81%;
       }
     }
     
