@@ -477,52 +477,57 @@ section#contentwrap #categories > .category footer cite {
 #topics_listing #contentwrap section#content article:nth-child(2n+1) {
   background-color: #F9F9F9;
 }
-/* line 18, sass/partials/_topics.scss */
+/* line 17, sass/partials/_topics.scss */
+#topics_listing #contentwrap section#content article.private {
+  background-color: #fcfcd7;
+  border-bottom: solid 2px #aaab72;
+}
+/* line 19, sass/partials/_topics.scss */
 #topics_listing #contentwrap section#content article h1 {
   background: url("../images/thread_sprite.gif") no-repeat scroll 10px -90px transparent;
   width: 44%;
   padding-left: 4%;
 }
-/* line 22, sass/partials/_topics.scss */
+/* line 23, sass/partials/_topics.scss */
 #topics_listing #contentwrap section#content article h1 a {
   font-weight: normal;
   font-size: 14px;
 }
-/* line 28, sass/partials/_topics.scss */
+/* line 29, sass/partials/_topics.scss */
 #topics_listing #contentwrap section#content article.sticky h1 {
   background-position: 10px -28px;
 }
-/* line 29, sass/partials/_topics.scss */
+/* line 30, sass/partials/_topics.scss */
 #topics_listing #contentwrap section#content article.locked h1 {
   background-position: 10px -59px;
 }
-/* line 30, sass/partials/_topics.scss */
+/* line 31, sass/partials/_topics.scss */
 #topics_listing #contentwrap section#content article.sticky.locked h1 {
   background-position: 10px 3px;
   padding-left: 6%;
 }
-/* line 32, sass/partials/_topics.scss */
+/* line 33, sass/partials/_topics.scss */
 #topics_listing #contentwrap section#content article cite, #topics_listing #contentwrap section#content article time, #topics_listing #contentwrap section#content article abbr {
   position: absolute;
   left: 53.5%;
   top: 10px;
 }
-/* line 37, sass/partials/_topics.scss */
+/* line 38, sass/partials/_topics.scss */
 #topics_listing #contentwrap section#content article cite a, #topics_listing #contentwrap section#content article time a, #topics_listing #contentwrap section#content article abbr a {
   font-size: 12px;
 }
-/* line 38, sass/partials/_topics.scss */
+/* line 39, sass/partials/_topics.scss */
 #topics_listing #contentwrap section#content article cite.updated_by, #topics_listing #contentwrap section#content article cite.updated_at, #topics_listing #contentwrap section#content article time.updated_by, #topics_listing #contentwrap section#content article time.updated_at, #topics_listing #contentwrap section#content article abbr.updated_by, #topics_listing #contentwrap section#content article abbr.updated_at {
   left: 69%;
 }
-/* line 40, sass/partials/_topics.scss */
+/* line 41, sass/partials/_topics.scss */
 #topics_listing #contentwrap section#content article time, #topics_listing #contentwrap section#content article abbr {
   font-size: 10px;
   top: 31px;
   width: 13%;
   border: none;
 }
-/* line 47, sass/partials/_topics.scss */
+/* line 48, sass/partials/_topics.scss */
 #topics_listing #contentwrap section#content article .post_count {
   font-family: Georgia, Cambria, "Times New Roman", Times, serif;
   font-size: 20px;
@@ -532,7 +537,7 @@ section#contentwrap #categories > .category footer cite {
   width: 30px;
   text-align: center;
 }
-/* line 59, sass/partials/_topics.scss */
+/* line 60, sass/partials/_topics.scss */
 #topics_listing #contentwrap section#content footer a {
   font-size: 12px;
   color: #CC0000;
@@ -638,9 +643,9 @@ section#contentwrap #categories > .category footer cite {
   margin: 15px 0 0;
   line-height: 18px;
   padding: 5px 6px 3px;
-  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #ffffff), color-stop(100%, #bfbfbf));
-  background-image: -moz-linear-gradient(top, #ffffff 0%, #bfbfbf 100%);
-  background-image: linear-gradient(top, #ffffff 0%, #bfbfbf 100%);
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #bfbfbf));
+  background-image: -moz-linear-gradient(top, #ffffff, #bfbfbf);
+  background-image: linear-gradient(top, #ffffff, #bfbfbf);
 }
 /* line 38, sass/partials/_new_topic.scss */
 #topics_new #drawer #attributes {
@@ -648,9 +653,9 @@ section#contentwrap #categories > .category footer cite {
   margin-top: -2px;
   padding: 9px 7px 7px 7px;
   width: 98%;
-  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #bfbfbf), color-stop(100%, #999999));
-  background-image: -moz-linear-gradient(top, #bfbfbf 0%, #999999 100%);
-  background-image: linear-gradient(top, #bfbfbf 0%, #999999 100%);
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #bfbfbf), color-stop(100%, #999999));
+  background-image: -moz-linear-gradient(top, #bfbfbf, #999999);
+  background-image: linear-gradient(top, #bfbfbf, #999999);
 }
 /* line 45, sass/partials/_new_topic.scss */
 #topics_new #drawer #attributes p {
@@ -672,7 +677,7 @@ section#contentwrap #categories > .category footer cite {
   width: 18%;
   line-height: 24px;
   color: #fff;
-  text-shadow: #111111 1px 1px 1px 1px 1px;
+  text-shadow: #111111, 1px 1px 1px;
 }
 /* line 57, sass/partials/_new_topic.scss */
 #topics_new #drawer #attributes label span {
