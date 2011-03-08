@@ -4,17 +4,14 @@ class User
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable, :lockable and :timeoutable
-  devise :database_authenticatable, :registerable, 
-         :recoverable, :rememberable, :trackable, :validatable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
 
   field :name, :type => String
   field :superadmin, :type => Boolean, :default => false
   field :posts_count, :type => Integer, :default => 0
-  references_and_referenced_in_many :messageboards #, :inverse_of => :users
-  
-  referenced_in :role
-  references_many :roles #, :stored_as => :array, :inverse_of => :users
 
+  references_and_referenced_in_many :messageboards
+  references_and_referenced_in_many :roles
   references_and_referenced_in_many :topics
   
   validates_presence_of :name
