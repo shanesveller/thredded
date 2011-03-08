@@ -67,4 +67,5 @@ Given /^a private thread exists between "([^"]*)" and "([^"]*)" titled "([^"]*)"
   @user2 = Factory(:user, :name => user2)
   @topic.posts << Factory(:post, :user => user1)
   @topic.users = [@user1, @user2]
+  @topic.save
 end
