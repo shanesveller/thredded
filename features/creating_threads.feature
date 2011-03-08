@@ -31,15 +31,15 @@ Feature: Add a new thread
        And a messageboard named "thredded" that I, "joel", am a member of
        And another member named "john" exists
       When I go to the add a new thread page for "thredded"
-       And I enter a recipient named "john", a title "Hello John" and content "This is a private thread"
+       And I enter a recipient named "john", a title "sup john" and content "This is a private thread"
        And I submit the form
        And I go to the most recently updated thread on "thredded"
       Then I should see "Joel and John"
-       And I should see "Hello John"
+       And I should see "sup john"
        And I should see "This is a private thread"
 
   Scenario: A user cannot see a private thread
      Given a messageboard named "ja" that I, "joel", am a member of
-       And a private thread exists between "Sal" and "John" titled "This is a private thread"
+       And a private thread exists between "Sal" and "John" titled "sal and john only please!"
       When I go to the topic listing page
-      Then I should not see "This is a private thread"
+      Then I should not see "sal and john only please!"

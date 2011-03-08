@@ -1,15 +1,14 @@
 source 'http://rubygems.org'
 
-gem 'rails',            '3.0.3'
-gem 'bson',             '1.1.5'
-gem 'bson_ext',         '1.1.5'
-gem 'mongo',            '1.1.5'
-gem 'mongoid',          :git => 'git://github.com/mongoid/mongoid.git' , :branch => "safe_master"
+gem 'rails',            '3.0.5'
+gem 'bson_ext',         '1.2.4'
+gem 'mongo',            '1.2.4'
+gem 'mongoid',          :git => "git://github.com/mongoid/mongoid.git"
 gem 'devise',           :git => "git://github.com/plataformatec/devise.git" 
-gem 'cancan' 
+gem 'cancan',           '1.5.1'
 gem 'compass'
-gem 'rspec',            '2.4.0'
-gem 'rspec-rails',      '2.4.1'
+gem 'rspec',            '2.5.0'
+gem 'rspec-rails',      '2.5.0'
 gem 'rails3-generators'
 gem 'paperclip'
 gem 'gravtastic'

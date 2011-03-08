@@ -15,7 +15,7 @@ class Topic
  
   # associations
   embeds_many :posts
-  references_many :users, :stored_as => :array, :inverse_of => :topics # private threads will reference users
+  references_and_referenced_in_many :users # , :inverse_of => :topics # private threads will reference users
   referenced_in :messageboard
   
   # lock it down
