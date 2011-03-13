@@ -643,15 +643,9 @@ section#contentwrap #categories > .category footer cite {
   margin: 15px 0 0;
   line-height: 18px;
   padding: 5px 6px 3px;
-<<<<<<< Updated upstream
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #bfbfbf));
-  background-image: -moz-linear-gradient(top, #ffffff, #bfbfbf);
-  background-image: linear-gradient(top, #ffffff, #bfbfbf);
-=======
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #ffffff), color-stop(100%, #bfbfbf));
   background-image: -moz-linear-gradient(top, #ffffff 0%, #bfbfbf 100%);
   background-image: linear-gradient(top, #ffffff 0%, #bfbfbf 100%);
->>>>>>> Stashed changes
 }
 /* line 38, sass/partials/_new_topic.scss */
 #topics_new #drawer #attributes {
@@ -659,15 +653,9 @@ section#contentwrap #categories > .category footer cite {
   margin-top: -2px;
   padding: 9px 7px 7px 7px;
   width: 98%;
-<<<<<<< Updated upstream
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #bfbfbf), color-stop(100%, #999999));
-  background-image: -moz-linear-gradient(top, #bfbfbf, #999999);
-  background-image: linear-gradient(top, #bfbfbf, #999999);
-=======
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #bfbfbf), color-stop(100%, #999999));
   background-image: -moz-linear-gradient(top, #bfbfbf 0%, #999999 100%);
   background-image: linear-gradient(top, #bfbfbf 0%, #999999 100%);
->>>>>>> Stashed changes
 }
 /* line 45, sass/partials/_new_topic.scss */
 #topics_new #drawer #attributes p {
@@ -678,10 +666,6 @@ section#contentwrap #categories > .category footer cite {
 /* line 46, sass/partials/_new_topic.scss */
 #topics_new #drawer #attributes p:last-child {
   padding-bottom: 0px;
-<<<<<<< Updated upstream
-  margin-bottom: 0px;
-=======
->>>>>>> Stashed changes
   border: none;
 }
 /* line 48, sass/partials/_new_topic.scss */
@@ -692,22 +676,14 @@ section#contentwrap #categories > .category footer cite {
   width: 18%;
   line-height: 24px;
   color: #fff;
-<<<<<<< Updated upstream
-  text-shadow: #111111, 1px 1px 1px;
-=======
   text-shadow: #111111 1px 1px 0px;
->>>>>>> Stashed changes
 }
 /* line 57, sass/partials/_new_topic.scss */
 #topics_new #drawer #attributes label span {
   font-size: 10px;
 }
 /* line 60, sass/partials/_new_topic.scss */
-<<<<<<< Updated upstream
-#topics_new #drawer #attributes input {
-=======
 #topics_new #drawer #attributes input[type="text"] {
->>>>>>> Stashed changes
   width: 81%;
 }
 /* line 65, sass/partials/_new_topic.scss */

@@ -43,11 +43,7 @@
       @include linear-gradient(color-stops(#bfbfbf, #999));
 
       p { padding-bottom: 10px; margin-bottom: 10px; border-bottom: dotted 1px #c0c0c0; }
-<<<<<<< Updated upstream
-      p:last-child { padding-bottom: 0px; margin-bottom: 0px; border: none; }
-=======
       p:last-child { padding-bottom: 0px; border: none; }
->>>>>>> Stashed changes
 
       label {
         margin: 0;
@@ -56,21 +52,12 @@
         width: 18%;
         line-height: 24px;
         color: #fff;
-<<<<<<< Updated upstream
-        @include text-shadow(#111, 1px 1px 1px);
-
-        span { font-size: 10px; }
-      }
-
-      input {
-=======
         @include text-shadow(#111, 1px, 1px, 0px);
         
         span { font-size: 10px; }
       }
 
       input[type="text"] {
->>>>>>> Stashed changes
         width: 81%;
       }
     }
