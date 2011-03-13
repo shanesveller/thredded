@@ -26,6 +26,33 @@ Feature: Add a new thread
            | topic 2     | joel    | joel    | 1     |
            | topic 1     | joel    | joel    | 1     |
 
+  Scenario: The member adds new threads, and locks one
+     Given a messageboard named "thredded" that I, "joel", am a member of
+       And I create the following new topics:
+           | title       | content                     |
+           | topic 1     | hello I'm first             |
+           | topic 2     | I'll come next              |
+           | topic 3     | I should be the very latest |
+       And "topic 1" is locked
+       And I go to the topic listing page
+      Then the topic listing should look like the following:
+           | Topic Title | Started | Updated | Posts |
+           | topic 1     | joel    | joel    | 1     |
+           | topic 3     | joel    | joel    | 1     |
+           | topic 2     | joel    | joel    | 1     |
+
+  Scenario: Members can not lock a thread or make it sticky
+     Given a messageboard named "thredded" that I, "matt", am a member of
+      When I go to the add a new thread page for "thredded"
+      Then I should not see "thread locked"
+       And I should not see "sticky"
+
+  Scenario: Admins can lock a thread or make it sticky
+     Given a messageboard named "thredded" that I, "joel", am an admin of
+      When I go to the add a new thread page for "thredded"
+      Then I should see "thread locked"
+       And I should see "sticky"
+
   Scenario: The user adds a private thread
      Given I am signed in as "joel"
        And a messageboard named "thredded" that I, "joel", am a member of
