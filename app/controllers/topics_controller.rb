@@ -28,6 +28,7 @@ class TopicsController < ApplicationController
     @topic = Topic.new(params[:topic])
     @topic.posts.create(params[:topic][:posts_attributes]["0"])
     @topic.users = @users
+    @topic.attribs = @attributes
     @topic.messageboard = messageboard
     @topic.save!
     redirect_to messageboard_topics_path(messageboard)
@@ -78,7 +79,15 @@ class TopicsController < ApplicationController
         end
         @users << current_user if @users.size > 0
       end
-      params[:topic].delete(:usernames)
+
+      @attributes = Array.new
+      @attributes << 'sticky' if params[:topic][:sticky] == "1"
+      @attributes << 'locked' if params[:topic][:locked] == "1"
+      
+      [:sticky, :locked, :usernames].each do |key|
+        params[:topic].delete(key)
+      end
+
       params[:topic][:last_user] = current_user_name
       params[:topic][:post_count] = 1
     end

@@ -4,7 +4,7 @@ Feature: Add a new thread
   Should submit new content and see it on the messageboard listing page
 
   Scenario: The member adds a new public thread
-     Given a messageboard named "thredded" that I, "joel", am a member of
+     Given a messageboard named "thredded" that I, "joel", am a "member" of
       When I go to the add a new thread page for "thredded"
        And I enter a title "This is a new thread" with content "Content for this new thread will show up here"
        And I submit the form
@@ -13,7 +13,7 @@ Feature: Add a new thread
        And I should see "Content for this new thread will show up here"
 
   Scenario: The member adds several new threads
-     Given a messageboard named "thredded" that I, "joel", am a member of
+     Given a messageboard named "thredded" that I, "joel", am a "member" of
        And I create the following new topics:
            | title       | content                     |
            | topic 1     | hello I'm first             |
@@ -28,7 +28,7 @@ Feature: Add a new thread
 
   Scenario: The user adds a private thread
      Given I am signed in as "joel"
-       And a messageboard named "thredded" that I, "joel", am a member of
+       And a messageboard named "thredded" that I, "joel", am a "member" of
        And another member named "john" exists
       When I go to the add a new thread page for "thredded"
        And I enter a recipient named "john", a title "sup john" and content "This is a private thread"
@@ -39,7 +39,20 @@ Feature: Add a new thread
        And I should see "This is a private thread"
 
   Scenario: A user cannot see a private thread
-     Given a messageboard named "ja" that I, "joel", am a member of
+     Given a messageboard named "ja" that I, "joel", am a "member" of
        And a private thread exists between "Sal" and "John" titled "sal and john only please!"
       When I go to the topic listing page
       Then I should not see "sal and john only please!"
+
+  Scenario: An admin can lock or pin a new thread
+     Given I am signed in as "joel"
+       And a messageboard named "ja" that I, "joel", am an "admin" of
+      When I go to the add a new thread page for "ja"
+      Then I should see "Locked"
+       And I should see "Sticky"
+
+  Scenario: A regular user cannot lock or pin a new thread
+     Given a messageboard named "ja" that I, "jack", am a "member" of
+      When I go to the add a new thread page for "ja"
+      Then I should not see "Locked"
+       And I should not see "Sticky"

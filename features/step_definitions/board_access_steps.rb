@@ -16,5 +16,5 @@ Given /^I am not a member of the messageboard$/ do
 end
 
 Given /^I am an anonymous visitor of the messageboard$/ do
-  pending # express the regexp above with the code you wish you had
+  user = User.new
 end

@@ -20,7 +20,9 @@ class Topic
   
   # lock it down
   attr_accessible :title, :user, :last_user, :user_ids
-  attr_accessor :usernames
+  attr_accessor :usernames, :sticky, :locked
+
+  # TODO: change :usernames from attr_accessor to attr_reader + setter method.  Ex: http://railscasts.com/episodes/259-decent-exposure
 
   # validations
   validates_numericality_of :post_count, :greater_than => 0

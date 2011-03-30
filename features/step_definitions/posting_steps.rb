@@ -1,4 +1,4 @@
-Given /^a messageboard named "([^"]*)" that I, "([^"]*)", am a member of$/ do |messageboard, name|
+Given /^a messageboard named "([^"]*)" that I, "([^"]*)", am an? "([^"]*)" of$/ do |messageboard, name, role|
   if !u = User.where(:name => name).first
     u = Factory :user,
       :name                  => name,
@@ -9,7 +9,8 @@ Given /^a messageboard named "([^"]*)" that I, "([^"]*)", am a member of$/ do |m
   m = Factory :messageboard,
     :name                  => messageboard,
     :security              => :public
-  u.member_of(m)
+  # u.member_of(m)
+  u.send "#{role}_of".to_sym, m
 end
 
 When /^I enter a title "([^"]*)" with content "([^"]*)"$/ do |title, content|

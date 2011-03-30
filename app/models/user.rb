@@ -39,6 +39,10 @@ class User
     self.save
   end
 
+  def admin_of(messageboard, as=:member)
+    member_of(messageboard, :admin)
+  end
+
   def logged_in?
     valid?
   end
