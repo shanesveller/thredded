@@ -1,0 +1,23 @@
+<p>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+</p>
+<p>
+  <%= f.label :usernames %>
+  <%= f.text_field :usernames %>
+</p>
+<% if current_user && current_user.admins?(messageboard) -%>
+  <p>
+   <%= f.label :locked %>
+   <%= f.check_box :locked %>
+  </p>
+  <p>
+    <%= f.label :sticky -%>
+    <%= f.check_box :sticky -%>
+  <p>
+<% end -%>
+<%= f.fields_for :posts do |post_form| %>
+  <%= post_form.label :content %>:<br/>
+  <%= post_form.text_area :content, :rows => 5 %>
+<% end %>
+</p>
