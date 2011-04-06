@@ -19,11 +19,8 @@ class Topic
   referenced_in :messageboard
   
   # lock it down
-  attr_accessible :title, :user, :last_user, :user_ids
-  attr_accessor :usernames, :sticky, :locked
-
-  # TODO: change :usernames from attr_accessor to attr_reader + setter method.  Ex: http://railscasts.com/episodes/259-decent-exposure
-
+  attr_accessible :title, :user, :last_user, :user_ids, :sticky, :locked, :usernames
+  
   # validations
   validates_numericality_of :post_count, :greater_than => 0
   validates_presence_of :messageboard_id
@@ -33,6 +30,31 @@ class Topic
   
   # misc
   accepts_nested_attributes_for :posts
+
+  # let's slim this down a little bit
+  [:sticky, :locked].each do |field|
+    class_eval %Q{
+      def #{field}
+        @#{field} = attribs.include?("#{field}") ? "1" : "0"
+      end
+
+      def #{field}=(state)
+        attribs.delete("#{field}") if state == "0" &&  attribs.include?("#{field}")
+        attribs << "#{field}"      if state == "1" && !attribs.include?("#{field}")
+      end
+    }
+  end
+
+  def usernames 
+    users.collect{ |u| u.name }.join(', ')
+  end
+
+  def usernames=(usernames)
+    usernames.split(',').each do |name|
+      user = User.where(:name => name.strip).first
+      users << user if user && user.present?
+    end
+  end
 
   def public? 
     self.users.empty? if self.users

@@ -2,14 +2,14 @@ class TopicsController < ApplicationController
   load_and_authorize_resource :only => [:index, :show, :edit]
   theme 'plainole'
   layout 'application'
-  before_filter :pad_params, :only => [:create, :update]
-  before_filter :pad_post, :only => :create
-  before_filter :pad_topic, :only => :create
+  before_filter :pad_params,  :only => [:create, :update]
+  before_filter :pad_post,    :only => :create
+  before_filter :pad_topic,   :only => :create
   helper_method :messageboard, :topic
 
   def index
-    # CHECK ABILITY ON MESSAGEBOARD - NOT TOPICS
-#    flash[:error] = "You are not authorized to access this page." and redirect_to root_path unless can? :read, messageboard
+    # TODO: CHECK ABILITY ON MESSAGEBOARD - NOT TOPICS
+    # flash[:error] = "You are not authorized to access this page." and redirect_to root_path unless can? :read, messageboard
     authorize! :index, messageboard
     @topics = messageboard.topics.latest
 
@@ -27,9 +27,8 @@ class TopicsController < ApplicationController
   def create
     @topic = Topic.new(params[:topic])
     @topic.posts.create(params[:topic][:posts_attributes]["0"])
-    @topic.users = @users
-    @topic.attribs = @attributes
     @topic.messageboard = messageboard
+    @topic.users << current_user if @topic.users.size > 0 && !@topic.users.include?(current_user) 
     @topic.save!
     redirect_to messageboard_topics_path(messageboard)
   end
@@ -68,26 +67,6 @@ class TopicsController < ApplicationController
     end
 
     def pad_topic
-      # TODO: Refactor.  Make faster
-      # If there are usernames in the form. add them 
-      # to the topic, make it automatically private
-      @users = Array.new
-      if params[:topic][:usernames].present?
-        params[:topic][:usernames].split(',').each do |name|
-          user = User.where(:name => name.strip).first
-          @users << user if user.present?
-        end
-        @users << current_user if @users.size > 0
-      end
-
-      @attributes = Array.new
-      @attributes << 'sticky' if params[:topic][:sticky] == "1"
-      @attributes << 'locked' if params[:topic][:locked] == "1"
-      
-      [:sticky, :locked, :usernames].each do |key|
-        params[:topic].delete(key)
-      end
-
       params[:topic][:last_user] = current_user_name
       params[:topic][:post_count] = 1
     end
