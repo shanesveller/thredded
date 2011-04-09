@@ -20,10 +20,12 @@ menu, nav, section, summary, time, mark, audio, video {
 // shim
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display:block; }
 
+body { font-family: $sans-serif-font-family; }
+
 nav ul { list-style:none; }
 blockquote, q { quotes:none; }
 blockquote:before, blockquote:after, q:before, q:after { content:''; content:none; }
-a { margin:0; padding:0; font-size:100%; vertical-align:baseline; background:transparent; }
+a { margin:0; padding:0; font-size:100%; vertical-align:baseline; background:transparent; color: #24B; }
 ins { background-color:#ff9; color:#000; text-decoration:none; }
 mark { background-color:#ff9; color:#000; font-style:italic; font-weight:bold; }
 del { text-decoration: line-through; }

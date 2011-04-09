@@ -1,0 +1,24 @@
+body {
+  background: #bbb;
+}
+
+section#contentwrap {
+  margin: 40px 2.5%;
+  width: 95%; 
+
+  section#content {
+    overflow: hidden;
+    width: 68%;
+    padding: 2% 2% 5% 2%;
+    background: #fff;
+    border-right: solid 4px #888;
+    border-bottom: solid 4px #888;
+
+    header {
+      h1 { font-size: 20px; font-weight: bold; text-transform: uppercase; margin-bottom: 6px; }
+      h2 { margin-bottom: 20px; font-weight: normal; color: #888; font-size: 12px; }
+      nav { overflow: hidden; margin-bottom: 16px; padding: 4px; background: #f9f9f9; font-size: 11px; color: #999; }
+      nav ul li { float: left; margin-right: 10px; }
+    }
+  }
+}

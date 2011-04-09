@@ -1,10 +1,10 @@
 # Require any additional compass plugins here.
 # Set this to the root of your project when deployed:
-http_path = "/themes/plainole/stylesheets"
+http_path = "/themes/beast/stylesheets"
 css_dir = "stylesheets"
 sass_dir = "stylesheets/sass"
-images_dir = "/themes/plainole/images"
-javascripts_dir = "/themes/plainole/javascripts"
+images_dir = "/themes/beast/images"
+javascripts_dir = "/themes/beast/javascripts"
 # You can select your preferred output style here (can be overridden via the command line):
 # output_style = :expanded or :nested or :compact or :compressed
 # To enable relative paths to assets via compass helper functions. Uncomment:

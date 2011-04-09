@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  theme 'plainole'
+  theme 'beast'
   layout 'application'
 
   def index

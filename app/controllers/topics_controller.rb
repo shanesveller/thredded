@@ -1,6 +1,6 @@
 class TopicsController < ApplicationController
   load_and_authorize_resource :only => [:index, :show, :edit]
-  theme 'plainole'
+  theme 'beast'
   layout 'application'
   before_filter :pad_params,  :only => [:create, :update]
   before_filter :pad_post,    :only => :create
