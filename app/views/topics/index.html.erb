@@ -4,23 +4,30 @@
 <%= render :partial => "shared/header" %>
 
 <section id="content">
+
+  <%= paginate @topics %>
+
 	<header>
     <h1>Topics</h1>
 		<div class="title">Topic Title</div>
-	  	<div class="started">Started</div>
-	  	<div class="updated">Updated</div>
-	  	<div class="posts">Posts</div>
-	</header>
-	<% @topics.each do |t| -%>
+	  <div class="started">Started</div>
+	  <div class="updated">Updated</div>
+	  <div class="posts">Posts</div>
+  </header>
+
+  <% @topics.each do |t| -%>
 		<% if can? :read, t -%>
 			<article>
-			<h1><%= link_to t.title, messageboard_topic_path(messageboard, t) %></h1>
-			<cite class="started_by"><%= link_to t.user, user_path(t.user) %></cite>
-			<abbr class="started_at timeago" title="<%= t.created_at.strftime("%Y-%m-%dT%I:%M:%S-0500") %>"><%= t.created_at.strftime("%B %d, %Y") %></abbr>
-			<cite class="updated_by"><%= link_to t.last_user, user_path(t.last_user)  %></cite> 
-			<abbr class="updated_at timeago" title="<%= t.updated_at.strftime("%Y-%m-%dT%I:%M:%S-0500") %>"><%= t.updated_at.strftime("%B %d, %Y") %></abbr>
-			<div  class="post_count"><%= t.post_count %></div>
+        <h1><%= link_to t.title, messageboard_topic_path(messageboard, t) %></h1>
+        <cite class="started_by"><%= link_to t.user, user_path(t.user) %></cite>
+        <abbr class="started_at timeago" title="<%= t.created_at.strftime("%Y-%m-%dT%I:%M:%S-0500") %>"><%= t.created_at.strftime("%B %d, %Y") %></abbr>
+        <cite class="updated_by"><%= link_to t.last_user, user_path(t.last_user)  %></cite> 
+        <abbr class="updated_at timeago" title="<%= t.updated_at.strftime("%Y-%m-%dT%I:%M:%S-0500") %>"><%= t.updated_at.strftime("%B %d, %Y") %></abbr>
+        <div  class="post_count"><%= t.post_count %></div>
 			</article>
 		<% end -%>
 	<% end -%>
+
+  <%= paginate @topics %>
+
 </section>

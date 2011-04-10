@@ -13,6 +13,9 @@ class Topic
   field :subscribers, :type => Array, :default => []
   field :permission, :type => Symbol, :default => :public
  
+  # pagination
+  paginates_per 50
+
   # associations
   embeds_many :posts
   references_and_referenced_in_many :users # , :inverse_of => :topics # private threads will reference users

@@ -11,7 +11,7 @@ class TopicsController < ApplicationController
     # TODO: CHECK ABILITY ON MESSAGEBOARD - NOT TOPICS
     # flash[:error] = "You are not authorized to access this page." and redirect_to root_path unless can? :read, messageboard
     authorize! :index, messageboard
-    @topics = messageboard.topics.latest
+    @topics = messageboard.topics.latest.page params[:page]
 
   end
 

@@ -14,6 +14,7 @@ gem 'paperclip'
 gem 'gravtastic'
 gem 'themes_for_rails' 
 gem 'omniauth',         '0.2.1'
+gem 'kaminari',         '0.10.4'
 
 # Rack Middleware
 gem 'rack-tidy'
