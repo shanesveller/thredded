@@ -1,9 +1,9 @@
 source 'http://rubygems.org'
 
-gem 'rails',            '3.0.5'
-gem 'bson_ext',         '1.2.4'
-gem 'mongo',            '1.2.4'
-gem 'mongoid',          :git => "git://github.com/mongoid/mongoid.git"
+gem 'rails',            '3.0.6'
+gem 'bson_ext',         '1.3.0'
+gem 'mongo',            '1.3.0'
+gem 'mongoid',          '2.0.1'
 gem 'devise',           :git => "git://github.com/plataformatec/devise.git" 
 gem 'cancan',           '1.5.1'
 gem 'compass'
@@ -13,7 +13,7 @@ gem 'rails3-generators'
 gem 'paperclip'
 gem 'gravtastic'
 gem 'themes_for_rails' 
-gem 'omniauth',         '0.1.6'
+gem 'omniauth',         '0.2.1'
 
 # Rack Middleware
 gem 'rack-tidy'
