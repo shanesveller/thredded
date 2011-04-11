@@ -19,6 +19,10 @@ module NavigationHelpers
     when /the topic listing page/i
       m = Messageboard.first
       messageboard_topics_path(m)
+    when /edit the latest thread/i
+      m = Messageboard.first
+      t = m.topics.latest.first
+      edit_messageboard_topic_path(m, t)
     when /the most recently updated thread on "([^\"]+)"/i
       m = Messageboard.where(:name =>$1).first
       t = m.topics.latest.first
