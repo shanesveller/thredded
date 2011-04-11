@@ -27,10 +27,10 @@ group :test do
   gem 'autotest-standalone'
   gem 'autotest-growl'
   gem 'factory_girl_rails'
-  gem 'capybara'
+  gem 'capybara',       '0.4.1.2'
   gem 'shoulda'
-  gem 'cucumber',		'0.10.0'
-  gem 'cucumber-rails',	'0.3.2'
+  gem 'cucumber',		    '0.10.2'
+  gem 'cucumber-rails',	'0.4.1'
   gem 'timecop'
   gem 'spork'
   gem 'growl'
@@ -38,6 +38,7 @@ group :test do
   gem 'guard-spork'
   gem 'launchy'
   gem 'fuubar'
+  gem 'SystemTimer',    '1.2.3'
 end
 
 # :development specific gems
