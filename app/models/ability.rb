@@ -38,10 +38,10 @@ class Ability
       topic.messageboard.public?
     end
 
-    # TODO: Update Topic to allow those when necessary
-    # can :manage, Topic do |topic|
-    #   true
-    # end
+    can :manage, Topic do |topic|
+      user.admins?(topic.messageboard) ||
+      topic.user == user.name
+    end
     
     
 
