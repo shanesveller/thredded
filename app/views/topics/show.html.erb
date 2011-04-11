@@ -9,6 +9,7 @@
     <% if topic.users_to_sentence %>
       <cite><%= topic.users_to_sentence %></cite>
     <% end %>
+    <%= link_to "edit subject", edit_messageboard_topic_path(messageboard, topic), {:id => "edit_subject"} %>
   </header>
 
   <% topic.posts.each do |p| %>
