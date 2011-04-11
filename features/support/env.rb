@@ -14,7 +14,7 @@ Spork.prefork do
   require 'capybara/rails'
   require 'capybara/cucumber'
   require 'capybara/session'
-  require 'cucumber/rails/capybara_javascript_emulation' # Lets you click links with onclick javascript handlers without using @culerity or @javascript
+  # require 'cucumber/rails/capybara_javascript_emulation' # Lets you click links with onclick javascript handlers without using @culerity or @javascript
   # Capybara defaults to XPath selectors rather than Webrat's default of CSS3. In
   # order to ease the transition to Capybara we set the default here. If you'd
   # prefer to use XPath just remove this line and adjust any selectors in your
@@ -30,7 +30,7 @@ Spork.prefork do
   # pages, more or less in the same way your application would behave in the
   # default production environment. It's not recommended to do this for all
   # of your scenarios, as this makes it hard to discover errors in your application.
-  ActionController::Base.allow_rescue = false
+  # ActionController::Base.allow_rescue = false
 
   # If you set this to true, each scenario will run in a database transaction.
   # You can still turn off transactions on a per-scenario basis, simply tagging 
