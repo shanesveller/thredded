@@ -8,11 +8,18 @@ end
 
 # ==========================
 
-Given /^a new thread by "([^"]*)" named "([^"]*)" exists on "([^"]*)"$/ do |arg1, arg2, arg3|
-  pending # express the regexp above with the code you wish you had
+Given /^a new thread by "([^"]*)" named "([^"]*)" exists on "([^"]*)"$/ do |username, title, messageboard|
+  u = Factory :user,
+      :name                  => username,
+      :email                 => "#{username}@email.com",
+      :password              => "password",
+      :password_confirmation => "password"
+  m = Messageboard.where(:name => messageboard).first
+#  m = Factory :messageboard, :name => messagboard, :security => :public
+  t = Factory :topic, :title => title, :messageboard => m, :user => u.name, :post_count => 1
 end
 
 Then /^I should not be able to edit this thread$/ do
-  pending # express the regexp above with the code you wish you had
+  page.should_not have_selector('form.edit_topic')
 end
 
