@@ -21,7 +21,8 @@ class TopicsController < ApplicationController
 
   def new
     @topic = messageboard.topics.build
-    @topic.posts.build
+    @topic.posts.build.images.build
+
   end
 
   def create

@@ -19,5 +19,10 @@
 <%= f.fields_for :posts do |post_form| %>
   <%= post_form.label :content %>:<br/>
   <%= post_form.text_area :content, :rows => 5 %>
+
+  <%= post_form.fields_for :images do |image_form| %>
+    <%= image_form.file_field :image %>
+  <% end %>
+
 <% end %>
 </p>

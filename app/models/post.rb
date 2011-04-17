@@ -11,12 +11,16 @@ class Post
   field :ip, :type => String
   field :notified, :type => Array, :default => []
   embedded_in :topic, :inverse_of => :posts
+  references_many :images
+
   validates_presence_of :content
   before_create :set_user_email
   after_create :modify_parent_topic
   after_create :incr_user_posts_count
-
   attr_accessible :content, :user, :ip
+
+  # misc
+  accepts_nested_attributes_for :images
 
   private
 
