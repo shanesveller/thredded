@@ -20,3 +20,10 @@ Feature: Edit an existing thread
        And a new thread by "sal" named "hello friends" exists on "thredded"
       When I go to edit the latest thread
       Then I should not be able to edit this thread
+
+  Scenario: An admin edits someone elses thread
+     Given I am signed in as "john"
+       And a messageboard named "thredded" that I, "john", am an "admin" of
+       And a new thread by "sal" named "sup dudes" exists on "thredded"
+      When I go to edit the latest thread
+      Then I should be able to edit this thread
