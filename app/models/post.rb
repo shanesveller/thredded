@@ -1,8 +1,17 @@
-require 'gravtastic'
 class Post
+
+  Filters = []
+
+  require "gravtastic"
+  require "bbcode_filter"
+  require "textile_filter"
+
   include Mongoid::Document
   include Mongoid::Timestamps
   include Gravtastic
+  include BbcodeFilter
+  include TextileFilter
+
   gravtastic :user_email
   
   field :user, :type => String
@@ -10,6 +19,8 @@ class Post
   field :content, :type => String
   field :ip, :type => String
   field :notified, :type => Array, :default => []
+  field :filter, :type => Symbol, :default => :bbcode
+
   embedded_in :topic, :inverse_of => :posts
   references_many :images
 
@@ -21,6 +32,10 @@ class Post
 
   # misc
   accepts_nested_attributes_for :images
+
+  def self.filters
+    Filters
+  end
 
   private
 

@@ -16,6 +16,8 @@ gem 'gravtastic'
 gem 'themes_for_rails' 
 gem 'omniauth',         '0.2.1'
 gem 'kaminari',         '0.10.4'
+gem 'bb-ruby',          '0.9.5'
+gem 'RedCloth',         '4.2.7'
 
 # Rack Middleware
 gem 'rack-tidy'

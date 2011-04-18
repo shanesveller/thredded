@@ -12,7 +12,6 @@ class TopicsController < ApplicationController
     # flash[:error] = "You are not authorized to access this page." and redirect_to root_path unless can? :read, messageboard
     authorize! :index, messageboard
     @topics = messageboard.topics.latest.page params[:page]
-
   end
 
   def show
