@@ -17,7 +17,8 @@
   <p>
 <% end -%>
 <%= f.fields_for :posts do |post_form| %>
-  <%= post_form.label :content %>:<br/>
+  <%= post_form.select :filter, Post.filters %>
+  <%= post_form.label :content %>
   <%= post_form.text_area :content, :rows => 5 %>
 
   <%= post_form.fields_for :images do |image_form| %>

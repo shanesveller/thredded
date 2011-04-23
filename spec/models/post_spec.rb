@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe Post do
+
   describe "#create" do
     before(:each) do
       @messageboard = Factory(:messageboard)
