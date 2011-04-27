@@ -29,9 +29,11 @@
 
   <%= form_for [messageboard, topic, @post] do |f| %>
     <p>
+    <%= f.label :filter %>
     <%= f.select :filter, Post.filters %>
+
     <%= f.label :your_content %>:
-      <%= f.text_area :content, :rows => 5 %>
+    <%= f.text_area :content, :rows => 5 %>
     </p>
     <%= f.submit "Submit" %>
   <% end -%>
