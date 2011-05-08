@@ -9,10 +9,10 @@ Feature: Edit an existing thread
       When I go to the add a new thread page for "thredded"
        And I enter a title "This is a new thread" with content "Content for this new thread will show up here"
        And I submit the form
-       # And I go to edit the latest thread
        And I go to the most recently updated thread on "thredded"
        And I click the edit subject link
       Then I should be able to edit this thread
+       And I should see only my original post
 
   Scenario: The member tries to edit someone elses thread
      Given I am signed in as "john"

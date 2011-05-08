@@ -6,6 +6,11 @@ Then /^I should be able to edit this thread$/ do
   page.should have_selector('form.edit_topic')
 end
 
+Then /^I should see only my original post$/ do
+  page.should_not have_selector("textarea:nth-of-type(1)")
+end
+
+
 # ==========================
 
 Given /^a new thread by "([^"]*)" named "([^"]*)" exists on "([^"]*)"$/ do |username, title, messageboard|

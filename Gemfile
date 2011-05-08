@@ -17,6 +17,8 @@ gem 'omniauth',         '0.2.1'
 gem 'kaminari',         '0.10.4'
 gem 'bb-ruby',          '0.9.5'
 gem 'RedCloth',         '4.2.7'
+gem 'termios',          '0.9.4'
+gem 'highline',         '1.6.1'
 
 # Rack Middleware
 gem 'rack-tidy'

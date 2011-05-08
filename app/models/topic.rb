@@ -25,7 +25,7 @@ class Topic
   attr_accessible :title, :user, :last_user, :user_ids, :sticky, :locked, :usernames
   
   # validations
-  validates_numericality_of :post_count, :greater_than => 0
+  validates_numericality_of :post_count
   validates_presence_of :messageboard_id
 
   # scopes

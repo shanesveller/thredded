@@ -15,6 +15,13 @@ Bundler.require(:default, Rails.env) if defined?(Bundler)
 
 module Thredded
   class Application < Rails::Application
+
+    # speeding up rails per suggestion here - http://dev.theconversation.edu.au/post/5001465621/how-we-shaved-2-seconds-off-our-rails-start-up-time
+    # Thank you to Xavier and Pete!
+    config.autoload_paths << Rails.root.join("app").to_s
+    config.autoload_paths << Rails.root.join("lib").to_s
+
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
