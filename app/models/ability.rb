@@ -43,6 +43,9 @@ class Ability
       topic.user == user.name
     end
     
+    can :manage, Post do |post|
+      user.admins?(post.topic.messageboard) || post.user == user.name
+    end
     
 
     # if messageboard is private
