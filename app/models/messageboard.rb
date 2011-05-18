@@ -33,6 +33,15 @@ class Messageboard
   def public?
     security == :public
   end
+
+  def default_home_is_topics?
+     THREDDED[:default_messageboard_home] == 'topics'
+  end
+
+  def default_home_is_home?
+     THREDDED[:default_messageboard_home] == 'home'
+  end
+
   
   def to_param
     "#{name.downcase}"
