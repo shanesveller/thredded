@@ -13,27 +13,32 @@
   </header>
 
   <% topic.posts.each do |p| %>
-	    <article>
-	      <header>	
-	        <abbr class="timeago" title="<%= p.created_at.strftime("%Y-%m-%dT%I:%M:%S-0500") %>"><%= p.created_at.strftime("%B %d, %Y") %></abbr>
-			<cite>
-				<a href="/users/<%= p.user %>">
-					<%= image_tag p.gravatar_url %>
-					<%= p.user %>
-				</a>
-			</cite>
-	      </header>
-	      <p><%= render_content_for(p) %></p>
-	    </article>
+    <article>
+      <header>	
+        <abbr class="timeago" title="<%= p.created_at.strftime("%Y-%m-%dT%I:%M:%S-0500") %>"><%= p.created_at.strftime("%B %d, %Y") %></abbr>
+        <cite>
+          <a href="/users/<%= p.user %>">
+            <%= image_tag p.gravatar_url %>
+            <%= p.user %>
+          </a>
+        </cite>
+      </header>
+      <p><%= render_content_for(p) %></p>
+      <footer>
+        <% if can? :manage, p %>
+          <%= link_to "edit post", edit_messageboard_topic_post_path(messageboard, topic, p), {:class => "edit"} %>
+        <% end %>
+      </footer>
+    </article>
   <% end -%>
 
   <%= form_for [messageboard, topic, @post] do |f| %>
     <p>
-    <%= f.label :filter %>
-    <%= f.select :filter, Post.filters %>
+      <%= f.label :filter %>
+      <%= f.select :filter, Post.filters %>
 
-    <%= f.label :your_content %>:
-    <%= f.text_area :content, :rows => 5 %>
+      <%= f.label :your_content %>:
+      <%= f.text_area :content, :rows => 5 %>
     </p>
     <%= f.submit "Submit" %>
   <% end -%>
