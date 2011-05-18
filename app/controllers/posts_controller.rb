@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  load_and_authorize_resource :only => [:index, :show, :edit]
+  load_and_authorize_resource :only => [:index, :show]
   theme 'plainole'
   layout 'application'
   before_filter :pad_post, :only => :create
@@ -7,6 +7,11 @@ class PostsController < ApplicationController
   def create
     p = topic.posts.create(params[:post])
     redirect_to messageboard_topic_path(topic.messageboard, topic)
+  end
+
+  def edit
+    @post = topic.posts.find(params[:id])
+    authorize! :update, @post
   end
 
   def update
