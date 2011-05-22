@@ -22,7 +22,7 @@ class Topic
   referenced_in :messageboard
   
   # lock it down
-  attr_accessible :title, :user, :last_user, :user_ids, :sticky, :locked, :usernames
+  attr_accessible :title, :user, :last_user, :user_ids, :sticky, :locked, :usernames, :posts_attributes
   
   # validations
   validates_numericality_of :post_count
@@ -53,10 +53,13 @@ class Topic
   end
 
   def usernames=(usernames)
+    user_ids.clear if usernames.empty?
+
     usernames.split(',').each do |name|
       user = User.where(:name => name.strip).first
       users << user if user && user.present?
     end
+    users
   end
 
   def public? 
