@@ -28,7 +28,7 @@ class Post
   before_create :set_user_email
   after_create :modify_parent_topic
   after_create :incr_user_posts_count
-  attr_accessible :content, :user, :ip, :filter
+  attr_accessible :content, :user, :ip, :filter, :images_attributes
 
   # misc
   accepts_nested_attributes_for :images
@@ -39,6 +39,14 @@ class Post
 
   def filters
     Filters
+  end
+
+  def created_timestamp
+    created_at.strftime("%Y-%m-%dT%I:%M:%S-0500") if created_at
+  end
+
+  def created_date 
+    created_at.strftime("%B %d, %Y") if created_at
   end
 
   private
