@@ -1,0 +1,14 @@
+<%= form_for([messageboard, topic, @post]) do |f| %>
+  
+  <%= f.label :filter %>
+  <%= f.select :filter, Post.filters %>
+  
+  <%= f.label :content %>
+  <%= f.text_area :content, :rows => 5 %>
+
+  <%= f.fields_for :images do |image_form| %>
+    <%= image_form.file_field :image %>
+  <% end %>
+
+  <%= f.submit "Edit Post" %>
+<% end %>
