@@ -37,10 +37,8 @@ class TopicsController < ApplicationController
   end
  
   def update
-    p = Post.new(params[:post])
-    topic.posts << pad_post(p)
-    topic.last_user = current_user
-    topic.save!
+    topic.update_attributes(params[:topic])
+    redirect_to messageboard_topic_path(messageboard, topic)
   end
 
   # ======================================

@@ -3,6 +3,7 @@ class PostsController < ApplicationController
   theme 'plainole'
   layout 'application'
   before_filter :pad_post, :only => :create
+  helper_method :messageboard, :topic
 
   def create
     p = topic.posts.create(params[:post])
@@ -10,12 +11,12 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = topic.posts.find(params[:id])
-    authorize! :update, @post
+    authorize! :update, post
   end
 
   def update
-    
+    post.update_attributes(params[:post])
+    redirect_to messageboard_topic_path(messageboard, topic)
   end
 
   # ======================================
@@ -26,6 +27,10 @@ class PostsController < ApplicationController
 
   def topic
     @topic ||= Topic.find(params[:topic_id])
+  end
+
+  def post
+    @post ||= topic.posts.find(params[:id]) 
   end
 
   def current_user_name 
