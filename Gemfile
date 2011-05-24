@@ -1,8 +1,9 @@
 source 'http://rubygems.org'
 
+gem 'rake'                        , '0.8.7'
 gem 'rails'                       , '3.0.6'
-gem 'bson_ext'                    , '1.3.0'
-gem 'mongo'                       , '1.3.0'
+gem 'bson_ext'                    , '1.3.1'
+gem 'mongo'                       , '1.3.1'
 gem 'mongoid'                     , '2.0.1'
 gem 'mongo-rails-instrumentation' , '0.2.4'
 gem 'devise'                      , '1.3.0'
