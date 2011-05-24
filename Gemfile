@@ -19,7 +19,7 @@ gem 'omniauth'                    , '0.2.1'
 gem 'kaminari'                    , '0.10.4'
 gem 'bb-ruby'                     , '0.9.5'
 gem 'RedCloth'                    , '4.2.7'
-gem 'termios'                     , '0.9.4'
+# gem 'termios'                     , '0.9.4'
 gem 'highline'                    , '1.6.1'
 
 # Rack Middleware
@@ -44,13 +44,13 @@ group :test do
   gem 'guard-spork'
   gem 'launchy'
   gem 'fuubar'
-  gem 'SystemTimer'         , '1.2.3'
+# gem 'SystemTimer'         , '1.2.3'
 end
 
 # :development specific gems
 group :development do
-  gem 'ruby-debug'
-  gem 'mongrel'
+  gem 'ruby-debug19'
+  gem 'unicorn'
 
   # convenience gems
   gem 'wirble'

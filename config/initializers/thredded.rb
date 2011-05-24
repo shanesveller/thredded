@@ -1,1 +1,1 @@
-require 'lib/load_thredded_config'
+require './lib/load_thredded_config'
