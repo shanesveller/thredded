@@ -13,6 +13,22 @@ module Thredded
         setup.bootstrap(config)
         setup
       end
+
+      def with_fake_threads
+        puts "Starting fake thread generation. Sit tight ..."
+        messageboard = Messageboard.last
+        50.times do
+          username = Faker::Name.first_name.downcase
+          topic = Topic.new(:user => username, :title => Faker::Lorem.words( 5 ).join( ' ' ))
+          topic.messageboard = messageboard
+          topic.save
+          3.times do
+            topic.posts.create(:content => Faker::Lorem.paragraph, :user => username, :ip => "127.0.0.1")
+            username = Faker::Name.first_name.downcase
+          end
+        end
+        puts "Finished. 50 fake threads created."
+      end
     end
 
     attr_accessor :config

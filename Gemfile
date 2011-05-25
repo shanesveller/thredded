@@ -50,6 +50,7 @@ end
 group :development do
   gem 'ruby-debug19'
   gem 'unicorn'
+  gem 'faker'
 
   # convenience gems
   gem 'wirble'

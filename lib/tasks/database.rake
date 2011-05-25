@@ -14,4 +14,12 @@ namespace :db do
     )
   end
 
+  namespace :seed do
+    desc "Randomly generate 50 threads with 3 posts by random people"
+    task :fakes => :environment do
+      require "thredded/setup"
+      Thredded::Setup.with_fake_threads
+    end
+  end
+
 end
