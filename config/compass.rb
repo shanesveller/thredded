@@ -7,5 +7,7 @@ http_path = "/"
 css_dir = "public/stylesheets"
 sass_dir = "public/stylesheets/sass"
 environment = Compass::AppIntegration::Rails.env
+output_style = :compact # :expanded :nested :compact :compressed
+line_comments = false
 # To enable relative paths to assets via compass helper functions. Uncomment:
 # relative_assets = true
