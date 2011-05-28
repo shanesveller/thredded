@@ -1,7 +1,8 @@
 class Topic
   include Mongoid::Document
   include Mongoid::Timestamps
-  
+  include Mongoid::Slug
+
   field :title, :type => String
   field :user, :type => String
   field :slug, :type => String
@@ -12,6 +13,7 @@ class Topic
   field :tags, :type => Array, :default => []
   field :subscribers, :type => Array, :default => []
   field :permission, :type => Symbol, :default => :public
+  slug  :title, :scope => :messageboard
  
   # pagination
   paginates_per 50

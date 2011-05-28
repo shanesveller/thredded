@@ -26,7 +26,7 @@ class PostsController < ApplicationController
   end
 
   def topic
-    @topic ||= Topic.find(params[:topic_id])
+    @topic ||= Topic.find_by_slug(params[:topic_id])
   end
 
   def post

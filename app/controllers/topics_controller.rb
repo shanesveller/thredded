@@ -1,5 +1,4 @@
 class TopicsController < ApplicationController
-  load_and_authorize_resource :only => [:index, :show, :edit]
   theme 'plainole'
   layout 'application'
   before_filter :pad_params,  :only => [:create, :update]
@@ -15,6 +14,7 @@ class TopicsController < ApplicationController
   end
 
   def show
+    authorize! :show, topic
     @post = Post.new
   end
 
@@ -34,6 +34,7 @@ class TopicsController < ApplicationController
   end
 
   def edit
+    authorize! :update, topic
   end
  
   def update
@@ -48,7 +49,7 @@ class TopicsController < ApplicationController
   end
 
   def topic
-    @topic ||= Topic.find(params[:id])
+    @topic ||= Topic.find_by_slug(params[:id])
   end
 
   def current_user_name 

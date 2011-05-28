@@ -1,6 +1,7 @@
 class Messageboard
   include Mongoid::Document
   include Mongoid::Timestamps
+  include Mongoid::Slug
 
   field :name, :type => String
   field :description, :type => String
@@ -8,6 +9,8 @@ class Messageboard
   field :topic_count, :type => Integer, :default => 0
   field :security, :type => Symbol
   field :posting_permission, :type => Symbol
+  slug  :name
+
   SECURED_WITH = [:private, :logged_in, :public]
   POSTS_ALLOWED_BY = [:members, :logged_in, :anonymous]
 
