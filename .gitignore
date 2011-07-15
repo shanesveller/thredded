@@ -1,3 +1,4 @@
+log/*
 .DS_Store
 .rvmrc
 .sass-cache
@@ -8,6 +9,5 @@ config/thredded_config.yml
 config/database.yml
 .bundle
 db/*.sqlite3
-log/*.log
 tmp/**/*
 public/uploads/tmp/*
