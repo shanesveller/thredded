@@ -1,0 +1,27 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: thredded_dev
+  username: username
+  password: password
+  host: localhost
+  port: 5432
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: thredded_test
+  username: username
+  password: password
+  host: localhost
+  port: 5432
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: thredded_production
+  username: username
+  password: password
+  host: localhost
+  port: 5432
+
