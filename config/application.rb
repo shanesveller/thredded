@@ -1,13 +1,8 @@
 require File.expand_path('../boot', __FILE__)
 
-# goodbye, activerecord
-# require 'rails/all'
-# require "rack/tidy"
-require "mongoid/railtie"
-require "action_controller/railtie"
-require "action_mailer/railtie"
-require "active_resource/railtie"
+require 'rails/all'
 require "carrierwave"
+# require "rack/tidy"
 
 # If you have a Gemfile, require the gems listed there, including any gems
 # you've limited to :test, :development, or :production.
@@ -48,7 +43,7 @@ module Thredded
     # Configure generators values. Many other options are available, be sure to check the documentation.
     config.generators do |g|
       g.stylesheets         false
-      g.orm                 :mongoid
+      g.orm                 :active_record
       g.template_engine     :erb
       g.test_framework      :rspec, :fixture => true,
                             :views => false,

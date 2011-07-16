@@ -31,11 +31,11 @@ Spork.prefork do
 
     # clean up after ourselves.  kill mongodb collections after each run.
     config.after(:each) do 
-      Mongoid.database.collections.each do |collection|
-        unless collection.name =~ /^system\./
-          collection.remove
-        end
-      end
+    #  Mongoid.database.collections.each do |collection|
+    #    unless collection.name =~ /^system\./
+    #      collection.remove
+    #    end
+    #  end
     end  
     
     ### Part of a Spork hack. See http://bit.ly/arY19y
@@ -61,8 +61,3 @@ end
 #   and during each_run!
 # - These instructions should self-destruct in 10 seconds.  If they don't,
 #   feel free to delete them.
-#
-
-
-
-

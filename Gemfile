@@ -1,5 +1,6 @@
 source 'http://rubygems.org'
 
+gem 'pg'
 gem 'rake'                        , '0.8.7'
 gem 'rails'                       , '3.0.6'
 gem 'devise'                      , '1.3.0'
@@ -17,11 +18,6 @@ gem 'kaminari'                    , '0.10.4'
 gem 'bb-ruby'                     , '0.9.5'
 gem 'RedCloth'                    , '4.2.7'
 gem 'highline'                    , '1.6.1'
-gem 'bson_ext'                    , '1.3.1'
-gem 'mongo'                       , '1.3.1'
-gem 'mongoid'                     , '2.0.1'
-gem 'mongo-rails-instrumentation' , '0.2.4'
-gem 'mongoid_slug', :require => 'mongoid/slug'
 
 # Rack Middleware
 gem 'rack-tidy'
