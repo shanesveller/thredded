@@ -1,27 +1,24 @@
-class Topic
-  include Mongoid::Document
-  include Mongoid::Timestamps
-  include Mongoid::Slug
+class Topic   < ActiveRecord::Base
 
-  field :title, :type => String
-  field :user, :type => String
-  field :slug, :type => String
-  field :last_user, :type => String
-  field :post_count, :type => Integer, :default => 0
-  field :attribs, :type => Array, :default => []
-  field :categories, :type => Array, :default => []
-  field :tags, :type => Array, :default => []
-  field :subscribers, :type => Array, :default => []
-  field :permission, :type => Symbol, :default => :public
-  slug  :title, :scope => :messageboard
+  # field :title, :type => String
+  # field :user, :type => String
+  # field :slug, :type => String
+  # field :last_user, :type => String
+  # field :post_count, :type => Integer, :default => 0
+  # field :attribs, :type => Array, :default => []
+  # field :categories, :type => Array, :default => []
+  # field :tags, :type => Array, :default => []
+  # field :subscribers, :type => Array, :default => []
+  # field :permission, :type => Symbol, :default => :public
+  # slug  :title, :scope => :messageboard
  
   # pagination
   paginates_per 50
 
   # associations
-  embeds_many :posts
-  references_and_referenced_in_many :users # , :inverse_of => :topics # private threads will reference users
-  referenced_in :messageboard
+  has_many :posts
+  has_and_belongs_to_many :users # , :inverse_of => :topics # private threads will reference users
+  belongs_to :messageboard
   
   # lock it down
   attr_accessible :title, :user, :last_user, :user_ids, :sticky, :locked, :usernames, :posts_attributes

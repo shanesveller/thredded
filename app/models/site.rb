@@ -1,3 +1,3 @@
-class Site
-  include Mongoid::Document
+class Site  < ActiveRecord::Base
+
 end

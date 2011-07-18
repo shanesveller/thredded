@@ -27,16 +27,16 @@ Spork.prefork do
     # If you're not using ActiveRecord, or you'd prefer not to run each of your
     # examples within a transaction, remove the following line or assign false
     # instead of true.
-    # config.use_transactional_fixtures = true
+    config.use_transactional_fixtures = true
 
     # clean up after ourselves.  kill mongodb collections after each run.
-    config.after(:each) do 
+    # config.after(:each) do 
     #  Mongoid.database.collections.each do |collection|
     #    unless collection.name =~ /^system\./
     #      collection.remove
     #    end
     #  end
-    end  
+    # end  
     
     ### Part of a Spork hack. See http://bit.ly/arY19y
     # Emulate initializer set_clear_dependencies_hook in 

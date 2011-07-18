@@ -1,15 +1,14 @@
-require "carrierwave/orm/mongoid"
+class Image < ActiveRecord::Base
 
-class Image
-  include Mongoid::Document
-  include Mongoid::Timestamps
-  field :width, :type => Integer
-  field :height, :type => Integer
-  field :orientation
-  referenced_in :post
+  # include Mongoid::Document
+  # include Mongoid::Timestamps
+  # field :width, :type => Integer
+  # field :height, :type => Integer
+  # field :orientation
+  # referenced_in :post
 
   # CarrierWave
-  mount_uploader :image, ImageUploader
+  # mount_uploader :image, ImageUploader
   validates_presence_of :image
   before_validation :save_dimensions, :save_orientation, :save_position
   

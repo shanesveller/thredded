@@ -1,9 +1,8 @@
-class Role
-  include Mongoid::Document
-  field :level, :type => Symbol
+class Role < ActiveRecord::Base
+  # field :level, :type => Symbol
 
-  referenced_in :messageboard
-  references_and_referenced_in_many :users
+  # belongs_to :messageboard
+  has_and_belongs_to_many :users
 
   ROLES = [:superadmin, :admin, :moderator, :member]
   validates_presence_of   :level

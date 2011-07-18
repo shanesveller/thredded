@@ -1,4 +1,4 @@
 class PrivateTopic < Topic
-  field :private, :type => Boolean
-  references_many :users, :inverse_of => :private_topics
+  # field :private, :type => Boolean
+  has_many :users
 end
