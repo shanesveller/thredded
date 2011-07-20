@@ -43,7 +43,7 @@ Spork.prefork do
         end
       end
       models.each do |m|
-        m.delete_all unless m.to_s == "Ability"
+        m.delete_all if m.respond_to?('delete_all') && m.respond_to?('table_exists?') && m.table_exists?
       end
     end  
     
