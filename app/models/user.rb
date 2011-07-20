@@ -6,9 +6,9 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me
 
-  # references_and_referenced_in_many :messageboards
-  # references_and_referenced_in_many :roles
-  # references_and_referenced_in_many :topics
+  # has_and_belongs_to_many :messageboards
+  has_many :roles
+  has_many :topics
   
   validates_presence_of :name
   validates_uniqueness_of :name, :email, :case_sensitive => false
@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   end
 
   def admins?(messageboard)
-    superadmin? || roles.for(messageboard).as([:admin]).size > 0
+    superadmin? || roles.for(messageboard).as(['admin']).size > 0
   end
 
   def moderates?(messageboard)
@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
     superadmin? || roles.for(messageboard).as([:admin, :moderator, :member]).size > 0
   end
   
-  def member_of(messageboard, as=:member)
+  def member_of(messageboard, as='member')
     roles << Role.create(:level => as, :messageboard => messageboard) and save
   end
 

@@ -12,7 +12,7 @@ class Messageboard < ActiveRecord::Base
 
   has_many :topics
   has_and_belongs_to_many :users #, :inverse_of => :messageboards
-  # has_one :role
+  has_many :roles
   
   def restricted_to_private?
     security == 'private'

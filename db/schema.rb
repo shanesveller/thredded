@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110716161613) do
+ActiveRecord::Schema.define(:version => 20110720021131) do
 
   create_table "messageboards", :force => true do |t|
     t.string   "name"
@@ -25,6 +25,17 @@ ActiveRecord::Schema.define(:version => 20110716161613) do
 
   add_index "messageboards", ["name"], :name => "index_messageboards_on_name", :unique => true
   add_index "messageboards", ["thread_count"], :name => "index_messageboards_on_thread_count"
+
+  create_table "roles", :force => true do |t|
+    t.string   "level"
+    t.integer  "user_id"
+    t.integer  "messageboard_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "roles", ["messageboard_id"], :name => "index_roles_on_messageboard_id"
+  add_index "roles", ["user_id"], :name => "index_roles_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                               :default => "",    :null => false

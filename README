@@ -30,9 +30,7 @@ Poke around the source and take a look. If there's anything that's been overlook
 Requirements:
 --------------------
 
-- mongodb installed and running
 - ImageMagick is installed
-- ensure that config/mongoid.yml exists. Usually for development environment the default that comes with this app should work.  If not, check connection information.
 - ensure that config/thredded_config.yml exists with site and application specific settings (config/thredded_config_sample.yml may be copied or moved into the proper location)
 
 

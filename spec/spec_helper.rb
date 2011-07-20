@@ -27,16 +27,25 @@ Spork.prefork do
     # If you're not using ActiveRecord, or you'd prefer not to run each of your
     # examples within a transaction, remove the following line or assign false
     # instead of true.
-    config.use_transactional_fixtures = true
+    config.use_transactional_fixtures = false
 
-    # clean up after ourselves.  kill mongodb collections after each run.
-    # config.after(:each) do 
-    #  Mongoid.database.collections.each do |collection|
-    #    unless collection.name =~ /^system\./
-    #      collection.remove
-    #    end
-    #  end
-    # end  
+    # clean up after ourselves.  kill all test records
+    config.after(:each) do 
+      models=[]
+      path="#{::Rails.root.to_s}/app/models"
+      Find.find(path) do |p|
+        if FileTest.directory?(p) and p!=path
+          Find.prune # dont recurse into directories
+          next
+        end
+        if p =~ /.rb$/
+           models << File.basename(p,".*").camelize.constantize
+        end
+      end
+      models.each do |m|
+        m.delete_all unless m.to_s == "Ability"
+      end
+    end  
     
     ### Part of a Spork hack. See http://bit.ly/arY19y
     # Emulate initializer set_clear_dependencies_hook in 

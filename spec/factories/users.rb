@@ -1,10 +1,5 @@
-Factory.sequence :email do |n|
-  "user#{n}@example.com"
-end
-
-Factory.sequence :name do |n|
-  "fred#{n}"
-end
+Factory.sequence(:email) {|n| "user#{n}@example.com" }
+Factory.sequence(:name)  {|n| "fred#{n}" }
 
 Factory.define :user do |user|
   user.email                 { Factory.next :email }
