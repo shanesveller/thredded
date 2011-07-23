@@ -9,7 +9,10 @@ class User < ActiveRecord::Base
   # has_and_belongs_to_many :messageboards
   has_many :roles
   has_many :topics
+  has_many :private_users
+  has_many :private_topics, :through => :private_users
   
+  # validates_numericality_of :posts_count, :topics_count
   validates_presence_of :name
   validates_uniqueness_of :name, :email, :case_sensitive => false
 

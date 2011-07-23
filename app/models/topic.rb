@@ -7,7 +7,6 @@ class Topic < ActiveRecord::Base
   # field :subscribers, :type => Array, :default => []
   # slug  :title, :scope => :messageboard
  
-  # pagination
   paginates_per 50
 
   # associations
@@ -20,7 +19,7 @@ class Topic < ActiveRecord::Base
   attr_accessible :title, :user, :last_user, :user_ids, :sticky, :locked, :usernames, :posts_attributes
   
   # validations
-  validates_numericality_of :post_count
+  # validates_numericality_of :post_count #TODO: change this to posts_count and throw the :counter_cache in Posts
   validates_presence_of :messageboard_id
 
   # scopes
@@ -57,26 +56,32 @@ class Topic < ActiveRecord::Base
     users
   end
 
+
+  # TODO: Remove permission column from Topics table
   def public? 
-    self.users.empty? if self.users
+    self.class.to_s == "Topic"
   end
 
   def private?
-    self.users.present? if self.users
+    self.class.to_s == "PrivateTopic"
   end
 
-  def add_user(name_or_obj)
-    if name_or_obj.class == String
-      @user = User.where(:name => name_or_obj).first
-    elsif name_or_obj.class == User
-      @user = name_or_obj
-    end
-
-    self.users << @user
-  end
 
   def users_to_sentence
     @users_to_sentence ||= self.users.collect{ |u| u.name.capitalize }.to_sentence
+  end
+
+  def self.inherited(child)
+    child.instance_eval do
+      def model_name
+        Topic.model_name
+      end
+    end
+    super
+  end
+
+  def self.select_options
+    subclasses.map{ |c| c.to_s }.sort
   end
 
 end

@@ -13,7 +13,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
 
       t.string  :name
       t.boolean :superadmin, :default => false, :null => false
-      t.integer :posts_count
+      t.integer :posts_count, :default => 0
 
       t.timestamps
     end

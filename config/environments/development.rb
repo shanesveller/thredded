@@ -31,4 +31,8 @@ Thredded::Application.configure do
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default :charset => "utf-8"
 
+  %w[topic private_topic].each do |c|
+    require_dependency File.join("app","models","#{c}.rb")
+  end
+  
 end

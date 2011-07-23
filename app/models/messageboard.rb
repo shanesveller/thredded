@@ -3,6 +3,7 @@ class Messageboard < ActiveRecord::Base
   SECURED_WITH = ['private', 'logged_in', 'public']
   POSTS_ALLOWED_BY = ['members', 'logged_in', 'anonymous']
 
+  validates_numericality_of :topics_count
   validates_inclusion_of  :security, :in => SECURED_WITH
   validates_inclusion_of  :posting_permission, :in => POSTS_ALLOWED_BY
   validates_presence_of   :name
