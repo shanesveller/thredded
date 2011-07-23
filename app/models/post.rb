@@ -12,21 +12,16 @@ class Post  < ActiveRecord::Base
 
   gravtastic :user_email
   
-  # field :user, :type => String
-  # field :user_email, :type => String  # why?  for gravatars, natch
-  # field :content, :type => String
-  # field :ip, :type => String
   # field :notified, :type => Array, :default => []
-  # field :filter, :type => Symbol, :default => :bbcode
 
-  # embedded_in :topic, :inverse_of => :posts
-  # references_many :images
+  belongs_to :topic
+  has_many :images
 
   validates_presence_of :content
   before_create :set_user_email
   after_create :modify_parent_topic
   after_create :incr_user_posts_count
-  attr_accessible :content, :user, :ip, :filter, :images_attributes
+  attr_accessible :content, :user, :ip, :filter #, :images_attributes
 
   # misc
   # accepts_nested_attributes_for :images

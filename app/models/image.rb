@@ -8,7 +8,7 @@ class Image < ActiveRecord::Base
   # referenced_in :post
 
   # CarrierWave
-  # mount_uploader :image, ImageUploader
+  mount_uploader :image, ImageUploader
   validates_presence_of :image
   before_validation :save_dimensions, :save_orientation, :save_position
   

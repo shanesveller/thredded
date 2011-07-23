@@ -1,9 +1,9 @@
 Factory.define :topic do |t|
   t.permission :public
-  t.user "admin"
-  t.last_user "admin"
-  t.title "Topic started by the admin"
+  t.title "New topic started here"
   t.post_count 1
-
+  t.association :user
+  t.association :messageboard
+  # t.association :last_user
   # t.association :posts, :factory => :post
 end

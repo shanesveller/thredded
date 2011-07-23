@@ -1,15 +1,10 @@
-class Topic   < ActiveRecord::Base
+class Topic < ActiveRecord::Base
 
-  # field :title, :type => String
-  # field :user, :type => String
   # field :slug, :type => String
-  # field :last_user, :type => String
-  # field :post_count, :type => Integer, :default => 0
   # field :attribs, :type => Array, :default => []
   # field :categories, :type => Array, :default => []
   # field :tags, :type => Array, :default => []
   # field :subscribers, :type => Array, :default => []
-  # field :permission, :type => Symbol, :default => :public
   # slug  :title, :scope => :messageboard
  
   # pagination
@@ -17,8 +12,9 @@ class Topic   < ActiveRecord::Base
 
   # associations
   has_many :posts
-  has_and_belongs_to_many :users # , :inverse_of => :topics # private threads will reference users
-  belongs_to :messageboard
+  belongs_to :last_user, :class_name => "User", :foreign_key => "last_user_id"
+  belongs_to :user, :counter_cache => true
+  belongs_to :messageboard, :counter_cache => true
   
   # lock it down
   attr_accessible :title, :user, :last_user, :user_ids, :sticky, :locked, :usernames, :posts_attributes
