@@ -66,7 +66,6 @@ class Topic < ActiveRecord::Base
     self.class.to_s == "PrivateTopic"
   end
 
-
   def users_to_sentence
     @users_to_sentence ||= self.users.collect{ |u| u.name.capitalize }.to_sentence
   end
