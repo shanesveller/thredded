@@ -1,6 +1,7 @@
-Factory.define :post, :class => Post, :default_strategy => :build do |f|
-  f.user "username"
-  f.content "This is a post by someone called ... originally enough .. 'username'"
+Factory.define :post do |f|
+  f.association :user
+  f.association :topic
+  f.content "This is a post with great profundity."
   f.ip "127.0.0.1"
   f.filter :bbcode
 end

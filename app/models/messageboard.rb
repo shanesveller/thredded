@@ -12,7 +12,8 @@ class Messageboard < ActiveRecord::Base
   validates_length_of     :name, :within => 1..16, :message => "should be between 1 and 16 characters" 
 
   has_many :topics
-  has_and_belongs_to_many :users #, :inverse_of => :messageboards
+  # TODO : Figure out what's wrong with this HABTM relationship
+  # has_and_belongs_to_many :users #, :inverse_of => :messageboards
   has_many :roles
   
   def restricted_to_private?

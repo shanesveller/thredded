@@ -14,25 +14,22 @@ class Post  < ActiveRecord::Base
   
   # field :notified, :type => Array, :default => []
 
-  belongs_to :topic
-  has_many :images
+  belongs_to :topic,  :counter_cache => true
+  belongs_to :user,   :counter_cache => true
+  has_many   :images
 
   validates_presence_of :content
-  before_create :set_user_email
-  after_create :modify_parent_topic
-  after_create :incr_user_posts_count
+  
   attr_accessible :content, :user, :ip, :filter #, :images_attributes
+
+  before_create :set_user_email
+  after_create  :modify_parent_topic
 
   # misc
   # accepts_nested_attributes_for :images
 
-  def self.filters
-    Filters
-  end
-
-  def filters
-    Filters
-  end
+  def self.filters; Filters; end
+  def filters;      Filters; end
 
   def created_timestamp
     created_at.strftime("%Y-%m-%dT%I:%M:%S-0500") if created_at
@@ -45,14 +42,9 @@ class Post  < ActiveRecord::Base
   private
 
     def modify_parent_topic
-      topic.last_user   = user 
-      topic.post_count  += 1
+      topic.last_user = user 
+      topic.updated_at = self.created_at
       topic.save
-    end
-
-    def incr_user_posts_count
-      @user ||= User.where(:name => self.user).first
-      @user.inc(:posts_count, 1) if @user
     end
 
     def set_user_email

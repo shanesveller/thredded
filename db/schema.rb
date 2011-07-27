@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110723111305) do
+ActiveRecord::Schema.define(:version => 20110724205710) do
 
   create_table "images", :force => true do |t|
     t.integer  "width"
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(:version => 20110723111305) do
     t.string   "posting_permission", :default => "anonymous"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "topics_count",       :default => 0
+    t.integer  "topics_count"
   end
 
   add_index "messageboards", ["name"], :name => "index_messageboards_on_name", :unique => true
@@ -75,12 +75,11 @@ ActiveRecord::Schema.define(:version => 20110723111305) do
     t.integer  "user_id"
     t.integer  "last_user_id"
     t.string   "title"
-    t.integer  "post_count",      :default => 0
-    t.string   "permission",      :default => "public"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "messageboard_id"
     t.string   "type"
+    t.integer  "posts_count",     :default => 0
   end
 
   create_table "users", :force => true do |t|
@@ -100,7 +99,7 @@ ActiveRecord::Schema.define(:version => 20110723111305) do
     t.integer  "posts_count"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "topics_count",                        :default => 0
+    t.integer  "topics_count"
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true

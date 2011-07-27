@@ -2,7 +2,8 @@ class Role < ActiveRecord::Base
   # field :level, :type => Symbol
 
   belongs_to :messageboard
-  has_and_belongs_to_many :users
+  # TODO : Figure out what's wrong with this HABTM relationship
+  # has_and_belongs_to_many :users
 
   ROLES = ['superadmin', 'admin', 'moderator', 'member']
   validates_presence_of   :level

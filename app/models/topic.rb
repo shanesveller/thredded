@@ -1,16 +1,16 @@
 class Topic < ActiveRecord::Base
 
+  paginates_per 50 if self.respond_to?(:paginates_per)
+  
   # field :slug, :type => String
   # field :attribs, :type => Array, :default => []
   # field :categories, :type => Array, :default => []
   # field :tags, :type => Array, :default => []
   # field :subscribers, :type => Array, :default => []
   # slug  :title, :scope => :messageboard
- 
-  paginates_per 50
 
   # associations
-  has_many :posts
+  has_many   :posts
   belongs_to :last_user, :class_name => "User", :foreign_key => "last_user_id"
   belongs_to :user, :counter_cache => true
   belongs_to :messageboard, :counter_cache => true

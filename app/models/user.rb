@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   # has_and_belongs_to_many :messageboards
   has_many :roles
   has_many :topics
+  has_many :posts
   has_many :private_users
   has_many :private_topics, :through => :private_users
   
