@@ -14,18 +14,19 @@ describe PostsHelper do
 
   describe "render_content_for BBCode" do
     before(:each) do
-      @messageboard = Factory(:messageboard, :name=> "kek")
-      @topic = Factory(:topic, :post_count => 1, :messageboard => @messageboard)
+      @post = Factory(:post)
     end
     
     it "renders html from bbcode markup" do
-      @topic.posts << Factory(:post, :content => "[i]this is italic[/i]", :filter => :bbcode)
-      helper.render_content_for(@topic.posts.last).should eq("<em>this is italic</em>")
+      @post.content = "[i]this is italic[/i]"
+      @post.filter  =  'bbcode'
+      helper.render_content_for(@post).should eq("<em>this is italic</em>")
     end
 
     it "renders html from textile markup" do
-      @topic.posts << Factory(:post, :content => "_this is italic_", :filter => :textile)
-      helper.render_content_for(@topic.posts.last).should eq("<p><em>this is italic</em></p>")
+      @post.content = "_this is italic_"
+      @post.filter  =  'textile'
+      helper.render_content_for(@post).should eq("<p><em>this is italic</em></p>")
     end
   end
 

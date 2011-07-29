@@ -1,5 +1,13 @@
 require 'spec_helper'
 
 describe Role do
-  pending "add some examples to (or delete) #{__FILE__}"
+  
+  describe "#.for(messageboard)" do
+    it "filters down roles only for this messagebaord"
+  end
+
+  describe "#.as(role)" do
+    it "filters down roles only for this particular role"
+  end
+
 end

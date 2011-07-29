@@ -3,13 +3,7 @@ class Post  < ActiveRecord::Base
   Filters = []
 
   require "gravtastic"
-  # require "bbcode_filter"
-  # require "textile_filter"
-
   include Gravtastic
-  # include BbcodeFilter
-  # include TextileFilter
-
   gravtastic :user_email
   
   # field :notified, :type => Array, :default => []
