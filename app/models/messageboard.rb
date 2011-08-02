@@ -11,6 +11,7 @@ class Messageboard < ActiveRecord::Base
   validates_uniqueness_of :name, :message => "must be a unique board name. Try again."
   validates_length_of     :name, :within => 1..16, :message => "should be between 1 and 16 characters" 
 
+  belongs_to :site
   has_many :topics
   # TODO : Figure out what's wrong with this HABTM relationship
   # has_and_belongs_to_many :users #, :inverse_of => :messageboards

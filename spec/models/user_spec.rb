@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe User do
 
+  it { should have_many(:sites) }
+
   describe "#admins?(messageboard)" do
      it "returns true for an admin" do
        stu = Factory(:user, :email => "stu@stu.com", :name => "stu")
