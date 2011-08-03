@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110730024348) do
+ActiveRecord::Schema.define(:version => 20110803015108) do
 
   create_table "images", :force => true do |t|
     t.integer  "width"
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(:version => 20110730024348) do
     t.string   "posting_permission", :default => "anonymous"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "topics_count",       :default => 0
+    t.integer  "topics_count"
     t.integer  "site_id",            :default => 0
   end
 
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(:version => 20110730024348) do
     t.integer "user_id"
     t.string  "slug",       :default => "thredded"
     t.string  "permission", :default => "public"
+    t.string  "domain"
   end
 
   create_table "topics", :force => true do |t|
@@ -101,7 +102,7 @@ ActiveRecord::Schema.define(:version => 20110730024348) do
     t.integer  "posts_count"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "topics_count",                        :default => 0
+    t.integer  "topics_count"
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true
