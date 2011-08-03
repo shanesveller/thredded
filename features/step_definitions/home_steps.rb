@@ -12,6 +12,7 @@ When /^I set the default messageboard home to "([^"]*)"$/ do |board_home|
 end
 
 When /^I set the default messageboard to "([^"]*)"$/ do |board_name|
+  THREDDED = Hash.new if THREDDED.nil?
   THREDDED[:default_messageboard_name] = board_name 
 end
 

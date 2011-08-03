@@ -42,13 +42,6 @@ Then /^I should be signed out$/ do
   Then %{I should see "Login"} 
 end
 
-When /^session is cleared$/ do
-  # TODO: This doesn't work with Capybara
-  # TODO: I tried Capybara.reset_sessions! but that didn't work
-  #request.reset_session
-  #controller.instance_variable_set(:@_current_user, nil)
-end
-
 Given /^I have signed in with "(.*)\/(.*)"$/ do |email, password|
   Given %{I am signed up and confirmed as "#{email}/#{password}"}
   And %{I sign in as "#{email}/#{password}"}
