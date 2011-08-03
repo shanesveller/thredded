@@ -29,22 +29,18 @@ Spork.prefork do
     config.use_transactional_fixtures = false
 
     # clean up after ourselves.  kill all test records
-    config.after(:each) do 
-      models=[]
-      path="#{::Rails.root.to_s}/app/models"
-      Find.find(path) do |p|
-        if FileTest.directory?(p) and p!=path
-          Find.prune # dont recurse into directories
-          next
-        end
-        if p =~ /.rb$/
-           models << File.basename(p,".*").camelize.constantize
-        end
-      end
-      models.each do |m|
-        m.delete_all if m.respond_to?('delete_all') && m.respond_to?('table_exists?') && m.table_exists?
-      end
-    end  
+    config.before(:suite) do
+      DatabaseCleaner.strategy = :transaction
+      DatabaseCleaner.clean_with(:truncation)
+    end
+
+    config.before(:each) do
+      DatabaseCleaner.start
+    end
+
+    config.after(:each) do
+      DatabaseCleaner.clean
+    end
     
     ### Part of a Spork hack. See http://bit.ly/arY19y
     # Emulate initializer set_clear_dependencies_hook in 
