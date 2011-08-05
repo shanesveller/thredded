@@ -72,12 +72,13 @@ module Thredded
 #   config.middleware.delete ActionDispatch::Flash
 #   config.middleware.insert_before Warden::Manager, ActionDispatch::Flash
 #   config.middleware.insert_before ActionDispatch::Flash, Rack::Tidy, 'indent-spaces' => 2
+    config.middleware.insert_before Rack::Lock, Refraction
   end
 end 
 
 ActionDispatch::Callbacks.after do
   # Reload the factories
-  return unless (Rails.env.development? || Rails.env.test?)
+  return unless (Rails.env.test?)
 
   unless Factory.factories.blank? # first init will load factories, this should only run on subsequent reloads
     Factory.factories.clear

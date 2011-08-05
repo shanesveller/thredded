@@ -20,6 +20,7 @@ gem 'bb-ruby'                     , '0.9.5'
 gem 'RedCloth'                    , '4.2.7'
 gem 'highline'                    , '1.6.1'
 gem 'escape_utils'                , '0.2.3'
+gem 'refraction'
 
 # Rack Middleware
 # gem 'rack-tidy'
