@@ -1,0 +1,35 @@
+
+#site_wide {
+  width: 100%;
+  height: 48px;
+}
+#site_wide ul {
+  height: 24px;
+  padding: 12px 0 12px 10px;
+  margin: 0;
+  overflow: hidden;
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #393939), color-stop(100%, #1a1a1a));
+  background-image: -moz-linear-gradient(top, #393939 0%, #1a1a1a 100%);
+  background-image: linear-gradient(top, #393939 0%, #1a1a1a 100%);
+}
+#site_wide ul li {
+  display: inline-block;
+  font-family: Arial, Verdana, Tahoma, Helvetica, sans-serif;
+}
+#site_wide ul li a {
+  font-size: 11px;
+  background-color: #535353;
+  color: white;
+  display: block;
+  padding: 6px;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  -moz-border-radius: 7px;
+  -webkit-border-radius: 7px;
+  -o-border-radius: 7px;
+  -ms-border-radius: 7px;
+  -khtml-border-radius: 7px;
+  border-radius: 7px;
+  text-shadow: black 1px 1px 0;
+}

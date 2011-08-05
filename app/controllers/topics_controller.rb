@@ -1,5 +1,4 @@
 class TopicsController < ApplicationController
-  theme 'plainole'
   layout 'application'
   before_filter :pad_params,  :only => [:create, :update]
   before_filter :pad_post,    :only => :create

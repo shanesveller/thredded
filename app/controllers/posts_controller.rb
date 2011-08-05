@@ -1,6 +1,5 @@
 class PostsController < ApplicationController
   load_and_authorize_resource :only => [:index, :show]
-  theme 'plainole'
   layout 'application'
   before_filter :pad_post, :only => :create
   helper_method :messageboard, :topic
