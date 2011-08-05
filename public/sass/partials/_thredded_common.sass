@@ -1,0 +1,64 @@
+#session_mgmt
+  section
+    :text-align center
+    
+form.session_mgmt
+  :background #fff
+  :border solid 1px #faf7ee
+  +border-radius(10px)
+  :padding 24px 12px
+  :width 400px
+  :margin 0 auto
+  :text-align left
+  p
+    :margin-bottom 18px
+    &:last-child
+      :margin-bottom 0
+  label
+    :color #8c1a1a
+    :font-size 11px
+    :display block
+    :text-transform uppercase
+    :letter-spacing 2px
+    :margin 0px 0 6px 6px
+    :cursor pointer
+  input
+    &[type="text"], &[type="password"]
+      :border solid 1px #faf7ee
+      :color #88837b
+      +border-radius(10px)
+      +box-shadow(#635444, 2px, 2px, 0)
+      :background #faf7ee
+      :padding 12px
+      :font-size 24px
+      :width 372px
+    &:focus
+      :color #302614
+    &[type="checkbox"]
+      :float left
+      :margin-top -2px
+    &[type="button"], &[type="submit"]
+      border: solid 1px #7f1b1b
+      +border-radius(10px)
+      :color #FFF
+      :cursor pointer
+      :font-size 11px
+      :letter-spacing 2px
+      +linear-gradient(color-stops(#992222, #790f0f))
+      :padding 5px 10px
+      +text-shadow(#1f1b16, 1px, 1px, 0)
+      :text-transform lowercase
+      :width 100%
+      &:focus
+        :font-weight bold
+        :outline 0
+      &:active
+        +linear-gradient(color-stops(#4c0707, #582121))
+p.shared_links
+  :font-size 11px
+  :text-transform uppercase
+  :letter-spacing 2px
+  :margin-top 12px
+  :padding-left 12px
+  a
+    :margin-right 10px
