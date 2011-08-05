@@ -13,3 +13,4 @@ tmp/**/*
 tmp/*
 db/sphinx/*
 public/uploads/tmp/*
+bin
