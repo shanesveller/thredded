@@ -2,18 +2,22 @@ Thredded::Application.routes.draw do
 
   themes_for_rails
 
-  root :to => "home#index"
+  root :to => "messageboards#index"
+
   devise_for :users
   resources :users
-  resources :messageboards do
-    resources :topics do
-      resources :posts
+  resources :sites do
+    resources :messageboards do
+      resources :topics do
+        resources :posts
+      end
     end
   end
 
-  match ':messageboard_id'        => 'messageboards#show'
-  match ':messageboard_id/topics' => 'topics#index', :as => :topics
-  
+  match ':site_id'                            => 'messageboards#index', :as => :site_messageboards
+  match ':site_id/:messageboard_id'           => 'topics#index',        :as => :site_messageboard_topics
+  match ':site_id/:messageboard_id/:topic_id' => 'posts#index',         :as => :site_messageboard_topic_posts
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

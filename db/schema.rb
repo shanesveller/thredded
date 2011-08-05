@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(:version => 20110803015108) do
     t.string   "posting_permission", :default => "anonymous"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "topics_count"
+    t.integer  "topics_count",       :default => 0
     t.integer  "site_id",            :default => 0
   end
 
@@ -99,10 +99,10 @@ ActiveRecord::Schema.define(:version => 20110803015108) do
     t.string   "authentication_token"
     t.string   "name"
     t.boolean  "superadmin",                          :default => false, :null => false
-    t.integer  "posts_count"
+    t.integer  "posts_count",                         :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "topics_count"
+    t.integer  "topics_count",                        :default => 0
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true

@@ -90,7 +90,6 @@ module Thredded
       }
       new_messageboard = Messageboard.where(:name => messageboard).first || Messageboard.new
       new_messageboard.update_attributes(attributes)
-      # make the newly created admin user a member of the new messageboard
       user.member_of(new_messageboard, 'admin')
       new_messageboard
     end
@@ -152,7 +151,7 @@ module Thredded
       end
       
       def prompt_for_security
-        security = 'anonymous'
+        security = 'public'
         choose do |menu|
           menu.index = :number
           menu.index_suffix = ") "
@@ -163,8 +162,8 @@ module Thredded
           menu.choice "Logged In - only those who are logged in to the site may view"  do |command|
             security = 'logged_in'
           end
-          menu.choice "Anonymous - anyone and everyone"  do |command|
-            security = 'anonymous'
+          menu.choice "Public - anyone and everyone"  do |command|
+            security = 'public'
           end
         end
         security
