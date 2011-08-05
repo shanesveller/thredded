@@ -42,10 +42,9 @@ module Thredded
     end
 
     def create_first_thread(admin, messageboard)
-      first_topic = Topic.new(:user => admin.name, :title => "Welcome to your site's very first thread")
-      first_topic.messageboard = messageboard
+      first_topic = messageboard.topics.create(:user => admin, :title => "Welcome to your site's very first thread")
       first_topic.save
-      first_topic.posts.create(:content => "There's not a whole lot here for now.", :user => admin.name, :ip => "127.0.0.1")
+      first_topic.posts.create(:content => "There's not a whole lot here for now.", :user => admin, :ip => "127.0.0.1")
       first_topic
     end
 
@@ -66,30 +65,33 @@ module Thredded
       admin
     end
 
+    # TODO : MAKE SURE SITE IS ACCURATELY BOOTSTRAPPED
+    #
     def create_site_and_messageboard(user, sitename, messageboard, security, permission)
       unless sitename and messageboard and security
         announce "Create your messageboard (press enter for defaults)."
-        sitename     = prompt_for_sitename     unless sitename
+        # sitename     = prompt_for_sitename     unless sitename
+        sitename     = "thredded"
         messageboard = prompt_for_messageboard unless messageboard
         security     = prompt_for_security     unless security
         permission   = prompt_for_permission   unless permission
       end
 
       #TODO: CREATE THE SITE OBJECT. Site doesn't exist yet.  Do it.
-
+      new_site = Site.create(:user => user)
 
       attributes = {
         :name               => messageboard,
         :description        => "Another internet messageboard named #{messageboard}",
         :theme              => "default",
-        :topic_count        => 0,
         :security           => security,
-        :posting_permission => permission
+        :posting_permission => permission,
+        :site               => new_site
       }
       new_messageboard = Messageboard.where(:name => messageboard).first || Messageboard.new
       new_messageboard.update_attributes(attributes)
       # make the newly created admin user a member of the new messageboard
-      user.member_of(new_messageboard, :admin)
+      user.member_of(new_messageboard, 'admin')
       new_messageboard
     end
 
@@ -150,38 +152,38 @@ module Thredded
       end
       
       def prompt_for_security
-        security = :anonymous
+        security = 'anonymous'
         choose do |menu|
           menu.index = :number
           menu.index_suffix = ") "
           menu.prompt = "Choose the security level you would like your messageboard to have: "
           menu.choice "Private - only members who've been invited"  do |command|
-            security = :private
+            security = 'private'
           end
           menu.choice "Logged In - only those who are logged in to the site may view"  do |command|
-            security = :logged_in
+            security = 'logged_in'
           end
           menu.choice "Anonymous - anyone and everyone"  do |command|
-            security = :anonymous
+            security = 'anonymous'
           end
         end
         security
       end
       
       def prompt_for_permission
-        permission = :logged_in
+        permission = 'logged_in'
         choose do |menu|
           menu.index = :number
           menu.index_suffix = ") "
           menu.prompt = "Select who may post in the messageboard: "
           menu.choice "Members - only those who've are members of the messageboard"  do |command|
-            permission = :members
+            permission = 'members'
           end
           menu.choice "Logged In - only those who are logged in to the site may post"  do |command|
-            permission = :logged_in
+            permission = 'logged_in'
           end
           menu.choice "Anonymous - anyone and everyone can post"  do |command|
-            permission = :anonymous
+            permission = 'anonymous'
           end
         end
         permission
