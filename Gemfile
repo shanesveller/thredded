@@ -20,16 +20,17 @@ gem 'RedCloth'                    , '4.2.7'
 gem 'highline'                    , '1.6.1'
 gem 'escape_utils'                , '0.2.3'
 gem 'refraction'
-
-# Rails 3.1 - Asset Pipeline
 gem 'multi_json'
-gem 'sass'
-gem 'compass'
-gem 'coffee-script'
-gem 'uglifier'
 
-# Rails 3.1 - JavaScript
-gem 'jquery-rails'
+# Gems used only for assets and not required
+# in production environments by default.
+group :assets do
+  gem 'jquery-rails'
+  gem 'sass-rails', "~> 3.1.0.rc"
+  gem 'coffee-rails', "~> 3.1.0.rc"
+  gem 'uglifier'
+  gem 'compass', :git => 'git://github.com/chriseppstein/compass.git', :branch => 'rails31'
+end
 
 # Deploy with Capistrano
 gem 'capistrano'
