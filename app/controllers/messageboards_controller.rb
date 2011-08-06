@@ -5,12 +5,8 @@ class MessageboardsController < ApplicationController
   helper_method :messageboard, :topic
   
   def index
-
-      debugger
       @site = Site.where(:slug => params[:site_id]).first
       @messageboards = @site.messageboards
-
-    # @messageboard_name = messageboard.present? ? messageboard.name : THREDDED[:default_messageboard_name]
   end
 
   def show
