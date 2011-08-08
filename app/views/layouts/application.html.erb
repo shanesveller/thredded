@@ -3,14 +3,14 @@
 <head>
   <title><%= yield :page_title %></title>
   <%= stylesheet_link_tag    "application" %>
-  <%= javascript_include_tag "application" %>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js"></script>
   <%= csrf_meta_tag %>
 </head>
 <!-- default layout -->
 <body id="<%= yield :page_id %>">
 	<header>
 		
-		<nav>
+		<nav id="site_wide">
 			<ul>
 			  <%= render 'devise/menu/registration_items' %>
 			  <%= render 'devise/menu/login_items' %>
@@ -20,12 +20,23 @@
 	</header>
 
 	<section id="contentwrap">
+    <header role="banner">
+      <hgroup>
+        <h1><%= site.slug %></h1>
+        <h2>TODO: Add a tagline field to the site model</h2>
+      </hgroup>
+    </header>
+  
 		<%= render :partial => "shared/error_msgs" %>
-		<%= yield %>
+    <section id="content">
+      <%= yield %>
+    </section>
 	</section>
 
 	<footer>
 		<p class="copy">&copy; A <a href="http://joeloliveira.com">WeatherField</a> / <a href="http://the47th.com">47th</a> Joint</p>
 	</footer>
+
+  <%= javascript_include_tag "application" %>
 </body>
 </html>

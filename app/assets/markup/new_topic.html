@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Messageboard | Create a New Topic</title>
+    <link href="../stylesheets/style.css" media="screen" rel="stylesheet" type="text/css" />
+  </head>
+  <body id="topics_new">
+    <section id="contentwrap">
+
+      <header role="banner">
+        <hgroup>
+          <h1>default</h1>
+          <h2>this is a default messageboard. you can change this description at any time</h2>
+        </hgroup>
+        <nav>
+          <ul>
+            <li class="new_topic"><a href="/messageboards/default/topics/new">Create a New Thread</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <section id="content">
+
+        <header>
+          <nav>
+            <ul>
+              <li><a href="#">Forums</a> &rarr; </li>
+              <li><a href="#">General Discussion</a> &rarr; </li>
+            </ul>
+          </nav>
+          <h1>New Topic</h1>
+          <h2>by Joel</h2>
+        </header>
+
+        <form>
+          <p class="title">
+            <label for="topic_title">Title</label>
+            <input id="topic_title" name="topic[title]" size="30" type="text" placeholder="Topic Title" />
+          </p>
+          <div id="drawer">
+            <div id="attributes">
+              <p class="private_users">
+                <label for="topic_usernames">Private Recipients</span></label>
+                <input id="topic_usernames" name="topic[usernames]" size="30" type="text" />
+              </p>
+              <p class="locked">
+                <label for="topic_locked">Thread Locked</span></label>
+                <input id="topic_locked" name="topic[locked]"  type="checkbox" />
+              </p>
+              <p class="sticky">
+                <label for="topic_sticky">Sticky</span></label>
+                <input  id="topic_sticky" name="topic[sticky]"  type="checkbox" />
+              </p>
+            </div>
+            <div class="handle"><a href="#attributes">More</a></div>
+          </div>
+          <p class="content">
+            <label for="topic_posts_attributes_0_content">Content</label>
+            <textarea cols="40" id="topic_posts_attributes_0_content" name="topic[posts_attributes][0][content]" rows="5"></textarea>
+          </p>
+          <p class="submit">
+            <input id="topic_submit" name="commit" type="submit" value="Create New Topic" />
+          </p>
+        </form>
+      </section>
+
+
+    </section>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+    <script src="../javascripts/jquery.timeago.js" type="text/javascript"></script>
+    <script src="../javascripts/application.js" type="text/javascript"></script>
+  </body>
+</html>

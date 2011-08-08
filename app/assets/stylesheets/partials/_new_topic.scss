@@ -1,0 +1,78 @@
+#topics_new {
+  label { display: block; clear: both; font-size: 12px; text-transform: lowercase; margin: 10px 0 4px 0; color: #888; font-size: 12px;  }
+  label[for="topic_title"] { display: none; }
+  
+  textarea { 
+    @include border-radius(3px); 
+    border: solid 1px #999; 
+    font-size: 18px; 
+    line-height: 26px; 
+    padding: 6px; 
+    width: 98%;
+    color: #333;
+  }
+
+  p.title input { 
+    border: solid 1px #999;
+    color: #333;
+    font-size: 26px; 
+    line-height: 24px;
+    padding: 10px 6px 6px;
+    width: 98%;
+    @include border-radius(3px);
+  }
+
+  p.submit input {
+    border: solid 1px #999;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 15px 0 0;
+    line-height: 18px;
+    padding: 5px 6px 3px;
+    @include background-image(linear-gradient(#ffffff, #bfbfbf));
+  }
+  
+  #drawer {
+
+    #attributes { 
+      display: none; 
+      margin-top: -2px;
+      padding: 9px 7px 7px 7px;
+      width: 98%;
+      @include background-image(linear-gradient(#bfbfbf, #999999));
+
+      p { padding-bottom: 10px; margin-bottom: 10px; border-bottom: dotted 1px #c0c0c0; }
+      p:last-child { padding-bottom: 0px; border: none; }
+
+      label {
+        margin: 0;
+        display: block;
+        float: left;
+        width: 18%;
+        line-height: 24px;
+        color: #fff;
+        @include text-shadow(#111 1px 1px 0px);
+        
+        span { font-size: 10px; }
+      }
+
+      input[type="text"] {
+        width: 81%;
+      }
+    }
+    
+    .handle a {
+        background: #999;
+        font-size: 11px;
+        margin-left: 10px;
+        padding: 1px 10px 5px;
+        display: block;
+        @include border-bottom-radius(3px);
+        width: 28px;
+        color: #fff;
+        text-decoration: none;
+        outline: none;
+        @include text-shadow(#111 1px 1px 1px)
+    }
+  }
+}

@@ -1,0 +1,68 @@
+section#contentwrap #messageboards {
+  > header {
+    overflow: hidden;
+
+    > div {
+      background: #333;
+      border: none;
+      color: #fff;
+      font-size: 11px;
+      float: left;
+      line-height: 28px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+
+      &.messageboard { width: 69%; padding-left: 1%; border-bottom: solid 1px #000; }
+      &.last_post { width: 30%; border-bottom: solid 1px #000; }
+    }
+  }
+  > .messageboard {
+    background: transparent url(../images/comment.gif) 16px 11px no-repeat;
+    border: solid 1px #ddd;
+    border-top: none;
+    clear: both;
+    display: block;
+    padding: 1% 1% 1% 5%;
+    position: relative;
+    
+    header {
+      font-size: 12px;
+
+      h2 { font-size: 14px; font-weight: normal; margin-bottom: 4px; }
+      h2 a { text-decoration: none; font-weight: bold; }
+      h2 a:hover { text-decoration: underline; }
+    }
+
+    p { font-size: 12px; margin-top: 6px; }
+
+    footer {
+      position: absolute;
+      right: 0px;
+      bottom: 0px;
+      left: 70%;
+      top: 0px;
+      width: 26%;
+      padding: 2%;
+      background: #eee;
+      
+      a {
+        color: #333;
+        font-size: 12px;
+        text-decoration: none;
+      }
+
+      cite {
+        display: block;
+        clear: both;
+      }
+    }
+  }
+}
+#messageboard_listing #content > footer {
+  border: solid 1px #ddd;
+  border-top: none;
+  padding: 1%;
+
+  a { font-weight: bold; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+}
