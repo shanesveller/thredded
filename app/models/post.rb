@@ -14,10 +14,10 @@ class Post  < ActiveRecord::Base
 
   validates_presence_of :content
   
-  attr_accessible :content, :user, :ip, :filter #, :images_attributes
+  attr_accessible :content, :user, :ip, :filter, :topic #, :images_attributes
 
   before_create :set_user_email
-  after_create  :modify_parent_topic
+  after_save    :modify_parent_topic
 
   # misc
   # accepts_nested_attributes_for :images
@@ -36,14 +36,13 @@ class Post  < ActiveRecord::Base
   private
 
     def modify_parent_topic
-      topic.last_user = user 
+      topic.last_user = user
       topic.updated_at = self.created_at
       topic.save
     end
 
     def set_user_email
-      @user ||= User.where(:name => self.user).first
-      self.user_email = @user.email if @user
+      self.user_email = self.user.email if self.user
     end
     
 end

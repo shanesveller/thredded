@@ -28,13 +28,13 @@ ActiveRecord::Schema.define(:version => 20110803015108) do
     t.integer  "thread_count",       :default => 0
     t.string   "security",           :default => "public"
     t.string   "posting_permission", :default => "anonymous"
+    t.integer  "site_id",            :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "topics_count",       :default => 0
-    t.integer  "site_id",            :default => 0
   end
 
-  add_index "messageboards", ["name"], :name => "index_messageboards_on_name", :unique => true
+  add_index "messageboards", ["name", "site_id"], :name => "index_messageboards_on_name_and_site_id", :unique => true
   add_index "messageboards", ["thread_count"], :name => "index_messageboards_on_thread_count"
 
   create_table "posts", :force => true do |t|

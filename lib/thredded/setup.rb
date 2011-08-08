@@ -14,20 +14,29 @@ module Thredded
         setup
       end
 
-      def with_fake_threads
+      def with_fake_content
         puts "Starting fake thread generation. Sit tight ..."
-        messageboard = Messageboard.last
-        50.times do
-          username = Faker::Name.first_name.downcase
-          topic = Topic.new(:user => username, :title => Faker::Lorem.words( 5 ).join( ' ' ))
-          topic.messageboard = messageboard
-          topic.save
-          3.times do
-            topic.posts.create(:content => Faker::Lorem.paragraph, :user => username, :ip => "127.0.0.1")
-            username = Faker::Name.first_name.downcase
+        
+        Messageboard.delete_all
+        Topic.delete_all
+        Post.delete_all
+
+        user = User.first
+
+          2.times do |i|
+            site = Site.find_or_create_by_slug(:slug => "site#{i}", :user => user)
+            3.times do |j|
+              messageboard = Messageboard.create(:name => "messageboard_#{j}", :site => site)
+              50.times do
+                topic = Topic.create(:user => user, :title => Faker::Lorem.words(5).join(' '), :messageboard => messageboard)
+                10.times do
+                  post = Post.create(:content => Faker::Lorem.paragraph, :user => user, :ip => "127.0.0.1", :topic => topic)
+                end
+              end
+            end
           end
-        end
-        puts "Finished. 50 fake threads created."
+
+        puts "Finished. 2 fake sites, 6 fake boards, 300 fake threads and 3000 fake posts created."
       end
     end
 

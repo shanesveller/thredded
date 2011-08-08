@@ -15,10 +15,10 @@ namespace :db do
   end
 
   namespace :seed do
-    desc "Randomly generate 50 threads with 3 posts by random people"
+    desc "Randomly generate 2 fake sites with messageboards, threads and posts"
     task :fakes => :environment do
       require "thredded/setup"
-      Thredded::Setup.with_fake_threads
+      Thredded::Setup.with_fake_content
     end
   end
 

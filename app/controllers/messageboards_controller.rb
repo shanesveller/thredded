@@ -2,11 +2,10 @@ class MessageboardsController < ApplicationController
   before_filter :messageboard, :only => :show
   load_and_authorize_resource
   layout 'application'
-  helper_method :messageboard, :topic
+  helper_method :site, :messageboard, :topic
   
   def index
-      @site = Site.where(:slug => params[:site_id]).first
-      @messageboards = @site.messageboards
+      @messageboards = site.messageboards
   end
 
   def show
@@ -16,7 +15,11 @@ class MessageboardsController < ApplicationController
   # ======================================
   
   def messageboard
-    @messageboard ||= Messageboard.where(:name => params[:id]).first
+    @messageboard ||= Messageboard.where(:name => params[:messageboard_id]).first
+  end
+
+  def site
+      @site ||= Site.where(:slug => params[:site_id]).includes(:messageboards).first
   end
 
 end
