@@ -1,0 +1,11 @@
+  <div class="messageboard">
+    <header>
+      <h2><%= link_to messageboard.name, site_messageboards_path(messageboard) %></h2>
+      <div class="meta"><%= messageboard.topics_count%> topic, <%= messageboard.posts_count %> posts</div>
+    </header>
+    <% content_tag :p, messageboard.description if messageboard.description %>
+    <p class="admin"><a href="#edit">Edit</a></p>
+    <footer>
+      <p><a href="#thread">posted 2 hours ago <cite>by joel</cite></a></p>
+    </footer>
+  </div>
