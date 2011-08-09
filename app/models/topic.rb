@@ -15,9 +15,12 @@ class Topic < ActiveRecord::Base
   belongs_to :user, :counter_cache => true
   belongs_to :messageboard, :counter_cache => true
   
+  # delegations
+  delegate :name, :name=, :email, :email=, :to => :user, :prefix => true
+
   # validations
-  # validates_numericality_of :post_count #TODO: change this to posts_count and throw the :counter_cache in Posts
   validates_presence_of :messageboard_id
+  validates_numericality_of :posts_count
 
   # lock it down
   attr_accessible :title, :user, :last_user, :user_ids, :sticky, :locked, :usernames, :posts_attributes, :messageboard
