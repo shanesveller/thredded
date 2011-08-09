@@ -5,7 +5,7 @@ class MessageboardsController < ApplicationController
   helper_method :site, :messageboard, :topic
   
   def index
-      @messageboards = site.messageboards
+    @messageboards = site.messageboards
   end
 
   def show
@@ -19,7 +19,7 @@ class MessageboardsController < ApplicationController
   end
 
   def site
-      @site ||= Site.where(:slug => params[:site_id]).includes(:messageboards).first
+    @site ||= Site.where(:slug => params[:site_id]).includes(:messageboards).first
   end
 
 end

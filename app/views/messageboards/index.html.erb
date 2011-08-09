@@ -3,7 +3,7 @@
 
 <header>
   <h1>Messageboards</h1>
-  <h2><%= site.messageboards.count %> Messageboard(s), 47 Threads and 4747 Posts - TODO: Get these numbers from actual places</h2>
+  <h2><%= site.messageboards.count %> Messageboard(s), <%= site.topics_count %> Threads and <%= site.posts_count %> Posts</h2>
 </header>
 
 <section id="messageboards">
@@ -11,27 +11,6 @@
     <div class="messageboard">Messageboard Name</div>
     <div class="last_post">Last Post At</div>
   </header>
-  <div class="messageboard">
-    <header>
-      <h2><a href="#general_discussion">General Discussion</a></h2>
-      <div class="meta">1 topic, 3 posts</div>
-    </header>
-    <p>Talk about any old topic goes in here</p>
-    <p class="admin"><a href="#edit">Edit</a></p>
-    <footer>
-      <p><a href="#thread">posted 2 hours ago <cite>by joel</cite></a></p>
-    </footer>
-  </div>
-  <div class="messageboard">
-    <header>
-      <h2><a href="#nws">NWS</a></h2>
-      <div class="meta">2 topics, 10 posts</div>
-    </header>
-    <p>Not necessarily ok for work consumption</p>
-    <p class="admin"><a href="#edit">Edit</a></p>
-    <footer>
-      <p><a href="#thread">posted 4 hours ago <cite>by chrisg</cite></a></p>
-    </footer>
-  </div>
+  <%= render @messageboards %>
 </section>
 

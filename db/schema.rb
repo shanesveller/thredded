@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110803015108) do
+ActiveRecord::Schema.define(:version => 20110809004658) do
 
   create_table "images", :force => true do |t|
     t.integer  "width"
@@ -25,28 +25,28 @@ ActiveRecord::Schema.define(:version => 20110803015108) do
     t.string   "name"
     t.text     "description"
     t.string   "theme"
-    t.integer  "thread_count",       :default => 0
     t.string   "security",           :default => "public"
     t.string   "posting_permission", :default => "anonymous"
     t.integer  "site_id",            :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "topics_count",       :default => 0
+    t.integer  "posts_count",        :default => 0
   end
 
   add_index "messageboards", ["name", "site_id"], :name => "index_messageboards_on_name_and_site_id", :unique => true
-  add_index "messageboards", ["thread_count"], :name => "index_messageboards_on_thread_count"
 
   create_table "posts", :force => true do |t|
     t.integer  "user_id"
     t.string   "user_email"
     t.text     "content"
     t.string   "ip"
-    t.string   "filter",     :default => "bbcode"
-    t.string   "source",     :default => "web"
+    t.string   "filter",          :default => "bbcode"
+    t.string   "source",          :default => "web"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "topic_id"
+    t.integer  "messageboard_id"
   end
 
   create_table "private_users", :force => true do |t|

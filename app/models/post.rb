@@ -8,13 +8,14 @@ class Post  < ActiveRecord::Base
   
   # field :notified, :type => Array, :default => []
 
+  belongs_to :messageboard, :counter_cache => true
   belongs_to :topic,  :counter_cache => true
   belongs_to :user,   :counter_cache => true
   has_many   :images
 
-  validates_presence_of :content
+  validates_presence_of :content, :topic_id, :messageboard_id
   
-  attr_accessible :content, :user, :ip, :filter, :topic #, :images_attributes
+  attr_accessible :content, :user, :ip, :filter, :topic, :messageboard #, :images_attributes
 
   before_create :set_user_email
   after_save    :modify_parent_topic
@@ -37,12 +38,12 @@ class Post  < ActiveRecord::Base
 
     def modify_parent_topic
       topic.last_user = user
-      topic.updated_at = self.created_at
+      topic.updated_at = created_at
       topic.save
     end
 
     def set_user_email
-      self.user_email = self.user.email if self.user
+      user_email = user.email if user
     end
     
 end

@@ -4,6 +4,14 @@ class Site  < ActiveRecord::Base
   validates_presence_of :slug, :permission
   validates_uniqueness_of :slug
 
+  def topics_count
+    messageboards.inject(0){|sum, item| sum + item.topics_count}
+  end
+
+  def posts_count
+    messageboards.inject(0){|sum, item| sum + item.posts_count}
+  end
+
   class << self
     def default_slug
       return THREDDED[:default_site] if Site.exists?(:slug => THREDDED[:default_site])

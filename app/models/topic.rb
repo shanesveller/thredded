@@ -15,13 +15,13 @@ class Topic < ActiveRecord::Base
   belongs_to :user, :counter_cache => true
   belongs_to :messageboard, :counter_cache => true
   
-  # lock it down
-  attr_accessible :title, :user, :last_user, :user_ids, :sticky, :locked, :usernames, :posts_attributes
-  
   # validations
   # validates_numericality_of :post_count #TODO: change this to posts_count and throw the :counter_cache in Posts
   validates_presence_of :messageboard_id
 
+  # lock it down
+  attr_accessible :title, :user, :last_user, :user_ids, :sticky, :locked, :usernames, :posts_attributes, :messageboard
+  
   # scopes
   scope :latest, desc(:updated_at)
   
