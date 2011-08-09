@@ -4,8 +4,11 @@ Thredded::Application.routes.draw do
 
   root :to => "messageboards#index"
 
-  devise_for :users
-  resources :users
+  scope ":site_id" do 
+    devise_for :users
+    resources :users
+  end 
+
   resources :sites do
     resources :messageboards do
       resources :topics do

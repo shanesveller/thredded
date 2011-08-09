@@ -4,6 +4,7 @@
 <h1>Log in</h1>
 
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :class => "session_mgmt"}) do |f| %>
+  <%= f.hidden_field :site_id, :value => site.id %>
   <p><%= f.label :email %>
   <%= f.text_field :email %></p>
 
