@@ -1,11 +1,12 @@
 class MessageboardsController < ApplicationController
-  before_filter :messageboard, :only => :show
   load_and_authorize_resource
+  before_filter :messageboard, :only => :show
   layout 'application'
   helper_method :site, :messageboard, :topic
   
   def index
     @messageboards = site.messageboards
+    # @messageboards = MessageboardDecorator.decorate(site.messageboards)
   end
 
   def show
