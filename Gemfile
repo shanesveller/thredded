@@ -1,6 +1,10 @@
 source 'http://rubygems.org'
 
+# pick your database
 gem 'pg'
+# gem 'mysql2'
+# gem 'sqlite'
+
 gem 'rack'
 gem 'rake'                        , '0.8.7'
 gem 'rails'                       , '3.1.0.rc5'
