@@ -12,4 +12,8 @@ module UsersHelper
     @devise_mapping ||= Devise.mappings[:user]
   end
 
+  def site 
+    @site ||= Site.find_by_slug(params[:site_id])
+  end
+
 end

@@ -4,10 +4,11 @@ Thredded::Application.routes.draw do
 
   root :to => "messageboards#index"
 
-  scope ":site_id" do 
-    devise_for :users
-    resources :users
-  end 
+  devise_for :users do
+    get  "/:site_id/users/sign_in(.:format)"  => "devise/sessions#new"
+    post "/:site_id/users/sign_in(.:format)"  => "devise/sessions#create"
+    get  "/:site_id/users/sign_out(.:format)" => "devise/sessions#destroy"
+  end
 
   resources :sites do
     resources :messageboards do
@@ -16,7 +17,7 @@ Thredded::Application.routes.draw do
       end
     end
   end
-
+  
   match ':site_id'                            => 'messageboards#index', :as => :site_messageboards
   match ':site_id/:messageboard_id'           => 'topics#index',        :as => :site_messageboard_topics
   match ':site_id/:messageboard_id/:topic_id' => 'posts#index',         :as => :site_messageboard_topic_posts
