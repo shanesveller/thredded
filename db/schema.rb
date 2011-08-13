@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110809004658) do
+ActiveRecord::Schema.define(:version => 20110810212910) do
 
   create_table "images", :force => true do |t|
     t.integer  "width"
@@ -69,9 +69,11 @@ ActiveRecord::Schema.define(:version => 20110809004658) do
 
   create_table "sites", :force => true do |t|
     t.integer "user_id"
-    t.string  "slug",       :default => "thredded"
-    t.string  "permission", :default => "public"
+    t.string  "slug",        :default => "thredded"
+    t.string  "permission",  :default => "public"
     t.string  "domain"
+    t.string  "title"
+    t.text    "description"
   end
 
   create_table "topics", :force => true do |t|

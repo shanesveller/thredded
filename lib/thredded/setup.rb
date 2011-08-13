@@ -23,7 +23,7 @@ module Thredded
 
         user = User.create(:email => 'test@user.com', :name => 'johndoe', :password => 'password')
         2.times do |i|
-          site = Site.create(:slug => "site#{i}", :user => user)
+          site = Site.create(:slug => "site#{i}", :user => user, :title => "Site Number #{i}", :description => "Just another internet messageboard")
           3.times do |j|
             messageboard = Messageboard.create(:name => "messageboard_#{j}", :site => site)
             50.times do
@@ -44,7 +44,7 @@ module Thredded
     def bootstrap(config)
       @config     = config
       admin       = create_admin_user(config[:username], config[:email], config[:password])
-      site_board  = create_site_and_messageboard(admin, config[:sitename], config[:messageboard], config[:security], config[:permission])
+      site_board  = create_site_and_messageboard(admin, config[:sitetitle], config[:messageboard], config[:security], config[:permission])
       first_topic = create_first_thread(admin, site_board)
       announce "Finished."
     end
@@ -75,18 +75,19 @@ module Thredded
 
     # TODO : MAKE SURE SITE IS ACCURATELY BOOTSTRAPPED
     #
-    def create_site_and_messageboard(user, sitename, messageboard, security, permission)
-      unless sitename and messageboard and security
+    def create_site_and_messageboard(user, sitetitle, messageboard, security, permission)
+      unless sitetitle and messageboard and security
         announce "Create your messageboard (press enter for defaults)."
-        # sitename     = prompt_for_sitename     unless sitename
-        sitename     = "thredded"
+        sitetitle    = prompt_for_sitetitle    unless sitetitle
+        siteslug     = sitetitle.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
+        sitedesc     = "Just another internet messageboard"
         messageboard = prompt_for_messageboard unless messageboard
         security     = prompt_for_security     unless security
         permission   = prompt_for_permission   unless permission
       end
 
       #TODO: CREATE THE SITE OBJECT. Site doesn't exist yet.  Do it.
-      new_site = Site.create(:user => user)
+      new_site = Site.create(:user => user, :slug => siteslug, :title => sitetitle, :description => sitedesc)
 
       attributes = {
         :name               => messageboard,
@@ -138,14 +139,14 @@ module Thredded
         password
       end
       
-      def prompt_for_sitename
-        sitename = ask('Website name (thredded): ', String) do |q|
+      def prompt_for_sitetitle
+        sitetitle = ask('Website title (My Messageboard): ', String) do |q|
           q.validate = /^.{0,20}$/
           q.responses[:not_valid] = "Invalid site name. It must be less than 20 characters long."
           q.whitespace = :strip
         end
-        sitename = "thredded" if sitename.blank?
-        sitename
+        sitetitle = "My Messageboard" if sitetitle.blank?
+        sitetitle
       end
       
       def prompt_for_messageboard

@@ -9,12 +9,22 @@ class ApplicationController < ActionController::Base
   private
 
     def after_sign_in_path_for(resource_or_scope)
-      root_url(:subdomain => params[:site_id])
+      site_home
     end
 
     def after_sign_out_path_for(resource_or_scope)
-      root_url(:subdomain => params[:site_id])
+      site_home
     end
-  
-  
+
+    def site_home
+      @site ||= Site.find_by_slug(params[:site_id])
+
+      if @site.domain.nil?
+        root_url(:subdomain => params[:site_id])
+      else
+        port = request.port.present? and request.port.to_s != "80" ? ":#{request.port}" : ""
+        "http://#{@site.domain}#{port}"
+      end
+    end
+
 end

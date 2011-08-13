@@ -17,8 +17,8 @@ class Post  < ActiveRecord::Base
   
   attr_accessible :content, :user, :ip, :filter, :topic, :messageboard #, :images_attributes
 
-  before_create :set_user_email
-  after_save    :modify_parent_topic
+  before_save :set_user_email
+  after_save  :modify_parent_topic
 
   # misc
   # accepts_nested_attributes_for :images
@@ -43,7 +43,7 @@ class Post  < ActiveRecord::Base
     end
 
     def set_user_email
-      user_email = user.email if user
+      self.user_email = self.user.email if user
     end
     
 end

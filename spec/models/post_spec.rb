@@ -6,8 +6,13 @@ describe Post do
 
     before(:each) do
       @topic = Factory(:topic)
+      @messageboard = @topic.messageboard
       @post  = Factory.build(:post)
       @joel = Factory(:user, :name => "joel", :email => "joel@thredded.com")
+    end
+
+    after(:each) do
+      Timecop.return
     end
 
     it "updates the parent topic with the latest post author" do
@@ -18,21 +23,26 @@ describe Post do
     end
 
     it "increments the topic's and user's post counts" do
-      3.times do; @topic.posts.create!(:user => @joel, :content => "content"); end
+      3.times do; @topic.posts.create!(:user => @joel, :content => "content", :messageboard => @messageboard); end
       @topic.reload.posts_count.should == 3
       @joel.reload.posts_count.should  == 3
     end
     
     it "updates the topic updated_at field to that of the new post" do
-      @topic.posts.create(:user => @joel, :content => "posting here")
-      @topic.posts.create(:user => @joel, :content => "posting some more")
+#      @topic.posts.create(:user => @joel, :content => "posting here", :messageboard => @messageboard)
+#      @topic.posts.create(:user => @joel, :content => "posting some more", :messageboard => @messageboard)
+#      @last_post = @topic.posts.last
+#      @topic.updated_at.should == @last_post.created_at
+
+      @topic.posts.create(:user => @joel, :content => "posting here", :messageboard => @messageboard)
+      @topic.posts.create(:user => @joel, :content => "posting some more", :messageboard => @messageboard)
       last_post = @topic.posts.last
       @topic.updated_at.should be_within(2.seconds).of(last_post.created_at)
     end
     
     it "sets the post user's email on creation" do
-      @topic.posts.create(:content => "I should have a gravatar", :user => @joel)
-      @topic.posts.last.user_email.should == "joel@thredded.com"
+      @new_post = Factory(:post, :user => @joel, :content => "by joel", :messageboard => @messageboard)
+      @new_post.user_email.should == @new_post.user.email
     end
     
   end

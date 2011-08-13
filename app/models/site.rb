@@ -1,7 +1,7 @@
 class Site  < ActiveRecord::Base
   has_many :messageboards
   belongs_to  :user
-  validates_presence_of :slug, :permission
+  validates_presence_of :slug, :permission, :title, :description
   validates_uniqueness_of :slug
 
   def topics_count

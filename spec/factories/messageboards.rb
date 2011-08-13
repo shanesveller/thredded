@@ -6,5 +6,4 @@ Factory.define :messageboard do |f|
   f.theme               'default'
   f.security            'public'
   f.posting_permission  'anonymous'
-  f.thread_count         0
 end

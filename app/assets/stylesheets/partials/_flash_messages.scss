@@ -1,0 +1,15 @@
+#flash {
+  background-color: #EFF0F1;
+  border: {
+    bottom: 4px solid #888888;
+    right: 4px solid #888888;
+  }
+  margin-bottom: 1%;
+  overflow: hidden;
+  padding: 1% 2%;
+  width: 68%;
+
+  &.notice {
+    background-color: #DCF7DD;
+  }
+}
