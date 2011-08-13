@@ -22,7 +22,6 @@ class ApplicationController < ActionController::Base
       if @site.domain.nil?
         root_url(:subdomain => params[:site_id])
       else
-        debugger
         port = (request.port.present? && request.port.to_s != "80") ? ":#{request.port}" : ""
         "http://#{@site.domain}#{port}"
       end
