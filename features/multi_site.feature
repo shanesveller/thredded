@@ -34,11 +34,17 @@ Feature: Multiple websites for a single installation
       And I visit "www.forum.com"
      Then I should see messageboards "baz" and "carl"
 
+  # TODO: test login.  something is definitely wrong
   Scenario: Website is behind a login and I am signed in
-    Given the default "logged_in" website domain is "example.com"
-     When I visit "example.com"
-     Then I should not see the login form
-
+    Given the default "logged_in" website domain is "example.org"
+      And I am signed up and confirmed as "confirmed@person.com/password"
+     When I go to the sign in page
+      And I fill in "Email" with "confirmed@person.com"
+      And I fill in "Password" with "password"
+      And I press "Sign in"
+     Then I should see "Signed in successfully."
+      And I should not see the login form
+  
   Scenario: Website is behind a login and I am not signed in
     Given the default "logged_in" website domain is "example.com"
      When I visit "example.com"
