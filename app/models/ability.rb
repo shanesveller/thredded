@@ -17,6 +17,10 @@ class Ability
       can :manage, :all
     end
     
+    can :read, Site do |site|
+      user.valid? || site.permission == "public"
+    end
+
     can :read, Messageboard do |messageboard|
       (messageboard.restricted_to_private?    && user.member_of?(messageboard)) ||
       (messageboard.restricted_to_logged_in?  && user.valid?) ||
