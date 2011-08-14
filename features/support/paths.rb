@@ -28,11 +28,11 @@ module NavigationHelpers
       t = m.topics.latest.first
       messageboard_topic_path(m, t)
     when /the sign up page/i
-      new_user_registration_path
+      new_user_registration_path( THREDDED[:default_site] )
     when /the sign in page/i
-      new_user_session_path
+      new_user_session_path( THREDDED[:default_site] )
     when /the password reset request page/i
-      new_user_password_path
+      new_user_password_path( THREDDED[:default_site] )
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
