@@ -29,11 +29,6 @@ describe Post do
     end
     
     it "updates the topic updated_at field to that of the new post" do
-#      @topic.posts.create(:user => @joel, :content => "posting here", :messageboard => @messageboard)
-#      @topic.posts.create(:user => @joel, :content => "posting some more", :messageboard => @messageboard)
-#      @last_post = @topic.posts.last
-#      @topic.updated_at.should == @last_post.created_at
-
       @topic.posts.create(:user => @joel, :content => "posting here", :messageboard => @messageboard)
       @topic.posts.create(:user => @joel, :content => "posting some more", :messageboard => @messageboard)
       last_post = @topic.posts.last
