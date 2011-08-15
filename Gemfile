@@ -64,6 +64,7 @@ group :development do
   gem 'ruby-debug19'
   gem 'unicorn'
   gem 'faker'
+  gem 'active_reload'
 
   # convenience gems
   gem 'wirble'
