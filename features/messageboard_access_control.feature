@@ -23,7 +23,31 @@ Feature: Visiting a messageboard with various privileges
      When I go to the topic listing page
      Then I should see "You are not authorized to access this page."
 
-  Scenario: The messageboard is public and I am not a member
+  Scenario: The messageboard is for those that are logged in and I am anonymous
+    Given a "logged_in" messageboard exists named "thredded"
+      And I am an anonymous visitor of the messageboard
+      And I set the default messageboard home to "topics"
+      And I set the default messageboard to "thredded"
+     When I go to the homepage
+     Then I should see "This messageboard is public, but you must be logged in to see it."
+      And I should be signed out
+
+  Scenario: The messageboard is for those that are logged in and I am logged in
+    Given a "logged_in" messageboard exists named "thredded"
+      And I have signed in with "confirmed@person.com/password"
+      And I set the default messageboard home to "topics"
+      And I set the default messageboard to "thredded"
+     When I go to the homepage
+     Then I should see a list of threads
+      And I should be signed in
+
+  Scenario: The messageboard is public
+    Given a "public" messageboard exists named "thredded"
+     When I go to the homepage
+     Then I should see a list of threads
+      And I should be signed out
+
+  Scenario: The messageboard is public, I am signed in but I am not a member
     Given I am signed in as "Jeff" 
       And I go to a "public" messageboard
       And I am not a member of the messageboard
