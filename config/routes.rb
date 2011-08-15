@@ -21,8 +21,18 @@ Thredded::Application.routes.draw do
   match '/:site_id(.:format)'                            => 'messageboards#index',     :as => :site_messageboards
   match '/:site_id/:messageboard_id(.:format)'           => 'topics#index',            :as => :site_messageboard_topics
   match '/:site_id/:messageboard_id/:topic_id(.:format)' => 'posts#index',             :as => :site_messageboard_topic_posts
-  match '/:site_id/users/sign_in(.:format)'              => 'devise/sessions#new',     :as => :new_user_session
-  match '/:site_id/users/sign_out(.:format)'             => "devise/sessions#destroy", :as => :destroy_user_session
+
+  if "test" == Rails.env
+    match '/:site_id/users/sign_in(.:format)'     => 'devise/sessions#create',   :as => :user_session
+    match '/:site_id/users/sign_in(.:format)'     => 'devise/sessions#new',      :as => :new_user_session
+    match '/:site_id/users/sign_out(.:format)'    => 'devise/sessions#destroy',  :as => :destroy_user_session
+    match '/:site_id/users/sign_up(.:format)'     => 'devise/registrations#new', :as => :new_user_registration
+  else
+    match '/users/sign_in(.:format)'              => 'devise/sessions#create',   :as => :user_session
+    match '/users/sign_in(.:format)'              => 'devise/sessions#new',      :as => :new_user_session
+    match '/users/sign_out(.:format)'             => "devise/sessions#destroy",  :as => :destroy_user_session
+    match '/users/sign_up(.:format)'              => 'devise/registrations#new', :as => :new_user_registration
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

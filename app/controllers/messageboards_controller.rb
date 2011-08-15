@@ -17,7 +17,8 @@ class MessageboardsController < ApplicationController
   # ======================================
   
   def default_home
-    if %w{test development}.include?( Rails.env )
+    # if %w{test development}.include?( Rails.env )
+    if %w{test}.include?( Rails.env )
       site_messageboards_path(THREDDED[:default_site]) 
     else
       root_url(:host => THREDDED[:default_domain])
@@ -25,7 +26,8 @@ class MessageboardsController < ApplicationController
   end
 
   def login_url_for(site)
-    if %w{test development}.include?( Rails.env )
+    # if %w{test development}.include?( Rails.env )
+    if %w{test}.include?( Rails.env )
       new_user_session_path(site.slug)
     else
       if site.domain.nil?

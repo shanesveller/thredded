@@ -17,16 +17,16 @@ class ApplicationController < ActionController::Base
     end
 
     def site_home
-      if %w{test development}.include?( Rails.env )
+      # if %w{test development}.include?( Rails.env )
+      if %w{test}.include?( Rails.env )
         "/#{site.slug}"
-        # if site.domain.nil?
-        #   root_url(:subdomain => params[:site_id])
-        # else
-        #   port = (request.port.present? && request.port.to_s != "80") ? ":#{request.port}" : ""
-        #   "http://#{site.domain}#{port}"
-        # end
       else
-        root_url(:host => THREDDED[:default_domain])
+        if site.domain.nil?
+          root_url(:subdomain => params[:site_id])
+        else
+          port = (request.port.present? && request.port.to_s != "80") ? ":#{request.port}" : ""
+          "http://#{site.domain}#{port}"
+        end
       end
     end
 
