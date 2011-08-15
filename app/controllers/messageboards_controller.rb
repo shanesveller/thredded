@@ -5,8 +5,9 @@ class MessageboardsController < ApplicationController
   helper_method :site, :messageboard, :topic
   
   def index
+    redirect_to default_home        and return if params[:site_id].nil?      
+    redirect_to login_url_for(site) and return unless can? :read, site
     @messageboards = site.messageboards
-    # @messageboards = MessageboardDecorator.decorate(site.messageboards)
   end
 
   def show
@@ -15,6 +16,26 @@ class MessageboardsController < ApplicationController
 
   # ======================================
   
+  def default_home
+    if %w{test development}.include?( Rails.env )
+      site_messageboards_path(THREDDED[:default_site]) 
+    else
+      root_url(:host => THREDDED[:default_domain])
+    end
+  end
+
+  def login_url_for(site)
+    if %w{test development}.include?( Rails.env )
+      new_user_session_path(site.slug)
+    else
+      if site.domain.nil?
+        new_user_session_url(:host => "#{site.slug}.#{THREDDED[:default_domain]}") 
+      else
+        new_user_session_url(:host => THREDDED[:default_domain]) 
+      end 
+    end
+  end
+
   def messageboard
     @messageboard ||= Messageboard.where(:name => params[:messageboard_id]).first
   end

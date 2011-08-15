@@ -17,14 +17,21 @@ class ApplicationController < ActionController::Base
     end
 
     def site_home
-      @site ||= Site.find_by_slug(params[:site_id])
-
-      if @site.domain.nil?
-        root_url(:subdomain => params[:site_id])
+      if %w{test development}.include?( Rails.env )
+        "/#{site.slug}"
+        # if site.domain.nil?
+        #   root_url(:subdomain => params[:site_id])
+        # else
+        #   port = (request.port.present? && request.port.to_s != "80") ? ":#{request.port}" : ""
+        #   "http://#{site.domain}#{port}"
+        # end
       else
-        port = (request.port.present? && request.port.to_s != "80") ? ":#{request.port}" : ""
-        "http://#{@site.domain}#{port}"
+        root_url(:host => THREDDED[:default_domain])
       end
+    end
+
+    def site
+      @site ||= Site.find_by_slug(params[:site_id])
     end
 
 end
