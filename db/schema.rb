@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110814141030) do
+ActiveRecord::Schema.define(:version => 20110815183958) do
 
   create_table "images", :force => true do |t|
     t.integer  "width"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(:version => 20110814141030) do
     t.datetime "updated_at"
     t.integer  "topics_count",       :default => 0
     t.integer  "posts_count",        :default => 0
+    t.string   "title"
   end
 
   add_index "messageboards", ["name", "site_id"], :name => "index_messageboards_on_name_and_site_id", :unique => true

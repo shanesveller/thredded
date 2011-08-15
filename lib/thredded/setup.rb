@@ -25,7 +25,7 @@ module Thredded
         2.times do |i|
           site = Site.create(:slug => "site#{i}", :user => user, :title => "Site Number #{i}", :description => "Just another internet messageboard")
           3.times do |j|
-            messageboard = Messageboard.create(:name => "messageboard_#{j}", :site => site)
+            messageboard = Messageboard.create(:name => "messageboard_#{j}", :title => "Messageboard #{j}", :site => site)
             50.times do
               topic = Topic.create(:user => user, :messageboard => messageboard, :title => Faker::Lorem.words(5).join(' '))
               10.times do
@@ -78,18 +78,20 @@ module Thredded
     def create_site_and_messageboard(user, sitetitle, messageboard, security, permission)
       unless sitetitle and messageboard and security
         announce "Create your messageboard (press enter for defaults)."
-        sitetitle    = prompt_for_sitetitle    unless sitetitle
-        siteslug     = sitetitle.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
-        sitedesc     = "Just another internet messageboard"
-        messageboard = prompt_for_messageboard unless messageboard
-        security     = prompt_for_security     unless security
-        permission   = prompt_for_permission   unless permission
+        sitetitle          = prompt_for_sitetitle    unless sitetitle
+        siteslug           = sitetitle.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
+        sitedesc           = "Just another internet messageboard"
+        messageboard_title = prompt_for_messageboard unless messageboard
+        messageboard       = messageboard_title.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
+        security           = prompt_for_security     unless security
+        permission         = prompt_for_permission   unless permission
       end
 
       #TODO: CREATE THE SITE OBJECT. Site doesn't exist yet.  Do it.
       new_site = Site.create(:user => user, :slug => siteslug, :title => sitetitle, :description => sitedesc)
 
       attributes = {
+        :title              => messageboard_title,
         :name               => messageboard,
         :description        => "Another internet messageboard named #{messageboard}",
         :theme              => "default",
@@ -150,12 +152,12 @@ module Thredded
       end
       
       def prompt_for_messageboard
-        messageboard = ask('Messageboard name (default): ', String) do |q|
+        messageboard = ask('Messageboard name (ex: Misc Topics): ', String) do |q|
           q.validate = /^.{0,20}$/
           q.responses[:not_valid] = "Invalid messageboard name. It must be less than 20 characters long."
           q.whitespace = :strip
         end
-        messageboard = "default" if messageboard.blank?
+        messageboard = "Misc Topics" if messageboard.blank?
         messageboard
       end
       

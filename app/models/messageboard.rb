@@ -6,7 +6,7 @@ class Messageboard < ActiveRecord::Base
   validates_numericality_of :topics_count
   validates_inclusion_of  :security, :in => SECURED_WITH
   validates_inclusion_of  :posting_permission, :in => POSTS_ALLOWED_BY
-  validates_presence_of   :name
+  validates_presence_of   :name, :title
   validates_format_of     :name, :with => /^[\w\-]+$/, :on => :create, :message => "should be letters, nums, dash, underscore only."
   validates_uniqueness_of :name, :message => "must be a unique board name. Try again.", :scope => :site_id
   validates_length_of     :name, :within => 1..16, :message => "should be between 1 and 16 characters" 

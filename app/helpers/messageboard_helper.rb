@@ -11,9 +11,9 @@ module MessageboardHelper
   def link_or_text_to(messageboard)
     @link_or_text = ""
     if can? :read, messageboard 
-      @link_or_text = link_to messageboard.name, site_messageboards_path(messageboard)
+      @link_or_text = link_to messageboard.title, site_messageboards_path(messageboard)
     else
-      @link_or_text = messageboard.name
+      @link_or_text = messageboard.title
     end
     @link_or_text
   end
