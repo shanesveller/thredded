@@ -1,33 +1,38 @@
 <% content_for :page_id do %>topics_listing<% end %>
-<% content_for :page_title do %><%= THREDDED[:site_name] %> | Recent Topics<% end %>
+<% content_for :page_title do %><%= THREDDED[:site_name] %> | <%= messageboard.title %> | Recent Topics<% end %>
+<% content_for :header_nav do %>
+    <nav>
+      <ul>
+        <li class="new_topic"><a href="/messageboards/default/topics/new">Create a New Thread</a></li>
+      </ul>
+    </nav>
+<% end %>
 
-<%= render :partial => "shared/header" %>
-
-<section id="content">
-
-  <%= paginate @topics %>
-
-	<header>
-    <h1>Topics</h1>
-		<div class="title">Topic Title</div>
-	  <div class="started">Started</div>
-	  <div class="updated">Updated</div>
-	  <div class="posts">Posts</div>
-  </header>
-
-  <% @topics.each do |t| -%>
-		<% if can? :read, t -%>
-			<article>
-        <h1><%= link_to t.title, messageboard_topic_path(messageboard, t) %></h1>
-        <cite class="started_by"><%= link_to t.user, user_path(t.user) %></cite>
-        <abbr class="started_at timeago" title="<%= t.created_at.strftime("%Y-%m-%dT%I:%M:%S-0500") %>"><%= t.created_at.strftime("%B %d, %Y") %></abbr>
-        <cite class="updated_by"><%= link_to t.last_user, user_path(t.last_user)  %></cite> 
-        <abbr class="updated_at timeago" title="<%= t.updated_at.strftime("%Y-%m-%dT%I:%M:%S-0500") %>"><%= t.updated_at.strftime("%B %d, %Y") %></abbr>
-        <div  class="post_count"><%= t.post_count %></div>
-			</article>
-		<% end -%>
-	<% end -%>
-
-  <%= paginate @topics %>
-
-</section>
+<header>
+  <nav>
+    <ul>
+      <li><a href="/">Forums</a> &rarr; </li>
+    </ul>
+  </nav>
+  <h1><%= messageboard.title %></h1>
+  <h2>Recent Updates</h2>
+  <div class="title">Topic Title</div>
+  <div class="started">Started</div>
+  <div class="updated">Updated</div>
+  <div class="posts">Posts</div>
+</header>
+<% @topics.each do |t| -%>
+  <% if can? :read, t -%>
+    <article>
+      <h1><%= link_to t.title, site_messageboard_topics_path(site, messageboard, t) %></h1>
+      <cite class="started_by"><%= link_to t.user_name, link_for_user(site, t.user) %></cite>
+      <abbr class="started_at timeago" title="<%= t.created_at.strftime("%Y-%m-%dT%I:%M:%S-0500") %>"><%= t.created_at.strftime("%B %d, %Y") %></abbr>
+      <cite class="updated_by"><%= link_to t.last_user.name, link_for_user(site, t.last_user) %></cite> 
+      <abbr class="updated_at timeago" title="<%= t.updated_at.strftime("%Y-%m-%dT%I:%M:%S-0500") %>"><%= t.updated_at.strftime("%B %d, %Y") %></abbr>
+      <div  class="post_count"><%= t.posts_count %></div>
+        </article>
+      <% end -%>
+    <% end -%>
+    <footer>
+      <a href="/messageboards/default/topics/new">Create a New Topic</a>
+    </footer>
