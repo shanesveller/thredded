@@ -10,11 +10,15 @@ Given /^I visit "([^"]*)"$/ do |domain|
   visit site_messageboards_path(@site.slug)
 end
 
-Given /^the default website has two messageboards named "([^"]*)" and "([^"]*)"$/ do |messageboard1, messageboard2|
+Given /^the default website has a messageboard named "([^"]*)"$/ do |messageboard|
   @site = Site.find_by_domain(THREDDED[:default_domain])
-  @site.messageboards << Factory(:messageboard, :name => messageboard1)
-  @site.messageboards << Factory(:messageboard, :name => messageboard2)
+  @site.messageboards << Factory(:messageboard, :name => messageboard)
   @site.save
+end
+
+Given /^the default website has two messageboards named "([^"]*)" and "([^"]*)"$/ do |messageboard1, messageboard2|
+  Then %{the default website has a messageboard named "#{messageboard1}"}
+  And %{the default website has a messageboard named "#{messageboard2}"}
 end
 
 Then /^I should see the messageboard called "([^"]*)"$/ do |messageboard|

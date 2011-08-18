@@ -4,9 +4,9 @@ Given /^I am logged in and visiting a "(.*)" messageboard$/ do |security|
   And %{I sign in as "user@domain.com/omglol"}
 end
 
-Given /^I am a member of the messageboard$/ do
-  user = User.first
-  user.member_of(Messageboard.first)
+Given /^I am a member of "(.*)"$/ do |name|
+  user = User.last
+  user.member_of Messageboard.find_by_name(name)
   user.reload
 end
 

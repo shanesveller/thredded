@@ -4,16 +4,18 @@ Feature: Visiting a messageboard with various privileges
   Should see the messageboard homepage or be notified of what the problem is
 
   Scenario: The messageboard is private and "Jimmy" is a member
-    Given I am signed in as "Jimmy"
+    Given the default "public" website domain is "example.com"
+      And the default website has a messageboard named "lol"
+      And I am signed in as "Jimmy"
+      And I am a member of "lol"
       And I go to a "private" messageboard
-      And I am a member of the messageboard
      When I go to the topic listing page
      Then I should see a list of threads
 
   Scenario: The messageboard is private and "Jon" is not a member
     Given I am signed in as "Jon" 
+      And I am not a member of "lol"
       And I go to a "private" messageboard
-      And I am not a member of the messageboard
      When I go to the topic listing page
      Then I should see "You are not authorized to access this page."
 
