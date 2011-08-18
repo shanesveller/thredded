@@ -1,3 +1,4 @@
+@default_site
 Feature: Visiting a messageboard with various privileges 
   In order to allow, or deny, users' access to a messageboard
   A user
