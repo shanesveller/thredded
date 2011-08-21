@@ -12,7 +12,7 @@ end
 
 Given /^the default website has a messageboard named "([^"]*)"$/ do |messageboard|
   @site = Site.find_by_domain(THREDDED[:default_domain])
-  @site.messageboards << Factory(:messageboard, :name => messageboard)
+  @site.messageboards << Factory(:messageboard, :name => messageboard, :title => messageboard)
   @site.save
 end
 
@@ -38,8 +38,8 @@ end
 Given /^"([^"]*)" has two messageboards named "([^"]*)" and "([^"]*)"$/ do |subdomain, messageboard1, messageboard2|
   slug = subdomain.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
   @site = Site.exists?(:domain => subdomain) ? Site.find_by_domain( subdomain ) : Site.find_by_slug( slug )
-  @site.messageboards << Factory(:messageboard, :name => messageboard1)
-  @site.messageboards << Factory(:messageboard, :name => messageboard2)
+  @site.messageboards << Factory(:messageboard, :name => messageboard1, :title => messageboard1)
+  @site.messageboards << Factory(:messageboard, :name => messageboard2, :title => messageboard2)
   @site.save
 end
 
