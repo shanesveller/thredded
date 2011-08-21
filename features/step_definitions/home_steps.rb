@@ -21,3 +21,9 @@ Given /^a "([a-z\_]*)" messageboard exists named "([^"]*)"$/ do |security_type, 
     :name                  => board_name,
     :security              => security_type.to_sym
 end
+
+Given /^"([^"]*)" is "([^"]*)"$/ do |messageboard_name, security|
+  messageboard = Messageboard.find_by_name(messageboard_name)
+  messageboard.security = security and messageboard.save if messageboard
+end
+
