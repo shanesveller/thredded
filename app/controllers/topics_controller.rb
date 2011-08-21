@@ -3,12 +3,11 @@ class TopicsController < ApplicationController
   before_filter :pad_params,  :only => [:create, :update]
   before_filter :pad_post,    :only => :create
   before_filter :pad_topic,   :only => :create
-  helper_method :messageboard, :topic
+  helper_method :site, :messageboard, :topic
 
   def index
-    # TODO: CHECK ABILITY ON MESSAGEBOARD - NOT TOPICS
+    authorize! :index, messageboard, :message => "You are not authorized access to this messageboard."
     # flash[:error] = "You are not authorized to access this page." and redirect_to root_path unless can? :read, messageboard
-    authorize! :index, messageboard
     @topics = messageboard.topics #.latest.page params[:page]
   end
 
@@ -49,6 +48,10 @@ class TopicsController < ApplicationController
 
   def topic
     @topic ||= Topic.find_by_slug(params[:id])
+  end
+
+  def site 
+    @site ||= Site.find_by_slug(params[:site_id])
   end
 
   def current_user_name 
