@@ -10,11 +10,12 @@ Given /^I am a member of "(.*)"$/ do |name|
   user.reload
 end
 
-Given /^I am not a member of the messageboard$/ do
+Given /^I am not a member of "(.*)"$/ do |name|
   user = User.last
   user.roles.delete_all
+  user.reload
 end
 
-Given /^I am an anonymous visitor of the messageboard$/ do
+Given /^I am an anonymous visitor$/ do
   user = User.new
 end
