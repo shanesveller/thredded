@@ -1,30 +1,37 @@
-<p>
+<p class="title">
   <%= f.label :title %>
   <%= f.text_field :title %>
 </p>
-<p>
-  <%= f.label :usernames %>
-  <%= f.text_field :usernames %>
-</p>
-<% if current_user && current_user.admins?(messageboard) -%>
-  <p>
-   <%= f.label :locked %>
-   <%= f.check_box :locked %>
-  </p>
-  <p>
-    <%= f.label :sticky -%>
-    <%= f.check_box :sticky -%>
-  <p>
-<% end -%>
+<div id="drawer">
+  <div id="attributes">
+    <p class="private_users">
+      <%= f.label :usernames %>
+      <%= f.text_field :usernames %>
+    </p>
+    <% if current_user && current_user.admins?(messageboard) -%>
+      <p class="locked">
+        <%= f.label :locked %>
+        <%= f.check_box :locked %>
+      </p>
+      <p class="sticky">
+        <%= f.label :sticky -%>
+        <%= f.check_box :sticky -%>
+      </p>
+    <% end -%>
+  </div>
+  <div class="handle"><a href="#attributes">More</a></div>
+</div>
+
 <%= f.fields_for :posts do |post_form| %>
   <%= post_form.label :filter %>
   <%= post_form.select :filter, Post.filters %>
-  <%= post_form.label :content %>
-  <%= post_form.text_area :content, :rows => 5 %>
-
+  <p class="content">
+    <%= post_form.label :content %>
+    <%= post_form.text_area :content, :rows => 5 %>
+  </p>
   <%= post_form.fields_for :images do |image_form| %>
     <%= image_form.file_field :image %>
   <% end %>
-
 <% end %>
-</p>
+
+

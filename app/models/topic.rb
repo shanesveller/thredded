@@ -38,8 +38,9 @@ class Topic < ActiveRecord::Base
     }
   end
 
+  # TODO: get usernames working
   def usernames 
-    users.collect{ |u| u.name }.join(', ')
+    '' # self.users.collect{ |u| u.name }.join(', ')
   end
 
   def usernames=(usernames)

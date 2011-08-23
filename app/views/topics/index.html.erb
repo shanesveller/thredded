@@ -3,7 +3,7 @@
 <% content_for :header_nav do %>
     <nav>
       <ul>
-        <li class="new_topic"><a href="/messageboards/default/topics/new">Create a New Thread</a></li>
+        <li class="new_topic"><%= link_to "Create a New Topic", link_for_new_topic(site, messageboard) %></li>
       </ul>
     </nav>
 <% end %>
@@ -34,5 +34,5 @@
       <% end -%>
     <% end -%>
     <footer>
-      <a href="/messageboards/default/topics/new">Create a New Topic</a>
+      <%= link_to "Create a New Topic", link_for_new_topic(site, messageboard) %>
     </footer>
