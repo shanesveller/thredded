@@ -5,6 +5,9 @@ class Post  < ActiveRecord::Base
   require "gravtastic"
   include Gravtastic
   gravtastic :user_email
+
+  include BbcodeFilter
+  include TextileFilter
   
   # field :notified, :type => Array, :default => []
 

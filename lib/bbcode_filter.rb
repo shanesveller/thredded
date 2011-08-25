@@ -7,18 +7,14 @@ module BbcodeFilter
       base.extend ClassMethods
     end
     
-    # module ClassMethods
-    #   def hello
-    #     "hi"
-    #   end
-    # end
-
-    def BbcodeFilter.render_content(content)
-      content.bbcode_to_html.html_safe
+    module ClassMethods
+      def render_content(content)
+        content.bbcode_to_html.html_safe
+      end
     end
 
-    # def render_content
-    #   content.bbcode_to_html.html_safe
-    # end
+    def render_content
+      content.bbcode_to_html.html_safe
+    end
 
 end

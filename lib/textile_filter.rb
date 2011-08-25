@@ -4,8 +4,14 @@ module TextileFilter
       base.class_eval { Post::Filters << :textile }
       base.extend ClassMethods
     end
-    
-    def TextileFilter.render_content(content)
+
+    module ClassMethods
+      def render_content(content)
+        RedCloth.new(content).to_html.html_safe
+      end
+    end
+
+    def render_content(content)
       RedCloth.new(content).to_html.html_safe
     end
 
