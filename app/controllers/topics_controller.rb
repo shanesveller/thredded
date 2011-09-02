@@ -26,7 +26,6 @@ class TopicsController < ApplicationController
     # @topic.posts.create(params[:topic][:posts_attributes]["0"])
     # @topic.messageboard = messageboard
     # @topic.users << current_user if @topic.users.size > 0 && !@topic.users.include?(current_user) 
-    debugger
     redirect_to link_for_messageboard(site, messageboard)
   end
 
