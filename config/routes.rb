@@ -18,13 +18,15 @@ Thredded::Application.routes.draw do
     get  "/:site_id/users/sign_up(.:format)"  => "devise/registrations#new",  :as => :new_user_registration
   end
 
-  match "/:site_id(.:format)"                               => 'messageboards#index',      :as => :site_messageboards
-  match "/:site_id/:messageboard_id(.:format)"              => 'topics#index',             :as => :site_messageboard_topics
-  match "/:site_id/:messageboard_id/:topic_id(.:format)"    => 'posts#index',              :as => :site_messageboard_topic_posts
   match "/:site_id/users(.:format)"                         => 'users#index',              :as => :site_users
   match "/:site_id/users/new(.:format)"                     => 'users#new',                :as => :new_site_user
   match "/:site_id/users/:id/edit(.:format)"                => 'users#index',              :as => :edit_site_user
-  match "/:site_id/:messageboard_id/topics/new(.:format)" => 'topics#new',               :as => :new_site_messageboard_topic
+
+  match "/:site_id(.:format)"                               => 'messageboards#index',      :as => :site_messageboards
+  match "/:site_id/:messageboard_id(.:format)"              => 'topics#index',             :as => :site_messageboard_topics
+  match "/:site_id/:messageboard_id/topics(.:format)"       => 'topics#create',            :as => :create_site_messageboard_topic
+  match "/:site_id/:messageboard_id/topics/new(.:format)"   => 'topics#new',               :as => :new_site_messageboard_topic
+  match "/:site_id/:messageboard_id/:topic_id(.:format)"    => 'posts#index',              :as => :site_messageboard_topic_posts
 
   if "test" == Rails.env
     match "/:site_id/users/sign_in(.:format)"               => 'devise/sessions#create',   :as => :user_session
