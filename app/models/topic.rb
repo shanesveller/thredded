@@ -44,13 +44,13 @@ class Topic < ActiveRecord::Base
   end
 
   def usernames=(usernames)
-    user_ids.clear if usernames.empty?
+    # user_ids.clear if usernames.empty?
 
-    usernames.split(',').each do |name|
-      user = User.where(:name => name.strip).first
-      users << user if user && user.present?
-    end
-    users
+    # usernames.split(',').each do |name|
+    #   user = User.where(:name => name.strip).first
+    #   users << user if user && user.present?
+    # end
+    # users
   end
 
 

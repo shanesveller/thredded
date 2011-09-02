@@ -16,7 +16,7 @@ class Post  < ActiveRecord::Base
   belongs_to :user,   :counter_cache => true
   has_many   :images
 
-  validates_presence_of :content, :topic_id, :messageboard_id
+  validates_presence_of :content, :messageboard_id
   
   attr_accessible :content, :user, :ip, :filter, :topic, :messageboard #, :images_attributes
 

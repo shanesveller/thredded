@@ -18,17 +18,16 @@ class TopicsController < ApplicationController
 
   def new
     @topic = messageboard.topics.build
-    @topic.posts.build.images.build
-
+    @topic.posts.build # .images.build
   end
 
   def create
-    @topic = Topic.new(params[:topic])
-    @topic.posts.create(params[:topic][:posts_attributes]["0"])
-    @topic.messageboard = messageboard
-    @topic.users << current_user if @topic.users.size > 0 && !@topic.users.include?(current_user) 
-    @topic.save!
-    redirect_to messageboard_topics_path(messageboard)
+    @topic = Topic.create(params[:topic])
+    # @topic.posts.create(params[:topic][:posts_attributes]["0"])
+    # @topic.messageboard = messageboard
+    # @topic.users << current_user if @topic.users.size > 0 && !@topic.users.include?(current_user) 
+    debugger
+    redirect_to link_for_messageboard(site, messageboard)
   end
 
   def edit
@@ -42,6 +41,16 @@ class TopicsController < ApplicationController
 
   # ======================================
  
+  # TODO : this feels wrong.  this should get pulled out.
+  def link_for_messageboard(site, messageboard)
+    if %w{test}.include?( Rails.env )
+      path = site_messageboards_path(site.slug, messageboard.name)
+    else
+      path = site_messageboards_path(messageboard.name)
+    end
+    path
+  end
+
   def messageboard
     @messageboard ||= Messageboard.where(:name => params[:messageboard_id]).first
   end
@@ -63,18 +72,19 @@ class TopicsController < ApplicationController
   private
   
     def pad_params
-      params[:topic][:user] = current_user_name
-      params[:topic][:last_user] = current_user_name
+      params[:topic][:user] = current_user
+      params[:topic][:last_user] = current_user
     end
 
     def pad_topic
-      params[:topic][:last_user] = current_user_name
-      params[:topic][:post_count] = 1
+      params[:topic][:last_user] = current_user
+      params[:topic][:messageboard] = messageboard
     end
 
     def pad_post
+      params[:topic][:posts_attributes]["0"][:messageboard] = messageboard
       params[:topic][:posts_attributes]["0"][:ip] = request.remote_ip
-      params[:topic][:posts_attributes]["0"][:user] = current_user_name
+      params[:topic][:posts_attributes]["0"][:user] = current_user
     end
 
 end

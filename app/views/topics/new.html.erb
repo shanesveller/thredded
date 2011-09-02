@@ -1,8 +1,9 @@
 <% content_for :page_id do %>topics_new<% end %>
 <% content_for :page_title do %><%= site.title %> | <%= messageboard.title %> | Start a New Thread<% end %>
 
-
-<%= form_for([site, messageboard, @topic], :html => { :multipart => true }) do |f| %>
+<%= form_for([site, messageboard, @topic], 
+             :url => link_for_create_topic(site, messageboard, @topic),
+             :html => { :multipart => true }) do |f| %>
   <%= render :partial => 'form', :locals => { :f => f } %>
   <p class="submit">
     <input id="topic_submit" name="commit" type="submit" value="Create New Topic" />
