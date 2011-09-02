@@ -19,7 +19,7 @@ class Topic < ActiveRecord::Base
   attr_accessible :title, :user, :last_user, :user_ids, :sticky, :locked, :usernames, :posts_attributes, :messageboard
   
   # scopes
-  scope :latest, desc(:updated_at)
+  default_scope :order => 'updated_at DESC'
   
   # misc
   accepts_nested_attributes_for :posts
