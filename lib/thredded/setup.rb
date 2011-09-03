@@ -26,6 +26,11 @@ module Thredded
           site = Site.create(:slug => "site#{i}", :user => user, :title => "Site Number #{i}", :description => "Just another internet messageboard")
           3.times do |j|
             messageboard = Messageboard.create(:name => "messageboard_#{j}", :title => "Messageboard #{j}", :site => site)
+            user.member_of(messageboard)
+            3.times do |u|
+              other_user = User.create(:email => "user#{u*j}@email.com", :name => Faker::Name.first_name, :password => 'password')
+              other_user.member_of(messageboard)
+            end
             50.times do
               topic = Topic.create(:user => user, :messageboard => messageboard, :title => Faker::Lorem.words(5).join(' '))
               10.times do
