@@ -2,12 +2,17 @@
   <%= f.label :title %>
   <%= f.text_field :title %>
 </p>
+
+<% if params[:type] == "private" -%>
+  <%= f.hidden_field :type %>
+  <p class="private_users">
+    <%= f.label :user_id, "private users" %>
+    <%= f.select(:user_id, messageboard.users.collect{|u| [u.name, u.id]}, {}, { :multiple => true }) %>
+  </p>
+<% end -%>
+
 <div id="drawer">
   <div id="attributes">
-    <p class="private_users">
-      <%= f.label :usernames %>
-      <%= f.text_field :usernames %>
-    </p>
     <% if current_user && current_user.admins?(messageboard) -%>
       <p class="locked">
         <%= f.label :locked %>
