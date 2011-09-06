@@ -2,6 +2,7 @@ class Role < ActiveRecord::Base
   # field :level, :type => Symbol
 
   belongs_to :messageboard
+  belongs_to :user
   # TODO : Figure out what's wrong with this HABTM relationship
   # has_and_belongs_to_many :users
 
