@@ -25,7 +25,7 @@ Thredded::Application.routes.draw do
   match "/:site_id(.:format)"                               => 'messageboards#index',      :as => :site_messageboards
   match "/:site_id/:messageboard_id(.:format)"              => 'topics#index',             :as => :site_messageboard_topics
   match "/:site_id/:messageboard_id/topics(.:format)"       => 'topics#create',            :as => :create_site_messageboard_topic
-  match "/:site_id/:messageboard_id/topics/new(.:format)"   => 'topics#new',               :as => :new_site_messageboard_topic
+  match "/:site_id/:messageboard_id/topics/new(.:format)/(:type)" => 'topics#new',         :as => :new_site_messageboard_topic
   match "/:site_id/:messageboard_id/:topic_id(.:format)"    => 'posts#index',              :as => :site_messageboard_topic_posts
 
   if "test" == Rails.env
