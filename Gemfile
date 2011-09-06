@@ -7,8 +7,8 @@ gem 'pg'
 
 gem 'rack'
 gem 'rake'                        , '0.8.7'
-gem 'rails'                       , '3.1.0.rc5'
-gem 'devise'                      , '1.3.0'
+gem 'rails'                       , '3.1.0'
+gem 'devise'                      , '1.4.4'
 gem 'cancan'                      , '1.6.4'
 gem 'mini_magick'                 , '3.2.1'
 gem 'carrierwave'                 , '0.5.3'
@@ -30,14 +30,10 @@ gem 'multi_json'
 # in production environments by default.
 group :assets do
   gem 'jquery-rails'
-  gem 'sass-rails', "~> 3.1.0.rc"
-  gem 'coffee-rails', "~> 3.1.0.rc"
+  gem 'sass-rails', "3.1.0"
   gem 'uglifier'
   gem 'compass', :git => 'git://github.com/chriseppstein/compass.git', :branch => 'rails31'
 end
-
-# Deploy with Capistrano
-gem 'capistrano'
 
 # Test specific gems
 group :test do
