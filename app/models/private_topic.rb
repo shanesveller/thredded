@@ -1,16 +1,12 @@
 class PrivateTopic < Topic
   has_many :private_users
   has_many :users, :through => :private_users
+  attr_accessible :user_id
 
-
-  def add_user(name_or_obj)
-    if name_or_obj.class == String
-      @user = User.where(:name => name_or_obj).first
-    elsif name_or_obj.class == User
-      @user = name_or_obj
+  def user_id=(ids)
+    if ids.size > 0
+      self.users = User.where(:id => ids.uniq)
     end
-
-    users << @user
   end
 
 end

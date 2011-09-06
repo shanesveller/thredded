@@ -12,6 +12,10 @@ class Site  < ActiveRecord::Base
     messageboards.inject(0){|sum, item| sum + item.posts_count}
   end
 
+  def to_param
+    slug
+  end
+
   class << self
     def default_slug
       return THREDDED[:default_site] if Site.exists?(:slug => THREDDED[:default_site])

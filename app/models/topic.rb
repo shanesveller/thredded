@@ -16,7 +16,7 @@ class Topic < ActiveRecord::Base
   validates_numericality_of :posts_count
 
   # lock it down
-  attr_accessible :title, :user, :last_user, :user_ids, :sticky, :locked, :usernames, :posts_attributes, :messageboard
+  attr_accessible :type, :title, :user, :last_user, :sticky, :locked, :usernames, :posts_attributes, :messageboard
   
   # scopes
   default_scope :order => 'updated_at DESC'
@@ -37,23 +37,7 @@ class Topic < ActiveRecord::Base
       end
     }
   end
-
-  # TODO: get usernames working
-  def usernames 
-    '' # self.users.collect{ |u| u.name }.join(', ')
-  end
-
-  def usernames=(usernames)
-    # user_ids.clear if usernames.empty?
-
-    # usernames.split(',').each do |name|
-    #   user = User.where(:name => name.strip).first
-    #   users << user if user && user.present?
-    # end
-    # users
-  end
-
-
+  
   # TODO: Remove permission column from Topics table
   def public? 
     self.class.to_s == "Topic"

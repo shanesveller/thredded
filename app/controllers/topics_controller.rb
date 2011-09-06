@@ -7,8 +7,7 @@ class TopicsController < ApplicationController
 
   def index
     authorize! :index, messageboard, :message => "You are not authorized access to this messageboard."
-    # flash[:error] = "You are not authorized to access this page." and redirect_to root_path unless can? :read, messageboard
-    @topics = messageboard.topics #.latest.page params[:page]
+    @topics = messageboard.topics
   end
 
   def show
@@ -18,14 +17,12 @@ class TopicsController < ApplicationController
 
   def new
     @topic = messageboard.topics.build
-    @topic.posts.build # .images.build
+    @topic.type = "PrivateTopic" if params[:type] == "private"
+    @topic.posts.build
   end
 
   def create
-    @topic = Topic.create(params[:topic])
-    # @topic.posts.create(params[:topic][:posts_attributes]["0"])
-    # @topic.messageboard = messageboard
-    # @topic.users << current_user if @topic.users.size > 0 && !@topic.users.include?(current_user) 
+    @topic = klass.create(params[:topic])
     redirect_to link_for_messageboard(site, messageboard)
   end
 
@@ -40,18 +37,20 @@ class TopicsController < ApplicationController
 
   # ======================================
  
-  # TODO : this feels wrong.  this should get pulled out.
+  # TODO : this feels wrong, really wrong.  this should get pulled out.
   def link_for_messageboard(site, messageboard)
     if %w{test}.include?( Rails.env )
       path = site_messageboards_path(site.slug, messageboard.name)
     else
+      port = request.port == 3000 ? ":3000" : ""
       path = site_messageboards_path(messageboard.name)
+      path = "http://#{site.slug}.#{request.host}#{port}#{path}"
     end
     path
   end
 
   def messageboard
-    @messageboard ||= Messageboard.where(:name => params[:messageboard_id]).first
+    @messageboard ||= Messageboard.where(:name => params[:messageboard_id]).where(:site_id => site.id).first
   end
 
   def topic
@@ -69,13 +68,18 @@ class TopicsController < ApplicationController
   # ======================================
 
   private
-  
+    
+    def klass
+      @klass ||= params[:topic][:type].present? ? params[:topic][:type].constantize : Topic
+    end
+
     def pad_params
       params[:topic][:user] = current_user
       params[:topic][:last_user] = current_user
     end
 
     def pad_topic
+      params[:topic][:user_id] << current_user.id.to_s if current_user and params[:topic][:user_id].present?
       params[:topic][:last_user] = current_user
       params[:topic][:messageboard] = messageboard
     end
