@@ -14,9 +14,8 @@ class Messageboard < ActiveRecord::Base
   belongs_to :site
   has_many :topics
   has_many :posts
-  # TODO : Figure out what's wrong with this HABTM relationship
-  # has_and_belongs_to_many :users #, :inverse_of => :messageboards
   has_many :roles
+  has_many :users, :through => :roles
   
   def restricted_to_private?
     security == 'private'
