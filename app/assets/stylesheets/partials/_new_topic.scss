@@ -12,6 +12,17 @@
     color: #333;
   }
 
+  p.private_users {
+    margin-top: 15px;
+
+    #topic_user_id {
+      width: 100%;
+    }
+    .chzn-container-multi .chzn-choices {
+      @include border-radius(3px); 
+    }
+  }
+
   p.title input { 
     border: solid 1px #999;
     color: #333;
@@ -30,6 +41,11 @@
     line-height: 18px;
     padding: 5px 6px 3px;
     @include background-image(linear-gradient(#ffffff, #bfbfbf));
+  }
+
+  #topic_posts_attributes_0_filter {
+    float: right;
+    margin: 20px 4px 0;
   }
   
   #drawer {

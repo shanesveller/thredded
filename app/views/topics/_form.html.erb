@@ -6,30 +6,27 @@
 <% if params[:type] == "private" -%>
   <%= f.hidden_field :type %>
   <p class="private_users">
-    <%= f.label :user_id, "private users" %>
-    <%= f.select(:user_id, messageboard.users.collect{|u| [u.name, u.id]}, {}, { :multiple => true }) %>
+    <%= f.select(:user_id, messageboard.users.collect{|u| [u.name, u.id]}, {}, { :multiple => true, 'data-placeholder' => 'select users to participate in this topic' }) %>
   </p>
 <% end -%>
 
+<% if current_user && current_user.admins?(messageboard) -%>
 <div id="drawer">
   <div id="attributes">
-    <% if current_user && current_user.admins?(messageboard) -%>
-      <p class="locked">
-        <%= f.label :locked %>
-        <%= f.check_box :locked %>
-      </p>
-      <p class="sticky">
-        <%= f.label :sticky -%>
-        <%= f.check_box :sticky -%>
-      </p>
-    <% end -%>
+    <p class="locked">
+      <%= f.label :locked %>
+      <%= f.check_box :locked %>
+    </p>
+    <p class="sticky">
+      <%= f.label :sticky -%>
+      <%= f.check_box :sticky -%>
+    </p>
   </div>
   <div class="handle"><a href="#attributes">More</a></div>
 </div>
+<% end -%>
 
 <%= f.fields_for :posts do |post_form| %>
-  <%= post_form.label :filter %>
-  <%= post_form.select :filter, Post.filters %>
   <p class="content">
     <%= post_form.label :content %>
     <%= post_form.text_area :content, :rows => 5 %>
@@ -39,6 +36,7 @@
     <%= image_form.file_field :image %>
   <% end %>
   -->
+  <%= post_form.select :filter, Post.filters %>
 <% end %>
 
 
