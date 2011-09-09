@@ -49,17 +49,18 @@ class TopicsController < ApplicationController
     path
   end
 
+  def site
+    @site ||= Site.where(:slug => params[:site_id]).includes(:messageboards).first
+  end
+
   def messageboard
-    @messageboard ||= Messageboard.where(:name => params[:messageboard_id]).where(:site_id => site.id).first
+    @messageboard ||= site.messageboards.where(:name => params[:messageboard_id]).first
   end
 
   def topic
     @topic ||= Topic.find_by_slug(params[:id])
   end
 
-  def site 
-    @site ||= Site.find_by_slug(params[:site_id])
-  end
 
   def current_user_name 
     @current_user_name ||= current_user.nil? ? "anonymous" : current_user.name

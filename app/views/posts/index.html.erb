@@ -1,15 +1,16 @@
 <% content_for :page_id do %>topics_posts<% end %>
 <% content_for :page_title do %><%= THREDDED[:site_name] %> | <%= topic.title %> | Posts<% end %>
-
-<%= render :partial => "shared/header" %>
+<% content_for :header_nav do %>
+    <nav>
+      <ul>
+        <li class="new_topic"><%= link_to "Create a New Topic", link_for_new_topic(site, messageboard) %></li>
+      </ul>
+    </nav>
+<% end %>
 
 <section id="content">
   <header>
     <h1><%= topic.title %></h1> 
-    <% if topic.users_to_sentence %>
-      <cite><%= topic.users_to_sentence %></cite>
-    <% end %>
-    <%= link_to "edit subject", edit_messageboard_topic_path(messageboard, topic), {:id => "edit_subject"} %>
   </header>
 
   <% topic.posts.each do |p| %>
@@ -32,7 +33,9 @@
     </article>
   <% end -%>
 
-  <%= form_for [messageboard, topic, @post] do |f| %>
+  <%= form_for( [site, messageboard, topic, @post],
+                :url => link_for_create_topic( site, messageboard, topic ),
+                :html => { :multipart => true } ) do |f| %>
     <p>
       <%= f.label :filter %>
       <%= f.select :filter, Post.filters %>

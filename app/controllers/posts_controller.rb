@@ -18,14 +18,23 @@ class PostsController < ApplicationController
     redirect_to messageboard_topic_path(messageboard, topic)
   end
 
+  def index
+    @post  = topic.posts.build
+    @posts = topic.posts
+  end
+
   # ======================================
  
+  def site
+    @site ||= Site.where(:slug => params[:site_id]).includes(:messageboards).first
+  end
+
   def messageboard
-    @messageboard ||= Messageboard.where(:name => params[:messageboard_id]).first
+    @messageboard ||= site.messageboards.where(:name => params[:messageboard_id]).first
   end
 
   def topic
-    @topic ||= Topic.find_by_slug(params[:topic_id])
+    @topic ||= messageboard.topics.find(params[:topic_id])
   end
 
   def post

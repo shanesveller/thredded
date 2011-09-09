@@ -9,12 +9,16 @@ module BbcodeFilter
     
     module ClassMethods
       def render_content(content)
-        content.bbcode_to_html.html_safe
+        content.bbcode_to_html.html_safe if content
       end
     end
 
-    def render_content
-      content.bbcode_to_html.html_safe
+    def self.render_content(content)
+      content.bbcode_to_html.html_safe if content
+    end
+
+    def render_content(content)
+      content.bbcode_to_html.html_safe if content
     end
 
 end
