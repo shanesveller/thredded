@@ -68,7 +68,7 @@ class TopicsController < ApplicationController
   # ======================================
 
   private
-    
+
     def klass
       @klass ||= params[:topic][:type].present? ? params[:topic][:type].constantize : Topic
     end

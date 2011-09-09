@@ -1,6 +1,6 @@
   <% if can? :read, t -%>
     <article>
-      <h1><%= link_to t.title, site_messageboard_topics_path(site, messageboard, t) %></h1>
+    <h1><%= link_to t.title, link_for_posts(site, messageboard, t) %></h1>
       <cite class="started_by"><%= link_to t.user_name, link_for_user(site, t.user) %></cite>
       <abbr class="started_at timeago" title="<%= t.created_at.strftime("%Y-%m-%dT%I:%M:%S-0500") %>"><%= t.created_at.strftime("%B %d, %Y") %></abbr>
       <cite class="updated_by"><%= link_to t.last_user.name, link_for_user(site, t.last_user) %></cite> 

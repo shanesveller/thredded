@@ -8,8 +8,13 @@ module TopicsHelper
     end
   end
 
+  def link_for_posts(site, messageboard, topic)
+    path = site_messageboard_topic_posts_path(site, messageboard, topic)
+    path.gsub!("#{site.slug}/", '') unless %w{test}.include?( Rails.env )
+  end
+
   def link_for_new_topic(site, messageboard)
-    path = new_site_messageboard_topic_path(site.slug, messageboard)
+    path = new_site_messageboard_topic_path(site, messageboard)
     path.gsub!("#{site.slug}/", '') unless %w{test}.include?( Rails.env )
   end
 

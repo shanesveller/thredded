@@ -1,0 +1,46 @@
+<% content_for :page_id do %>topics_posts<% end %>
+<% content_for :page_title do %><%= THREDDED[:site_name] %> | <%= topic.title %> | Posts<% end %>
+
+<%= render :partial => "shared/header" %>
+
+<section id="content">
+  <header>
+    <h1><%= topic.title %></h1> 
+    <% if topic.users_to_sentence %>
+      <cite><%= topic.users_to_sentence %></cite>
+    <% end %>
+    <%= link_to "edit subject", edit_messageboard_topic_path(messageboard, topic), {:id => "edit_subject"} %>
+  </header>
+
+  <% topic.posts.each do |p| %>
+    <article>
+      <header>	
+        <abbr class="timeago" title="<%= p.created_timestamp %>"><%= p.created_date %></abbr>
+        <cite>
+          <a href="/users/<%= p.user %>">
+            <%= image_tag p.gravatar_url %>
+            <%= p.user %>
+          </a>
+        </cite>
+      </header>
+      <p><%= render_content_for(p) %></p>
+      <footer>
+        <% if can? :manage, p %>
+          <%= link_to "edit post", edit_messageboard_topic_post_path(messageboard, topic, p), {:class => "edit"} %>
+        <% end %>
+      </footer>
+    </article>
+  <% end -%>
+
+  <%= form_for [messageboard, topic, @post] do |f| %>
+    <p>
+      <%= f.label :filter %>
+      <%= f.select :filter, Post.filters %>
+
+      <%= f.label :your_content %>:
+      <%= f.text_area :content, :rows => 5 %>
+    </p>
+    <%= f.submit "Submit" %>
+  <% end -%>
+</section>
+
