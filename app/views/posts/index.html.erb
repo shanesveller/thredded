@@ -8,42 +8,41 @@
     </nav>
 <% end %>
 
-<section id="content">
-  <header>
-    <h1><%= topic.title %></h1> 
-  </header>
+<header>
+  <h1><%= topic.title %></h1> 
+</header>
 
-  <% topic.posts.each do |p| %>
-    <article>
-      <header>	
-        <abbr class="timeago" title="<%= p.created_timestamp %>"><%= p.created_date %></abbr>
-        <cite>
-          <a href="/users/<%= p.user %>">
-            <%= image_tag p.gravatar_url %>
-            <%= p.user %>
-          </a>
-        </cite>
-      </header>
-      <p><%= render_content_for(p) %></p>
-      <footer>
-        <% if can? :manage, p %>
-          <%= link_to "edit post", edit_messageboard_topic_post_path(messageboard, topic, p), {:class => "edit"} %>
-        <% end %>
-      </footer>
-    </article>
+<% topic.posts.each do |p| %>
+  <% if p.valid? %>
+  <article id="post-<%= p.id %>">
+    <header>	
+      <abbr class="timeago" title="<%= p.created_timestamp %>"><%= p.created_date %></abbr>
+      <cite>
+        <a href="/users/<%= p.user %>">
+          <%= image_tag p.gravatar_url %>
+          <%= p.user.name %>
+        </a>
+      </cite>
+    </header>
+    <p><%= render_content_for(p) %></p>
+    <footer>
+      <% if true or can? :manage, p %>
+        <%= link_to "edit post", link_to_edit_post(site, messageboard, topic, p) %>
+      <% end -%>
+    </footer>
+  </article>
   <% end -%>
+<% end -%>
 
-  <%= form_for( [site, messageboard, topic, @post],
-                :url => link_for_create_topic( site, messageboard, topic ),
-                :html => { :multipart => true } ) do |f| %>
-    <p>
-      <%= f.label :filter %>
-      <%= f.select :filter, Post.filters %>
+<%= form_for( [site, messageboard, topic, @post],
+              :url => link_for_create_topic( site, messageboard, topic ),
+              :html => { :multipart => true } ) do |f| %>
+  <p>
+    <%= f.label :filter %>
+    <%= f.select :filter, Post.filters %>
 
-      <%= f.label :your_content %>:
-      <%= f.text_area :content, :rows => 5 %>
-    </p>
-    <%= f.submit "Submit" %>
-  <% end -%>
-</section>
-
+    <%= f.label :your_content %>:
+    <%= f.text_area :content, :rows => 5 %>
+  </p>
+  <%= f.submit "Submit" %>
+<% end -%>

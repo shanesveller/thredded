@@ -27,6 +27,8 @@ Thredded::Application.routes.draw do
   match "/:site_id/:messageboard_id/topics(.:format)"       => 'topics#create',            :as => :create_site_messageboard_topic
   match "/:site_id/:messageboard_id/topics/new(.:format)/(:type)" => 'topics#new',         :as => :new_site_messageboard_topic
   match "/:site_id/:messageboard_id/:topic_id(.:format)"    => 'posts#index',              :as => :site_messageboard_topic_posts
+  match "/:site_id/:messageboard_id/:topic_id/:post_id(.:format)" => 'posts#show',         :as => :site_messageboard_topic_post
+  match "/:site_id/:messageboard_id/:topic_id/:post_id/edit(.:format)" => 'posts#edit',    :as => :edit_site_messageboard_topic_post
 
   if "test" == Rails.env
     match "/:site_id/users/sign_in(.:format)"               => 'devise/sessions#create',   :as => :user_session
