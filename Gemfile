@@ -58,9 +58,10 @@ end
 # :development specific gems
 group :development do
   gem 'ruby-debug19'
-  gem 'unicorn'
+  gem 'thin'
   gem 'faker'
   gem 'active_reload'
+  gem 'foreman'
 
   # convenience gems
   gem 'wirble'
