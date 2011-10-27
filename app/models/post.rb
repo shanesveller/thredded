@@ -11,6 +11,8 @@ class Post  < ActiveRecord::Base
   
   # field :notified, :type => Array, :default => []
 
+  default_scope :order => 'id ASC'
+
   belongs_to :messageboard, :counter_cache => true
   belongs_to :topic,  :counter_cache => true
   belongs_to :user,   :counter_cache => true

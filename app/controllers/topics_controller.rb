@@ -37,18 +37,6 @@ class TopicsController < ApplicationController
 
   # ======================================
  
-  # TODO : this feels wrong, really wrong.  this should get pulled out.
-  def link_for_messageboard(site, messageboard)
-    if %w{test}.include?( Rails.env )
-      path = site_messageboards_path(site.slug, messageboard.name)
-    else
-      port = request.port == 3000 ? ":3000" : ""
-      path = site_messageboards_path(messageboard.name)
-      path = "http://#{site.slug}.#{request.host}#{port}#{path}"
-    end
-    path
-  end
-
   def site
     @site ||= Site.where(:slug => params[:site_id]).includes(:messageboards).first
   end

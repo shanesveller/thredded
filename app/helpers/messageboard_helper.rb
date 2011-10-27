@@ -41,7 +41,7 @@ module MessageboardHelper
   end
 
   def latest_user_for(messageboard)
-    if messageboard.topics.first.present?
+    if messageboard.topics.first.present? && messageboard.topics.first.user.present?
       messageboard.topics.first.user_name
     else
       ""

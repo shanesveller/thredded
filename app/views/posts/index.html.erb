@@ -27,7 +27,7 @@
     <p><%= render_content_for(p) %></p>
     <footer>
       <% if true or can? :manage, p %>
-        <%= link_to "edit post", link_to_edit_post(site, messageboard, topic, p) %>
+        <%= link_to "edit post", link_to_edit_post( site, messageboard, topic, p ) %>
       <% end -%>
     </footer>
   </article>
@@ -35,7 +35,7 @@
 <% end -%>
 
 <%= form_for( [site, messageboard, topic, @post],
-              :url => link_for_create_topic( site, messageboard, topic ),
+              :url => link_for_create_topic_post( site, messageboard, topic, @post ),
               :html => { :multipart => true } ) do |f| %>
   <p>
     <%= f.label :filter %>
