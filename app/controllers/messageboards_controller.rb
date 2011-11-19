@@ -4,14 +4,11 @@ class MessageboardsController < ApplicationController
   layout 'application'
   helper_method :site, :messageboard, :topic
   
-  def index
+  def show
     redirect_to default_home        and return if params[:site_id].nil?      
     redirect_to login_url_for(site) and return unless can? :read, site
+    @topics = messageboard.topics
     @messageboards = site.messageboards
-  end
-
-  def show
-    redirect_to topics_path(@messageboard)
   end
 
   # ======================================
@@ -38,12 +35,12 @@ class MessageboardsController < ApplicationController
     end
   end
 
-  def messageboard
-    @messageboard ||= Messageboard.where(:name => params[:messageboard_id]).first
-  end
-
   def site
     @site ||= Site.where(:slug => params[:site_id]).includes(:messageboards).first
+  end
+
+  def messageboard
+    @messageboard ||= Messageboard.where(:name => params[:messageboard_id]).first
   end
 
 end

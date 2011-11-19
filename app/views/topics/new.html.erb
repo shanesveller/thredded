@@ -2,7 +2,7 @@
 <% content_for :page_title do %><%= site.title %> | <%= messageboard.title %> | Start a New Thread<% end %>
 
 <%= form_for([site, messageboard, @topic], 
-             :url => link_for_create_topic(site, messageboard, @topic),
+             :url => create_site_messageboard_topic_path(site, messageboard, @topic),
              :html => { :multipart => true }) do |f| %>
   <%= render :partial => 'form', :locals => { :f => f } %>
   <p class="submit">

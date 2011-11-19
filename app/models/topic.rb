@@ -48,7 +48,7 @@ class Topic < ActiveRecord::Base
   end
 
   def users_to_sentence
-    @users_to_sentence ||= self.users.collect{ |u| u.name.capitalize }.to_sentence
+    @users_to_sentence ||= self.users.collect{ |u| u.name.capitalize }.to_sentence if self.class == "PrivateTopic" && self.users
   end
 
   def self.inherited(child)

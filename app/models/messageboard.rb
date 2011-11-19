@@ -37,9 +37,8 @@ class Messageboard < ActiveRecord::Base
      THREDDED[:default_messageboard_home] == 'home'
   end
 
-  
   def to_param
-    "#{name.downcase}"
+    name.downcase
   end
 
 end

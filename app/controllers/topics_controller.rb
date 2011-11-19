@@ -1,14 +1,8 @@
 class TopicsController < ApplicationController
-  layout 'application'
   before_filter :pad_params,  :only => [:create, :update]
   before_filter :pad_post,    :only => :create
   before_filter :pad_topic,   :only => :create
   helper_method :site, :messageboard, :topic
-
-  def index
-    authorize! :index, messageboard, :message => "You are not authorized access to this messageboard."
-    @topics = messageboard.topics
-  end
 
   def show
     authorize! :show, topic
@@ -23,7 +17,9 @@ class TopicsController < ApplicationController
 
   def create
     @topic = klass.create(params[:topic])
-    redirect_to link_for_messageboard(site, messageboard)
+    debugger
+    redirect_to site_messageboards_path(site, messageboard)
+    # redirect_to link_for_messageboard(site, messageboard)
   end
 
   def edit
@@ -46,9 +42,8 @@ class TopicsController < ApplicationController
   end
 
   def topic
-    @topic ||= Topic.find_by_slug(params[:id])
+    @topic ||= Topic.find(params[:topic_id])
   end
-
 
   def current_user_name 
     @current_user_name ||= current_user.nil? ? "anonymous" : current_user.name

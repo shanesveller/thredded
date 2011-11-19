@@ -1,2 +1,16 @@
-<h1>Sites#show</h1>
-<p>Find me in app/views/sites/show.html.erb</p>
+<% content_for :page_id do %>messageboard_listing<% end %>
+<% content_for :page_title do %><%= THREDDED[:site_name] %> | Messageboard Listing<% end %>
+
+<header>
+  <h1>Messageboards</h1>
+  <h2><%= site.messageboards.count %> Messageboard(s), <%= site.topics_count %> Threads and <%= site.posts_count %> Posts</h2>
+</header>
+
+<section id="messageboards">
+  <header>
+    <div class="messageboard">Messageboard Name</div>
+    <div class="last_post">Last Post At</div>
+  </header>
+  <%= render @messageboards %>
+</section>
+

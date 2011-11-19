@@ -62,6 +62,8 @@ group :development do
   gem 'faker'
   gem 'active_reload'
   gem 'foreman'
+  gem 'unicorn'
+  gem 'hooves'
 
   # convenience gems
   gem 'wirble'
