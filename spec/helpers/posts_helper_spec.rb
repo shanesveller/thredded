@@ -18,15 +18,15 @@ describe PostsHelper do
     end
     
     it "renders html from bbcode markup" do
-      @post.content = "[i]this is italic[/i]"
+      @post.content = "[i]this is italicized bbcode[/i]"
       @post.filter  =  'bbcode'
-      helper.render_content_for(@post).should eq("<em>this is italic</em>")
+      helper.render_content_for(@post).should eq("<em>this is italicized bbcode</em>")
     end
 
     it "renders html from textile markup" do
-      @post.content = "_this is italic_"
+      @post.content = "_this is italicized textile_"
       @post.filter  =  'textile'
-      helper.render_content_for(@post).should eq("<p><em>this is italic</em></p>")
+      helper.render_content_for(@post).should eq("<p><em>this is italicized textile</em></p>")
     end
   end
 

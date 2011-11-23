@@ -9,4 +9,13 @@ class PrivateTopic < Topic
     end
   end
 
+  def add_user(user)
+    user = User.find_by_name(user) if String == user.class
+    users << user
+  end
+
+  def users_to_sentence
+    users.map{ |u| u.name.capitalize }.to_sentence
+  end
+
 end
