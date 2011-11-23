@@ -1,16 +1,7 @@
 module TopicsHelper
 
-  def link_for_user(site, user)
-    if %w{test}.include?( Rails.env )
-      site_user_path(site, user) 
-    else
-      site_user_path(user) 
-    end
-  end
-
   # TODO : yup. this still feels wrong. wtf am I doing here?
   def link_for_messageboard(site, messageboard)
-    debugger
     path = site_messageboards_path(site.slug, messageboard.name)
     unless %w{test}.include?( Rails.env )
       port = request.port == 3000 ? ":3000" : ""

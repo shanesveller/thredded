@@ -2,7 +2,6 @@ class MessageboardsController < ApplicationController
   load_and_authorize_resource
   before_filter :messageboard, :only => :show
   layout 'application'
-  helper_method :site, :messageboard, :topic
   
   def show
     redirect_to default_home        and return if params[:site_id].nil?      
@@ -33,14 +32,6 @@ class MessageboardsController < ApplicationController
         new_user_session_url(:host => THREDDED[:default_domain]) 
       end 
     end
-  end
-
-  def site
-    @site ||= Site.where(:slug => params[:site_id]).includes(:messageboards).first
-  end
-
-  def messageboard
-    @messageboard ||= Messageboard.where(:name => params[:messageboard_id]).first
   end
 
 end

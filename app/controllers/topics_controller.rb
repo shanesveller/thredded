@@ -2,7 +2,6 @@ class TopicsController < ApplicationController
   before_filter :pad_params,  :only => [:create, :update]
   before_filter :pad_post,    :only => :create
   before_filter :pad_topic,   :only => :create
-  helper_method :site, :messageboard, :topic
 
   def show
     authorize! :show, topic
@@ -32,18 +31,6 @@ class TopicsController < ApplicationController
   end
 
   # ======================================
- 
-  def site
-    @site ||= Site.where(:slug => params[:site_id]).includes(:messageboards).first
-  end
-
-  def messageboard
-    @messageboard ||= site.messageboards.where(:name => params[:messageboard_id]).first
-  end
-
-  def topic
-    @topic ||= Topic.find(params[:topic_id])
-  end
 
   def current_user_name 
     @current_user_name ||= current_user.nil? ? "anonymous" : current_user.name

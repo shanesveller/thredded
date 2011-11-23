@@ -47,4 +47,8 @@ class User < ActiveRecord::Base
     valid?
   end
 
+  def to_param
+    name
+  end
+
 end

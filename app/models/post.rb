@@ -1,14 +1,13 @@
 class Post  < ActiveRecord::Base
 
   Filters = []
-
+  include BbcodeFilter
+  include TextileFilter
+  
   require "gravtastic"
   include Gravtastic
   gravtastic :user_email
 
-  include BbcodeFilter
-  include TextileFilter
-  
   # field :notified, :type => Array, :default => []
 
   default_scope :order => 'id ASC'

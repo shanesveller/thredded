@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  helper_method :site, :messageboard, :topic
 
   rescue_from CanCan::AccessDenied do |exception|
     flash[:error] = exception.message
@@ -31,7 +32,15 @@ class ApplicationController < ActionController::Base
     end
 
     def site
-      @site ||= Site.find_by_slug(params[:site_id])
+      @site ||= Site.where(:slug => params[:site_id]).includes(:messageboards).first
+    end
+
+    def messageboard
+      @messageboard ||= site.messageboards.where(:name => params[:messageboard_id]).first
+    end
+
+    def topic
+      @topic ||= messageboard.topics.find(params[:topic_id])
     end
 
 end

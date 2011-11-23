@@ -1,0 +1,17 @@
+<article>
+  <header>	
+    <abbr class="timeago" title="<%= post.created_timestamp %>"><%= post.created_date %></abbr>
+    <cite>
+      <a href="/users/<%= post.user.to_param %>">
+        <%= image_tag post.gravatar_url %>
+        <%= post.user.to_param %>
+      </a>
+    </cite>
+  </header>
+  <p><%= render_content_for(post) %></p>
+  <footer>
+    <% if can? :manage, post %>
+      <%= link_to "edit post", edit_messageboard_topic_post_path(messageboard, topic, post), {:class => "edit"} %>
+    <% end %>
+  </footer>
+</article>

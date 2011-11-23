@@ -5,37 +5,25 @@
       <ul>
         <li class="new_topic"><%= link_to "Create a New Topic", new_site_messageboard_topic_path(site, messageboard) %></li>
         <li class="reply_to_topic"><a href="#new_post">Reply To This Topic</a></li>
+        <li class="edit_topic"><%= link_to "edit subject", edit_site_messageboard_topic_path(site, messageboard, topic) %></li>
       </ul>
     </nav>
 <% end %>
 
   <header>
+    <nav>
+      <ul>
+        <li><a href="/">Forums</a> &rarr; </li>
+        <li><%= link_to messageboard.title, site_messageboard_path(site, messageboard) %> &rarr; </li>
+      </ul>
+    </nav>
     <h1><%= topic.title %></h1> 
     <% if topic.users_to_sentence %>
       <cite><%= topic.users_to_sentence %></cite>
     <% end %>
-    <%= link_to "edit subject", edit_site_messageboard_topic_path(site, messageboard, topic), {:id => "edit_subject"} %>
   </header>
 
-  <% topic.posts.each do |p| %>
-    <article>
-      <header>	
-        <abbr class="timeago" title="<%= p.created_timestamp %>"><%= p.created_date %></abbr>
-        <cite>
-          <a href="/users/<%= p.user %>">
-            <%= image_tag p.gravatar_url %>
-            <%= p.user %>
-          </a>
-        </cite>
-      </header>
-      <p><%= render_content_for(p) %></p>
-      <footer>
-        <% if can? :manage, p %>
-          <%= link_to "edit post", edit_messageboard_topic_post_path(messageboard, topic, p), {:class => "edit"} %>
-        <% end %>
-      </footer>
-    </article>
-  <% end -%>
+  <%= render topic.posts %>
 
   <%= form_for [site, messageboard, topic, @post] do |f| %>
     <p>

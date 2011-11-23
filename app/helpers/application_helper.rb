@@ -20,6 +20,13 @@ module ApplicationHelper
     "/#{messageboard.to_param}/#{topic.to_param}"
   end
 
+  def site_user_path(site, user)
+    return "/#{site.to_param}/users/#{user.to_param}" if needs_full_path
+    "/users/#{user.to_param}"
+  end
+
+  # ========================
+
   def needs_full_path
     "test" == Rails.env
   end

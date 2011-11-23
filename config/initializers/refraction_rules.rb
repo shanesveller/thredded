@@ -1,6 +1,6 @@
 Refraction.configure do |req|
 
-    unless req.path =~ /\.css|\.png|\.jpg|\.gif|\.js/ || req.path =~ /^\/users/
+    unless req.path =~ /\.css|\.png|\.jpg|\.gif|\.js/ # || req.path =~ /^\/users/
 
       default_domain  = THREDDED[:default_domain]
       subdomains      = Site.all.map{ |site| site.slug }.join '|'
