@@ -3,7 +3,6 @@ source 'http://rubygems.org'
 # pick your database
 gem 'pg'
 # gem 'mysql2'
-# gem 'sqlite'
 
 gem 'rack'
 gem 'rake'                        , '0.8.7'
@@ -53,6 +52,7 @@ group :test do
   gem 'guard-spork'         , '0.2.1'
   gem 'launchy'
   gem 'fuubar'
+  gem 'sqlite3'
 end
 
 # :development specific gems

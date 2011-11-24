@@ -88,6 +88,9 @@ Spork.each_run do
   # This code will be run each time you run your specs.
   Factory.factories.clear
   Dir[Rails.root.join("spec/factories/**/*.rb")].each{|f| load f}
+
+  ActiveRecord::Schema.verbose = false
+  load "#{Rails.root}/db/schema.rb"
 end
 
 # --- Instructions ---
