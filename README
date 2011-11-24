@@ -56,7 +56,7 @@ Testing / Autotest:
 
 - bundle install will get all the required gems installed
 - make sure you have `growlnotify` installed (can be found in Extras folder of the Growl dmg - http://growl.info/index.php)
-- are you sure config/thredded_config.yml exists?  What about mongoid.yml? Promise?
+- are you sure config/thredded_config.yml exists? Promise?
 - make sure to add the following line to your ~/.autotest file:
 
   require 'autotest/growl'
