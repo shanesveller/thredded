@@ -20,19 +20,19 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :name, :email, :case_sensitive => false
 
   def superadmin?
-    self.superadmin
+    valid? && self.superadmin
   end
 
   def admins?(messageboard)
-    superadmin? || roles.for(messageboard).as(['admin']).size > 0
+    valid? && (superadmin? || roles.for(messageboard).as(['admin']).size > 0)
   end
 
   def moderates?(messageboard)
-    superadmin? || roles.for(messageboard).as([:admin, :moderator]).size > 0
+    valid? && (superadmin? || roles.for(messageboard).as([:admin, :moderator]).size > 0)
   end
 
   def member_of?(messageboard)
-    superadmin? || roles.for(messageboard).as([:admin, :moderator, :member]).size > 0
+    valid? && (superadmin? || roles.for(messageboard).as([:admin, :moderator, :member]).size > 0)
   end
   
   def member_of(messageboard, as='member')

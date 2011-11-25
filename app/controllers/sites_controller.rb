@@ -2,6 +2,8 @@ class SitesController < ApplicationController
   load_and_authorize_resource
 
   def index
+    @sites = Site.all
+    render :layout => 'home'
   end
 
   def show

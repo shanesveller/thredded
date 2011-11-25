@@ -25,6 +25,11 @@ module ApplicationHelper
     "/users/#{user.to_param}"
   end
 
+  def new_user_session_path(site="")
+    return "/#{site}/users/sign_in" if site.present?
+    "/users/sign_in"
+  end
+
   # ========================
 
   def needs_full_path
