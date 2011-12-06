@@ -4,13 +4,13 @@ class MessageboardsController < ApplicationController
   layout 'application'
   
   def show
-    redirect_to default_home and return if params[:site_id].nil?      
+    redirect_to default_home and return unless site.present?
 
     unless can? :read, messageboard
-      flash[:error] = "You are not authorized access to this messageboard. Please log in and/or gain the appropriate permissions."
-      redirect_to new_user_session_url(site) unless current_user
-      redirect_to 'http://www.thredded.dev:3000/' if current_user
-      return
+#      flash[:error] = "You are not authorized access to this messageboard. Please log in and/or gain the appropriate permissions."
+#      redirect_to new_user_session_url(site) unless current_user
+#      redirect_to 'http://thredded.dev:3000/' if current_user
+#      return
     end
 
     @topics = messageboard.topics

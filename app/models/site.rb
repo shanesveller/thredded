@@ -1,9 +1,19 @@
 class Site  < ActiveRecord::Base
   has_many :messageboards
-  belongs_to  :user
-  validates_presence_of :slug, :permission, :title, :description
-  validates_uniqueness_of :slug
-
+  belongs_to :user
+  
+  before_validation       :cache_domain
+  validates_uniqueness_of :subdomain,    :cached_domain
+  validates_uniqueness_of :cname_alias,  :allow_blank => true
+  validates_presence_of   :subdomain,
+                          :cached_domain,
+                          :permission,
+                          :title,
+                          :description
+  validates_exclusion_of  :subdomain,
+                          :in => %w(admin blog www), 
+                          :message => "is taken"
+  
   def topics_count
     messageboards.inject(0){|sum, item| sum + item.topics_count}
   end
@@ -13,14 +23,17 @@ class Site  < ActiveRecord::Base
   end
 
   def to_param
-    slug
+    subdomain
   end
 
-  class << self
-    def default_slug
-      return THREDDED[:default_site] if Site.exists?(:slug => THREDDED[:default_site])
-      return Site.first.slug if Site.first
-      raise "No default site exists for this website. Please create a new Site and/or set :default_site in your thredded_config.yml to point to it."
+private
+
+  def cache_domain
+    self.cached_domain = if self.cname_alias.blank?
+      "#{self.subdomain}.#{THREDDED[:default_domain]}"
+    else
+      "#{self.cname_alias}"
     end
   end
+
 end

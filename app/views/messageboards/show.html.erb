@@ -3,7 +3,7 @@
 <% content_for :header_nav do %>
     <nav>
       <ul>
-        <li class="new_topic"><%= link_to "Create a New Topic", new_site_messageboard_topic_path(site, messageboard) %></li>
+        <li class="new_topic"><%= link_to "Create a New Topic", new_messageboard_topic_path(messageboard) %></li>
       </ul>
     </nav>
 <% end %>
@@ -22,5 +22,5 @@
 </header>
 <%= render :partial => "topics/topic_condensed", :collection => @topics, :as => :t %>
 <footer>
-  <%= link_to "Create a New Topic", new_site_messageboard_topic_path(site, messageboard) %>
+  <%= link_to "Create a New Topic", new_messageboard_topic_path(messageboard) %>
 </footer>

@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  before_filter :site
   helper_method :site, :messageboard, :topic
 
   rescue_from CanCan::AccessDenied do |exception|
@@ -8,6 +9,11 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+    def get_project
+      @site ||= Site.where(:cached_domain => request.host).first
+    end
+    
 
     def after_sign_in_path_for(resource_or_scope)
       site_home
@@ -32,7 +38,7 @@ class ApplicationController < ActionController::Base
     end
 
     def site
-      @site ||= Site.where(:slug => params[:site_id]).includes(:messageboards).first
+      @site ||= Site.where(:cached_domain => request.host).includes(:messageboards).first
     end
 
     def messageboard

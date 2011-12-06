@@ -1,63 +1,29 @@
 Thredded::Application.routes.draw do
 
 
-  resources :sites do
-    resources :users
+  # The priority is based upon order of creation:
+  # first created -> highest priority.
+
+  resources :users
+  devise_for :users 
+  
+  constraints(PersonalizedDomain.new) do
     resources :messageboards do
       resources :topics do
         resources :posts
       end
     end
+    root :to => "messageboards#index"
+    match "/:messageboard_id(.:format)"                         => 'messageboards#show', :as => :messageboard
+    match "/:messageboard_id/topics(.:format)"                  => 'topics#create',      :as => :create_messageboard_topic
+    match "/:messageboard_id/topics/new/(:type)"                => 'topics#new',         :as => :new_messageboard_topic
+    match "/:messageboard_id/:topic_id(.:format)"               => 'topics#show',        :as => :messageboard_topic
+    match "/:messageboard_id/:topic_id/posts(.:format)"         => 'posts#create',       :as => :create_messageboard_topic_post
+    match "/:messageboard_id/:topic_id/:post_id(.:format)"      => 'posts#show',         :as => :messageboard_topic_post
+    match "/:messageboard_id/:topic_id/:post_id/edit(.:format)" => 'posts#edit',         :as => :edit_messageboard_topic_post
   end
 
-  devise_for :users do
-    post "/:site_id/users/sign_in(.:format)"  => "devise/sessions#create",    :as => :user_session
-    get  "/:site_id/users/sign_in(.:format)"  => "devise/sessions#new",       :as => :new_user_session
-    get  "/:site_id/users/sign_out(.:format)" => "devise/sessions#destroy",   :as => :destroy_user_session
-    get  "/:site_id/users/edit(.:format)"     => "devise/registrations#edit", :as => :edit_user_registration
-    get  "/:site_id/users/sign_up(.:format)"  => "devise/registrations#new",  :as => :new_user_registration
-  end
-
-  match "/:site_id/users(.:format)"                         => 'users#index',              :as => :site_users
-  match "/:site_id/users/new(.:format)"                     => 'users#new',                :as => :new_site_user
-  match "/:site_id/users/:id/edit(.:format)"                => 'users#index',              :as => :edit_site_user
-  match "/:site_id/users/:id(.:format)"                     => 'users#show',               :as => :site_user
-
-  if "test" == Rails.env
-    match "/:site_id/users/sign_in(.:format)"               => 'devise/sessions#create',   :as => :user_session
-    match "/:site_id/users/sign_in(.:format)"               => 'devise/sessions#new',      :as => :new_user_session
-    match "/:site_id/users/sign_out(.:format)"              => 'devise/sessions#destroy',  :as => :destroy_user_session
-    match "/:site_id/users/sign_up(.:format)"               => 'devise/registrations#new', :as => :new_user_registration
-  else
-    match "/users/sign_in(.:format)"                        => 'devise/sessions#create',   :as => :user_session
-    match "/users/sign_in(.:format)"                        => 'devise/sessions#new',      :as => :new_user_session
-    match "/users/sign_out(.:format)"                       => 'devise/sessions#destroy',  :as => :destroy_user_session
-    match "/users/sign_up(.:format)"                        => 'devise/registrations#new', :as => :new_user_registration
-  end
-
-  match "/:site_id(.:format)"                                          => 'sites#show',         :as => :site
-  match "/:site_id/:messageboard_id(.:format)"                         => 'messageboards#show', :as => :site_messageboard
-
-  match "/:site_id/:messageboard_id/:topic_id(.:format)"               => 'topics#show',        :as => :site_messageboard_topic
-  match "/:site_id/:messageboard_id/topics(.:format)"                  => 'topics#create',      :as => :create_site_messageboard_topic
-  match "/:site_id/:messageboard_id/topics/new/(:type)"                => 'topics#new',         :as => :new_site_messageboard_topic
-
-  match "/:site_id/:messageboard_id/:topic_id/:post_id(.:format)"      => 'posts#show',         :as => :site_messageboard_topic_post
-  match "/:site_id/:messageboard_id/:topic_id/posts(.:format)"         => 'posts#create',       :as => :create_site_messageboard_topic_post
-  match "/:site_id/:messageboard_id/:topic_id/:post_id/edit(.:format)" => 'posts#edit',         :as => :edit_site_messageboard_topic_post
-
-  root :to => "sites#index"
-
-  # The priority is based upon order of creation:
-  # first created -> highest priority.
-
-  # Sample of regular route:
-  #   match 'products/:id' => 'catalog#view'
-  # Keep in mind you can assign values other than :controller and :action
-
-  # Sample of named route:
-  #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
-  # This route can be invoked with purchase_url(:id => product.id)
+  root :to => "home#index"
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
@@ -80,14 +46,6 @@ Thredded::Application.routes.draw do
   #     resource :seller
   #   end
 
-  # Sample resource route with more complex sub-resources
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', :on => :collection
-  #     end
-  #   end
-
   # Sample resource route within a namespace:
   #   namespace :admin do
   #     # Directs /admin/products/* to Admin::ProductsController
@@ -95,13 +53,4 @@ Thredded::Application.routes.draw do
   #     resources :products
   #   end
 
-  # You can have the root of your site routed with "root"
-  # just remember to delete public/index.html.
-  # root :to => "welcome#index"
-
-  # See how all your routes lay out with "rake routes"
-
-  # This is a legacy wild controller route that's not recommended for RESTful applications.
-  # Note: This route will make all actions in every controller accessible via GET requests.
-  # match ':controller(/:action(/:id(.:format)))'
 end

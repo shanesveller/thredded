@@ -12,7 +12,7 @@ module MessageboardHelper
   def link_or_text_to(messageboard)
     @link_or_text = ""
     if can? :read, messageboard 
-      @link_or_text = link_to messageboard.title, site_messageboard_path(site, messageboard)
+      @link_or_text = link_to messageboard.title, messageboard_path(messageboard)
     else
       @link_or_text = messageboard.title
     end
@@ -33,7 +33,7 @@ module MessageboardHelper
 
   def latest_thread_for(messageboard)
     if can? :read, messageboard and messageboard.topics.first.present?
-      link_to time_ago_in_words(messageboard.topics.first.updated_at)+" ago", site_messageboard_topic_posts_path(site, messageboard, messageboard.topics.first)
+      link_to time_ago_in_words(messageboard.topics.first.updated_at)+" ago", messageboard_topic_posts_path(messageboard, messageboard.topics.first)
     elsif messageboard.topics.first.present?
       time_ago_in_words(messageboard.topics.first.updated_at)+" ago"
     else

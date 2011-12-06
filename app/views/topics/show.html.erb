@@ -3,9 +3,9 @@
 <% content_for :header_nav do %>
     <nav>
       <ul>
-        <li class="new_topic"><%= link_to "Create a New Topic", new_site_messageboard_topic_path(site, messageboard) %></li>
+        <li class="new_topic"><%= link_to "Create a New Topic", new_messageboard_topic_path(messageboard) %></li>
         <li class="reply_to_topic"><a href="#new_post">Reply To This Topic</a></li>
-        <li class="edit_topic"><%= link_to "edit subject", edit_site_messageboard_topic_path(site, messageboard, topic) %></li>
+        <li class="edit_topic"><%= link_to "edit subject", edit_messageboard_topic_path(messageboard, topic) %></li>
       </ul>
     </nav>
 <% end %>
@@ -14,7 +14,7 @@
     <nav>
       <ul>
         <li><a href="/">Forums</a> &rarr; </li>
-        <li><%= link_to messageboard.title, site_messageboard_path(site, messageboard) %> &rarr; </li>
+        <li><%= link_to messageboard.title, messageboard_path(messageboard) %> &rarr; </li>
       </ul>
     </nav>
     <h1><%= topic.title %></h1> 
@@ -25,7 +25,7 @@
 
   <%= render topic.posts %>
 
-  <%= form_for [site, messageboard, topic, @post] do |f| %>
+  <%= form_for [messageboard, topic, @post] do |f| %>
     <p>
       <%= f.label :filter %>
       <%= f.select :filter, Post.filters %>
