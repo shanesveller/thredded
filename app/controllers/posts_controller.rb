@@ -6,9 +6,8 @@ class PostsController < ApplicationController
   helper_method :messageboard, :topic
 
   def create
-    # http://site0.thredded.dev:3000/messageboard_2/1252
     p = topic.posts.create(params[:post])
-    redirect_to link_for_messageboard(site, messageboard)
+    redirect_to messageboards_path
   end
 
   def edit
@@ -27,18 +26,6 @@ class PostsController < ApplicationController
 
   # ======================================
  
-  def site
-    @site ||= Site.where(:slug => params[:site_id]).includes(:messageboards).first
-  end
-
-  def messageboard
-    @messageboard ||= site.messageboards.where(:name => params[:messageboard_id]).first
-  end
-
-  def topic
-    @topic ||= messageboard.topics.find(params[:topic_id])
-  end
-
   def post
     @post ||= topic.posts.find(params[:id]) 
   end

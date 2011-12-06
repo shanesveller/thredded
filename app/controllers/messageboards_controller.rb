@@ -3,6 +3,8 @@ class MessageboardsController < ApplicationController
   before_filter :messageboard, :only => :show
   layout 'application'
   
+  def index; end
+
   def show
     redirect_to default_home and return unless site.present?
 
