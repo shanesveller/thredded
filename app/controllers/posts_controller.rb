@@ -19,11 +19,6 @@ class PostsController < ApplicationController
     redirect_to link_for_posts(site, messageboard, topic)
   end
 
-  def index
-    @post  = topic.posts.build
-    @posts = topic.posts
-  end
-
   # ======================================
  
   def post
