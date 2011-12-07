@@ -1,7 +1,7 @@
 Given /^the default "([^"]*)" website domain is "([^"]*)"$/ do |permission, website|
   THREDDED[:default_domain] = website
   THREDDED[:default_site]   = website.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
-  @site = Factory(:site, :slug => THREDDED[:default_site], :domain => THREDDED[:default_domain], :permission => permission)
+  @site = Factory(:site, :cname_alias => website, :permission => permission)
 end
 
 Given /^I visit "([^"]*)"$/ do |domain|

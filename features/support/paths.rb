@@ -13,25 +13,25 @@ module NavigationHelpers
 
     when /the messageboard "([^\"]+)"/i
       messageboard = @site.messageboards.find_by_name($1)
-      site_messageboard_path(@site.to_param, messageboard)
+      messageboard_path(messageboard)
 
     when /the add a new thread page for "([^\"]+)"/i
       messageboard = @site.messageboards.find_by_name($1)
-      new_site_messageboard_topic_path(@site.to_param, messageboard)
+      new_messageboard_topic_path(messageboard)
 
     when /the topic listing page/i
       messageboard = @site.messageboards.first
-      site_messageboard_topics_path(@site.to_param, messageboard)
+      messageboard_topics_path(messageboard)
 
     when /edit the latest thread/i
       messageboard = Messageboard.first
       topic = messageboard.topics.latest.first
-      edit_site_messageboard_topic_path(@site.to_param, messageboard, topic)
+      edit_messageboard_topic_path(messageboard, topic)
 
     when /the most recently updated thread on "([^\"]+)"/i
       messageboard = @site.messageboards.find_by_name($1)
       topic = messageboard.topics.latest.first
-      site_messageboard_topic_path(@site.to_param, messageboard, topic)
+      messageboard_topic_path(messageboard, topic)
 
     when /the sign up page/i
       new_user_registration_path( THREDDED[:default_site] )
