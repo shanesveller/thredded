@@ -16,7 +16,6 @@ class TopicsController < ApplicationController
 
   def create
     @topic = klass.create(params[:topic])
-    debugger
     redirect_to site_messageboards_path(site, messageboard)
     # redirect_to link_for_messageboard(site, messageboard)
   end
