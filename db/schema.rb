@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111125195447) do
+ActiveRecord::Schema.define(:version => 20111208033650) do
 
   create_table "images", :force => true do |t|
     t.integer  "width"
@@ -88,6 +88,8 @@ ActiveRecord::Schema.define(:version => 20111125195447) do
     t.text    "description"
     t.string  "cached_domain"
   end
+
+  add_index "sites", ["cached_domain"], :name => "index_sites_on_cached_domain"
 
   create_table "topics", :force => true do |t|
     t.integer  "user_id"
