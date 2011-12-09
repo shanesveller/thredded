@@ -6,12 +6,12 @@ end
 
 Given /^I visit "([^"]*)"$/ do |domain|
   slug = domain.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
-  @site = Site.exists?(:domain => domain) ? Site.find_by_domain(domain) : Site.find_by_slug(slug)
-  visit site_messageboards_path(@site.slug)
+  @site = Site.exists?(:cached_domain => domain) ? Site.find_by_cached_domain(domain) : Site.find_by_subdomain(slug)
+  visit root_url(:host => @site.cached_domain)
 end
 
 Given /^the default website has a messageboard named "([^"]*)"$/ do |messageboard|
-  @site = Site.find_by_domain(THREDDED[:default_domain])
+  @site = Site.find_by_cached_domain(THREDDED[:default_domain])
   @site.messageboards << Factory(:messageboard, :name => messageboard, :title => messageboard)
   @site.save
 end
@@ -31,20 +31,19 @@ Then /^I should see messageboards "([^"]*)" and "([^"]*)"$/ do |messageboard1, m
 end
 
 Given /^a subdomain site exists called "([^"]*)"$/ do |subdomain|
-  slug = subdomain.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
-  Factory(:site, :slug => slug) 
+  @site = Site.where("cached_domain = ? OR  subdomain = ?", subdomain, subdomain)
+  Factory(:site, :subdomain => slug) if @site.nil?
 end
 
 Given /^"([^"]*)" has two messageboards named "([^"]*)" and "([^"]*)"$/ do |subdomain, messageboard1, messageboard2|
-  slug = subdomain.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
-  @site = Site.exists?(:domain => subdomain) ? Site.find_by_domain( subdomain ) : Site.find_by_slug( slug )
+  @site = Site.where("cached_domain = ? OR  subdomain = ?", subdomain, subdomain)
   @site.messageboards << Factory(:messageboard, :name => messageboard1, :title => messageboard1)
   @site.messageboards << Factory(:messageboard, :name => messageboard2, :title => messageboard2)
   @site.save
 end
 
 Given /^a custom domain site exists called "([^"]*)"$/ do |domain|
-  Factory(:site, :slug => domain.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, ''), :domain => domain)
+  Factory(:site, :cname_alias => domain)
 end
 
 Then /^I should see the login form$/ do
