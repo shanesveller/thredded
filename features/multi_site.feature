@@ -3,17 +3,23 @@ Feature: Multiple websites for a single installation
   An install of thredded
   Should serve the appropriately scoped messageboards and threads
 
-  Scenario: Default domain "example.com" has its own messageboards
+  Scenario: Default domain "example.com" has its own homepage
     Given the default "public" website domain is "example.com"
-      And the default website has two messageboards named "lol" and "kek"
       And I have signed in with "confirmed@person.com/password"
      When I visit "example.com"
+     Then I should see the site homepage
+
+  Scenario: Custom cname "mi.com" has its own messageboards
+    Given a custom cname site exists called "mi.com"
+      And "mi.com" has two messageboards named "lol" and "kek"
+      And I have signed in with "confirmed@person.com/password"
+     When I visit "mi.com"
      Then I should see messageboards "lol" and "kek"
 
   Scenario: Two sites use their own subdomains  
     Given the default "public" website domain is "example.com"
-      And a subdomain site exists called "red.example.com"
-      And a subdomain site exists called "blue.example.com"
+      And a custom cname site exists called "red.example.com"
+      And a custom cname site exists called "blue.example.com"
       And "red.example.com" has two messageboards named "foo" and "bar"
       And "blue.example.com" has two messageboards named "baz" and "carl"
       And I have signed in with "confirmed@person.com/password"
@@ -24,8 +30,8 @@ Feature: Multiple websites for a single installation
 
   Scenario: One subdomain site and one custom domain site
     Given the default "public" website domain is "example.com"
-      And a subdomain site exists called "red.example.com"
-      And a custom domain site exists called "www.forum.com"
+      And a custom cname site exists called "red.example.com"
+      And a custom cname site exists called "www.forum.com"
       And "red.example.com" has two messageboards named "foo" and "bar"
       And "www.forum.com" has two messageboards named "baz" and "carl"
       And I have signed in with "confirmed@person.com/password"
@@ -34,7 +40,6 @@ Feature: Multiple websites for a single installation
       And I visit "www.forum.com"
      Then I should see messageboards "baz" and "carl"
 
-  # TODO: test login.  something is definitely wrong
   Scenario: Website is behind a login and I am signed in
     Given the default "logged_in" website domain is "example.org"
       And I am signed up and confirmed as "confirmed@person.com/password"
@@ -47,5 +52,7 @@ Feature: Multiple websites for a single installation
   
   Scenario: Website is behind a login and I am not signed in
     Given the default "logged_in" website domain is "example.com"
-     When I visit "example.com"
+      And a custom cname site exists called "red.example.com"
+      And "red.example.com" is a "logged_in" site
+     When I visit "red.example.com"
      Then I should see the login form
