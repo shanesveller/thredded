@@ -8,7 +8,11 @@ class MessageboardsController < ApplicationController
   end
 
   def show
-    redirect_to default_home and return unless site.present?
+    unless site.present? and can? :read, messageboard
+      flash[:error] = "You are not authorized access to this messageboard." 
+      redirect_to root_url(:host => site.cached_domain)
+      return 
+    end
     @topics = messageboard.topics
     @messageboards = site.messageboards
   end
