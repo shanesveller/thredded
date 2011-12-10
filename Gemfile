@@ -16,7 +16,6 @@ gem 'rspec-rails'                 , '2.6.1'
 gem 'rails3-generators'
 gem 'gravtastic'
 gem 'nokogiri'                    , '1.4.6'
-gem 'omniauth'                    , '0.2.6'
 gem 'kaminari'                    , '0.12.4'
 gem 'bb-ruby'                     , '0.9.5'
 gem 'RedCloth'                    , '4.2.7'
@@ -35,7 +34,8 @@ group :assets do
 end
 
 # Test specific gems
-group :test do
+group :test, :cucumber do
+  gem 'rack-test'           , :git => 'git://github.com/hassox/rack-test.git'
   gem 'autotest-standalone'
   gem 'autotest-growl'
   gem 'factory_girl'        , '1.3.3'
@@ -50,7 +50,8 @@ group :test do
   gem 'growl'               , '1.0.3'
   gem 'rb-fsevent'
   gem 'guard-spork'         , '0.2.1'
-  gem 'launchy'
+  gem "addressable"         , "2.2.6"
+  gem 'launchy'             , '2.0.5'
   gem 'fuubar'
   gem 'sqlite3'
 end

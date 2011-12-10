@@ -5,7 +5,8 @@ Feature: Visiting a messageboard with various privileges
 
 Background: Default site and messageboard
     Given the default "public" website domain is "example.com"
-      And the default website has a messageboard named "lol"
+      And a custom cname site exists called "mi.com"
+      And "mi.com" has two messageboards named "lol" and "kek"
 
   Scenario: The messageboard is private and "Jimmy" is a member
     Given I am signed in as "Jimmy"
@@ -19,6 +20,7 @@ Background: Default site and messageboard
       And "lol" is "private"
       And I am not a member of "lol"
      When I go to the messageboard "lol"
+     Then show me the page
      Then I should see "You are not authorized access to this messageboard."
 
   Scenario: The messageboard is private and I am anonymous
