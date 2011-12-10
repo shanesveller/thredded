@@ -20,7 +20,6 @@ Background: Default site and messageboard
       And "lol" is "private"
       And I am not a member of "lol"
      When I go to the messageboard "lol"
-     Then show me the page
      Then I should see "You are not authorized access to this messageboard."
 
   Scenario: The messageboard is private and I am anonymous
@@ -42,13 +41,13 @@ Background: Default site and messageboard
       And I am signed in as "Joel" 
      When I go to the messageboard "lol"
      Then I should see a list of threads
-      And I should be signed in
+      And I should see "Logout"
 
   Scenario: The messageboard is public
     Given "lol" is "public"
      When I go to the messageboard "lol"
      Then I should see a list of threads
-      And I should be signed out
+      And I should see "Login"
 
   Scenario: The messageboard is public, I am signed in but I am not a member
     Given "lol" is "public"
@@ -56,7 +55,7 @@ Background: Default site and messageboard
       And I am not a member of "lol"
      When I go to the messageboard "lol"
      Then I should see a list of threads
-      And I should be signed in
+      And I should see "Logout"
 
   Scenario: The messageboard is public and I am a member
     Given "lol" is "public"
@@ -64,4 +63,4 @@ Background: Default site and messageboard
       And I am a member of "lol"
      When I go to the messageboard "lol"
      Then I should see a list of threads
-      And I should be signed in
+      And I should see "Logout"
