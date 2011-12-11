@@ -16,7 +16,7 @@ class TopicsController < ApplicationController
 
   def create
     @topic = klass.create(params[:topic])
-    redirect_to site_messageboards_path(site, messageboard)
+    redirect_to messageboard_url(messageboard, :host => @site.cached_domain)
     # redirect_to link_for_messageboard(site, messageboard)
   end
 

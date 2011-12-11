@@ -27,13 +27,14 @@ Background: Default site and messageboard
      When I go to the messageboard "thredded"
      Then the topic listing should look like the following:
           | Topic Title | Started | Updated | Posts |
-          | topic 3     | joel    | joel    | 1     |
-          | topic 2     | joel    | joel    | 1     |
-          | topic 1     | joel    | joel    | 1     |
+          | topic 3     | Joel    | Joel    | 1     |
+          | topic 2     | Joel    | Joel    | 1     |
+          | topic 1     | Joel    | Joel    | 1     |
 
   Scenario: The user adds a private thread
     Given another member named "john" exists
-     When I go to the add a new thread page for "thredded"
+      And "john" is a member of "thredded"
+     When I go to the new private thread page for "thredded"
       And I enter a recipient named "john", a title "sup john" and content "This is a private thread"
       And I submit the form
       And I go to the most recently updated thread on "thredded"
@@ -44,7 +45,7 @@ Background: Default site and messageboard
   Scenario: A user cannot see a private thread
     Given a private thread exists between "Sal" and "John" titled "sal and john only please"
      When I go to the topic listing page
-     Then I should not see "sal and john only please!"
+     Then I should not see "sal and john only please"
 
   Scenario: An admin can lock or pin a new thread
     Given I am a admin of "thredded"
