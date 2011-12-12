@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111208033650) do
+ActiveRecord::Schema.define(:version => 20111212170846) do
 
   create_table "images", :force => true do |t|
     t.integer  "width"
@@ -100,6 +100,7 @@ ActiveRecord::Schema.define(:version => 20111208033650) do
     t.integer  "messageboard_id"
     t.string   "type"
     t.integer  "posts_count",     :default => 0
+    t.string   "attribs",         :default => "[]"
   end
 
   create_table "users", :force => true do |t|

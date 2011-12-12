@@ -63,6 +63,13 @@ Given /^"([^"]*)" is a member of "([^"]*)"$/ do |name, board|
   u.member_of m
 end
 
+Given /^I am a admin of "([^"]*)"$/ do |board|
+  user = User.last
+  board = Messageboard.find_by_name board
+  user.member_of board, "admin"
+end
+
+
 When /^I enter a recipient named "([^"]*)", a title "([^"]*)" and content "([^"]*)"$/ do |username, title, content|
   select username, :from => 'topic_user_id'
   And  %{I enter a title "#{title}" with content "#{content}"}
