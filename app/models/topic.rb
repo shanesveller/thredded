@@ -25,52 +25,25 @@ class Topic < ActiveRecord::Base
   accepts_nested_attributes_for :posts
 
 
-      def sticky
-        return "0" if self.attribs.nil?
-        self.attribs = ActiveSupport::JSON.decode( self.attribs ) if self.attribs.class == String
-        @sticky = self.attribs.include?("sticky") ? "1" : "0"
-      end
-
-      def sticky=(state)
-        self.attribs = "[]" if self.attribs.nil?
-        current_attribs = ActiveSupport::JSON.decode( self.attribs )
-        current_attribs.delete("sticky") if state == "0" &&  current_attribs.include?("sticky")
-        current_attribs << "sticky"      if state == "1" && !current_attribs.include?("sticky")
-        self.attribs = ActiveSupport::JSON.encode( current_attribs )
-        return state
-      end
-
-      def locked
-        return "0" if self.attribs.nil?
-        self.attribs = ActiveSupport::JSON.decode( self.attribs ) if self.attribs.class == String
-        @locked = self.attribs.include?("locked") ? "1" : "0"
-      end
-
-      def locked=(state)
-        self.attribs = "[]" if self.attribs.nil?
-        current_attribs = ActiveSupport::JSON.decode( self.attribs )
-        current_attribs.delete("locked") if state == "0" &&  current_attribs.include?("locked")
-        current_attribs << "locked"      if state == "1" && !current_attribs.include?("locked")
-        self.attribs = ActiveSupport::JSON.encode( current_attribs )
-        return state
-      end
-
   # let's slim this down a little bit
-  # [:sticky, :locked].each do |field|
-  #   class_eval %Q{
-  #     def #{field}
-  #       attribs = ActiveSupport::JSON.decode( attribs )
-  #       @#{field} = attribs.include?("#{field}") ? "1" : "0"
-  #     end
+  [:locked].each do |field|
+    class_eval %Q{
+      def #{field}
+        return "0" if self.attribs.nil?
+        self.attribs = ActiveSupport::JSON.decode( self.attribs ) if self.attribs.class == String
+        @#{field} = self.attribs.include?("#{field}") ? "1" : "0"
+      end
 
-  #     def #{field}=(state)
-  #       current_attribs = ActiveSupport::JSON.decode( attribs )
-  #       current_attribs.delete("#{field}") if state == "0" &&  current_attribs.include?("#{field}")
-  #       current_attribs << "#{field}"      if state == "1" && !current_attribs.include?("#{field}")
-  #       attribs = ActiveSupport::JSON.encode( current_attribs )
-  #     end
-  #   }
-  # end
+      def #{field}=(state)
+        self.attribs = "[]" if self.attribs.nil?
+        current_attribs = ActiveSupport::JSON.decode( self.attribs )
+        current_attribs.delete("#{field}") if state == "0" &&  current_attribs.include?("#{field}")
+        current_attribs << "#{field}"      if state == "1" && !current_attribs.include?("#{field}")
+        self.attribs = ActiveSupport::JSON.encode( current_attribs )
+        return state
+      end
+    }
+  end
   
   # TODO: Remove permission column from Topics table
   def public? 

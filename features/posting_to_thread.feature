@@ -3,17 +3,22 @@ Feature: Reply to a thread
   A user
   Should submit new content and see it on that thread's page
 
+Background: Default site and messageboard
+    Given the default "public" website domain is "example.com"
+      And the default website has a messageboard named "thredded"
+      And I am signed in as "Joel"
+      And I am a member of "thredded"
+      And "thredded" is "public"
+
   Scenario: The member adds a new reply
-    Given a messageboard named "thredded" that I, "joel", am a "member" of
-      And a thread already exists on "thredded"
+    Given a thread already exists on "thredded"
      When I go to the most recently updated thread on "thredded"
       And I select "bbcode" from "Filter"
       And I submit some drivel like "oh my god this is the greatest, most [i]AMAZING[/i] thread of ALL TIME."
      Then I should see "oh my god this is the greatest, most AMAZING thread of ALL TIME."
 
   Scenario: The member adds a new reply with the textile filter
-    Given a messageboard named "thredded" that I, "joel", am a "member" of
-      And a thread already exists on "thredded"
+    Given a thread already exists on "thredded"
      When I go to the most recently updated thread on "thredded"
       And I select "textile" from "Filter"
       And I submit some drivel like "oh my god this is the greatest, most __AMAZING__ thread of ALL TIME."

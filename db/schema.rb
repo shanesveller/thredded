@@ -101,6 +101,7 @@ ActiveRecord::Schema.define(:version => 20111212170846) do
     t.string   "type"
     t.integer  "posts_count",     :default => 0
     t.string   "attribs",         :default => "[]"
+    t.boolean  "sticky",          :default => false
   end
 
   create_table "users", :force => true do |t|

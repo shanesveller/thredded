@@ -6,10 +6,7 @@ Given /^a messageboard named "([^"]*)" that I, "([^"]*)", am an? "([^"]*)" of$/ 
       :password              => "password",
       :password_confirmation => "password"
   end
-  m = Factory :messageboard,
-    :name                  => messageboard,
-    :security              => :public
-  # u.member_of(m)
+  m = Factory :messageboard, :name => messageboard
   u.send "#{role}_of".to_sym, m
 end
 
@@ -23,9 +20,10 @@ When /^I submit the form$/ do
 end
 
 Given /^a thread already exists on "([^"]*)"$/ do |board|
+  u = User.last
   m = Messageboard.where(:name => board).first
-  t = m.topics.create(:last_user => "admin", :title => "thready thread", :user => "admin", :post_count => 1)
-  t.posts.create(:content => "FIRST!", :user => "admin")
+  t = m.topics.create(:last_user => u, :title => "thready thread", :user => u, :post_count => 1)
+  t.posts.create(:content => "FIRST!", :user => u)
 end
 
 When /^I submit some drivel like "([^"]*)"$/ do |content|
