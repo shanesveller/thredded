@@ -2,38 +2,36 @@
 
 
 Given /^a new thread by "([^"]*)" named "([^"]*)" exists on "([^"]*)"$/ do |username, title, messageboard|
-  u = User.where(:name => username).first || Factory(:user, :name => username, :email => "#{username}@email.com")
-  m = Messageboard.where(:name => messageboard).first
-  t = Factory :topic, :title => title, :messageboard => m, :user => u.name, :post_count => 1
+  @user = User.where(:name => username).first || Factory(:user, :name => username+"s", :email => "#{username}s@email.com")
+  @messageboard = Messageboard.where(:name => messageboard).first
+  @topic = Factory :topic, :title => title, :messageboard => @messageboard, :user => @user
 end
 
 Given /^the latest thread on "([^"]*)" has several posts$/ do |messageboard|
   Given %{a new thread by "joel" named "oh hello" exists on "#{messageboard}"}
-  messageboard = Messageboard.where(:name => messageboard).first
   2.times do |index|
-    messageboard.topics.latest.first.posts.create(:content => "post ##{index}", :user => "joel")
+    @topic.posts.create(:content => "post ##{index}", :user => @user, :messageboard => @messageboard)
   end
-  messageboard.topics.latest.first.save
+  @topic.save
 end
 
-Given /^the ([^"]*) post on the most recent thread is joels$/ do |position|
-  latest_topic = Messageboard.first.topics.latest.first
+Given /^the ([^"]*) post on the most recent thread is mine$/ do |position|
   if "last" == position
-    latest_topic.posts.last.user = "joel"
+    @topic.posts.last.user = @user
   elsif "first" == position
-    latest_topic.posts.first.user = "joel"
+    @topic.posts.first.user = @user
   end
-  latest_topic.save
+  @topic.save
 end
 
-Given /^the ([^"]*) post on the most recent thread is not joels/ do |position|
-  latest_topic = Messageboard.first.topics.latest.first
+Given /^the ([^"]*) post on the most recent thread is not mine/ do |position|
+  @not_me = Factory(:user, :name => "notme", :email => "notme@email.com")
   if "last" == position
-    latest_topic.posts.last.user = "notjoel"
+    @topic.posts.last.user = @not_me
   elsif "first" == position
-    latest_topic.posts.first.user = "notjoel"
+    @topic.posts.first.user = @not_me
   end
-  latest_topic.save
+  @topic.save
 end
 
 # Assertions ==========================
