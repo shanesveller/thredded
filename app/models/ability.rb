@@ -44,11 +44,11 @@ class Ability
 
     can :manage, Topic do |topic|
       user.admins?(topic.messageboard) ||
-      topic.user == user.name
+      topic.user == user
     end
     
     can :manage, Post do |post|
-      user.admins?(post.topic.messageboard) || post.user == user.name
+      user.admins?(post.topic.messageboard) || post.user == user
     end
     
 

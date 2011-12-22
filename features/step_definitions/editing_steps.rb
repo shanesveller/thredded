@@ -16,12 +16,10 @@ Given /^the latest thread on "([^"]*)" has several posts$/ do |messageboard|
 end
 
 Given /^the ([^"]*) post on the most recent thread is mine$/ do |position|
-  if "last" == position
-    @topic.posts.last.user = @user
-  elsif "first" == position
-    @topic.posts.first.user = @user
-  end
-  @topic.save
+  post = @topic.posts.last if "last" == position
+  post = @topic.posts.first if "first" == position
+  post.user = @current_user
+  post.save
 end
 
 Given /^the ([^"]*) post on the most recent thread is not mine/ do |position|
