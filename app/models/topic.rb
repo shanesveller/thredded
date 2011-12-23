@@ -12,7 +12,7 @@ class Topic < ActiveRecord::Base
   delegate :name, :name=, :email, :email=, :to => :user, :prefix => true
 
   # validations
-  validates_presence_of :messageboard_id
+  validates_presence_of [:last_user_id, :messageboard_id]
   validates_numericality_of :posts_count
 
   # lock it down

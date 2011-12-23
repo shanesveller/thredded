@@ -39,8 +39,8 @@ class User < ActiveRecord::Base
     roles << Role.create(:level => as, :messageboard => messageboard) and save
   end
 
-  def admin_of(messageboard, as=:member)
-    member_of(messageboard, :admin)
+  def admin_of(messageboard)
+    member_of(messageboard, 'admin')
   end
 
   def logged_in?

@@ -48,6 +48,8 @@ module Thredded
 
     def bootstrap(config)
       @config     = config
+      # TODO : `create_anonymous_user` method doesn't even exist. create it.
+      anonymous   = create_anonymous_user
       admin       = create_admin_user(config[:username], config[:email], config[:password])
       site_board  = create_site_and_messageboard(admin, config[:sitetitle], config[:messageboard], config[:security], config[:permission])
       first_topic = create_first_thread(admin, site_board)

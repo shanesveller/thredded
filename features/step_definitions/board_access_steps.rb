@@ -19,3 +19,8 @@ end
 Given /^I am an anonymous visitor$/ do
   user = User.new
 end
+
+Given /^I am an admin for "([^"]*)"$/ do |name|
+  @current_user.admin_of Messageboard.find_by_name(name)
+end
+

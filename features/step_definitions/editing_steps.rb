@@ -4,7 +4,7 @@
 Given /^a new thread by "([^"]*)" named "([^"]*)" exists on "([^"]*)"$/ do |username, title, messageboard|
   @user = User.where(:name => username).first || Factory(:user, :name => username+"s", :email => "#{username}s@email.com")
   @messageboard = Messageboard.where(:name => messageboard).first
-  @topic = Factory :topic, :title => title, :messageboard => @messageboard, :user => @user
+  @topic = Factory :topic, :title => title, :messageboard => @messageboard, :user => @user, :last_user => @user
 end
 
 Given /^the latest thread on "([^"]*)" has several posts$/ do |messageboard|
