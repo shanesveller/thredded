@@ -24,14 +24,9 @@ class TopicsController < ApplicationController
   end
  
   def update
+    debugger
     topic.update_attributes(params[:topic])
     redirect_to messageboard_topic_path(messageboard, topic)
-  end
-
-  # ======================================
-
-  def current_user_name 
-    @current_user_name ||= current_user.nil? ? "anonymous" : current_user.name
   end
 
   # ======================================

@@ -11,7 +11,7 @@ Background: Default site and messageboard
       And "thredded" is "public"
 
   Scenario: The member edits his own thread
-      When I go to the add a new thread page for "thredded"
+      When I go to the new thread page for "thredded"
        And I enter a title "This is a new thread" with content "Content for this new thread will show up here"
        And I submit the form
        And I go to the most recently updated thread on "thredded"

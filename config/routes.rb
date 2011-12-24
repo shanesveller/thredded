@@ -8,19 +8,22 @@ Thredded::Application.routes.draw do
   resources :users
   
   constraints(PersonalizedDomain.new) do
+    root :to => "messageboards#index"
+    match "/:messageboard_id(.:format)"                         => 'messageboards#show', :as => :messageboard
+    match "/:messageboard_id/topics(.:format)"                  => 'topics#create',      :as => :create_messageboard_topic
+    match "/:messageboard_id/topics/new/(:type)"                => 'topics#new',         :as => :new_messageboard_topic
+    match "/:messageboard_id/:topic_id/edit(.:format)"          => 'topics#edit',        :as => :edit_messageboard_topic
+    match "/:messageboard_id/:topic_id(.:format)"               => 'topics#update',     :via => :put
+    match "/:messageboard_id/:topic_id(.:format)"               => 'topics#show',        :as => :messageboard_topic
+    match "/:messageboard_id/:topic_id/posts(.:format)"         => 'posts#create',       :as => :create_messageboard_topic_post
+    match "/:messageboard_id/:topic_id/:post_id(.:format)"      => 'posts#update',      :via => :put
+    match "/:messageboard_id/:topic_id/:post_id(.:format)"      => 'posts#show',         :as => :messageboard_topic_post
+    match "/:messageboard_id/:topic_id/:post_id/edit(.:format)" => 'posts#edit',         :as => :edit_messageboard_topic_post
     resources :messageboards do
       resources :topics do
         resources :posts
       end
     end
-    root :to => "messageboards#index"
-    match "/:messageboard_id(.:format)"                         => 'messageboards#show', :as => :messageboard
-    match "/:messageboard_id/topics(.:format)"                  => 'topics#create',      :as => :create_messageboard_topic
-    match "/:messageboard_id/topics/new/(:type)"                => 'topics#new',         :as => :new_messageboard_topic
-    match "/:messageboard_id/:topic_id(.:format)"               => 'topics#show',        :as => :messageboard_topic
-    match "/:messageboard_id/:topic_id/posts(.:format)"         => 'posts#create',       :as => :create_messageboard_topic_post
-    match "/:messageboard_id/:topic_id/:post_id(.:format)"      => 'posts#show',         :as => :messageboard_topic_post
-    match "/:messageboard_id/:topic_id/:post_id/edit(.:format)" => 'posts#edit',         :as => :edit_messageboard_topic_post
   end
 
   root :to => "home#index"

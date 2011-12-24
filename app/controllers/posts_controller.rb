@@ -22,11 +22,7 @@ class PostsController < ApplicationController
   # ======================================
  
   def post
-    @post ||= topic.posts.find(params[:id]) 
-  end
-
-  def current_user_name 
-    @current_user_name ||= current_user.nil? ? "anonymous" : current_user.name
+    @post ||= topic.posts.find(params[:post_id]) 
   end
 
   # ======================================
