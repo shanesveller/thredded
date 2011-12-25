@@ -4,8 +4,12 @@
   .title, 
   .started, 
   .updated, 
-  .posts { background: #444; color:#fff; float: left; display: block; width: 15.5%; line-height: 24px; overflow: hidden; font-size: 11px; }
-  .title { width: 52.5%; padding-left:1%; }
+  .posts { background: #444; color:#fff; float: left; display: block; line-height: 24px; overflow: hidden; font-size: 11px; }
+
+  .title   { width: 57%; padding-left:1%; }
+  .posts   { width: 6%; }
+  .started { width: 18%; }
+  .updated { width: 18%; }
 
   article {
     clear: both;
@@ -32,11 +36,13 @@
 
     cite, time, abbr {
       position: absolute;
-      left: 53.5%;
+      left: 58%;
       top: 10px; 
 
       a { font-size: 12px; }
-      &.updated_by, &.updated_at { left: 69%; }
+
+      &.updated_by, 
+      &.updated_at { left: 76%; }
     }
     time, abbr {
       font-size: 10px;
@@ -47,10 +53,9 @@
 
     .post_count {
       font-family: $serif-font-family;
-      font-size: 20px;
-      left:84.5%;
+      left:94%;
       position:absolute;
-      top:15px;
+      top:10px;
       width: 30px;
       text-align: center;
     }

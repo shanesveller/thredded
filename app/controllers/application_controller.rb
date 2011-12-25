@@ -28,11 +28,11 @@ class ApplicationController < ActionController::Base
     end
 
     def site
-      @site ||= Site.where(:cached_domain => request.host).includes(:messageboards).first
+      @site ||= Site.where(:cached_domain => request.host).includes(:messageboards).order('messageboards.id ASC').first
     end
 
     def messageboard
-      @messageboard ||= site.messageboards.where(:name => params[:messageboard_id]).first
+      @messageboard ||= site.messageboards.where(:name => params[:messageboard_id]).order('id ASC').first
     end
 
     def topic

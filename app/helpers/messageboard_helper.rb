@@ -32,10 +32,11 @@ module MessageboardHelper
   end
 
   def latest_thread_for(messageboard)
-    if can? :read, messageboard and messageboard.topics.first.present?
-      link_to time_ago_in_words(messageboard.topics.first.updated_at)+" ago", messageboard_topic_posts_path(messageboard, messageboard.topics.first)
-    elsif messageboard.topics.first.present?
-      time_ago_in_words(messageboard.topics.first.updated_at)+" ago"
+    topic = messageboard.topics.first
+    if can? :read, messageboard and topic.present?
+      link_to time_ago_in_words(topic.updated_at)+" ago", messageboard_topic_path(messageboard, topic)
+    elsif topic.present?
+      time_ago_in_words(topic.updated_at)+" ago"
     else
       ""
     end
