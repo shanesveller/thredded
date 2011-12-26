@@ -1,11 +1,13 @@
 #topics_posts {
 
   #content article {
-    padding: 15px 0 0;
+    padding: 15px 0 15px 155px;
     margin-bottom: 10px;
+    min-height: 70px;
     border-top: solid 2px #eee;
     clear: both;
     overflow: hidden;
+    position: relative;
 
     &:last {
       border: none;
@@ -15,36 +17,56 @@
       float: left;
       text-align: left;
       background: #eee;
+      font-size: 11px;  
       padding: 10px;
       overflow: hidden;
-      margin-right: 15px; 
-      margin-top: -15px;
       width: 120px;
-      
-      a {
-        color: #999;
-        text-decoration: none;
-        margin-bottom: 10px;
-        display: block;
-        
-        img {
-          display: block;
-          width: 48px;
-          height: auto;
-          border: solid 4px #fff;
-          margin-bottom: 5px;
-          margin-left: -4px;
-        }
-        
-      }
-       
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      bottom: 0px;
       
       abbr {
         display: block; clear: both;
-        font-size: 11px;  
-        margin-bottom: 10px; 
+        margin-bottom: 7px; 
         border: none;
       }
+      img {
+        display: block;
+        float: left;
+        width: 32px;
+        height: auto;
+        border: solid 2px #fff;
+        margin-right: 8px;
+      }
+      a {
+        color: #999;
+        text-decoration: none;
+        margin-bottom: 3px;
+        display: block;
+        font-weight: bold;
+        font-size: 13px;
+        font-style: normal;
+        color: #0d75b6;
+      }
+      .meta { display: block; overflow: auto; }
+      .roles { display: block; margin-bottom: 3px; }
+      .posts_count { display: block; margin-bottom: 3px; }
+      
+    }
+
+    footer {
+      font-size: 12px;
+      position: absolute;
+      bottom: 0px;
+      left: 155px;
+      right: 0px;
+      padding: 4px;
+      opacity: 0;
+      @include transition(opacity .4s linear);
+    }
+    &:hover footer {
+      opacity: 1;
     }
   }
 }

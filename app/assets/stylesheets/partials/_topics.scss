@@ -1,67 +1,106 @@
+.cell {
+  display: inline-block; 
+  line-height: 20px; 
+  overflow: hidden; 
+  font-size: 11px; 
+  float: left;
+}
 
-#topics_listing #contentwrap section#content {
+.cell_title {
+  @extend .cell;
+  width: 49%;
+}
+.cell_posts   { 
+  @extend .cell;
+  width: 6%;
+  text-align: center;
+}
+.cell_started { 
+  @extend .cell;
+  width: 22%;
+  padding-left: 1%;
+}
+.cell_updated { 
+  @extend .cell;
+  width: 22%; 
+}
+
+#topics_listing {
 
   .title, 
   .started, 
   .updated, 
-  .posts { background: #444; color:#fff; float: left; display: block; line-height: 24px; overflow: hidden; font-size: 11px; }
+  .posts { 
+    @extend .cell;
+    background: #444; 
+    color:#fff;
+  }
 
-  .title   { width: 57%; padding-left:1%; }
-  .posts   { width: 6%; }
-  .started { width: 18%; }
-  .updated { width: 18%; }
+  .title        { @extend .cell_title;   }
+  .title:before { content:""; display:inline-block; width: 30px; }
+  .posts        { @extend .cell_posts;   }
+  .started      { @extend .cell_started; }
+  .updated      { @extend .cell_updated; }
 
   article {
     clear: both;
     position: relative;
-    height: 40px;
-    padding: 10px 0;
+    overflow: auto;
 
     &:nth-child(2n+1) { background-color: #F9F9F9; }
     &.private { background-color: #fcfcd7; border-bottom: solid 2px #aaab72; }
 
+    .started_by,
+    .updated_by, 
+    .post_count,
+    h1 a { 
+      padding-top: 5px; 
+      padding-bottom: 5px; 
+    }
+
     h1 { 
-      background: url("/assets/thread_sprite.gif") no-repeat scroll 10px -90px transparent;
-      width: 44%; 
-      padding-left: 4%;
+      @extend .cell_title;
+
       a {
+        background: url("/assets/thread_sprite.gif") no-repeat scroll 7px -87px transparent;
+        padding-left: 30px;
         font-weight: normal;
         font-size: 14px;
+        display: inline-block;
       }
     }
+    &.sticky        h1  a { background-position: 10px -28px; }
+    &.locked        h1  a { background-position: 10px -59px; }
+    &.sticky.locked h1  a { background-position: 10px 3px; padding-left: 6%; }
 
-    &.sticky h1         { background-position: 10px -28px; }
-    &.locked h1         { background-position: 10px -59px; }
-    &.sticky.locked h1  { background-position: 10px 3px; padding-left: 6%; }
+    cite, 
+    time, 
+    abbr { border: none; }
 
-    cite, time, abbr {
-      position: absolute;
-      left: 58%;
-      top: 10px; 
-
-      a { font-size: 12px; }
-
-      &.updated_by, 
-      &.updated_at { left: 76%; }
+    .started_by {
+      @extend .cell_started;
     }
-    time, abbr {
-      font-size: 10px;
-      top: 31px;
-      width: 13%;
-      border: none;
+    .updated_by { 
+      @extend .cell_updated;
+    }
+    .started_by a,
+    .updated_by a {
+      font-style: normal;
+      font-weight: bold;
+      color: #999;
+      text-decoration: none;
+    }
+
+    .timeago:after {
+      content: " by";
     }
 
     .post_count {
-      font-family: $serif-font-family;
-      left:94%;
-      position:absolute;
-      top:10px;
-      width: 30px;
-      text-align: center;
+      @extend .cell_posts;
+      background: #eee;
     }
   }
 
-  footer {
-    a { font-size: 12px; color: #CC0000; }
-  }
+  footer a { font-size: 12px; color: #CC0000; }
+  
 }

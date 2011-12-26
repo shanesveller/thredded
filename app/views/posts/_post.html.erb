@@ -2,11 +2,13 @@
   <header>	
     <abbr class="timeago" title="<%= post.created_timestamp %>"><%= post.created_date %></abbr>
     <cite>
-      <a href="/users/<%= post.user.to_param %>">
-        <%= image_tag post.gravatar_url %>
-        <%= post.user.to_param %>
-      </a>
+      <%= image_tag post.gravatar_url, :class => "avatar" %>
+      <a href="/users/<%= post.user.to_param %>"><%= post.user.to_param %></a>
     </cite>
+    <div class="meta">
+      <span class="roles"><%= post.user.roles.for(messageboard).map{|r| r.level }.to_sentence %></span>
+      <span class="posts_count"><%= post.user.posts_count %> posts</span>
+    </div>
   </header>
   <p><%= render_content_for(post) %></p>
   <footer>
