@@ -1,3 +1,12 @@
+.submit_button {
+    border: solid 1px #999;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 18px;
+    padding: 5px 6px 3px;
+    @include background-image(linear-gradient(#ffffff, #bfbfbf));
+}
+
 #topics_new {
   label { display: block; clear: both; font-size: 12px; text-transform: lowercase; margin: 10px 0 4px 0; color: #888; font-size: 12px;  }
   label[for="topic_title"] { display: none; }
@@ -34,13 +43,8 @@
   }
 
   p.submit input {
-    border: solid 1px #999;
-    font-size: 14px;
-    font-weight: bold;
+    @extend .submit_button;
     margin: 15px 0 0;
-    line-height: 18px;
-    padding: 5px 6px 3px;
-    @include background-image(linear-gradient(#ffffff, #bfbfbf));
   }
 
   #topic_posts_attributes_0_filter {

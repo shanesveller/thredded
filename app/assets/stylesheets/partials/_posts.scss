@@ -1,7 +1,7 @@
 #topics_posts {
 
-  #content article {
-    padding: 15px 0 15px 155px;
+  article {
+    padding: 15px 0 30px 155px;
     margin-bottom: 10px;
     min-height: 70px;
     border-top: solid 2px #eee;
@@ -67,6 +67,46 @@
     }
     &:hover footer {
       opacity: 1;
+    }
+
+    p {
+      font-size: .9em;
+      line-height: 1.3em;
+    }
+  }
+
+  #new_post {
+    p {
+      padding-left: 155px;
+      border-top: solid 2px #EEE;
+      padding-top: 16px;
+    }
+    label {
+      color: #888;
+      font-size: 12px;
+      text-transform: lowercase;
+      clear: both; 
+      display: block;
+      margin-bottom: 10px;
+    }
+    textarea {
+      display: block;
+      clear: both;
+      @include border-radius(3px); 
+      border: solid 1px #999; 
+      font-size: 18px; 
+      line-height: 26px; 
+      padding: 6px; 
+      color: #333;
+      width: 98%;
+      margin-bottom: 10px;
+    }
+    select {
+      float: right;
+    }
+    input[type="submit"] {
+      @extend .submit_button;
+      margin-left: 155px;
     }
   }
 }

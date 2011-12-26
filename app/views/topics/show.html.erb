@@ -11,27 +11,37 @@
 <% end %>
 
   <header>
-    <nav>
+    <nav class="breadcrumbs">
       <ul>
         <li><a href="/">Forums</a> &rarr; </li>
         <li><%= link_to messageboard.title, messageboard_path(messageboard) %> &rarr; </li>
       </ul>
     </nav>
     <h1><%= topic.title %></h1> 
+    <h2><%= topic.posts_count %> posts</h2>
     <% if topic.users_to_sentence %>
       <cite><%= topic.users_to_sentence %></cite>
     <% end %>
   </header>
 
   <%= render topic.posts %>
-
-  <%= form_for [messageboard, topic, @post] do |f| %>
-    <p>
-      <%= f.label :filter %>
+  
+  <% if can? :create, Post %>
+    <%= form_for [messageboard, topic, @post] do |f| %>
+      <p>
+        <%= f.label :your_reply %>
+        <%= f.text_area :content, :rows => 5 %>
+      </p>
       <%= f.select :filter, Post.filters %>
-
-      <%= f.label :your_content %>:
-      <%= f.text_area :content, :rows => 5 %>
-    </p>
-    <%= f.submit "Submit" %>
+      <%= f.submit "Submit" %>
+    <% end -%>
   <% end -%>
+
+  <footer>
+    <nav class="breadcrumbs">
+      <ul>
+        <li><a href="/">Forums</a> &rarr; </li>
+        <li><%= link_to messageboard.title, messageboard_path(messageboard) %> &rarr; </li>
+      </ul>
+    </nav>
+  </footer>
