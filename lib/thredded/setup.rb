@@ -1,4 +1,5 @@
 require "highline"
+require 'ruby-debug'
 
 # A ginormous thank you to the Radiant CMS team for direction in how to implement the setup and bootstrapping of a project.
 # For more information - https://github.com/radiant/radiant/blob/master/lib/radiant/setup.rb
@@ -32,7 +33,7 @@ module Thredded
               other_user.member_of(messageboard)
             end
             50.times do
-              topic = Topic.create(:user => user, :messageboard => messageboard, :title => Faker::Lorem.words(5).join(' '))
+              topic = Topic.create(:user => user, :last_user => user, :messageboard => messageboard, :title => Faker::Lorem.words(5).join(' '))
               10.times do
                 post = Post.create(:content => Faker::Lorem.paragraph, :user => user, :ip => "127.0.0.1", :topic => topic, :messageboard => messageboard)
               end
@@ -48,19 +49,28 @@ module Thredded
 
     def bootstrap(config)
       @config     = config
-      # TODO : `create_anonymous_user` method doesn't even exist. create it.
       anonymous   = create_anonymous_user
       admin       = create_admin_user(config[:username], config[:email], config[:password])
       site_board  = create_site_and_messageboard(admin, config[:sitetitle], config[:messageboard], config[:security], config[:permission])
       first_topic = create_first_thread(admin, site_board)
-      announce "Finished."
+      announce "Finished. One last thing - please make sure that all configuration in thredded_config.yml is complete!"
     end
 
     def create_first_thread(admin, messageboard)
-      first_topic = messageboard.topics.create(:user => admin, :title => "Welcome to your site's very first thread")
+      first_topic = messageboard.topics.create(:user => admin, :last_user => admin, :title => "Welcome to your site's very first thread")
       first_topic.save
       first_topic.posts.create(:content => "There's not a whole lot here for now.", :user => admin, :ip => "127.0.0.1")
       first_topic
+    end
+
+    def create_anonymous_user
+      attributes = {
+        :name => "anonymous",
+        :email => "anonymous@localhost",
+        :password => "anonymous"
+      }
+      anon = User.create attributes
+      anon
     end
 
     def create_admin_user(username, email, password)
@@ -86,7 +96,8 @@ module Thredded
       unless sitetitle and messageboard and security
         announce "Create your messageboard (press enter for defaults)."
         sitetitle          = prompt_for_sitetitle    unless sitetitle
-        siteslug           = sitetitle.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
+        # subdomain          = sitetitle.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
+        subdomain          = prompt_for_subdomain
         sitedesc           = "Just another internet messageboard"
         messageboard_title = prompt_for_messageboard unless messageboard
         messageboard       = messageboard_title.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
@@ -95,7 +106,10 @@ module Thredded
       end
 
       #TODO: CREATE THE SITE OBJECT. Site doesn't exist yet.  Do it.
-      new_site = Site.create(:user => user, :slug => siteslug, :title => sitetitle, :description => sitedesc)
+      new_site = Site.create(:user        => user, 
+                             :subdomain   => subdomain, 
+                             :title       => sitetitle, 
+                             :description => sitedesc)
 
       attributes = {
         :title              => messageboard_title,
@@ -117,6 +131,16 @@ module Thredded
     end
     
     private 
+
+      def prompt_for_subdomain
+        subdomain = ask('Default site subdomain (www): ', String) do |q|
+          q.validate = /^[a-z0-9]{1,10}$/
+          q.responses[:not_valid] = "Invalid subdomain. It must only be letters or numbers and less than 10 characters long."
+          q.whitespace = :strip
+        end
+        subdomain = "www" if subdomain.blank?
+        subdomain
+      end
 
       def prompt_for_username
         username = ask('Name (Admin): ', String) do |q|
