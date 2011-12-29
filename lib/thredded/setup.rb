@@ -48,18 +48,20 @@ module Thredded
     attr_accessor :config
 
     def bootstrap(config)
+      announce "Before starting -- please make sure that all configuration in thredded_config.yml is complete!"
       @config     = config
       anonymous   = create_anonymous_user
       admin       = create_admin_user(config[:username], config[:email], config[:password])
       site_board  = create_site_and_messageboard(admin, config[:sitetitle], config[:messageboard], config[:security], config[:permission])
       first_topic = create_first_thread(admin, site_board)
-      announce "Finished. One last thing - please make sure that all configuration in thredded_config.yml is complete!"
+      announce "Finished. Enjoy!"
+      # TODO: open browser with the new configured site/messageboard if on a Mac or Linux
     end
 
     def create_first_thread(admin, messageboard)
       first_topic = messageboard.topics.create(:user => admin, :last_user => admin, :title => "Welcome to your site's very first thread")
       first_topic.save
-      first_topic.posts.create(:content => "There's not a whole lot here for now.", :user => admin, :ip => "127.0.0.1")
+      first_topic.posts.create(:content => "There's not a whole lot here for now.", :user => admin, :ip => "127.0.0.1", :messageboard => messageboard)
       first_topic
     end
 
@@ -133,12 +135,14 @@ module Thredded
     private 
 
       def prompt_for_subdomain
-        subdomain = ask('Default site subdomain (www): ', String) do |q|
-          q.validate = /^[a-z0-9]{1,10}$/
-          q.responses[:not_valid] = "Invalid subdomain. It must only be letters or numbers and less than 10 characters long."
+        subdomain = ask('Default site subdomain - cannot be admin or blog. (forum): ', String) do |q|
+          q.validate = proc do |s|
+            s != "admin" and s != "blog" and s =~ /^[a-z0-9]{0,10}$/
+          end
+          q.responses[:not_valid] = "Invalid subdomain. It must only be letters or numbers, less than 10 characters long and NOT \"admin\" or \"blog\"."
           q.whitespace = :strip
         end
-        subdomain = "www" if subdomain.blank?
+        subdomain = "forum" if subdomain.blank?
         subdomain
       end
 

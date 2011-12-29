@@ -11,7 +11,7 @@ class Site  < ActiveRecord::Base
                           :title,
                           :description
   validates_exclusion_of  :subdomain,
-                          :in => %w(admin blog www), 
+                          :in => %w(admin blog),
                           :message => "is taken"
   
   def topics_count
