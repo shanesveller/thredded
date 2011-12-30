@@ -9,13 +9,13 @@ defaults: &defaults
   # default_messageboard_home: "topics"        # => messageboards#show where :messageboard_id == default_messageboard_name
 
 development:
-  domain: localhost
   <<: *defaults
+  domain: localhost
 
 test:
-  domain: test
   <<: *defaults
+  domain: test
 
 production:
-  domain: domain.com
   <<: *defaults
+  domain: domain.com
