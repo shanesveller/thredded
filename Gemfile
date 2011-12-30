@@ -6,8 +6,8 @@ gem 'pg'
 
 gem 'rack'
 gem 'rake'                        , '0.8.7'
-gem 'rails'                       , '3.1.0'
-gem 'devise'                      , '1.4.4'
+gem 'rails'                       , '3.1.3'
+gem 'devise'                      , '1.5.3'
 gem 'cancan'                      , '1.6.4'
 gem 'mini_magick'                 , '3.2.1'
 gem 'carrierwave'                 , '0.5.3'
@@ -18,7 +18,7 @@ gem 'gravtastic'
 gem 'nokogiri'                    , '1.4.6'
 gem 'kaminari'                    , '0.12.4'
 gem 'bb-ruby'                     , '0.9.5'
-gem 'RedCloth'                    , '4.2.7'
+gem 'RedCloth'                    , '4.2.9' # in OS X Lion : gem install RedCloth -- --with-cflags=-w 
 gem 'highline'                    , '1.6.1'
 gem 'escape_utils'                , '0.2.3'
 gem 'refraction'
@@ -30,7 +30,7 @@ group :assets do
   gem 'jquery-rails'
   gem 'sass-rails', "3.1.0"
   gem 'uglifier'
-  gem 'compass', :git => 'git://github.com/chriseppstein/compass.git', :branch => 'rails31'
+  gem 'compass'
 end
 
 # Test specific gems
