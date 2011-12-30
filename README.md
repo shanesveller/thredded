@@ -54,7 +54,7 @@ Whatever's stricken out still needs to be implemented
 
 	`require 'autotest/growl'`
 
-* start growl
+* start guard
 
 	`guard start &`
 
