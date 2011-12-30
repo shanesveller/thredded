@@ -78,25 +78,23 @@ Two files remain that need to be created - **config/database.yml** and **config/
 	  site_name: "My Messageboard"
 	  email: "My Messageboard Mail-Bot <noreply@mysite.com>"
 	  subject_prefix: "[My Messageboard] "
-	  default_messageboard_name: "default"
+	  default_site_name: "forum"
+	  default_messageboard_name: "misc-topics"
 	  default_messageboard_home: "home"            # => home#index
 	  # default_messageboard_home: "messageboards" # => messageboards#index
 	  # default_messageboard_home: "topics"        # => messageboards#show where :messageboard_id == default_messageboard_name
 	
 	development:
-	  domain: localhost:3000
-	  address: http://localhost:3000
 	  <<: *defaults
+	  domain: localhost
 	
 	test:
-	  domain: test:3000
-	  address: http://test:3000
 	  <<: *defaults
+	  domain: test
 	
 	production:
-	  domain: domain.com
-	  address: http://domain.com
 	  <<: *defaults
+	  domain: domain.com
 
 ***
 
