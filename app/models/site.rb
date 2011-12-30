@@ -29,8 +29,10 @@ class Site  < ActiveRecord::Base
 private
 
   def cache_domain
-    self.cached_domain = if self.cname_alias.blank?
-      "#{self.subdomain}.#{THREDDED[:default_domain]}"
+    self.cached_domain = if THREDDED[:domain] == 'localhost'
+      "localhost"
+    elsif self.cname_alias.blank?
+      "#{self.subdomain}.#{THREDDED[:domain]}"
     else
       "#{self.cname_alias}"
     end
