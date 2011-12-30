@@ -28,7 +28,15 @@ class ApplicationController < ActionController::Base
     end
 
     def site
-      @site ||= Site.where(:cached_domain => request.host).includes(:messageboards).order('messageboards.id ASC').first
+      @site ||= requested_host_site or default_messageboard_site
+    end
+
+    def default_messageboard_site
+      Site.where('messageboards.name = ?', THREDDED[:default_messageboard_name]).includes(:messageboards).order('messageboards.id ASC').first
+    end
+
+    def requested_host_site
+      Site.where(:cached_domain => request.host).includes(:messageboards).order('messageboards.id ASC').first
     end
 
     def messageboard
