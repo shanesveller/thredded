@@ -26,4 +26,3 @@ Given /^"([^"]*)" is "([^"]*)"$/ do |messageboard_name, security|
   messageboard = Messageboard.find_by_name(messageboard_name)
   messageboard.security = security and messageboard.save if messageboard
 end
-

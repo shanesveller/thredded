@@ -1,5 +1,4 @@
 require "highline"
-require 'ruby-debug'
 
 # A ginormous thank you to the Radiant CMS team for direction in how to implement the setup and bootstrapping of a project.
 # For more information - https://github.com/radiant/radiant/blob/master/lib/radiant/setup.rb
@@ -54,7 +53,7 @@ module Thredded
       admin       = create_admin_user(config[:username], config[:email], config[:password])
       site_board  = create_site_and_messageboard(admin, config[:sitetitle], config[:messageboard], config[:security], config[:permission])
       first_topic = create_first_thread(admin, site_board)
-      announce "Finished. Enjoy!"
+      announce "Finished. Start up your server with 'rails s' and enjoy!"
       # TODO: open browser with the new configured site/messageboard if on a Mac or Linux
     end
 
@@ -98,8 +97,7 @@ module Thredded
       unless sitetitle and messageboard and security
         announce "Create your messageboard (press enter for defaults)."
         sitetitle          = prompt_for_sitetitle    unless sitetitle
-        # subdomain          = sitetitle.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
-        subdomain          = prompt_for_subdomain
+        sitename           = prompt_for_sitename
         sitedesc           = "Just another internet messageboard"
         messageboard_title = prompt_for_messageboard unless messageboard
         messageboard       = messageboard_title.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
@@ -109,8 +107,8 @@ module Thredded
 
       #TODO: CREATE THE SITE OBJECT. Site doesn't exist yet.  Do it.
       new_site = Site.create(:user        => user, 
-                             :subdomain   => subdomain, 
-                             :title       => sitetitle, 
+                             :subdomain   => sitename, 
+                             :title       => sitetitle,
                              :description => sitedesc)
 
       attributes = {
@@ -134,16 +132,17 @@ module Thredded
     
     private 
 
-      def prompt_for_subdomain
-        subdomain = ask('Default site subdomain - cannot be admin or blog. (forum): ', String) do |q|
+      def prompt_for_sitename
+        sitename = ask('Website name - Cannot be admin or blog, must be letters and/or numbers and contain no spaces (forum): ', String) do |q|
           q.validate = proc do |s|
             s != "admin" and s != "blog" and s =~ /^[a-z0-9]{0,10}$/
           end
-          q.responses[:not_valid] = "Invalid subdomain. It must only be letters or numbers, less than 10 characters long and NOT \"admin\" or \"blog\"."
+          q.responses[:not_valid] = "Invalid site name. It must only be letters or numbers, less than 10 characters long and NOT \"admin\" or \"blog\"."
           q.whitespace = :strip
         end
-        subdomain = "forum" if subdomain.blank?
-        subdomain
+        sitename = "forum" if sitename.blank?
+        announce "Make sure to change :default_site_name in thredded_config.yml to '#{sitename}'." if sitename != "forum"
+        sitename
       end
 
       def prompt_for_username
@@ -187,12 +186,16 @@ module Thredded
       end
       
       def prompt_for_messageboard
-        messageboard = ask('Messageboard name (ex: Misc Topics): ', String) do |q|
+        messageboard = ask('Messageboard name (Misc Topics): ', String) do |q|
           q.validate = /^.{0,20}$/
           q.responses[:not_valid] = "Invalid messageboard name. It must be less than 20 characters long."
           q.whitespace = :strip
         end
         messageboard = "Misc Topics" if messageboard.blank?
+        if messageboard != "Misc Topics"
+          messageboard_slug = messageboard.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
+          announce "Make sure to change :default_messageboard_name in thredded_config.yml to '#{messageboard_slug}'." 
+        end
         messageboard
       end
       
