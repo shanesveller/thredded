@@ -1,29 +1,26 @@
+defaults: &defaults
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  pool: 5
+  username: root
+  password: 
+  socket: /tmp/mysql.sock
+
 development:
-  adapter: mysql2
-  encoding: utf8
-  reconnect: false
+  <<: *defaults
   database: thredded_dev
-  pool: 5
   username: username
   password: password
-  socket: /tmp/mysql.sock
 
 test:
-  adapter: mysql2
-  encoding: utf8
-  reconnect: false
+  <<: *defaults
   database: thredded_test
-  pool: 5
   username: username
   password: password
-  socket: /tmp/mysql.sock
 
 test:
-  adapter: mysql2
-  encoding: utf8
-  reconnect: false
+  <<: *defaults
   database: thredded_production
-  pool: 5
   username: username
   password: password
-  socket: /tmp/mysql.sock

@@ -1,23 +1,21 @@
-DEFAULTS: &DEFAULTS
+defaults: &defaults
   site_name: "My Messageboard"
   email: "My Messageboard Mail-Bot <noreply@mysite.com>"
   subject_prefix: "[My Messageboard] "
-  default_messageboard_name: "default"
-  default_messageboard_home: "home" # or "topics"
-  multi_site: false
-  multi_site_location: "path" # or "subdomain"
- 
+  default_site_name: "forum"
+  default_messageboard_name: "misc-topics"
+  default_messageboard_home: "home"            # => home#index
+  # default_messageboard_home: "messageboards" # => messageboards#index
+  # default_messageboard_home: "topics"        # => messageboards#show where :messageboard_id == default_messageboard_name
+
 development:
-  domain: localhost:3000
-  address: http://localhost:3000
-  <<: *DEFAULTS
-  
+  domain: localhost
+  <<: *defaults
+
 test:
-  domain: test:3000
-  address: http://test:3000
-  <<: *DEFAULTS
- 
+  domain: test
+  <<: *defaults
+
 production:
   domain: domain.com
-  address: http://domain.com
-  <<: *DEFAULTS
+  <<: *defaults
