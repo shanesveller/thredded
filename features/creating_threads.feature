@@ -26,10 +26,10 @@ Background: Default site and messageboard
           | topic 3     | I should be the very latest |
      When I go to the messageboard "thredded"
      Then the topic listing should look like the following:
-          | Topic Title | Started | Updated | Posts |
-          | topic 3     | Joel    | Joel    | 1     |
-          | topic 2     | Joel    | Joel    | 1     |
-          | topic 1     | Joel    | Joel    | 1     |
+          | Topic Title | Posts | Started | Updated |
+          | topic 3     | 1     | Joel    | Joel    |
+          | topic 2     | 1     | Joel    | Joel    |
+          | topic 1     | 1     | Joel    | Joel    |
 
   Scenario: The user adds a private thread
     Given another member named "john" exists

@@ -1,11 +1,13 @@
 require 'spec_helper'
+require 'ruby-debug'
 
 describe Post do
 
   describe "#create" do
 
     before(:each) do
-      @topic = Factory(:topic)
+      @shaun = Factory(:user, :name => "shaun", :email => "shaun@thredded.com")
+      @topic = Factory(:topic, :last_user => @shaun)
       @messageboard = @topic.messageboard
       @post  = Factory.build(:post)
       @joel = Factory(:user, :name => "joel", :email => "joel@thredded.com")
@@ -23,7 +25,7 @@ describe Post do
     end
 
     it "increments the topic's and user's post counts" do
-      3.times do; @topic.posts.create!(:user => @joel, :content => "content", :messageboard => @messageboard); end
+      3.times do; @topic.posts.create!(:user => @joel, :last_user => @joel, :content => "content", :messageboard => @messageboard); end
       @topic.reload.posts_count.should == 3
       @joel.reload.posts_count.should  == 3
     end
@@ -36,7 +38,12 @@ describe Post do
     end
     
     it "sets the post user's email on creation" do
-      @new_post = Factory(:post, :user => @joel, :content => "by joel", :messageboard => @messageboard)
+      @new_post = Post.create(:user => @shaun, 
+                              :topic => @topic, 
+                              :messageboard => @messageboard,
+                              :content => "this is a post from shaun",
+                              :ip => "255.255.255.0",
+                              :filter => "bbcode")
       @new_post.user_email.should == @new_post.user.email
     end
     

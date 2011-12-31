@@ -106,6 +106,10 @@ Now that those two files are created and the settings are correct we can move on
 
 		rake db:create db:migrate db:bootstrap
 
+  and for your testing environment
+
+    RAILS_ENV=test rake db:create db:migrate
+
   That should get everything situated in the database for you.
 * **Note:** If you set your default messageboard's name to something other than "misc-topics" then make sure to change `default_messageboard_name` in _thredded_config.yml_ to the name of the board you entered during `rake db:bootstrap`.
 * start the server with 
