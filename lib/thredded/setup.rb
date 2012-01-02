@@ -1,4 +1,5 @@
 require "highline"
+require "ruby-debug" 
 
 # A ginormous thank you to the Radiant CMS team for direction in how to implement the setup and bootstrapping of a project.
 # For more information - https://github.com/radiant/radiant/blob/master/lib/radiant/setup.rb
@@ -58,9 +59,19 @@ module Thredded
     end
 
     def create_first_thread(admin, messageboard)
-      first_topic = messageboard.topics.create(:user => admin, :last_user => admin, :title => "Welcome to your site's very first thread")
-      first_topic.save
-      first_topic.posts.create(:content => "There's not a whole lot here for now.", :user => admin, :ip => "127.0.0.1", :messageboard => messageboard)
+      first_topic = messageboard.topics.create( :user => admin, 
+                                                :last_user => admin, 
+                                                :title => "Welcome to your site's very first thread",
+                                                :posts_attributes => {
+                                                  "0" => {
+                                                    :content => "There's not a whole lot here for now.", 
+                                                    :user => admin, 
+                                                    :ip => "127.0.0.1", 
+                                                    :messageboard => messageboard
+                                                  }
+                                                }
+                                              )
+      raise first_topic.errors if first_topic.errors.size > 0
       first_topic
     end
 
