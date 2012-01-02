@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :site
-  helper_method :site, :messageboard, :topic
+  helper_method :site, :messageboard, :topic, :tz_offset
 
   rescue_from CanCan::AccessDenied do |exception|
     flash[:error] = exception.message
@@ -45,6 +45,11 @@ class ApplicationController < ActionController::Base
 
     def topic
       @topic ||= messageboard.topics.find(params[:topic_id])
+    end
+
+    def tz_offset
+      # Time.zone = current_user.time_zone if current_user
+      @tz_offset ||= Time.zone.utc_offset / 1.hour
     end
 
 end

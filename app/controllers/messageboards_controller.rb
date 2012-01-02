@@ -8,7 +8,9 @@ class MessageboardsController < ApplicationController
   end
 
   def show
-    redirect_to default_home, :flash => { :error => "You are not authorized access to this messageboard." } and return unless site.present? and can? :read, messageboard
+    unless site.present? and can? :read, messageboard
+      redirect_to default_home, :flash => { :error => "You are not authorized access to this messageboard." } and return 
+    end
     @topics = messageboard.topics
     @messageboards = site.messageboards
   end

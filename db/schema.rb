@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111212170846) do
+ActiveRecord::Schema.define(:version => 20120102025140) do
 
   create_table "images", :force => true do |t|
     t.integer  "width"
@@ -105,8 +105,8 @@ ActiveRecord::Schema.define(:version => 20111212170846) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                               :default => "",    :null => false
-    t.string   "encrypted_password",   :limit => 128, :default => "",    :null => false
+    t.string   "email",                               :default => "",                           :null => false
+    t.string   "encrypted_password",   :limit => 128, :default => "",                           :null => false
     t.string   "reset_password_token"
     t.string   "remember_token"
     t.datetime "remember_created_at"
@@ -117,11 +117,12 @@ ActiveRecord::Schema.define(:version => 20111212170846) do
     t.string   "last_sign_in_ip"
     t.string   "authentication_token"
     t.string   "name"
-    t.boolean  "superadmin",                          :default => false, :null => false
+    t.boolean  "superadmin",                          :default => false,                        :null => false
     t.integer  "posts_count",                         :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "topics_count",                        :default => 0
+    t.string   "time_zone",                           :default => "Eastern Time (US & Canada)"
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true
