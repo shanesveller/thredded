@@ -31,11 +31,11 @@ class Post  < ActiveRecord::Base
   def filters;      Filters; end
 
   def created_timestamp
-    created_at.strftime("%Y-%m-%dT%I:%M:%S") if created_at
+    created_at.strftime("%Y-%m-%dT%H:%M:%S") if created_at
   end
 
   def created_date 
-    created_at.strftime("%B %d, %Y") if created_at
+    created_at.strftime("%b %d, %Y %I:%M:%S %Z") if created_at
   end
 
   private
