@@ -96,22 +96,32 @@ Two files remain that need to be created - **config/database.yml** and **config/
 	  <<: *defaults
 	  domain: domain.com
 
+**Note**: Keep in mind that what you see in `domain` within the following block, **_localhost_**, is what you should be pointing your web browser to:
+
+	development:
+	  <<: *defaults
+	  domain: localhost
+
 ***
 
 # Bootstrapping
 
-Now that those two files are created and the settings are correct we can move on to creating the DB and seeding some data.
+Now that those two files are created and the settings are correct we can move on to installing the gems, creating the DB and seeding some data.
+
+* Install the gems with 
+
+		bundle install
 
 * create the database, migrate the tables and seed with your own data:
 
 		bundle exec rake db:create db:migrate db:bootstrap
 
-  and for your testing environment
+* and for your testing environment
 
-    RAILS_ENV=test bundle exec rake db:create db:migrate
+		RAILS_ENV=test bundle exec rake db:create db:migrate
 
-  That should get everything situated in the database for you.
 * **Note:** If you set your default messageboard's name to something other than "misc-topics" then make sure to change `default_messageboard_name` in _thredded_config.yml_ to the name of the board you entered during `rake db:bootstrap`.
+
 * start the server with 
 
 		rails s
