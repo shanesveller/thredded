@@ -96,6 +96,8 @@ Two files remain that need to be created - **config/database.yml** and **config/
 	  <<: *defaults
 	  domain: domain.com
 
+**Note**: If you use something other than "forum" for _Site Name_ or something other than "Misc Topics" for the first _Messageboard Name_ make sure to edit thredded_config.yml. Also, after starting up the local rails server the domain you visit in your browser should be the same as what's under "domain" for your environment in thredded_config.yml. By default it's "localhost", but you may want to use something else.
+
 ***
 
 # Bootstrapping
