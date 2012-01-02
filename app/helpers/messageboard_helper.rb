@@ -34,7 +34,7 @@ module MessageboardHelper
   def latest_thread_for(messageboard)
     topic = messageboard.topics.first
     if can? :read, messageboard and topic.present?
-      link_to time_ago_in_words(topic.updated_at)+" ago", messageboard_topic_path(messageboard, topic)
+      link_to topic.updated_at.strftime("%B %d, %Y"), messageboard_topic_path(messageboard, topic), {:class => "timeago", :title => topic.updated_at.strftime("%Y-%m-%dT%I:%M:%S") }
     elsif topic.present?
       time_ago_in_words(topic.updated_at)+" ago"
     else

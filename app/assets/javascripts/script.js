@@ -1,6 +1,6 @@
 jQuery(document).ready(function() {
   jQuery.timeago.settings.allowFuture = true;
-  jQuery("abbr.timeago").timeago();
+  jQuery("a.timeago, abbr.timeago").timeago();
 
   jQuery("#topics_new #topic_user_id").chosen();
 
