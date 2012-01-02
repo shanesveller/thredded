@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120102025140) do
+ActiveRecord::Schema.define(:version => 20120102221407) do
 
   create_table "images", :force => true do |t|
     t.integer  "width"
@@ -79,6 +79,16 @@ ActiveRecord::Schema.define(:version => 20120102025140) do
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
+  create_table "settings", :force => true do |t|
+    t.string   "site_name",            :default => "My Messageboard"
+    t.string   "site_slug",            :default => "my-messageboard"
+    t.string   "email_reply_to",       :default => "My Messageboard Mail-Bot <noreply@mysite.com>"
+    t.string   "email_subject_prefix", :default => "[My Messageboard] "
+    t.string   "domain",               :default => "localhost"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "sites", :force => true do |t|
     t.integer "user_id"
     t.string  "subdomain",     :default => "thredded"
@@ -87,6 +97,7 @@ ActiveRecord::Schema.define(:version => 20120102025140) do
     t.string  "title"
     t.text    "description"
     t.string  "cached_domain"
+    t.string  "home",          :default => "messageboards"
   end
 
   add_index "sites", ["cached_domain"], :name => "index_sites_on_cached_domain"

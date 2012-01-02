@@ -1,8 +1,12 @@
 Thredded::Application.routes.draw do
 
-
   # The priority is based upon order of creation:
-  # first created -> highest priority.
+  #   first created -> highest priority.
+
+  constraints(SetupThredded.new) do
+    root :to => "settings#new"
+    resource :setting
+  end
 
   devise_for :users 
   resources :users
