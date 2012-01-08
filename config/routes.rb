@@ -5,7 +5,8 @@ Thredded::Application.routes.draw do
 
   constraints(SetupThredded.new) do
     root :to => "settings#new"
-    match "/:step" => 'settings#new', :constraints => { :step => /\d{1}/ }
+    match "/:step" => 'settings#new',    :constraints => { :step => /\d{1}/ }, :as => :new_setting, :via => :get
+    match "/:step" => 'settings#create', :constraints => { :step => /\d{1}/ }, :as => :create_setting, :via => :post
     resource :setting
   end
 

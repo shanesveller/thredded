@@ -1,10 +1,9 @@
 class SettingsController < ApplicationController
   layout 'settings'
+  helper_method :step
 
   def new
-    @step = params[:step] || "1" 
-
-    case @step
+    case step
       when "1"
         @user = User.new
       when "2"
@@ -34,6 +33,12 @@ class SettingsController < ApplicationController
   end
 
   def update
+  end
+
+private
+
+  def step
+    @step ||= params[:step] || "1" 
   end
 
 end
