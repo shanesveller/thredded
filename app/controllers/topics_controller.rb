@@ -24,7 +24,6 @@ class TopicsController < ApplicationController
   end
  
   def update
-    debugger
     topic.update_attributes(params[:topic])
     redirect_to messageboard_topic_path(messageboard, topic)
   end

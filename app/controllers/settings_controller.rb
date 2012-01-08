@@ -22,13 +22,13 @@ class SettingsController < ApplicationController
   end
 
   def create
-    case params[:step]
+    case step
     when "1"
       @user = User.create(params[:user]) 
       redirect_to root_path :step => 2 if @user.valid?
-      render :action => :new unless @user.valid?
+      flash[:error] = "There were errors creating your user." and render :action => :new unless @user.valid?
     when "2"
-      debugger
+      true
     end
   end
 
