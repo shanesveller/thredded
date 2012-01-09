@@ -34,7 +34,7 @@ class SettingsController < ApplicationController
     when "3"
       @user = User.last
       @site = Site.last
-      @messageboard = Messageboard.create(params[:messageboard].merge!( {:user => @user, :site => @site} ))
+      @messageboard = Messageboard.create(params[:messageboard].merge!( {:theme => "default", :site => @site} ))
       redirect_to '/4' if @messageboard.valid?
     end
   end
