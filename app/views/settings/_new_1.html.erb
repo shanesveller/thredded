@@ -1,18 +1,14 @@
 <%= form_for(@user, :as => :user, :url => create_setting_path(:step => step || '1'), :method => :post) do |f| %>
-  <%= hidden_field_tag(:step, "1") %>
   <%= devise_error_messages! %>
 
-  <p><%= f.label :name %>
-  <%= f.text_field :name %></p>
+  <p><%= f.label :title %>
+  <%= f.text_field :title %></p>
 
-  <p><%= f.label :email %>
-  <%= f.text_field :email %></p>
+  <p><%= f.label :description %>
+  <%= f.text_field :description %></p>
 
-  <p><%= f.label :password %>
-  <%= f.password_field :password %></p>
-
-  <p><%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation %></p>
+  <p><%= f.label :cname_alias %>
+  <%= f.password_field :cname_alias %></p>
 
   <p><%= f.submit "Continue" %></p>
 <% end %>

@@ -25,10 +25,18 @@ class SettingsController < ApplicationController
     case step
     when "1"
       @user = User.create(params[:user]) 
-      redirect_to root_path :step => 2 if @user.valid?
+      redirect_to '/2' if @user.valid?
       flash[:error] = "There were errors creating your user." and render :action => :new unless @user.valid?
     when "2"
-      true
+      @user = User.last
+      params[:site].merge!( {:user => @user} )
+      @site = Site.create(params[:site])
+      redirect_to '/3' if @site.valid?
+    when "3"
+      @user = User.last
+      @site = Site.last
+      @messageboard = Messageboard.create(params[:messageboard].merge!( {:user => @user, :site => @site} ))
+      redirect_to '/4' if @messageboard.valid?
     end
   end
 
@@ -42,3 +50,4 @@ private
   end
 
 end
+

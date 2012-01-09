@@ -1,0 +1,18 @@
+<%= form_for(@messageboard, :as => :messageboard, :url => create_setting_path(:step => step || '3'), :method => :post) do |f| %>
+  <p><%= f.label :title %>
+  <%= f.text_field :title %></p>
+
+  <p><%= f.label :name %>
+  <%= f.text_field :name %></p>
+
+  <p><%= f.label :description %>
+  <%= f.text_field :description %></p>
+
+  <p><%= f.label :security %>
+    <%= f.select :security, [:private, :public, :logged_in] %></p>
+
+  <p><%= f.label :posting_permission %>
+    <%= f.select :posting_permission, [:members, :logged_in, :anonymous] %></p>
+
+  <p><%= f.submit "Continue" %></p>
+<% end %>

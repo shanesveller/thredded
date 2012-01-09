@@ -1,0 +1,12 @@
+<%= form_for(@site, :as => :site, :url => create_setting_path(:step => step || '2'), :method => :post) do |f| %>
+  <p><%= f.label :title %>
+  <%= f.text_field :title %></p>
+
+  <p><%= f.label :description %>
+  <%= f.text_field :description %></p>
+
+  <p><%= f.label :cname_alias, "Site Domain" %>
+    <%= f.text_field :cname_alias, :value => request.host %></p>
+
+  <p><%= f.submit "Continue" %></p>
+<% end %>
