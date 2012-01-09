@@ -29,8 +29,7 @@ class SettingsController < ApplicationController
       flash[:error] = "There were errors creating your user." and render :action => :new unless @user.valid?
     when "2"
       @user = User.last
-      params[:site].merge!( {:user => @user} )
-      @site = Site.create(params[:site])
+      @site = Site.create params[:site].merge!({:user => @user})
       redirect_to '/3' if @site.valid?
     when "3"
       @user = User.last
