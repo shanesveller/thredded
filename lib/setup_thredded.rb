@@ -1,5 +1,5 @@
 class SetupThredded
   def matches?(request)
-    return Setting.all.empty?
+    return User.all.empty? || Site.all.empty? || Messageboard.all.empty?
   end
 end

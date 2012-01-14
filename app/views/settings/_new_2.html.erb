@@ -1,4 +1,6 @@
 <%= form_for(@site, :as => :site, :url => create_setting_path(:step => step || '2'), :method => :post) do |f| %>
+  <%= f.hidden_field :default_site, :value => true %>
+
   <p><%= f.label :title %>
   <%= f.text_field :title %></p>
 
@@ -7,6 +9,12 @@
 
   <p><%= f.label :cname_alias, "Site Domain" %>
     <%= f.text_field :cname_alias, :value => request.host %></p>
+
+  <p><%= f.label :email_from, "Emails from this site will come from" %>
+    <%= f.text_field :email_from %></p>
+
+  <p><%= f.label :email_subject_prefix %>
+    <%= f.text_field :email_subject_prefix %></p>
 
   <p><%= f.submit "Continue" %></p>
 <% end %>

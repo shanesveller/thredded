@@ -5,8 +5,7 @@ class Site  < ActiveRecord::Base
   before_validation       :cache_domain
   validates_uniqueness_of :subdomain,    :cached_domain
   validates_uniqueness_of :cname_alias,  :allow_blank => true
-  validates_presence_of   :subdomain,
-                          :cached_domain,
+  validates_presence_of   :cached_domain,
                           :permission,
                           :title,
                           :description
