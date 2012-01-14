@@ -33,6 +33,17 @@ class SettingsController < ApplicationController
       @user = User.last
       @site = Site.last
       @messageboard = Messageboard.create(params[:messageboard].merge!( {:theme => "default", :site => @site} ))
+      @messageboard.topics.create( :user => @user, 
+                                   :last_user => @user, 
+                                   :title => "Welcome to your site's very first thread",
+                                   :posts_attributes => {
+                                     "0" => {
+                                       :content => "There's not a whole lot here for now.", 
+                                       :user => @user, 
+                                       :ip => "127.0.0.1", 
+                                       :messageboard => @messageboard
+                                     }
+                                   })
       debugger
       redirect_to root_path if @messageboard.valid?
     end
