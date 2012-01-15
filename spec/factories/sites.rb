@@ -5,5 +5,9 @@ Factory.define :site do |f|
   f.permission    "public"
   f.title         "Default website"
   f.description   "default website description"
+  f.home          "messageboards"
+  f.email_from    "Site <email@email.com>"
+  f.email_subject_prefix "[Email] "
+  f.default_site  "f"
   f.association   :user
 end

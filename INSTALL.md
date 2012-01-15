@@ -114,7 +114,7 @@ Now that those two files are created and the settings are correct we can move on
 
 * create the database, migrate the tables and seed with your own data:
 
-		bundle exec rake db:create db:migrate db:bootstrap
+		bundle exec rake db:create db:migrate
 
 * and for your testing environment
 

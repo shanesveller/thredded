@@ -1,7 +1,8 @@
 Given /^the default "([^"]*)" website domain is "([^"]*)"$/ do |permission, website|
-  THREDDED[:default_domain] = website
-  THREDDED[:default_site]   = website.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
-  @site = Factory(:site, :cname_alias => website, :permission => permission)
+  @site ||= Factory(:site, 
+                    :cname_alias => website, 
+                    :permission => permission, 
+                    :default_site => 't')
 end
 
 Given /^I visit "([^"]*)"$/ do |domain|
@@ -10,7 +11,7 @@ Given /^I visit "([^"]*)"$/ do |domain|
 end
 
 Given /^the default website has a messageboard named "([^"]*)"$/ do |messageboard|
-  @site = Site.find_by_cached_domain(THREDDED[:default_domain])
+  @site = Site.find_by_default_site(true)
   @site.messageboards << Factory(:messageboard, :name => messageboard, :title => messageboard)
   @site.save
 end
