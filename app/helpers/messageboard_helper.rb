@@ -33,13 +33,16 @@ module MessageboardHelper
 
   def latest_thread_for(messageboard)
     topic = messageboard.topics.first
-    abbr = content_tag :abbr, :class => "updated_at timeago", :title => topic.updated_at.strftime("%Y-%m-%dT%H:%M:%SZ") do
-      topic.updated_at.strftime("%b %d, %Y %I:%M:%S %Z")
-    end
-    if can? :read, messageboard and topic.present?
-      link_to abbr , messageboard_topic_path(messageboard, topic)
-    elsif topic.present?
-      abbr
+
+    if topic.present?
+      abbr = content_tag :abbr, :class => "updated_at timeago", :title => topic.updated_at.strftime("%Y-%m-%dT%H:%M:%SZ") do
+        topic.updated_at.strftime("%b %d, %Y %I:%M:%S %Z")
+      end
+      if can? :read, messageboard
+        link_to abbr , messageboard_topic_path(messageboard, topic)
+      else
+        abbr
+      end
     else
       ""
     end
