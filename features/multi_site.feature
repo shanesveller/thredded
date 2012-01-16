@@ -5,12 +5,15 @@ Feature: Multiple websites for a single installation
 
   Scenario: Default domain "example.com" has its own homepage
     Given the default "public" website domain is "example.com"
+      And "example.com" has two messageboards named "lol" and "kek"
+      And the default website home is the homepage
       And I have signed in with "confirmed@person.com/password"
      When I visit "example.com"
      Then I should see the site homepage
 
   Scenario: Custom cname "mi.com" has its own messageboards
-    Given a custom cname site exists called "mi.com"
+    Given the default "public" website domain is "example.com"
+      And a custom cname site exists called "mi.com"
       And "mi.com" has two messageboards named "lol" and "kek"
       And I have signed in with "confirmed@person.com/password"
      When I visit "mi.com"
@@ -41,7 +44,8 @@ Feature: Multiple websites for a single installation
      Then I should see messageboards "baz" and "carl"
 
   Scenario: Website is behind a login and I am signed in
-    Given the default "logged_in" website domain is "example.org"
+    Given the default "logged_in" website domain is "example.com"
+      And "example.com" has two messageboards named "lol" and "kek"
       And I am signed up and confirmed as "confirmed@person.com/password"
      When I go to the sign in page
       And I fill in "Email" with "confirmed@person.com"
@@ -49,9 +53,10 @@ Feature: Multiple websites for a single installation
       And I press "Sign in"
      Then I should see "Signed in successfully."
       And I should not see the login form
-  
+
   Scenario: Website is behind a login and I am not signed in
     Given the default "logged_in" website domain is "example.com"
+      And "example.com" has two messageboards named "lol" and "kek"
       And a custom cname site exists called "red.example.com"
       And "red.example.com" is a "logged_in" site
      When I visit "red.example.com"

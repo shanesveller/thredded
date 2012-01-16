@@ -12,6 +12,7 @@ class Site  < ActiveRecord::Base
   validates_exclusion_of  :subdomain,
                           :in => %w(admin blog),
                           :message => "is taken"
+  validates_inclusion_of  :home, :in => %w{homepage messageboards topics}
   
   def topics_count
     messageboards.inject(0){|sum, item| sum + item.topics_count}

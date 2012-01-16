@@ -4,7 +4,7 @@ module HomeHelper
     if @messageboard
       @messageboard.name + " home"
     else
-      "Welcome to "+THREDDED[:site_name]
+      "Welcome to "+ default_site.title
     end
   end
 

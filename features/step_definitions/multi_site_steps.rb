@@ -21,6 +21,12 @@ Given /^the default website has two messageboards named "([^"]*)" and "([^"]*)"$
   And %{the default website has a messageboard named "#{messageboard2}"}
 end
 
+Given /^the default website home is the homepage$/ do
+  @site.home = "homepage"
+  @site.save
+end
+
+
 Then /^I should see the site homepage$/ do
   page.should have_selector("body#site_home")
 end

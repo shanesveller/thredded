@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :site
-  helper_method :site, :messageboard, :topic, :tz_offset
+  helper_method :site, :messageboard, :topic, :tz_offset, :default_site
 
   rescue_from CanCan::AccessDenied do |exception|
     flash[:error] = exception.message
@@ -29,6 +29,10 @@ class ApplicationController < ActionController::Base
 
     def site
       @site ||= requested_host_site or default_messageboard_site
+    end
+
+    def default_site
+      @default_site ||= Site.find_by_default_site(true)
     end
 
     def default_messageboard_site
