@@ -2,7 +2,7 @@
 <html>
 <head>
   <title><%= yield :page_title %></title>
-  <%= stylesheet_link_tag "application", "settings" %>
+  <%= stylesheet_link_tag "application" %>
   <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js"></script>
   <%= csrf_meta_tag %>
 </head>
@@ -16,7 +16,7 @@
     </section>
 	</section>
 
-  <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag "application" -%>
 </body>
 </html>
 

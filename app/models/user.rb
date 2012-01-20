@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
   # validates_numericality_of :posts_count, :topics_count
   validates_presence_of :name
   validates_uniqueness_of :name, :email, :case_sensitive => false
+  validates :name, :format => { :with => /\A[a-zA-Z0-9]+\z/, :message => "only letters or numbers allowed" }
 
   def superadmin?
     valid? && self.superadmin

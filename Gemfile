@@ -23,6 +23,7 @@ gem 'highline'                    , '1.6.1'
 gem 'escape_utils'                , '0.2.3'
 gem 'refraction'
 gem 'multi_json'
+gem 'client_side_validations'
 
 # Gems used only for assets and not required
 # in production environments by default.

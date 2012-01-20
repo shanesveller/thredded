@@ -3,7 +3,7 @@ class PersonalizedDomain
 
     main_site = Site.find_by_default_site(true)
 
-    if main_site.home == "homepage"
+    if main_site && main_site.home == "homepage"
       return false
     end
 
