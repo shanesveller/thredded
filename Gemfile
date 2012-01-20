@@ -62,6 +62,7 @@ group :development do
   gem 'ruby-debug19'
   gem 'faker'
   gem 'puma'
+  gem 'heroku'
 
   # convenience gems
   gem 'wirble'
