@@ -44,7 +44,7 @@ class SetupsController < ApplicationController
                                        :messageboard => @messageboard
                                      }
                                    })
-      debugger
+      sign_in @user
       redirect_to root_path if @messageboard.valid?
     end
   end
