@@ -1,5 +1,5 @@
-class SettingsController < ApplicationController
-  layout 'settings'
+class SetupsController < ApplicationController
+  layout 'setup'
   helper_method :step
 
   def new

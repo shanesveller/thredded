@@ -4,10 +4,10 @@ Thredded::Application.routes.draw do
   #   first created -> highest priority.
 
   constraints(SetupThredded.new) do
-    root :to => "settings#new"
-    match "/:step" => 'settings#new',    :constraints => { :step => /\d{1}/ }, :as => :new_setting, :via => :get
-    match "/:step" => 'settings#create', :constraints => { :step => /\d{1}/ }, :as => :create_setting, :via => :post
-    resource :setting
+    root :to => "setups#new"
+    match "/:step" => 'setups#new',    :constraints => { :step => /\d{1}/ }, :as => :new_setup, :via => :get
+    match "/:step" => 'setups#create', :constraints => { :step => /\d{1}/ }, :as => :create_setup, :via => :post
+    resource :setup
   end
 
   devise_for :users 
