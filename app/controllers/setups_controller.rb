@@ -1,6 +1,6 @@
 class SetupsController < ApplicationController
   layout 'setup'
-  helper_method :step
+  helper_method :step, :setting_up
 
   def new
     case step
@@ -56,6 +56,17 @@ private
 
   def step
     @step ||= params[:step] || "1" 
+  end
+
+  def setting_up
+    case step
+      when "1"
+        @setting_up = "User"
+      when "2"
+        @setting_up = "Site"
+      when "3"
+        @setting_up = "Messageboard"
+    end
   end
 
 end

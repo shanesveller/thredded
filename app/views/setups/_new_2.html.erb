@@ -1,4 +1,4 @@
-<%= form_for(@site, :as => :site, :url => create_setting_path(:step => step || '2'), :method => :post) do |f| %>
+<%= form_for(@site, :as => :site, :url => create_setup_path(:step => step || '2'), :method => :post) do |f| %>
   <%= f.hidden_field :default_site, :value => true %>
 
   <p><%= f.label :title %>

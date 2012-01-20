@@ -28,15 +28,11 @@ class ApplicationController < ActionController::Base
     end
 
     def site
-      @site ||= requested_host_site or default_messageboard_site
+      @site ||= requested_host_site or default_site
     end
 
     def default_site
       @default_site ||= Site.find_by_default_site(true)
-    end
-
-    def default_messageboard_site
-      Site.where('messageboards.name = ?', THREDDED[:default_messageboard_name]).includes(:messageboards).order('messageboards.id ASC').first
     end
 
     def requested_host_site
