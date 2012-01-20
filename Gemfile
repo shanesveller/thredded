@@ -24,6 +24,7 @@ gem 'escape_utils'                , '0.2.3'
 gem 'refraction'
 gem 'multi_json'
 gem 'client_side_validations'
+gem 'thin'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -60,8 +61,8 @@ end
 group :development do
   gem 'ruby-debug19'
   gem 'faker'
-  gem 'puma'
   gem 'heroku'
+  gem 'foreman'
 
   # convenience gems
   gem 'wirble'
