@@ -54,7 +54,6 @@ group :test, :cucumber do
   gem "addressable"         , "2.2.6"
   gem 'launchy'             , '2.0.5'
   gem 'fuubar'
-  gem 'sqlite3'
 end
 
 # :development specific gems
