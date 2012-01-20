@@ -1,6 +1,6 @@
 # Initial Setup
 
-I highly suggest using [RVM](https://rvm.beginrescueend.com/) or [RBENV](https://github.com/sstephenson/rbenv) to manage your ruby vm's. I'll assume you're using RVM, so if more information is needed please take the time to watch Ryan Bates' screencast on [getting started with Ruby on Rails](http://railscasts.com/episodes/310-getting-started-with-rails). You should probably watch it anyway, actually.
+I highly suggest using [RVM](https://rvm.beginrescueend.com/) or [RBENV](https://github.com/sstephenson/rbenv) to manage your ruby vm's. I'll assume you're using RVM, so if more information is needed please take the time to watch Ryan Bates' screencast on [getting started with Ruby on Rails](http://railscasts.com/episodes/310-getting-started-with-rails). You should probably watch it anyway.
 
 * Install Ruby 1.9.2 -- `rvm install 1.9.2`
 * create a thredded gemset -- `rvm gemset create thredded`
@@ -14,7 +14,7 @@ NOTE: You **could** use Ruby 1.9.3 as it's a bit faster but currently has [some 
 
 Before installing all the gem dependencies take note of which RDBMS you'll be using and adjust the Gemfile accordingly. The default is Postgres (the **_pg_** gem) but if you'd like to use Mysql you may comment out `gem 'pg'` and instead use the Mysql2 gem -- `gem 'mysql2'`
 
-Two files remain that need to be created - **config/database.yml** and **config/thredded_config.yml**.  There are three sample files -- database.yml files for both pg and mysql, and one for thredded_config.yml -- in the repo but I'll include them here for a quick copy and paste job.  Create those two files and configure for your environment.
+One more file needs to be created - **config/database.yml**. There are two sample database.yml files for both pg and mysql. Copy one of those two files to **config/database.yml** and configure for your environment & database.
 
 *_config/database.yml_* (for postgres)
 
@@ -71,42 +71,11 @@ Two files remain that need to be created - **config/database.yml** and **config/
 	  username: username
 	  password: password
 
-
-*_config/thredded_config.yml_*
-
-	defaults: &defaults
-	  site_name: "My Messageboard"
-	  email: "My Messageboard Mail-Bot <noreply@mysite.com>"
-	  subject_prefix: "[My Messageboard] "
-	  default_site_name: "forum"
-	  default_messageboard_name: "misc-topics"
-	  default_messageboard_home: "home"            # => home#index
-	  # default_messageboard_home: "messageboards" # => messageboards#index
-	  # default_messageboard_home: "topics"        # => messageboards#show where :messageboard_id == default_messageboard_name
-	
-	development:
-	  <<: *defaults
-	  domain: localhost
-	
-	test:
-	  <<: *defaults
-	  domain: test
-	
-	production:
-	  <<: *defaults
-	  domain: domain.com
-
-**Note**: Keep in mind that what you see in `domain` within the following block, **_localhost_**, is what you should be pointing your web browser to:
-
-	development:
-	  <<: *defaults
-	  domain: localhost
-
 ***
 
-# Bootstrapping
+# Setup
 
-Now that those two files are created and the settings are correct we can move on to installing the gems, creating the DB and seeding some data.
+Now that those two files are created and the settings are correct we can move on to installing the gems, creating the DB and getting set up.
 
 * Install the gems with 
 
@@ -120,11 +89,8 @@ Now that those two files are created and the settings are correct we can move on
 
 		RAILS_ENV=test bundle exec rake db:create db:migrate
 
-* **Note:** If you set your default messageboard's name to something other than "misc-topics" then make sure to change `default_messageboard_name` in _thredded_config.yml_ to the name of the board you entered during `rake db:bootstrap`.
-
 * start the server with 
 
 		rails s
 
-  and you should be ready to go!
-
+* Follow the setup wizard that will help you set up your site and first messageboard, and you should be ready to go!
