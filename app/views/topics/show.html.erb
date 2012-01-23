@@ -3,13 +3,13 @@
 <% content_for :header_nav do %>
     <nav>
       <ul>
-        <% if can? :create, topic -%>
+        <% if messageboard.posting_for_anonymous? || (current_user && current_user.can_post_to?(messageboard)) -%>
           <li class="new_topic"><%= link_to "Create a New Topic", new_messageboard_topic_path(messageboard) %></li>
-        <% end -%>
-        <% if can? :create, Post -%>
           <li class="reply_to_topic"><a href="#new_post">Reply To This Topic</a></li>
         <% end -%>
-        <li class="edit_topic"><%= link_to "edit subject", edit_messageboard_topic_path(messageboard, topic) %></li>
+        <% if (current_user && current_user.admins?(messageboard)) || topic.user == current_user  -%>
+          <li class="edit_topic"><%= link_to "edit subject", edit_messageboard_topic_path(messageboard, topic) %></li>
+        <% end -%>
       </ul>
     </nav>
 <% end %>
@@ -30,7 +30,7 @@
 
   <%= render topic.posts %>
   
-  <% if can? :create, Post %>
+  <% if messageboard.posting_for_anonymous? || (current_user && current_user.can_post_to?(messageboard)) -%>
     <%= form_for [messageboard, topic, @post] do |f| %>
       <p>
         <%= f.label :your_reply %>
