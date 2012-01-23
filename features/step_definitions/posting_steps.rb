@@ -1,3 +1,13 @@
+Then /^I should not see the post reply form$/ do
+  page.should_not have_selector('textarea#post_content')
+end
+
+
+Given /^"([^"]*)" posting permissions are constrained to those that are "([^"]*)"$/ do |messageboard, permission|
+  @messageboard = Messageboard.find_by_name messageboard
+  @messageboard.update_attribute(:posting_permission, permission)
+end
+
 Given /^a messageboard named "([^"]*)" that I, "([^"]*)", am an? "([^"]*)" of$/ do |messageboard, name, role|
   if !u = User.where(:name => name).first
     u = Factory :user,

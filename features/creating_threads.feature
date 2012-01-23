@@ -57,3 +57,16 @@ Background: Default site and messageboard
      When I go to the new thread page for "thredded"
      Then I should not see "Locked"
       And I should not see "Sticky"
+
+  Scenario: Anonymous user cannot post to a public messageboard where posting is for logged-in users
+    Given "thredded" posting permissions are constrained to those that are "logged_in"
+      And I create the following new threads:
+          | title       | content         |
+          | topic 1     | hello I'm first |
+     When I sign out
+      And I go to the topic listing page
+     Then I should not see "Create a New Topic"
+      And I go to the new thread page for "thredded"
+      And I should see "Sorry, you are not authorized to post on this messageboard."
+      And I go to the most recently updated thread on "thredded"
+      And I should not see the post reply form 

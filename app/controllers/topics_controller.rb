@@ -10,6 +10,10 @@ class TopicsController < ApplicationController
 
   def new
     @topic = messageboard.topics.build
+    unless can? :create, @topic
+      flash[:error] = "Sorry, you are not authorized to post on this messageboard."
+      redirect_to messageboard
+    end
     @topic.type = "PrivateTopic" if params[:type] == "private"
     @topic.posts.build
   end

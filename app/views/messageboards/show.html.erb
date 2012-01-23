@@ -3,7 +3,9 @@
 <% content_for :header_nav do %>
     <nav>
       <ul>
-        <li class="new_topic"><%= link_to "Create a New Topic", new_messageboard_topic_path(messageboard) %></li>
+        <% if messageboard.posting_for_anonymous? || (current_user && current_user.can_post_to?(messageboard)) -%>
+          <li class="new_topic"><%= link_to "Create a New Topic", new_messageboard_topic_path(messageboard) %></li>
+        <% end -%>
       </ul>
     </nav>
 <% end %>
@@ -22,5 +24,7 @@
 </header>
 <%= render :partial => "topics/topic_condensed", :collection => @topics, :as => :t %>
 <footer>
-  <%= link_to "Create a New Topic", new_messageboard_topic_path(messageboard) %>
+  <% if messageboard.posting_for_anonymous? || (current_user && current_user.can_post_to?(messageboard)) -%>
+    <%= link_to "Create a New Topic", new_messageboard_topic_path(messageboard) %>
+  <% end -%>
 </footer>

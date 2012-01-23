@@ -44,6 +44,10 @@ class User < ActiveRecord::Base
     member_of(messageboard, 'admin')
   end
 
+  def can_post_to?(messageboard)
+    messageboard.posting_for_anonymous? || (messageboard.posting_for_logged_in? && self.logged_in?) || (messageboard.posting_for_members? && self.member_of?(messageboard) )
+  end
+
   def logged_in?
     valid?
   end

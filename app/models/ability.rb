@@ -37,9 +37,9 @@ class Ability
     end
 
     can :create, Topic do |topic|
-      (topic.messageboard.restricted_to_private?    && user.member_of?(topic.messageboard)) ||
-      (topic.messageboard.restricted_to_logged_in?  && user.valid?) ||
-      topic.messageboard.public?
+      ( (topic.messageboard.restricted_to_private? || topic.messageboard.posting_for_members?) && user.member_of?(topic.messageboard)) ||
+      ( (topic.messageboard.restricted_to_logged_in? || topic.messageboard.posting_for_logged_in? ) && user.valid?) ||
+      topic.messageboard.public? && topic.messageboard.posting_for_anonymous?
     end
 
     can :manage, Topic do |topic|

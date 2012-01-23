@@ -3,8 +3,12 @@
 <% content_for :header_nav do %>
     <nav>
       <ul>
-        <li class="new_topic"><%= link_to "Create a New Topic", new_messageboard_topic_path(messageboard) %></li>
-        <li class="reply_to_topic"><a href="#new_post">Reply To This Topic</a></li>
+        <% if can? :create, topic -%>
+          <li class="new_topic"><%= link_to "Create a New Topic", new_messageboard_topic_path(messageboard) %></li>
+        <% end -%>
+        <% if can? :create, Post -%>
+          <li class="reply_to_topic"><a href="#new_post">Reply To This Topic</a></li>
+        <% end -%>
         <li class="edit_topic"><%= link_to "edit subject", edit_messageboard_topic_path(messageboard, topic) %></li>
       </ul>
     </nav>

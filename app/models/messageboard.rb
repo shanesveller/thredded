@@ -15,23 +15,27 @@ class Messageboard < ActiveRecord::Base
   has_many :users, :through => :roles
   
   def restricted_to_private?
-    security == 'private'
+    "private" == security
   end
 
   def restricted_to_logged_in?
-    security == 'logged_in'
+    "logged_in" == security
   end
   
   def public?
-    security == 'public'
+    "public" == security
   end
 
-  def default_home_is_topics?
-     THREDDED[:default_messageboard_home] == 'topics'
+  def posting_for_members?
+    "members" == posting_permission
   end
 
-  def default_home_is_home?
-     THREDDED[:default_messageboard_home] == 'home'
+  def posting_for_logged_in?
+    "logged_in" == posting_permission
+  end
+
+  def posting_for_anonymous?
+    "anonymous" == posting_permission
   end
 
   def to_param
@@ -39,3 +43,5 @@ class Messageboard < ActiveRecord::Base
   end
 
 end
+
+
