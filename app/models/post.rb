@@ -8,24 +8,20 @@ class Post  < ActiveRecord::Base
   include Gravtastic
   gravtastic :user_email
 
-  # field :notified, :type => Array, :default => []
-
   default_scope :order => 'id ASC'
 
   belongs_to :messageboard, :counter_cache => true
   belongs_to :topic,  :counter_cache => true
   belongs_to :user,   :counter_cache => true
-  has_many   :images
+  has_many   :attachments
+  accepts_nested_attributes_for :attachments
 
   validates_presence_of :content, :messageboard_id
   
-  attr_accessible :content, :user, :ip, :filter, :topic, :messageboard #, :images_attributes
+  attr_accessible :content, :user, :ip, :filter, :topic, :messageboard, :attachments_attributes
 
   before_save :set_user_email
   after_save  :modify_parent_topic
-
-  # misc
-  # accepts_nested_attributes_for :images
 
   def self.filters; Filters; end
   def filters;      Filters; end

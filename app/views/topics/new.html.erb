@@ -1,7 +1,7 @@
 <% content_for :page_id do %>topics_new<% end %>
 <% content_for :page_title do %><%= site.title %> | <%= messageboard.title %> | Start a New Thread<% end %>
 
-<%= form_for([messageboard, @topic], 
+<%= nested_form_for([messageboard, @topic], 
              :url => create_messageboard_topic_url(messageboard, @topic, :host => site.cached_domain ),
              :html => { :multipart => true }) do |f| %>
   <%= render :partial => 'form', :locals => { :f => f } %>

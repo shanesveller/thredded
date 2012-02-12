@@ -11,7 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120211230445) do
+ActiveRecord::Schema.define(:version => 20120212185227) do
+
+  create_table "attachments", :force => true do |t|
+    t.string   "attachment"
+    t.string   "content_type"
+    t.integer  "file_size"
+    t.integer  "post_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "categories", :force => true do |t|
     t.integer  "messageboard_id"
