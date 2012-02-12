@@ -5,6 +5,12 @@ GIT
     rack-test (0.6.1)
       rack (>= 1.0)
 
+GIT
+  remote: git://github.com/ryanb/nested_form.git
+  revision: c5fc50abbed106ab8d5e8434f780ff6270c8ff01
+  specs:
+    nested_form (0.2.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -54,7 +60,7 @@ GEM
       rack-test (>= 0.5.4)
       selenium-webdriver (~> 2.0)
       xpath (~> 0.1.4)
-    carrierwave (0.5.3)
+    carrierwave (0.5.8)
       activesupport (~> 3.0)
     childprocess (0.2.1)
       ffi (~> 1.0.6)
@@ -253,7 +259,7 @@ DEPENDENCIES
   bb-ruby (= 0.9.5)
   cancan (= 1.6.4)
   capybara (= 1.0.1)
-  carrierwave (= 0.5.3)
+  carrierwave (= 0.5.8)
   client_side_validations
   compass
   cucumber (= 1.0.2)
@@ -277,6 +283,7 @@ DEPENDENCIES
   launchy (= 2.0.5)
   mini_magick (= 3.2.1)
   multi_json
+  nested_form!
   nokogiri (= 1.4.6)
   pg
   rack
