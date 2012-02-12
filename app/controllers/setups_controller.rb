@@ -33,6 +33,7 @@ class SetupsController < ApplicationController
       @user = User.last
       @site = Site.last
       @messageboard = Messageboard.create(params[:messageboard].merge!( {:theme => "default", :site => @site} ))
+      @user.admin_of @messageboard
       @messageboard.topics.create( :user => @user, 
                                    :last_user => @user, 
                                    :title => "Welcome to your site's very first thread",
