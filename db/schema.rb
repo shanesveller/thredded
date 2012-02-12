@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120209155722) do
+ActiveRecord::Schema.define(:version => 20120211230445) do
 
   create_table "categories", :force => true do |t|
     t.integer  "messageboard_id"
@@ -114,7 +114,10 @@ ActiveRecord::Schema.define(:version => 20120209155722) do
     t.integer  "posts_count",     :default => 0
     t.string   "attribs",         :default => "[]"
     t.boolean  "sticky",          :default => false
+    t.integer  "category_id"
   end
+
+  add_index "topics", ["category_id"], :name => "index_topics_on_category_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                               :default => "",                           :null => false

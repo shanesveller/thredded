@@ -7,6 +7,7 @@ class Topic < ActiveRecord::Base
   belongs_to :last_user, :class_name => "User", :foreign_key => "last_user_id"
   belongs_to :user, :counter_cache => true
   belongs_to :messageboard, :counter_cache => true
+  belongs_to :category
   
   # delegations
   delegate :name, :name=, :email, :email=, :to => :user, :prefix => true
