@@ -5,7 +5,7 @@ gem 'pg'
 # gem 'mysql2'
 
 gem 'rack'
-gem 'rake'                        , '0.8.7'
+gem 'rake'                        , '~>0.9.0'
 gem 'rails'                       , '3.1.3'
 gem 'devise'                      , '1.5.3'
 gem 'cancan'                      , '1.6.4'
