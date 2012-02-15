@@ -60,7 +60,7 @@ end
 
 # :development specific gems
 group :development do
-  gem 'ruby-debug19'
+  gem 'ruby-debug19' # Wigs out on 1.9.3p0 per http://stackoverflow.com/a/9267541
   gem 'faker'
   gem 'heroku'
   gem 'foreman'
