@@ -3,6 +3,7 @@
 I highly suggest using [RVM](https://rvm.beginrescueend.com/) or [RBENV](https://github.com/sstephenson/rbenv) to manage your ruby vm's. I'll assume you're using RVM, so if more information is needed please take the time to watch Ryan Bates' screencast on [getting started with Ruby on Rails](http://railscasts.com/episodes/310-getting-started-with-rails). You should probably watch it anyway.
 
 * Install Ruby 1.9.2 -- `rvm install 1.9.2`
+* Install imagemagick, preferably with homebrew -- `brew install imagemagick`
 * create a thredded gemset -- `rvm gemset create thredded`
 * use your new thredded-specific ruby env -- `rvm use 1.9.2@thredded`
 
