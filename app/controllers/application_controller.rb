@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :site
+  before_filter :theme_layout, :except => [:delete, :update, :create]
   helper_method :site, :messageboard, :topic, :tz_offset, :default_site
 
   rescue_from CanCan::AccessDenied do |exception|
@@ -9,6 +10,12 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+    def theme_layout
+      if site && site.theme && ::Thredded.themes.keys.include?(site.theme.to_sym)
+        prepend_view_path ::Thredded.themes[site.theme.to_sym]
+      end
+    end
 
     def get_project
       @site ||= Site.where(:cached_domain => request.host).first

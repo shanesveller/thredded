@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120212185227) do
+ActiveRecord::Schema.define(:version => 20120217015614) do
 
   create_table "attachments", :force => true do |t|
     t.string   "attachment"
@@ -108,6 +108,7 @@ ActiveRecord::Schema.define(:version => 20120212185227) do
     t.string  "email_from",           :default => "My Messageboard Mail-Bot <noreply@mysite.com>"
     t.string  "email_subject_prefix", :default => "[My Messageboard] "
     t.boolean "default_site",         :default => false
+    t.string  "theme"
   end
 
   add_index "sites", ["cached_domain"], :name => "index_sites_on_cached_domain"
