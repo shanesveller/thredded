@@ -1,3 +1,18 @@
+.attachment {
+  background: #eeeeee;
+  margin-bottom: 4px;
+  padding: 8px !important;
+  overflow: hidden;
+}
+.remove_attachment {
+  font-size: 11px;
+  float: right;
+}
+
+.add_attachment {
+  float: right;
+  margin: 10px 10px 0px 20px;
+}
 .submit_button {
     border: solid 1px #999;
     font-size: 14px;
@@ -44,13 +59,14 @@
 
   p.submit input {
     @extend .submit_button;
-    margin: 15px 0 0;
+    margin-top: 10px;
   }
 
   #topic_posts_attributes_0_filter {
     float: right;
-    margin: 20px 4px 0;
+    margin-top: 10px;
   }
+
   
   #drawer {
 
