@@ -35,6 +35,7 @@
   .updated, 
   .posts { 
     @extend .table_header;
+    overflow: hidden;
   }
 
   .title        { @extend .cell_title;   }
@@ -102,6 +103,7 @@
       @extend .cell_posts;
       background: #eee;
       height: 19px;
+      overflow: hidden;
     }
   }
 
