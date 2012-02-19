@@ -29,18 +29,18 @@ class AttachmentUploader < CarrierWave::Uploader::Base
   # end
 
   # Create different versions of your uploaded files:
-  version :thumb do
+  version :thumb, :if => :image? do
     process :resize_to_fit => [90, 90]
   end
 
-  version :mobile do
+  version :mobile, :if => :image? do
     process :resize_to_limit => [480, 2000]
   end
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   def extension_white_list
-    %w(jpg jpeg gif png pdf zip tgz)
+    %w(jpg jpeg gif png pdf zip tgz txt)
   end
 
   # Override the filename of the uploaded files:
@@ -48,5 +48,11 @@ class AttachmentUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
+
+protected
+
+  def image?(new_file)
+    new_file.content_type.include? 'image'
+  end
 
 end

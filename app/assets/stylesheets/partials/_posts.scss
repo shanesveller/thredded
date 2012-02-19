@@ -1,9 +1,9 @@
 #topics_posts {
 
   article {
-    padding: 15px 0 30px 155px;
+    padding: 15px 0 5px 155px;
     margin-bottom: 10px;
-    min-height: 70px;
+    min-height: 90px;
     border-top: solid 2px #eee;
     clear: both;
     overflow: hidden;
@@ -71,6 +71,31 @@
     p {
       font-size: .9em;
       line-height: 1.3em;
+    }
+
+    .attachments {
+      list-style: none;
+      padding: 45px 0 0 0;
+      margin: 0px;
+
+      li {
+        padding: 0px;
+        margin: 0px;
+      }
+
+      a {
+        font-size: 11px;
+        text-decoration: none;
+        height: 22px;
+        line-height: 22px;
+        padding-left: 20px;
+        display: inline-block;
+
+        &[data-type="text/plain"]      { background: transparent url(/images/file-types/txt.png) left center no-repeat; }
+        &[data-type="application/pdf"] { background: transparent url(/images/file-types/pdf.png) left center no-repeat; }
+        &[data-type^="image"]          { background: transparent url(/images/file-types/img.png) left center no-repeat; }
+        &[data-type*="zip"]            { background: transparent url(/images/file-types/zip.png) left center no-repeat; }
+      }
     }
   }
 

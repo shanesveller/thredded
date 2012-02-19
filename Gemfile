@@ -5,7 +5,7 @@ gem 'pg'
 # gem 'mysql2'
 
 gem 'rack'
-gem 'rake'                        , '0.8.7'
+gem 'rake'                        , '0.9.2.2'
 gem 'rails'                       , '3.1.3'
 gem 'devise'                      , '1.5.3'
 gem 'cancan'                      , '1.6.4'
@@ -40,13 +40,13 @@ end
 # Test specific gems
 group :test, :cucumber do
   gem 'rack-test'           , :git => 'git://github.com/hassox/rack-test.git'
-  gem 'autotest-standalone'
-  gem 'autotest-growl'
+  gem 'autotest-standalone' , '4.5.9'
+  gem 'autotest-growl'      , '0.2.16'
   gem 'factory_girl'        , '1.3.3'
   gem 'factory_girl_rails'  , '1.0.1'
   gem 'database_cleaner'  
   gem 'capybara'            , '1.1.2'
-  gem 'shoulda'
+  gem 'shoulda'             , '2.11.3'
   gem 'cucumber'            , '1.1.4'
   gem 'cucumber-rails'      , '1.2.1', require: false
   gem 'timecop'
@@ -61,7 +61,9 @@ end
 
 # :development specific gems
 group :development do
-  gem 'ruby-debug19'
+  gem 'ruby-debug-base19', '0.11.26' # https://gist.github.com/1848409 to work with 1.9.3-p125
+  gem 'ruby-debug19', '0.11.6'
+  gem 'guard-livereload'
   gem 'faker'
   gem 'heroku'
   gem 'foreman'

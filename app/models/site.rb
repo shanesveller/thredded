@@ -30,7 +30,7 @@ private
 
   def cache_domain
     @default_site ||= Site.find_by_default_site(true)
-    self.cached_domain = if self.cname_alias.blank?
+    self.cached_domain = if self.cname_alias.blank? && @default_site
       "#{self.subdomain}.#{@default_site.cname_alias}"
     else
       "#{self.cname_alias}"
