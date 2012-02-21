@@ -10,10 +10,9 @@ Bundler.require *Rails.groups(:assets) if defined?(Bundler)
 
 module Thredded
   mattr_accessor :themes
+  self.themes = {}
 
   class Application < Rails::Application
-
-    ::Thredded.themes = {}
 
     # speeding up rails per suggestion here - http://dev.theconversation.edu.au/post/5001465621/how-we-shaved-2-seconds-off-our-rails-start-up-time
     # Thank you to Xavier and Pete!
