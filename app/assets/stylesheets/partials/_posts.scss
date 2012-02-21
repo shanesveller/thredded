@@ -88,13 +88,12 @@
         text-decoration: none;
         height: 22px;
         line-height: 22px;
-        padding-left: 20px;
         display: inline-block;
-
-        &[data-type="text/plain"]      { background: transparent url(/images/file-types/txt.png) left center no-repeat; }
-        &[data-type="application/pdf"] { background: transparent url(/images/file-types/pdf.png) left center no-repeat; }
-        &[data-type^="image"]          { background: transparent url(/images/file-types/img.png) left center no-repeat; }
-        &[data-type*="zip"]            { background: transparent url(/images/file-types/zip.png) left center no-repeat; }
+        
+        &[data-type="text/plain"]      { padding-left: 20px; background: transparent url(/images/file-types/txt.png) left center no-repeat; }
+        &[data-type="application/pdf"] { padding-left: 20px; background: transparent url(/images/file-types/pdf.png) left center no-repeat; }
+        &[data-type^="image"]          { padding-left: 20px; background: transparent url(/images/file-types/img.png) left center no-repeat; }
+        &[data-type*="zip"]            { padding-left: 20px; background: transparent url(/images/file-types/zip.png) left center no-repeat; }
       }
     }
   }
