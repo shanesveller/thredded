@@ -1,8 +1,6 @@
-# Read about factories at http://github.com/thoughtbot/factory_girl
-
 Factory.define :attachment do |f|
-  f.attachment "MyString"
-  f.post_id 1
-  f.content_type "MyString"
-  f.file_size 1
+  include ActionDispatch::TestProcess
+  f.attachment    fixture_file_upload('spec/samples/img.png', 'image/png')
+  f.content_type  "image/png"
+  f.file_size     1000
 end
