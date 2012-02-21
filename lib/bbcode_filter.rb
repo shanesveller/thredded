@@ -7,7 +7,7 @@ module BbcodeFilter
 
   def content
     @content = super
-    @content = @content.bbcode_to_html.html_safe if self.filter == "bbcode"
+    @content = @content.bbcode_to_html.html_safe if @content && self.filter == :bbcode
   end
 
   # BbcodeFilter.render_content("This is [i]italic[/i].")
