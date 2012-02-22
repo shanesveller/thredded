@@ -5,13 +5,13 @@ module BbcodeFilter
     base.class_eval { Post::Filters << :bbcode }
   end
 
-  def content
-    @content = super
-    @content = @content.bbcode_to_html.html_safe if @content && self.filter == :bbcode
-  end
-
-  # BbcodeFilter.render_content("This is [i]italic[/i].")
-  def self.render_content(content)
-    content
+  def filtered_content
+    if self.filter == :bbcode
+     @filtered_content = self.content
+     @filtered_content = @filtered_content.bbcode_to_html.html_safe if @filtered_content
+    end
+    true
   end
 end
+
+Post.send :include BbcodeFilter

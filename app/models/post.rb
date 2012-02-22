@@ -1,8 +1,8 @@
 class Post  < ActiveRecord::Base
 
   Filters = []
-  include BbcodeFilter
-  include TextileFilter
+  def self.filters; Filters; end # convenience class and instance methods to fetch filters
+  def filters;      Filters; end
   
   require "gravtastic"
   include Gravtastic
@@ -23,8 +23,6 @@ class Post  < ActiveRecord::Base
   before_save :set_user_email
   after_save  :modify_parent_topic
 
-  def self.filters; Filters; end
-  def filters;      Filters; end
 
   def created_timestamp
     created_at.strftime("%Y-%m-%dT%H:%M:%S") if created_at
@@ -32,6 +30,10 @@ class Post  < ActiveRecord::Base
 
   def created_date 
     created_at.strftime("%b %d, %Y %I:%M:%S %Z") if created_at
+  end
+
+  def filtered_content
+    @filtered_content = self.content
   end
 
   private

@@ -48,4 +48,20 @@ describe Post do
     end
     
   end
+
+  describe ".content" do
+
+    it "translates psuedo-image tags to html" do
+      @post.content = "[t:img=2 left] [t:img=3 right] [t:img] [t:img=4 200x200]"
+      @post.save
+
+      @attachment_1 = Factory(:attachment, :post => @post)
+      @attachment_2 = Factory(:pdfpng, :post => @post)
+      @attachment_3 = Factory(:txtpng, :post => @post)
+      @attachment_4 = Factory(:zippng, :post => @post)
+
+      @post.filtered_content.should == '<img src="/uploads/attachment/attachment/'+ @attachment_2.id +'/pdf.png" class="align_left" /> <img src="/uploads/attachment/attachment/'+ @attachment_3.id +'/img.png" class="align_right" /> <img src="/uploads/attachment/attachment/'+ @attachment_1.id +'/zip.png" /> <img src="/uploads/attachment/attachment/'+ @attachment_4.id +'/img.png" width="200" height="200" />'
+      
+    end
+  end
 end
