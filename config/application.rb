@@ -9,6 +9,7 @@ Bundler.require *Rails.groups(:assets) if defined?(Bundler)
 
 
 module Thredded
+
   mattr_accessor :themes
   self.themes = {}
 
@@ -17,9 +18,9 @@ module Thredded
     # speeding up rails per suggestion here - http://dev.theconversation.edu.au/post/5001465621/how-we-shaved-2-seconds-off-our-rails-start-up-time
     # Thank you to Xavier and Pete!
     config.autoload_paths << Rails.root.join("app").to_s
-    config.autoload_paths << Rails.root.join("lib").to_s
-
-
+    config.autoload_paths += %W(#{config.root}/lib)
+    config.autoload_paths += Dir["#{config.root}/lib/**/"]
+    
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -95,4 +96,3 @@ ActionDispatch::Callbacks.after do
   end
 
 end
-
