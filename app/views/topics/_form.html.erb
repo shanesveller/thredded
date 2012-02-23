@@ -38,7 +38,7 @@
   <% end %>
 
   <%= post_form.link_to_add "Add an attachment", :attachments, :class => "add_attachment" %>
-  <%= post_form.select :filter, post_form.filters %>
+  <%= post_form.select :filter, Post::Filters %>
 
 <% end %>
 
