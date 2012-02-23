@@ -1,7 +1,6 @@
 <li class="search_form">
-<%= form_tag(messageboard_path(messageboard) + "/search" , :method => "get") do %>
-  <%= label_tag(:q, "Search for:") %>
-  <%= text_field_tag(:q, params[:q]) %>
+<%= form_tag(messageboard_path(messageboard), :method => "get") do %>
+  <%= text_field_tag(:q, params[:q], {:placeholder => "Search Terms"}) %>
   <%= submit_tag("Search", :name => "") %>
 <% end %>
 </li>

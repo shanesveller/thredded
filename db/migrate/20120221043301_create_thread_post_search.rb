@@ -1,4 +1,4 @@
-class CreateTopicPostSearch < ActiveRecord::Migration
+class CreateThreadPostSearch < ActiveRecord::Migration
   def self.up
     ActiveRecord::Base.connection.execute <<-SQL
     CREATE VIEW topic_post_searches AS

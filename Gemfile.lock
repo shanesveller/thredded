@@ -209,7 +209,7 @@ GEM
       activesupport (~> 3.0)
       railties (~> 3.0)
       rspec (~> 2.6.0)
-    ruby-debug-base19 (0.11.26)
+    ruby-debug-base19 (0.11.25)
       columnize (>= 0.3.1)
       linecache19 (>= 0.5.11)
       ruby_core_source (>= 0.1.4)
@@ -310,8 +310,8 @@ DEPENDENCIES
   refraction
   rspec (= 2.6.0)
   rspec-rails (= 2.6.1)
-  ruby-debug-base19 (= 0.11.26)
-  ruby-debug19 (= 0.11.6)
+  ruby-debug-base19 (= 0.11.25)
+  ruby-debug19
   sass-rails (= 3.1.0)
   shoulda (= 2.11.3)
   spork (~> 0.9.0.rc)
