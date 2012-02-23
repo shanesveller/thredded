@@ -13,6 +13,7 @@ class MessageboardsController < ApplicationController
 
     if params[:q].present?
       @results = TopicPostSearch.new( params[:q], messageboard.name ) 
+      redirect_to messageboard_path(messageboard), :flash => { :error => "No topics found for this search." } unless @results.length > 0
       @topics = []
       @results.each {|f| @topics.push f.topic}
     else
