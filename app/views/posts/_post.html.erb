@@ -10,7 +10,7 @@
       <span class="posts_count"><%= post.user.posts_count %> posts</span>
     </div>
   </header>
-  <p><%= render_content_for(post) %></p>
+  <p><%= post.filtered_content %></p>
   <ul class="attachments">
     <%= render post.attachments %>
   </ul>
