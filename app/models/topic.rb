@@ -1,9 +1,10 @@
 class Topic < ActiveRecord::Base
 
   paginates_per 50 if self.respond_to?(:paginates_per)
-  
+
   # associations
   has_many   :posts
+  has_many   :topic_post_searches
   belongs_to :last_user, :class_name => "User", :foreign_key => "last_user_id"
   belongs_to :user, :counter_cache => true
   belongs_to :messageboard, :counter_cache => true

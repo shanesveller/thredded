@@ -1,0 +1,27 @@
+.search_form {
+  overflow: hidden;
+  padding-bottom: 20px;
+
+  input {
+    float: left;
+  }
+  input[type="text"] {
+    width: 66%;
+    display: block;
+    border: solid 1px gray;
+    padding: 2%;
+    margin: 0;
+    font-size: 11px;
+    text-transform: lowercase;
+  }
+  input[type="submit"] {
+    width: 19%;
+    margin-left: 1%;
+    border: solid 1px gray;
+    background: #efefef;
+    color: gray;
+    padding: 2% 0px;
+    font-size: 11px;
+    text-transform: lowercase;
+  }
+}

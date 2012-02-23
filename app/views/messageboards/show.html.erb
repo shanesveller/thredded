@@ -3,6 +3,7 @@
 <% content_for :header_nav do %>
     <nav>
       <ul>
+        <%= render :partial => 'search/form' %>
         <% if messageboard.posting_for_anonymous? || (current_user && current_user.can_post_to?(messageboard)) -%>
           <li class="new_topic"><%= link_to "Create a New Topic", new_messageboard_topic_path(messageboard) %></li>
         <% end -%>
