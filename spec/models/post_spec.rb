@@ -49,7 +49,23 @@ describe Post do
     
   end
 
-  describe ".content" do
+  describe ".filtered_content" do
+
+    before(:each) do
+      @post  = Factory.build(:post)
+    end
+
+    it "converts textile to html" do
+      @post.content = "this is *bold*"
+      @post.filter = "textile"
+      @post.filtered_content.should == "<p>this is <strong>bold</strong></p>"
+    end
+
+    it "converts bbcode to html" do
+      @post.content = "this is [b]bold[/b]"
+      @post.filter = "bbcode"
+      @post.filtered_content.should == "this is <strong>bold</strong>"
+    end
 
     it "translates psuedo-image tags to html" do
       @post.content = "[t:img=2 left] [t:img=3 right] [t:img] [t:img=4 200x200]"
@@ -60,7 +76,9 @@ describe Post do
       @attachment_3 = Factory(:txtpng, :post => @post)
       @attachment_4 = Factory(:zippng, :post => @post)
 
-      @post.filtered_content.should == '<img src="/uploads/attachment/attachment/'+ @attachment_2.id +'/pdf.png" class="align_left" /> <img src="/uploads/attachment/attachment/'+ @attachment_3.id +'/img.png" class="align_right" /> <img src="/uploads/attachment/attachment/'+ @attachment_1.id +'/zip.png" /> <img src="/uploads/attachment/attachment/'+ @attachment_4.id +'/img.png" width="200" height="200" />'
+      expectation = "<img src=\"/uploads/attachment/attachment/#{@attachment_2.id}/pdf.png\" class=\"align_left\" /> <img src=\"/uploads/attachment/attachment/#{@attachment_3.id}/img.png\" class=\"align_right\" /> <img src=\"/uploads/attachment/attachment/#{@attachment_1.id}/zip.png\" /> <img src=\"/uploads/attachment/attachment/#{@attachment_4.id}/img.png\" width=\"200\" height=\"200\" />"
+
+      @post.filtered_content.should == expectation
       
     end
   end
