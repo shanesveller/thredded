@@ -68,6 +68,7 @@ describe Post do
     end
 
     it "translates psuedo-image tags to html" do
+      pending "TODO: Implement this in lib/attachment_filter.rb"
       @post.content = "[t:img=2 left] [t:img=3 right] [t:img] [t:img=4 200x200]"
       @post.save
 
