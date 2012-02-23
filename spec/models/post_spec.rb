@@ -68,7 +68,7 @@ describe Post do
     end
 
     it "translates psuedo-image tags to html" do
-      pending "TODO: Implement this in lib/attachment_filter.rb"
+      #pending "TODO: Implement this in lib/attachment_filter.rb"
       @post.content = "[t:img=2 left] [t:img=3 right] [t:img] [t:img=4 200x200]"
       @post.save
 
@@ -77,7 +77,7 @@ describe Post do
       @attachment_3 = Factory(:txtpng, :post => @post)
       @attachment_4 = Factory(:zippng, :post => @post)
 
-      expectation = "<img src=\"/uploads/attachment/attachment/#{@attachment_2.id}/pdf.png\" class=\"align_left\" /> <img src=\"/uploads/attachment/attachment/#{@attachment_3.id}/img.png\" class=\"align_right\" /> <img src=\"/uploads/attachment/attachment/#{@attachment_1.id}/zip.png\" /> <img src=\"/uploads/attachment/attachment/#{@attachment_4.id}/img.png\" width=\"200\" height=\"200\" />"
+      expectation = "<img src=\"/uploads/attachment/attachment/#{@attachment_2.id}/pdf.png\" class=\"align_left\" /> <img src=\"/uploads/attachment/attachment/#{@attachment_3.id}/txt.png\" class=\"align_right\" /> <img src=\"/uploads/attachment/attachment/#{@attachment_1.id}/zip.png\" /> <img src=\"/uploads/attachment/attachment/#{@attachment_4.id}/zip.png\" width=\"200\" height=\"200\" />"
 
       @post.filtered_content.should == expectation
       
