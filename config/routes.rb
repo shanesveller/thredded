@@ -18,7 +18,6 @@ Thredded::Application.routes.draw do
     match "/:messageboard_id(.:format)"                         => 'messageboards#show', :as => :messageboard
     match "/:messageboard_id/topics(.:format)"                  => 'topics#create',      :as => :create_messageboard_topic
     match "/:messageboard_id/topics/new/(:type)"                => 'topics#new',         :as => :new_messageboard_topic
-    match "/:messageboard_id/search/"                           => 'search#index',       :as => :search
     match "/:messageboard_id/:topic_id/edit(.:format)"          => 'topics#edit',        :as => :edit_messageboard_topic
     match "/:messageboard_id/:topic_id(.:format)"               => 'topics#update',      :via => :put
     match "/:messageboard_id/:topic_id(.:format)"               => 'topics#show',        :as => :messageboard_topic
