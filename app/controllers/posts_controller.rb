@@ -5,6 +5,12 @@ class PostsController < ApplicationController
   before_filter :pad_post, :only => :create
   helper_method :messageboard, :topic
 
+  def index
+    authorize! :show, topic
+    @post = Post.new
+  end
+
+
   def create
     p = topic.posts.create(params[:post])
     redirect_to messageboard_topic_url(messageboard, topic, :host => @site.cached_domain)

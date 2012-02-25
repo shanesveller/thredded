@@ -3,9 +3,13 @@ class TopicsController < ApplicationController
   before_filter :pad_post,    :only => :create
   before_filter :pad_topic,   :only => :create
 
-  def show
-    authorize! :show, topic
-    @post = Post.new
+  def index
+    unless site.present? and can? :read, messageboard
+      redirect_to default_home, :flash => { :error => "You are not authorized access to this messageboard." } and return 
+    end
+    @topics = params[:q].present? ? Topic.full_text_search(params[:q], messageboard.id) : messageboard.topics
+    redirect_to messageboard_path(messageboard), :flash => { :error => "No topics found for this search." } unless @topics.length > 0
+    @messageboards = site.messageboards
   end
 
   def new

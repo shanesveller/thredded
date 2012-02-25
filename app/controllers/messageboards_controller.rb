@@ -10,19 +10,8 @@ class MessageboardsController < ApplicationController
     unless site.present? and can? :read, messageboard
       redirect_to default_home, :flash => { :error => "You are not authorized access to this messageboard." } and return 
     end
-
-    if params[:q].present?
-      @topics = Topic.full_text_search(params[:q], messageboard.id)
-      redirect_to messageboard_path(messageboard), :flash => { :error => "No topics found for this search." } unless @topics.length > 0
-
-      #@results = TopicPostSearch.new( params[:q], messageboard.name ) 
-      #redirect_to messageboard_path(messageboard), :flash => { :error => "No topics found for this search." } unless @results.length > 0
-      #@topics = []
-      #@results.each {|f| @topics.push f.topic}
-    else
-      @topics = messageboard.topics
-    end
-
+    @topics = params[:q].present? ? Topic.full_text_search(params[:q], messageboard.id) : messageboard.topics
+    redirect_to messageboard_path(messageboard), :flash => { :error => "No topics found for this search." } unless @topics.length > 0
     @messageboards = site.messageboards
   end
 
