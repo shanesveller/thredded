@@ -2,9 +2,9 @@ class Post  < ActiveRecord::Base
   require "gravtastic"
   include Gravtastic
   include BaseFilter
-  include AttachmentFilter
   include TextileFilter
   include BbcodeFilter
+  include AttachmentFilter
   
   gravtastic :user_email
   default_scope :order => 'id ASC'
