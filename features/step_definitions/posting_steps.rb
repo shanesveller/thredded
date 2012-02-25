@@ -55,7 +55,11 @@ Given /^I create the following new threads:$/ do |topics_table|
 end
 
 Then /^the topic listing should look like the following:$/ do |topics_table|
-  topics_table.diff!(tableish('#content header, #content article','h1 a,.post_count,.started_by a,.updated_by a, div'))
+  html = Capybara::Node::Simple.new(body)
+  header = html.find('#content header').all('div').map {|r| r.text }
+  cells = html.all('#content article h1 a, #content article .post_count, #content article .started_by a, #content article .updated_by a, #content article div').map {|c| c.text }.collect_every(4)
+  table = cells.insert(0, header)
+  topics_table.diff!(table)
 end
 
 Given /^another member named "([^"]*)" exists$/ do |name|
@@ -80,7 +84,7 @@ end
 
 When /^I enter a recipient named "([^"]*)", a title "([^"]*)" and content "([^"]*)"$/ do |username, title, content|
   select username, :from => 'topic_user_id'
-  And  %{I enter a title "#{title}" with content "#{content}"}
+  step %{I enter a title "#{title}" with content "#{content}"}
 end
 
 Given /^a private thread exists between "([^"]*)" and "([^"]*)" titled "([^"]*)"$/ do |user1, user2, title|

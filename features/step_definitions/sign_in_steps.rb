@@ -2,11 +2,11 @@
 
 # General
 Then /^I should see error messages$/ do
-  Then %{I should see "errors prohibited"}
+  step %{I should see "errors prohibited"}
 end
 
 Then /^I should see an error message$/ do
-  Then %{I should see "error prohibited"}
+  step %{I should see "error prohibited"}
 end
 
 Then /^I debug$/ do
@@ -33,20 +33,20 @@ end
 # Session
 
 Then /^I should be signed in$/ do
-  Then %{I should see "Logout"} 
+  step %{I should see "Logout"} 
 end
 
 Then /^I should be signed out$/ do
-  Then %{I should see "Login"} 
+  step %{I should see "Login"} 
 end
 
 Given /^I have signed in with "(.*)\/(.*)"$/ do |email, password|
-  Given %{I am signed up and confirmed as "#{email}/#{password}"}
-  And %{I sign in as "#{email}/#{password}"}
+  step %{I am signed up and confirmed as "#{email}/#{password}"}
+  step %{I sign in as "#{email}/#{password}"}
 end
 
 Given /^I am signed in as "(.*)"$/ do |username|
-  Given %{I have signed in with "#{username}@email.com/mypassword"}
+  step %{I have signed in with "#{username}@email.com/mypassword"}
 end
 
 # Emails
@@ -99,10 +99,10 @@ end
 # Actions
 
 When /^I sign in as "(.*)\/(.*)"$/ do |email, password|
-  When %{I go to the sign in page}
-  And %{I fill in "Email" with "#{email}"}
-  And %{I fill in "Password" with "#{password}"}
-  And %{I press "Sign in"}
+  step %{I go to the sign in page}
+  step %{I fill in "Email" with "#{email}"}
+  step %{I fill in "Password" with "#{password}"}
+  step %{I press "Sign in"}
   @current_user = User.find_by_email(email)
 end
 
@@ -111,18 +111,18 @@ When /^I sign out$/ do
 end
 
 When /^I request password reset link to be sent to "(.*)"$/ do |email|
-  When %{I go to the password reset request page}
-  And %{I fill in "Email address" with "#{email}"}
-  And %{I press "Reset password"}
+  step %{I go to the password reset request page}
+  step %{I fill in "Email address" with "#{email}"}
+  step %{I press "Reset password"}
 end
 
 When /^I update my password with "(.*)\/(.*)"$/ do |password, confirmation|
-  And %{I fill in "Choose password" with "#{password}"}
-  And %{I fill in "Confirm password" with "#{confirmation}"}
-  And %{I press "Save this password"}
+  step %{I fill in "Choose password" with "#{password}"}
+  step %{I fill in "Confirm password" with "#{confirmation}"}
+  step %{I press "Save this password"}
 end
 
 When /^I return next time$/ do
-  When %{session is cleared}
-  And %{I go to the homepage}
+  step %{session is cleared}
+  step %{I go to the homepage}
 end

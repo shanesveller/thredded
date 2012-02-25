@@ -17,8 +17,8 @@ Given /^the default website has a messageboard named "([^"]*)"$/ do |messageboar
 end
 
 Given /^the default website has two messageboards named "([^"]*)" and "([^"]*)"$/ do |messageboard1, messageboard2|
-  Then %{the default website has a messageboard named "#{messageboard1}"}
-  And %{the default website has a messageboard named "#{messageboard2}"}
+  step %{the default website has a messageboard named "#{messageboard1}"}
+  step %{the default website has a messageboard named "#{messageboard2}"}
 end
 
 Given /^the default website home is the homepage$/ do
@@ -36,8 +36,8 @@ Then /^I should see the messageboard called "([^"]*)"$/ do |messageboard|
 end
 
 Then /^I should see messageboards "([^"]*)" and "([^"]*)"$/ do |messageboard1, messageboard2|
-  Then %{I should see the messageboard called "#{messageboard1}"}
-  And  %{I should see the messageboard called "#{messageboard2}"}
+  step %{I should see the messageboard called "#{messageboard1}"}
+  step  %{I should see the messageboard called "#{messageboard2}"}
 end
 
 Given /^a custom cname site exists called "([^"]*)"$/ do |subdomain|

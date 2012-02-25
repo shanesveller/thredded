@@ -8,7 +8,7 @@ Given /^a new thread by "([^"]*)" named "([^"]*)" exists on "([^"]*)"$/ do |user
 end
 
 Given /^the latest thread on "([^"]*)" has several posts$/ do |messageboard|
-  Given %{a new thread by "joel" named "oh hello" exists on "#{messageboard}"}
+  step %{a new thread by "joel" named "oh hello" exists on "#{messageboard}"}
   2.times do |index|
     @topic.posts.create(:content => "post ##{index}", :user => @user, :messageboard => @messageboard)
   end
