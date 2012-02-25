@@ -1,6 +1,6 @@
   <% if can? :read, t -%>
     <article>
-      <h1><%= link_to t.title, messageboard_topic_path(messageboard, t) %></h1>
+      <h1><%= link_to t.title, messageboard_topic_posts_path(messageboard, t) %></h1>
       <div  class="post_count"><%= t.posts_count %></div>
       <cite class="started_by">
         <abbr class="started_at timeago" title="<%= t.created_at.strftime("%Y-%m-%dT%H:%M:%SZ") %>"><%= t.created_at.strftime("%b %d, %Y %I:%M:%S %Z") %></abbr>

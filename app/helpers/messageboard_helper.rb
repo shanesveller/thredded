@@ -12,7 +12,7 @@ module MessageboardHelper
   def link_or_text_to(messageboard)
     @link_or_text = ""
     if can? :read, messageboard 
-      @link_or_text = link_to messageboard.title, messageboard_path(messageboard)
+      @link_or_text = link_to messageboard.title, messageboard_topics_path(messageboard)
     else
       @link_or_text = messageboard.title
     end
@@ -39,7 +39,7 @@ module MessageboardHelper
         topic.updated_at.strftime("%b %d, %Y %I:%M:%S %Z")
       end
       if can? :read, messageboard
-        link_to abbr , messageboard_topic_path(messageboard, topic)
+        link_to abbr , messageboard_topic_posts_path(messageboard, topic)
       else
         abbr
       end
