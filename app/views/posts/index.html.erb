@@ -19,7 +19,7 @@
     <nav class="breadcrumbs">
       <ul>
         <li><a href="/">Forums</a> &rarr; </li>
-        <li><%= link_to messageboard.title, messageboard_path(messageboard) %> &rarr; </li>
+        <li><%= link_to messageboard.title, messageboard_topics_path(messageboard) %> &rarr; </li>
       </ul>
     </nav>
     <h1><%= topic.title %></h1> 
@@ -52,7 +52,7 @@
     <nav class="breadcrumbs">
       <ul>
         <li><a href="/">Forums</a> &rarr; </li>
-        <li><%= link_to messageboard.title, messageboard_path(messageboard) %> &rarr; </li>
+        <li><%= link_to messageboard.title, messageboard_topics_path(messageboard) %> &rarr; </li>
       </ul>
     </nav>
   </footer>
