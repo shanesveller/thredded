@@ -16,7 +16,7 @@
 <% end %>
 
   <header>
-    <% cache "header-" + messageboard.cache_key do %>
+    <% cache ["posts", "header",  messageboard] do %>
       <nav class="breadcrumbs">
         <ul>
           <li><a href="/">Forums</a> &rarr; </li>
@@ -25,7 +25,7 @@
       </nav>
     <% end %> 
 
-    <% cache "header-" + topic.cache_key do %>
+    <% cache ["posts", "header", topic] do %>
       <h1><%= topic.title %></h1> 
       <h2><%= topic.posts_count %> posts</h2>
       <% if topic.users_to_sentence %>
@@ -34,12 +34,12 @@
     <% end %>
   </header>
   
-  <% cache "posts-" + topic.cache_key do %>
+  <% cache ["posts", topic] do %>
     <%= render topic.posts %>
   <% end %>
   
   <% if messageboard.posting_for_anonymous? || (current_user && current_user.can_post_to?(messageboard)) -%>
-    <% cache "form-" + topic.cache_key do %>
+    <% cache ["posts", "form", topic] do %>
     <%= nested_form_for([messageboard, topic, @post], 
                         :url => create_messageboard_topic_post_url(messageboard, topic, @post, :host => site.cached_domain),
                         :html => { :multipart => true }) do |f| %>
@@ -59,7 +59,7 @@
     <% end -%>
   <% end -%>
 
-<% cache "footer-" + messageboard.cache_key do %>
+<% cache ["posts", "footer", messageboard] do %>
   <footer>
     <nav class="breadcrumbs">
       <ul>
