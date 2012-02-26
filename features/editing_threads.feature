@@ -16,7 +16,9 @@ Background: Default site and messageboard
        And I submit the form
        And I go to the most recently updated thread on "thredded"
        And I click the edit subject link
-      Then I should be able to edit this thread
+       And I change the content to "I edited this content"
+       And I click the edit topic button
+      Then I should see "I edited this content"
 
   Scenario: The member tries to edit someone elses thread
      Given a new thread by "sal" named "hello friends" exists on "thredded"

@@ -32,12 +32,19 @@ Given /^the ([^"]*) post on the most recent thread is not mine/ do |position|
   @topic.save
 end
 
-# Assertions ==========================
+When /^I change the content to "([^"]*)"$/ do |content|
+ fill_in "Content", :with => content
+end
 
+When /^I click the edit topic button$/ do
+  find_button("Edit Topic").click
+end
 
 When /^I click the edit subject link$/ do
   find_link("edit subject").click
 end
+
+# Assertions ==========================
 
 Then /^I should be able to edit this thread$/ do
   page.should have_selector('form.edit_topic')

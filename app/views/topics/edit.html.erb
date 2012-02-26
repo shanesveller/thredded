@@ -1,4 +1,6 @@
-<%= nested_form_for [@messageboard, @topic], :url => messageboard_topic_path(@messageboard, @topic), :html => { :method => "put" } do |f| %>
+<%= nested_form_for [@messageboard, @topic], 
+                    :url => messageboard_topic_path(@messageboard, @topic), 
+                    :html => { :method => "put" } do |f| %>
   <%= render :partial => 'form', :locals => { :f => f } %>
   <%= f.submit "Edit Topic" %>
 <% end %>

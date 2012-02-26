@@ -33,7 +33,7 @@ class TopicsController < ApplicationController
  
   def update
     topic.update_attributes(params[:topic])
-    redirect_to messageboard_topic_path(messageboard, topic)
+    redirect_to messageboard_topic_posts_url(messageboard, topic, :host => @site.cached_domain)
   end
 
   # ======================================
