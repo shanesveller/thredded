@@ -22,7 +22,7 @@ class PostsController < ApplicationController
 
   def update
     post.update_attributes(params[:post])
-    redirect_to messageboard_topic_url(messageboard, topic, :host => @site.cached_domain)
+    redirect_to messageboard_topic_posts_url(messageboard, topic, :host => @site.cached_domain)
   end
 
   # ======================================
