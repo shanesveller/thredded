@@ -13,7 +13,7 @@ module NavigationHelpers
 
     when /the messageboard "([^\"]+)"/i
       messageboard = @site.messageboards.find_by_name($1)
-      messageboard_url(messageboard, :host => @site.cached_domain)
+      messageboard_topics_url(messageboard, :host => @site.cached_domain)
 
     when /the new thread page for "([^\"]+)"/i
       messageboard = @site.messageboards.find_by_name($1)
@@ -25,7 +25,7 @@ module NavigationHelpers
 
     when /the topic listing page/i
       messageboard = @site.messageboards.first
-      messageboard_url(messageboard, :host => @site.cached_domain)
+      messageboard_topics_url(messageboard, :host => @site.cached_domain)
 
     when /edit the latest thread/i
       messageboard = Messageboard.first
@@ -35,7 +35,7 @@ module NavigationHelpers
     when /the most recently updated thread on "([^\"]+)"/i
       messageboard = @site.messageboards.find_by_name($1)
       topic = messageboard.topics.first
-      messageboard_topic_url(messageboard, topic, :host => @site.cached_domain)
+      messageboard_topic_posts_url(messageboard, topic, :host => @site.cached_domain)
 
     when /the sign up page/i
       new_user_registration_url( :host => @site.cached_domain )
