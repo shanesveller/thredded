@@ -16,23 +16,30 @@
 <% end %>
 
   <header>
-    <nav class="breadcrumbs">
-      <ul>
-        <li><a href="/">Forums</a> &rarr; </li>
-        <li><%= link_to messageboard.title, messageboard_topics_path(messageboard) %> &rarr; </li>
-      </ul>
-    </nav>
-    <h1><%= topic.title %></h1> 
-    <h2><%= topic.posts_count %> posts</h2>
-    <% if topic.users_to_sentence %>
-      <cite><%= topic.users_to_sentence %></cite>
+    <% cache "header-" + messageboard.cache_key do %>
+      <nav class="breadcrumbs">
+        <ul>
+          <li><a href="/">Forums</a> &rarr; </li>
+          <li><%= link_to messageboard.title, messageboard_topics_path(messageboard) %> &rarr; </li>
+        </ul>
+      </nav>
+    <% end %> 
+
+    <% cache "header-" + topic.cache_key do %>
+      <h1><%= topic.title %></h1> 
+      <h2><%= topic.posts_count %> posts</h2>
+      <% if topic.users_to_sentence %>
+        <cite><%= topic.users_to_sentence %></cite>
+      <% end %>
     <% end %>
   </header>
-
-  <%= render topic.posts %>
+  
+  <% cache "posts-" + topic.cache_key do %>
+    <%= render topic.posts %>
+  <% end %>
   
   <% if messageboard.posting_for_anonymous? || (current_user && current_user.can_post_to?(messageboard)) -%>
-
+    <% cache "form-" + topic.cache_key do %>
     <%= nested_form_for([messageboard, topic, @post], 
                         :url => create_messageboard_topic_post_url(messageboard, topic, @post, :host => site.cached_domain),
                         :html => { :multipart => true }) do |f| %>
@@ -49,9 +56,10 @@
 
       <%= f.submit "Submit a reply" %>
     <% end -%>
-
+    <% end -%>
   <% end -%>
 
+<% cache "footer-" + messageboard.cache_key do %>
   <footer>
     <nav class="breadcrumbs">
       <ul>
@@ -60,3 +68,4 @@
       </ul>
     </nav>
   </footer>
+<% end %>
