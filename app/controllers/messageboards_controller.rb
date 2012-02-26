@@ -8,10 +8,4 @@ class MessageboardsController < ApplicationController
 
   # ======================================
 
-private
-
-  def default_home
-    root_url(:host => site.cached_domain)
-  end
-
 end

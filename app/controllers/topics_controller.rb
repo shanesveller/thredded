@@ -8,7 +8,7 @@ class TopicsController < ApplicationController
       redirect_to default_home, :flash => { :error => "You are not authorized access to this messageboard." } and return 
     end
     @topics = params[:q].present? ? Topic.full_text_search(params[:q], messageboard.id) : messageboard.topics
-    redirect_to messageboard_topics_path(messageboard), :flash => { :error => "No topics found for this search." } unless @topics.length > 0
+    redirect_if_no_search_results_for @topics
     @messageboards = site.messageboards
   end
 
@@ -39,6 +39,17 @@ class TopicsController < ApplicationController
   # ======================================
 
   private
+
+    def redirect_if_no_search_results_for(topics)
+      if params[:q].present? && topics.length == 0
+        redirect_to messageboard_topics_path(messageboard), :flash => { :error => "No topics found for this search." } 
+      end
+    end
+
+    def default_home
+      root_url(:host => site.cached_domain)
+    end
+
 
     def klass
       @klass ||= params[:topic][:type].present? ? params[:topic][:type].constantize : Topic

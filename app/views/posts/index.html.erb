@@ -32,7 +32,10 @@
   <%= render topic.posts %>
   
   <% if messageboard.posting_for_anonymous? || (current_user && current_user.can_post_to?(messageboard)) -%>
-    <%= nested_form_for([messageboard, topic, @post], :html => { :multipart => true }) do |f| %>
+
+    <%= nested_form_for([messageboard, topic, @post], 
+                        :url => create_messageboard_topic_post_url(messageboard, topic, @post, :host => site.cached_domain),
+                        :html => { :multipart => true }) do |f| %>
       <p>
         <%= f.label :your_reply %>
         <%= f.text_area :content, :rows => 5 %>
@@ -46,6 +49,7 @@
 
       <%= f.submit "Submit a reply" %>
     <% end -%>
+
   <% end -%>
 
   <footer>

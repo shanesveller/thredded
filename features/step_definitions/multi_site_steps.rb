@@ -48,8 +48,8 @@ end
 
 Given /^"([^"]*)" has two messageboards named "([^"]*)" and "([^"]*)"$/ do |subdomain, messageboard1, messageboard2|
   @site = Site.where("cached_domain = ? OR  subdomain = ?", subdomain, subdomain).first
-  @site.messageboards << Factory(:messageboard, :name => messageboard1, :title => messageboard1)
-  @site.messageboards << Factory(:messageboard, :name => messageboard2, :title => messageboard2)
+  @site.messageboards << Factory(:messageboard, :name => messageboard1, :title => messageboard1, :topics => [Factory(:topic)])
+  @site.messageboards << Factory(:messageboard, :name => messageboard2, :title => messageboard2, :topics => [Factory(:topic)])
   @site.save
 end
 

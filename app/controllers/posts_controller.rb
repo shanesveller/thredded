@@ -13,7 +13,7 @@ class PostsController < ApplicationController
 
   def create
     p = topic.posts.create(params[:post])
-    redirect_to messageboard_topic_url(messageboard, topic, :host => @site.cached_domain)
+    redirect_to messageboard_topic_posts_url(messageboard, topic, :host => @site.cached_domain)
   end
 
   def edit
