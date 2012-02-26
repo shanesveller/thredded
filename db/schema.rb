@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120224025921) do
+ActiveRecord::Schema.define(:version => 20120226200759) do
 
   create_table "attachments", :force => true do |t|
     t.string   "attachment"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(:version => 20120224025921) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "attachments", ["post_id"], :name => "index_attachments_on_post_id"
 
   create_table "categories", :force => true do |t|
     t.integer  "messageboard_id"
@@ -67,6 +69,8 @@ ActiveRecord::Schema.define(:version => 20120224025921) do
     t.integer  "topic_id"
     t.integer  "messageboard_id"
   end
+
+  add_index "posts", ["topic_id"], :name => "index_posts_on_topic_id"
 
   create_table "private_users", :force => true do |t|
     t.integer  "private_topic_id"
@@ -128,6 +132,7 @@ ActiveRecord::Schema.define(:version => 20120224025921) do
   end
 
   add_index "topics", ["category_id"], :name => "index_topics_on_category_id"
+  add_index "topics", ["messageboard_id"], :name => "index_topics_on_messageboard_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                               :default => "",                           :null => false

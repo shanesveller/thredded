@@ -1,5 +1,5 @@
 <%= form_for([messageboard, topic, @post], :url => { :action => "update" }) do |f| %>
-  
+
   <%= f.label :filter %>
   <%= f.select :filter, @post.filters %>
   
