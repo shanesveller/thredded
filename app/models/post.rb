@@ -9,7 +9,7 @@ class Post  < ActiveRecord::Base
   gravtastic :user_email
   default_scope :order => 'id ASC'
   belongs_to :messageboard, :counter_cache => true
-  belongs_to :topic,  :counter_cache => true, :touch => true
+  belongs_to :topic,  :counter_cache => true
   belongs_to :user,   :counter_cache => true
   has_many   :attachments
   accepts_nested_attributes_for :attachments
@@ -30,7 +30,7 @@ class Post  < ActiveRecord::Base
 
     def modify_parent_topic
       topic.last_user = user
-      topic.updated_at = created_at
+      topic.updated_at = DateTime.now
       topic.save
     end
 
