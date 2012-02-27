@@ -16,8 +16,6 @@
     <%= render post.attachments %>
   </ul>
   <footer>
-    <% if post.attachments.size > 0 -%>
-    <% end -%>
     <% if can? :manage, post %>
       <%= link_to "edit post", edit_messageboard_topic_post_path(messageboard, topic, post), {:class => "edit"} %>
     <% end %>

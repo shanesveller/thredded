@@ -1,14 +1,23 @@
-<%= form_for([messageboard, topic, @post], :url => { :action => "update" }) do |f| %>
+<% content_for :page_id do %>posts_edit<% end %>
+<% content_for :page_title do %><%= site.title %> | <%= messageboard.title %> | Edit Post<% end %>
 
-  <%= f.label :filter %>
-  <%= f.select :filter, @post.filters %>
-  
-  <%= f.label :content %>
-  <%= f.text_area :content, :rows => 5 %>
+<%= nested_form_for([messageboard, topic, @post], 
+                    :url => { :action => "update" },
+                    :html => { :method => :put, :class => :topic_form }) do |f| %>
 
-  <%= f.fields_for :images do |image_form| %>
-    <%= image_form.file_field :image %>
+  <p class="content">
+    <%= f.text_area :content, :rows => 5 %>
+  </p>
+
+  <%= f.fields_for :attachments do |attachment_form|  %>
+    <p class="attachment"> 
+      <%= attachment_form.file_field :attachment %>
+      <%= attachment_form.link_to_remove "Remove this attachment", :class => "remove_attachment" %> 
+    </p>
   <% end %>
+
+  <%= f.link_to_add "Add an attachment", :attachments, :class => "add_attachment" %>
+  <%= f.select :filter, Post::Filters %>
 
   <%= f.submit "Edit Post" %>
 <% end %>

@@ -22,7 +22,7 @@
     @include background-image(linear-gradient(#ffffff, #bfbfbf));
 }
 
-#topics_new {
+.topic_form {
   label { display: block; clear: both; font-size: 12px; text-transform: lowercase; margin: 10px 0 4px 0; color: #888; font-size: 12px;  }
   label[for="topic_title"] { display: none; }
   
