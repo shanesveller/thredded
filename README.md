@@ -33,14 +33,14 @@ Whatever's stricken out still needs to be implemented
 
 * Security per messageboard - private, public or logged in users only
 * Permissions to post - anonymous, members or logged in users only
-* <del>Attaching images to posts</del>
-* <del>Attaching documents to posts</del>
+* Attaching images to posts
+* Attaching documents to posts
 * Content Filters - bbcode, textile
 * Locking threads
 * Sticky / Pinned threads
 * Private threads
-* <del>Fully theme'able</del>
-* <del>Placement of attached images to posts</del>
+* Fully theme'able
+* Placement of attached images to posts
 * <del>Logging in via twitter, github, facebook, linked in, and Gmail</del>
 * Search
 * <del>Import and Export</del>
