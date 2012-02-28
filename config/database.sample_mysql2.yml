@@ -10,16 +10,12 @@ defaults: &defaults
 development:
   <<: *defaults
   database: thredded_dev
-  username: username
-  password: password
 
 test:
   <<: *defaults
   database: thredded_test
-  username: username
-  password: password
 
-test:
+production:
   <<: *defaults
   database: thredded_production
   username: username
