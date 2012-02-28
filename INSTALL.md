@@ -1,5 +1,7 @@
 # Initial Setup
 
+(for heroku - see [the bottom of this file](#heroku))
+
 I highly suggest using [RVM](https://rvm.beginrescueend.com/) or [RBENV](https://github.com/sstephenson/rbenv) to manage your ruby vm's. I'll assume you're using RVM, so if more information is needed please take the time to watch Ryan Bates' screencast on [getting started with Ruby on Rails](http://railscasts.com/episodes/310-getting-started-with-rails). You should probably watch it anyway.
 
 * Install Ruby 1.9.2 -- `rvm install 1.9.2`
@@ -95,3 +97,8 @@ Now that those two files are created and the settings are correct we can move on
 		rails s
 
 * Open your local server up in your browser and follow the setup "wizard". That will help you set up your site and first messageboard, and you should be ready to go!
+
+## Heroku <a name="heroku"></a>
+
+* use the cedar stack - `heroku create -s cedar`
+* once your slug is compiled just visit the URL that heroku provides you and start the setup from right there.
