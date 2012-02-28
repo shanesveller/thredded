@@ -94,4 +94,4 @@ Now that those two files are created and the settings are correct we can move on
 
 		rails s
 
-* Follow the setup wizard that will help you set up your site and first messageboard, and you should be ready to go!
+* Open your local server up in your browser and follow the setup "wizard". That will help you set up your site and first messageboard, and you should be ready to go!
