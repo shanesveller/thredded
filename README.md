@@ -1,5 +1,9 @@
 # Thredded
 
+## Installation:
+
+If you just want to know how to install - please head to [the Installation instructions](https://github.com/jayroh/thredded/blob/master/INSTALL.md). Details on getting things running on Heroku are included.
+
 ## Why?
 
 Two reasons. The vast majority of messageboard, or "forum", software out there is garbage.  And I can't find any current and maintained projects running on Rails (specifically version 3).
@@ -24,7 +28,7 @@ Poke around the source and take a look. If there's anything that's been overlook
 ## Requirements:
 
 * ImageMagick is installed
-* postgres or mysql
+* postgres or mysql (search currently only works with pg, using pg's fulltext search capabilities)
 
 
 ## Features:
