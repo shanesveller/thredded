@@ -30,7 +30,6 @@ class Post  < ActiveRecord::Base
 
     def modify_parent_topic
       topic.last_user = user
-      topic.updated_at = DateTime.now
       topic.save
     end
 

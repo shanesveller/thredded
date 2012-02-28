@@ -34,12 +34,9 @@
     <% end %>
   </header>
   
-  <% cache ["posts", topic] do %>
-    <%= render topic.posts %>
-  <% end %>
+  <%= render topic.posts %>
   
   <% if messageboard.posting_for_anonymous? || (current_user && current_user.can_post_to?(messageboard)) -%>
-    <% cache ["posts", "form", topic] do %>
     <%= nested_form_for([messageboard, topic, @post], 
                         :url => create_messageboard_topic_post_url(messageboard, topic, @post, :host => site.cached_domain),
                         :html => { :multipart => true }) do |f| %>
@@ -55,7 +52,6 @@
       <%= f.select :filter, @post.filters %>
 
       <%= f.submit "Submit a reply" %>
-    <% end -%>
     <% end -%>
   <% end -%>
 
