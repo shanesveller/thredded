@@ -1,0 +1,13 @@
+<% content_for :page_id do %>sites_edit<% end %>
+<% content_for :page_title do %><%= @site.title %> | Edit<% end %>
+
+<h1>Edit <%= @site.title %></h1>
+
+<%= nested_form_for @site,
+                    :url => admin_site_path(@site),
+                    :html => { :method => :put, :class => :topic_form, :multipart => true } do |f| %>
+  <%= render :partial => 'form', :locals => { :f => f } %>
+  <p>
+    <%= f.submit "Edit Topic" %>
+  </p>
+<% end %>

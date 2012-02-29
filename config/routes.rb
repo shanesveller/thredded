@@ -11,6 +11,13 @@ Thredded::Application.routes.draw do
 
   devise_for :users 
   resources :users
+
+  namespace :admin do
+    resources :sites do
+      resources :messageboards
+    end
+    resources :users
+  end
   
   constraints(PersonalizedDomain.new) do
     root :to => "messageboards#index"
