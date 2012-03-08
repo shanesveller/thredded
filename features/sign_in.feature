@@ -24,3 +24,10 @@ Feature: Sign in
     When I go to the sign in page
      And I sign in as "email@person.com/password"
     Then I should see "Signed in"
+
+  Scenario: User requests new password
+   Given I am signed up and confirmed as "confirmed@person.com/blarghyblargh"
+    When I go to the forgot password page
+     And I fill in "Email" with "confirmed@person.com"
+     And I press "Send me reset password instructions"
+    Then I should see "You will receive an email with instructions about how to reset your password in a few minutes."

@@ -11,6 +11,9 @@ module NavigationHelpers
     when /the homepage/
       '/'
 
+    when /the forgot password page/i
+      new_user_password_path
+
     when /the messageboard "([^\"]+)"/i
       messageboard = @site.messageboards.find_by_name($1)
       messageboard_topics_url(messageboard, :host => @site.cached_domain)
