@@ -3,6 +3,7 @@ defaults: &defaults
   encoding: UTF8
   host: localhost
   port: 5432
+  min_messages: WARNING
   
 development:
   <<: *defaults
