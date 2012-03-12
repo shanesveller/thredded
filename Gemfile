@@ -35,6 +35,7 @@ group :assets do
   gem 'sass-rails', "3.1.0"
   gem 'uglifier'
   gem 'compass'
+  gem 'therubyracer'
 end
 
 # Test specific gems
@@ -62,10 +63,10 @@ end
 # :development specific gems
 group :development do
   # for '1.9.3'
-  # gem 'ruby-debug-base19', '0.11.26' # https://gist.github.com/1848409 to work with 1.9.3-p125
-  # gem 'ruby-debug19', '0.11.6'
-  gem 'ruby-debug-base19', '0.11.25'
-  gem 'ruby-debug19'
+  gem 'ruby-debug-base19', '0.11.26' # https://gist.github.com/1848409 to work with 1.9.3-p125
+  gem 'ruby-debug19', '0.11.6'
+  # gem 'ruby-debug-base19', '0.11.25'
+  # gem 'ruby-debug19'
   gem 'guard-livereload'
   gem 'faker'
   gem 'heroku'

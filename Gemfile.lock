@@ -150,6 +150,7 @@ GEM
       rails (>= 3.0.0)
     launchy (2.0.5)
       addressable (~> 2.2.6)
+    libv8 (3.3.10.4)
     linecache19 (0.5.13)
       ruby_core_source (>= 0.1.4)
     mail (2.3.0)
@@ -209,7 +210,7 @@ GEM
       activesupport (~> 3.0)
       railties (~> 3.0)
       rspec (~> 2.6.0)
-    ruby-debug-base19 (0.11.25)
+    ruby-debug-base19 (0.11.26)
       columnize (>= 0.3.1)
       linecache19 (>= 0.5.11)
       ruby_core_source (>= 0.1.4)
@@ -239,6 +240,8 @@ GEM
       tilt (~> 1.1, != 1.3.0)
     subexec (0.0.4)
     term-ansicolor (1.0.7)
+    therubyracer (0.9.10)
+      libv8 (~> 3.3.10)
     thin (1.3.1)
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
@@ -308,11 +311,12 @@ DEPENDENCIES
   refraction
   rspec (= 2.6.0)
   rspec-rails (= 2.6.1)
-  ruby-debug-base19 (= 0.11.25)
-  ruby-debug19
+  ruby-debug-base19 (= 0.11.26)
+  ruby-debug19 (= 0.11.6)
   sass-rails (= 3.1.0)
   shoulda (= 2.11.3)
   spork (~> 0.9.0.rc)
+  therubyracer
   thin
   thredded-theme-metal!
   timecop
