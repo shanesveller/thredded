@@ -18,6 +18,12 @@ GIT
   specs:
     nested_form (0.2.0)
 
+GIT
+  remote: git://github.com/thoughtbot/shoulda-matchers.git
+  revision: fd4aa53382574f062cea9fc182564bce63d2b212
+  specs:
+    shoulda-matchers (1.0.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -232,7 +238,6 @@ GEM
       ffi (~> 1.0.9)
       json_pure
       rubyzip
-    shoulda (2.11.3)
     spork (0.9.0)
     sprockets (2.0.3)
       hike (~> 1.2)
@@ -314,7 +319,7 @@ DEPENDENCIES
   ruby-debug-base19 (= 0.11.26)
   ruby-debug19 (= 0.11.6)
   sass-rails (= 3.1.0)
-  shoulda (= 2.11.3)
+  shoulda-matchers!
   spork (~> 0.9.0.rc)
   therubyracer
   thin

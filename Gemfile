@@ -47,7 +47,7 @@ group :test, :cucumber do
   gem 'factory_girl_rails'  , '1.0.1'
   gem 'database_cleaner'  
   gem 'capybara'            , '1.1.2'
-  gem 'shoulda'             , '2.11.3'
+  gem 'shoulda-matchers'    , :git => 'git://github.com/thoughtbot/shoulda-matchers.git'
   gem 'cucumber'            , '1.1.4'
   gem 'cucumber-rails'      , '1.2.1', require: false
   gem 'timecop'
