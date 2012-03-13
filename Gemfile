@@ -60,13 +60,15 @@ group :test, :cucumber do
   gem 'fuubar'
 end
 
-# :development specific gems
 group :development do
-  # for '1.9.3'
-  gem 'ruby-debug-base19', '0.11.26' # https://gist.github.com/1848409 to work with 1.9.3-p125
+  # 
+  # for '1.9.3' MAKE SURE TO INSTALL WITH :
+  #
+  #   https://gist.github.com/1848409
+  #   bash < <(curl -L https://raw.github.com/gist/1848409)
+  #
+  gem 'ruby-debug-base19', '0.11.26' 
   gem 'ruby-debug19', '0.11.6'
-  # gem 'ruby-debug-base19', '0.11.25'
-  # gem 'ruby-debug19'
   gem 'guard-livereload'
   gem 'faker'
   gem 'heroku'
