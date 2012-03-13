@@ -47,7 +47,7 @@ end
 # Assertions ==========================
 
 Then /^I should be able to edit this thread$/ do
-  page.should have_selector('form.edit_topic')
+  page.should have_selector('form.topic_form')
 end
 
 Then /^I should see only my original post$/ do
