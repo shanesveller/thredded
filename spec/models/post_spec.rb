@@ -71,10 +71,10 @@ describe Post do
       @post.content = "[t:img=2 left] [t:img=3 right] [t:img] [t:img=4 200x200]"
       @post.save
 
-      @attachment_4 = Factory(:zippng, :post => @post)     # 4 zip
-      @attachment_3 = Factory(:txtpng, :post => @post)     # 3 txt
-      @attachment_2 = Factory(:pdfpng, :post => @post)     # 2 pdf
-      @attachment_1 = Factory(:attachment, :post => @post) # 1 img 
+      @attachment_4 = FactoryGirl.create(:zippng,     :post => @post) # 4 zip
+      @attachment_3 = FactoryGirl.create(:txtpng,     :post => @post) # 3 txt
+      @attachment_2 = FactoryGirl.create(:pdfpng,     :post => @post) # 2 pdf
+      @attachment_1 = FactoryGirl.create(:attachment, :post => @post) # 1 img 
 
       expectation = "<img src=\"/uploads/attachment/attachment/#{@attachment_2.id}/pdf.png\" class=\"align_left\" /> <img src=\"/uploads/attachment/attachment/#{@attachment_3.id}/txt.png\" class=\"align_right\" /> <img src=\"/uploads/attachment/attachment/#{@attachment_1.id}/img.png\" /> <img src=\"/uploads/attachment/attachment/#{@attachment_4.id}/zip.png\" width=\"200\" height=\"200\" />"
 
