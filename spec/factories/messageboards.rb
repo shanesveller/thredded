@@ -1,11 +1,19 @@
-Factory.sequence(:messageboard_name) {|n| "messageboard#{n}" }
-Factory.sequence(:messageboard_title) {|n| "Messageboard #{n}" }
+FactoryGirl.define do
+  sequence :messageboard_name do |n|
+    "messageboard#{n}"
+  end
+  sequence :messageboard_title do |n|
+    "Messageboard #{n}"
+  end
+end
 
-Factory.define :messageboard do |f|
-  f.name                { Factory.next :messageboard_name }
-  f.description         "This is a description of the messageboard"
-  f.theme               'default'
-  f.security            'public'
-  f.posting_permission  'anonymous'
-  f.title               { Factory.next :messageboard_title }
+FactoryGirl.define do
+  factory :messageboard do
+    name                { FactoryGirl.generate(:messageboard_name) }
+    title               { FactoryGirl.generate(:messageboard_title) }
+    description         "This is a description of the messageboard"
+    theme               'default'
+    security            'public'
+    posting_permission  'anonymous'
+  end
 end

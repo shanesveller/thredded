@@ -1,4 +1,6 @@
-# Read about factories at http://github.com/thoughtbot/factory_girl
-
-Factory.define :category do |f|
+FactoryGirl.define do
+  factory :category do
+    name "Funny"
+    description "Probably pictures of lolcats"
+  end
 end
