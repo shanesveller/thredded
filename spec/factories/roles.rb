@@ -1,4 +1,6 @@
-Factory.define :role do |f|
-  f.level 'admin'
-  f.association :messageboard
+FactoryGirl.define do
+  factory :role do
+    level         'admin'
+    messageboard
+  end
 end

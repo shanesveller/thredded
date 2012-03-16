@@ -24,12 +24,9 @@ Spork.prefork do
     config.stretches = 0
   end
 
-
-
   # Requires supporting ruby files with custom matchers and macros, etc,
   # in spec/support/ and its subdirectories.
   Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
-
 
   counter = -1
   RSpec.configure do |config|
@@ -74,23 +71,22 @@ Spork.prefork do
     config.after(:suite) do
       counter = 0
     end
-    
-    
+
+
     ### Part of a Spork hack. See http://bit.ly/arY19y
     # Emulate initializer set_clear_dependencies_hook in 
     # railties/lib/rails/application/bootstrap.rb
     ActiveSupport::Dependencies.clear
-    
+
   end # of RSpec.configure
 end # of Spork.prefork
 
 Spork.each_run do
   # This code will be run each time you run your specs.
-  Factory.factories.clear
-  Dir[Rails.root.join("spec/factories/**/*.rb")].each{|f| load f}
-
   ActiveRecord::Schema.verbose = false
   load "#{Rails.root}/db/schema.rb"
+  FactoryGirl.definition_file_paths = [File.join(Rails.root, 'spec', 'factories')]
+  FactoryGirl.reload
 end
 
 # --- Instructions ---

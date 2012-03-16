@@ -3,8 +3,8 @@ require 'spec_helper'
 describe PrivateTopic do
 
   before(:each) do
-    @user1 = Factory(:user, :name => "user1")
-    @user2 = Factory(:user, :name => "user2")
+    @user1 = Factory(:user, :name => "privateuser1")
+    @user2 = Factory(:user, :name => "privateuser2")
     @messageboard = Factory(:messageboard)
     @topic = Factory(:private_topic, :messageboard => @messageboard, :users => [@user1, @user2])
   end
@@ -15,7 +15,7 @@ describe PrivateTopic do
   
   context "when it is private" do
     it "does not allow someone not involved to read the topic" do
-      @user3 = Factory(:user, :name => "user3")
+      @user3 = Factory(:user)
       ability = Ability.new(@user3)
       ability.can?(:read, @topic).should be_false
     end
@@ -41,7 +41,7 @@ describe PrivateTopic do
 
   describe ".users_to_sentence" do
     it "should list out the users in a topic in a human readable format" do
-      @topic.users_to_sentence.should == "User1 and User2"
+      @topic.users_to_sentence.should == "Privateuser1 and Privateuser2"
     end
   end
 
