@@ -17,7 +17,7 @@ gem 'rspec-rails'                 , '2.6.1'
 gem 'rails3-generators'
 gem 'gravtastic'                  , '3.1.0'
 gem 'nokogiri'                    , '1.5.0'
-gem 'kaminari'                    , '0.12.4'
+gem 'kaminari'                    , '0.13.0'
 gem 'bb-ruby'                     , '0.9.5'
 gem 'RedCloth'                    , '4.2.9' # in OS X Lion : gem install RedCloth -- --with-cflags=-w 
 gem 'highline'                    , '1.6.1'

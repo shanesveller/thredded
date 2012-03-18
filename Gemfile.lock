@@ -152,8 +152,10 @@ GEM
       thor (~> 0.14)
     json (1.6.5)
     json_pure (1.6.5)
-    kaminari (0.12.4)
-      rails (>= 3.0.0)
+    kaminari (0.13.0)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      railties (>= 3.0.0)
     launchy (2.0.5)
       addressable (~> 2.2.6)
     libv8 (3.3.10.4)
@@ -300,7 +302,7 @@ DEPENDENCIES
   highline (= 1.6.1)
   hirb
   jquery-rails
-  kaminari (= 0.12.4)
+  kaminari (= 0.13.0)
   launchy (= 2.0.5)
   mini_magick (= 3.2.1)
   multi_json
