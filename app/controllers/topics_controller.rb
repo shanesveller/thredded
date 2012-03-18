@@ -14,7 +14,7 @@ class TopicsController < ApplicationController
     if params[:q].present?
       @topics = Topic.full_text_search(params[:q], messageboard.id) 
     else
-      @topics = messageboard.topics.page(params[:page]).per(50)
+      @topics = messageboard.topics.page(params[:page]).per(30)
     end
 
     redirect_if_no_search_results_for @topics

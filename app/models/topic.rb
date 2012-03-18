@@ -21,7 +21,8 @@ class Topic < ActiveRecord::Base
   attr_accessible :type, :title, :user, :last_user, :sticky, :locked, :usernames, :posts_attributes, :messageboard
   
   # scopes
-  default_scope :order => 'updated_at DESC'
+  default_scope order('updated_at DESC')
+  default_scope where('type IS NULL')
   
   # misc
   accepts_nested_attributes_for :posts
