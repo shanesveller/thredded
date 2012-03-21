@@ -9,7 +9,7 @@ class Topic < ActiveRecord::Base
   belongs_to :user, :counter_cache => true
   belongs_to :messageboard, :counter_cache => true, :touch => true
   belongs_to :category
-  
+
   # delegations
   delegate :name, :name=, :email, :email=, :to => :user, :prefix => true
 
@@ -19,11 +19,10 @@ class Topic < ActiveRecord::Base
 
   # lock it down
   attr_accessible :type, :title, :user, :last_user, :sticky, :locked, :usernames, :posts_attributes, :messageboard
-  
+
   # scopes
   default_scope order('updated_at DESC')
-  default_scope where('type IS NULL')
-  
+
   # misc
   accepts_nested_attributes_for :posts
 
