@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  include ActiveModel::Dirty
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :token_authenticatable
@@ -17,8 +19,11 @@ class User < ActiveRecord::Base
   
   # validates_numericality_of :posts_count, :topics_count
   validates_presence_of :name
-  validates_uniqueness_of :name, :email, :case_sensitive => false
-  validates :name, :format => { :with => /\A[a-zA-Z0-9]+\z/, :message => "only letters or numbers allowed" }
+  validates :name, :presence => true, :uniqueness => true, :format => { :with => /\A[a-zA-Z0-9]+\z/, :message => "only letters or numbers allowed" }
+  validates :email, :presence => true, :length => {:minimum => 3, :maximum => 254}, :uniqueness => true, :format => {:with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :message => "invalid email address"}
+  
+
+  after_save :update_posts
 
   def superadmin?
     valid? && self.superadmin
@@ -55,5 +60,12 @@ class User < ActiveRecord::Base
   def to_param
     self.name
   end
+
+  private 
+    def update_posts
+      if self.email_changed?
+        Post.update_all(["user_email = ?", self.email], ["user_email = ?", self.email_was])
+      end
+    end
 
 end

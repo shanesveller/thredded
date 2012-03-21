@@ -89,8 +89,8 @@ describe User do
     end
   end
 
-  describe "user updates email" do
-    it "updates updates posts.user_email" do
+  describe "updating email" do
+    it "will update posts.user_email" do
 
       @shaun = Factory(:user, :name => "shaun", :email => "shaun@thredded.com")
       @topic = Factory(:topic, :last_user => @shaun)
@@ -103,6 +103,20 @@ describe User do
       @post.reload
       @post.user_email.should == @shaun.email
 
+    end
+  end
+
+  describe "email address" do
+    it "will be valid" do
+      @shaun = Factory.build(:user, :name => "shaun", :email => "shaun@thredded.com")
+      @shaun.should be_valid
+    end
+  end
+
+  describe "email address" do
+    it "will not be valid" do
+      @shaun = Factory.build(:user, :name => "shaun", :email => "shaun@.com")
+      @shaun.should_not be_valid
     end
   end
 
