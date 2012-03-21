@@ -89,7 +89,7 @@ describe User do
     end
   end
 
-  describe "updating email" do
+  describe "#after_save" do
     it "will update posts.user_email" do
 
       @shaun = Factory(:user, :name => "shaun", :email => "shaun@thredded.com")
@@ -106,14 +106,12 @@ describe User do
     end
   end
 
-  describe "email address" do
+  describe ".email" do
     it "will be valid" do
       @shaun = Factory.build(:user, :name => "shaun", :email => "shaun@thredded.com")
       @shaun.should be_valid
     end
-  end
 
-  describe "email address" do
     it "will not be valid" do
       @shaun = Factory.build(:user, :name => "shaun", :email => "shaun@.com")
       @shaun.should_not be_valid
