@@ -1,6 +1,8 @@
-Factory.define :private_topic do |f|
-  f.title "New private topic started here"
-  f.association :user
-  f.association :last_user
-  f.association :messageboard
+FactoryGirl.define do 
+  factory :private_topic do
+    title "New private topic started here"
+    user
+    association :last_user, :factory => :user
+    messageboard
+  end
 end
