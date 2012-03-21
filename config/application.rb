@@ -88,11 +88,9 @@ ActionDispatch::Callbacks.after do
   # Reload the factories
   return unless (Rails.env.test?)
 
-  unless Factory.factories.blank? # first init will load factories, this should only run on subsequent reloads
-    Factory.factories.clear
-    Factory.find_definitions.each do |location|
-      Dir["#{location}/**/*.rb"].each { |file| load file }
-    end
+  unless FactoryGirl.factories.blank?
+    FactoryGirl.definition_file_paths = [File.join(Rails.root, 'spec', 'factories')]
+    FactoryGirl.reload
   end
 
 end

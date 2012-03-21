@@ -1,6 +1,9 @@
 FactoryGirl.define  do
+  sequence(:subdomain) { |n| "site#{n}" }
+
   factory :site do
-    subdomain            "site0"
+    user
+    subdomain
     cached_domain        "website.com"
     cname_alias          "website.com"
     permission           "public"
@@ -10,6 +13,5 @@ FactoryGirl.define  do
     email_from           "Site <email@email.com>"
     email_subject_prefix "[Email] "
     default_site         "f"
-    # association   :user
   end
 end

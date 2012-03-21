@@ -1,5 +1,5 @@
 Given /^the default "([^"]*)" website domain is "([^"]*)"$/ do |permission, website|
-  @site ||= Factory(:site, 
+  @site ||= Factory(:site,
                     :cname_alias => website, 
                     :permission => permission, 
                     :default_site => 't')

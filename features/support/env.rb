@@ -15,7 +15,8 @@ Spork.prefork do
   require 'factory_girl'
   require 'factory_girl/step_definitions'
 
-  Dir[File.expand_path(File.join(File.dirname(__FILE__),'..','..','spec','factories','*.rb'))].each {|f| require f} 
+  FactoryGirl.definition_file_paths = [File.join(Rails.root, 'spec', 'factories')]
+  FactoryGirl.reload
 
   # Capybara defaults to XPath selectors rather than Webrat's default of CSS3. In
   # order to ease the transition to Capybara we set the default here. If you'd

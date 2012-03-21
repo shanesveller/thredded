@@ -1,10 +1,10 @@
 FactoryGirl.define do
-  sequence(:name)  { |n| "messageboard#{n}"  }
-  sequence(:title) { |n| "Messageboard #{n}" }
+  sequence(:messageboard_name)  { |n| "messageboard#{n}"  }
+  sequence(:messageboard_title) { |n| "Messageboard #{n}" }
 
   factory :messageboard do
-    name
-    title
+    name                { FactoryGirl.generate(:messageboard_name) }
+    title               { FactoryGirl.generate(:messageboard_title) }
     description         "This is a description of the messageboard"
     theme               'default'
     security            'public'
