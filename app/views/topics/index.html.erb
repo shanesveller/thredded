@@ -10,7 +10,9 @@
       </ul>
     </nav>
 <% end %>
+
 <header>
+  <%= paginate @topics %>
   <nav>
     <ul>
       <li><a href="/">Forums</a> &rarr; </li>
@@ -24,10 +26,7 @@
   <div class="updated">Updated</div>
 </header>
 
-<% #topic_cache_key = params[:q].present? ? ['search', messageboard, md5(params[:q])] : ['topics_list', messageboard] %>
-<% #cache topic_cache_key do %>
-  <%= render :partial => "topics/topic_condensed", :collection => @topics, :as => :t %>
-<% #end -%>
+<%= render :partial => "topics/topic_condensed", :collection => @topics, :as => :t %>
 
 <footer>
   <% if messageboard.posting_for_anonymous? || (current_user && current_user.can_post_to?(messageboard)) -%>

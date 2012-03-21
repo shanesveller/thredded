@@ -1,6 +1,8 @@
-Factory.define :topic do |f|
-  f.title "New topic started here"
-  f.association :user
-  f.association :last_user
-  f.association :messageboard
+FactoryGirl.define do
+  factory :topic do
+    title "New topic started here"
+    user
+    association :last_user, :factory => :user
+    messageboard
+  end
 end

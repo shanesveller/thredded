@@ -1,18 +1,20 @@
-Factory.define :attachment do |f|
-  include ActionDispatch::TestProcess
-  f.attachment    fixture_file_upload('spec/samples/img.png', 'image/png')
-  f.content_type  "image/png"
-  f.file_size     1000
+include ActionDispatch::TestProcess
+
+FactoryGirl.define do
+  factory :attachment do
+    attachment    fixture_file_upload('spec/samples/img.png', 'image/png')
+    content_type  "image/png"
+    file_size     1000
+
+    factory :pdfpng do
+      attachment  fixture_file_upload('spec/samples/pdf.png', 'image/png')
+    end
+    factory :txtpng do
+      attachment  fixture_file_upload('spec/samples/txt.png', 'image/png')
+    end
+    factory :zippng do
+      attachment  fixture_file_upload('spec/samples/zip.png', 'image/png')
+    end
+  end
 end
 
-Factory.define :pdfpng, :parent => :attachment do |pdf|
-  pdf.attachment  fixture_file_upload('spec/samples/pdf.png', 'image/png')
-end
-
-Factory.define :txtpng, :parent => :attachment do |txt|
-  txt.attachment  fixture_file_upload('spec/samples/txt.png', 'image/png')
-end
-
-Factory.define :zippng, :parent => :attachment do |zip|
-  zip.attachment  fixture_file_upload('spec/samples/zip.png', 'image/png')
-end

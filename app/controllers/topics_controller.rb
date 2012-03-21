@@ -5,9 +5,18 @@ class TopicsController < ApplicationController
 
   def index
     unless site.present? and can? :read, messageboard
-      redirect_to default_home, :flash => { :error => "You are not authorized access to this messageboard." } and return 
+      redirect_to default_home, :flash => { 
+        :error => "You are not authorized access to this messageboard." 
+      }
+      return 
     end
-    @topics = params[:q].present? ? Topic.full_text_search(params[:q], messageboard.id) : messageboard.topics
+
+    if params[:q].present?
+      @topics = Topic.full_text_search(params[:q], messageboard.id) 
+    else
+      @topics = messageboard.topics.page(params[:page]).per(30)
+    end
+
     redirect_if_no_search_results_for @topics
     @messageboards = site.messageboards
   end

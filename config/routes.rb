@@ -31,7 +31,7 @@ Thredded::Application.routes.draw do
     match "/:messageboard_id/:topic_id/:post_id(.:format)"      => 'posts#update',       :via => :put
     match "/:messageboard_id/:topic_id/:post_id(.:format)"      => 'posts#show',         :as => :messageboard_topic_post
     match "/:messageboard_id/:topic_id/:post_id/edit(.:format)" => 'posts#edit',         :as => :edit_messageboard_topic_post
-    resources :messageboards, :module => "admin" do
+    resources :messageboards do
       resources :topics do
         resources :posts
       end

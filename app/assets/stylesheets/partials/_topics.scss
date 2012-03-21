@@ -67,10 +67,14 @@
 
       a {
         background: url("/assets/thread_sprite.gif") no-repeat scroll 7px -87px transparent;
-        padding-left: 30px;
+        display: inline-block;
         font-weight: normal;
         font-size: 14px;
-        display: inline-block;
+        overflow: hidden;
+        padding-left: 30px;
+        text-overflow: ellipsis;
+        width: 92%;
+        white-space: nowrap;
       }
     }
     &.sticky        h1  a { background-position: 10px -28px; }
