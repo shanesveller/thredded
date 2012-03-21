@@ -89,4 +89,21 @@ describe User do
     end
   end
 
+  describe "user updates email" do
+    it "updates updates posts.user_email" do
+
+      @shaun = Factory(:user, :name => "shaun", :email => "shaun@thredded.com")
+      @topic = Factory(:topic, :last_user => @shaun)
+      @post  = Factory.build(:post, :user => @shaun, :topic => @topic)
+      @post.save
+
+      @shaun.email = "shaun@notthredded.com"
+      @shaun.save
+
+      @post.reload
+      @post.user_email.should == @shaun.email
+
+    end
+  end
+
 end
