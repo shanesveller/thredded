@@ -53,9 +53,9 @@ class Topic < ActiveRecord::Base
     SELECT t.*
       FROM topics t, posts p
      WHERE t.messageboard_id = ?
-       and p.topic_id        = t.id
-       and  to_tsvector('english', p.content) @@ to_tsquery('english', ?)
-     UNION 
+       AND p.topic_id        = t.id
+       AND to_tsvector('english', p.content) @@ to_tsquery('english', ?)
+     UNION
     SELECT t.*
       FROM topics t
      WHERE t.messageboard_id = ?

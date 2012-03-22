@@ -61,7 +61,7 @@ class User < ActiveRecord::Base
     self.name
   end
 
-  private 
+  private
     def update_posts
       if self.email_changed?
         Post.update_all(["user_email = ?", self.email], ["user_email = ?", self.email_was])
