@@ -11,6 +11,8 @@ class Role < ActiveRecord::Base
   validates_inclusion_of  :level, :in => ROLES
   validates_presence_of   :messageboard_id
 
+  attr_accessible :level
+
   scope :for, lambda { |messageboard| where(:messageboard_id => messageboard.id) }
   scope :as,  lambda { |role| where(:level => role) }
 end

@@ -13,7 +13,9 @@ class Site  < ActiveRecord::Base
                           :in => %w(admin blog),
                           :message => "is taken"
   validates_inclusion_of  :home, :in => %w{homepage messageboards topics}
-  
+
+  attr_accessible :subdomain, :permission, :title, :description, :cname_alias, :email_from, :email_subject_prefix, :default_site, :theme
+
   def topics_count
     messageboards.inject(0){|sum, item| sum + item.topics_count}
   end

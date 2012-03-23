@@ -14,7 +14,9 @@ class Messageboard < ActiveRecord::Base
   has_many :posts
   has_many :roles
   has_many :users, :through => :roles
-  
+
+  attr_accessible :name, :description, :title, :security, :posting_permission, :theme
+
   def restricted_to_private?
     "private" == security
   end

@@ -18,7 +18,6 @@ class User < ActiveRecord::Base
   has_many :private_topics, :through => :private_users
   
   # validates_numericality_of :posts_count, :topics_count
-  validates_presence_of :name
   validates :name, :presence => true, :uniqueness => true, :format => { :with => /\A[a-zA-Z0-9]+\z/, :message => "only letters or numbers allowed" }
   validates :email, :presence => true, :length => {:minimum => 3, :maximum => 254}, :uniqueness => true, :format => {:with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :message => "invalid email address"}
   
