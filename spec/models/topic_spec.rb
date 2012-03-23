@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Topic do
 
   before(:each) do
-    @user = Factory(:user, :name => "user1")
+    @user = Factory(:user)
     @messageboard = Factory(:messageboard)
     @topic  = Factory(:topic, :messageboard => @messageboard)
   end
