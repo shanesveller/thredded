@@ -22,18 +22,15 @@ class Ability
     end
 
     can :read, Messageboard do |messageboard|
-      (messageboard.restricted_to_private?    && user.member_of?(messageboard)) ||
-      (messageboard.restricted_to_logged_in?  && user.valid?) ||
-      messageboard.public?
+      can_read_messageboard(messageboard, user)
     end
     
     can :read, Topic do |topic|
-      topic.messageboard.public? && topic.public? ||
-      topic.messageboard.public? && topic.private? && topic.users.include?(user) ||
-      topic.messageboard.restricted_to_logged_in? && user.logged_in? && topic.public? ||
-      topic.messageboard.restricted_to_logged_in? && user.logged_in? && topic.private? && topic.users.include?(user) ||
-      topic.messageboard.restricted_to_private? && user.member_of?(topic.messageboard) && topic.public? ||
-      topic.messageboard.restricted_to_private? && user.member_of?(topic.messageboard) && topic.private? && topic.users.include?(user) 
+      can_read_messageboard(topic.messageboard, user) && 
+      ( topic.public? ||
+        topic.private? && topic.users.include?(user) ||
+        user.valid? && topic.public?
+      )
     end
 
     can :create, Topic do |topic|
@@ -72,4 +69,12 @@ class Ability
 
 
   end
+
+  private
+    def can_read_messageboard(messageboard, user)
+      (messageboard.restricted_to_private?    && user.member_of?(messageboard)) ||
+      (messageboard.restricted_to_logged_in?  && user.valid?) ||
+      messageboard.public?
+    end
+
 end
