@@ -67,6 +67,12 @@ describe Post do
       @post.filtered_content.should == "this is <strong>bold</strong>"
     end
 
+    it "converts markdown to html" do
+      @post.content = "# Header\nhttp://www.google.com"
+      @post.filter = "markdown"
+      @post.filtered_content.should == "<h1>Header</h1>\n\n<p><a href=\"http://www.google.com\">http://www.google.com</a></p>\n"
+    end
+
     it "translates psuedo-image tags to html" do
       @post.content = "[t:img=2 left] [t:img=3 right] [t:img] [t:img=4 200x200]"
       @post.save

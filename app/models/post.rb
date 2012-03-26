@@ -4,6 +4,7 @@ class Post  < ActiveRecord::Base
   include BaseFilter
   include TextileFilter
   include BbcodeFilter
+  include MarkdownFilter
   include AttachmentFilter
   
   gravtastic :user_email
