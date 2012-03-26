@@ -85,7 +85,7 @@ ActiveRecord::Schema.define(:version => 20120325231817) do
     t.integer  "messageboard_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.datetime "last_seen",       :default => '2012-03-25 23:59:46'
+    t.datetime "last_seen"
   end
 
   add_index "roles", ["last_seen"], :name => "index_roles_on_last_seen"
