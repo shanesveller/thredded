@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :site
   before_filter :theme_layout, :except => [:delete, :update, :create]
+  before_filter :touch_last_seen
   helper_method :site, :messageboard, :topic, :tz_offset, :default_site
 
   rescue_from CanCan::AccessDenied do |exception|
@@ -57,6 +58,12 @@ class ApplicationController < ActionController::Base
     def tz_offset
       Time.zone = current_user.time_zone if current_user
       @tz_offset ||= Time.zone.utc_offset / 1.hour
+    end
+
+    def touch_last_seen
+      if current_user && messageboard
+        Role.touch_last_seen(current_user.id, messageboard.id)
+      end
     end
 
 end

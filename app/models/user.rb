@@ -63,6 +63,21 @@ class User < ActiveRecord::Base
     self.name
   end
 
+  def self.online(messageboard_id)
+    sql = <<-SQL
+    SELECT u.name
+      FROM users u, roles r
+     WHERE r.messageboard_id = ?
+       AND r.last_seen       > ?
+       AND r.user_id         = u.id
+     ORDER BY lower(u.name)
+    SQL
+
+    # TODO maybe make this configurable?
+    last_seen_time = Time.now - 600
+    self.find_by_sql [sql, messageboard_id, last_seen_time]
+  end
+
   private
     def update_posts
       if self.email_changed?

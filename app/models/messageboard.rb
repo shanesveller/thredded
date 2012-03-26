@@ -45,6 +45,11 @@ class Messageboard < ActiveRecord::Base
     name.downcase
   end
 
+  # returns an array of User objects with only name populated for now
+  def active_users
+    User.online(id)
+  end
+
 end
 
 
