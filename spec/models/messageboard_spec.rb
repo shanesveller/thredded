@@ -12,8 +12,8 @@ describe Messageboard do
       @joe  = FactoryGirl.create(:user, :name => "Joe")
       @john.member_of @m
       @joe.member_of @m
-      @john.recently_active_in!(@m)
-      @joe.recently_active_in!(@m)
+      @john.mark_active_in!(@m)
+      @joe.mark_active_in!(@m)
 
       @m.active_users[0].name.should == "Joe"
       @m.active_users[1].name.should == "John"

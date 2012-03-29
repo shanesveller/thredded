@@ -61,7 +61,7 @@ class ApplicationController < ActionController::Base
 
     def touch_last_seen
       if current_user && messageboard
-        current_user.recently_active_in!(messageboard)
+        current_user.mark_active_in!(messageboard)
       end
     end
 

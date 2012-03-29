@@ -4,7 +4,7 @@ describe User do
 
   it { should have_many(:sites) }
 
-  describe ".recently_active_in!(messageboard)" do
+  describe ".mark_active_in!(messageboard)" do
     it "updates last_seen to now" do
       @now_time = Time.local(2011, 9, 1, 12, 0, 0)
       @messageboard = FactoryGirl.create(:messageboard)
@@ -12,7 +12,7 @@ describe User do
       @user.member_of @messageboard
 
       Timecop.freeze(@now_time) do
-        @user.recently_active_in!(@messageboard)
+        @user.mark_active_in!(@messageboard)
         @user.roles.for(@messageboard).first.last_seen.should == @now_time
       end
     end

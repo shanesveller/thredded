@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
 
   after_save :update_posts
 
-  def recently_active_in!(messageboard)
+  def mark_active_in!(messageboard)
     @user_role = roles.for(messageboard).first
     if @user_role
       @user_role.last_seen = Time.now
