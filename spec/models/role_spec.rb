@@ -28,13 +28,4 @@ describe Role do
     end
   end
 
-  describe "#touch_last_seen(current_user, messageboard)" do
-    it "updates last_seen to now" do
-      @old_timestamp = @admin.last_seen
-      Role.touch_last_seen(@admin_user, @messageboard)
-      @admin.reload
-      @admin.last_seen.should_not == @old_timestamp
-    end
-  end
-
 end

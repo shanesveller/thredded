@@ -24,7 +24,7 @@ class Messageboard < ActiveRecord::Base
   def restricted_to_logged_in?
     "logged_in" == security
   end
-  
+
   def public?
     "public" == security
   end
@@ -45,11 +45,19 @@ class Messageboard < ActiveRecord::Base
     name.downcase
   end
 
-  # returns an array of User objects with only name populated for now
   def active_users
-    User.online(id)
+    sql = <<-SQL
+    SELECT u.id, 
+           u.name, 
+           u.email
+      FROM users u, roles r
+     WHERE r.messageboard_id = ?
+       AND r.last_seen       > ?
+       AND r.user_id         = u.id
+     ORDER BY lower(u.name)
+    SQL
+
+    User.find_by_sql [sql, self.id, 5.minutes.ago]
   end
 
 end
-
-

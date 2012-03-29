@@ -21,7 +21,6 @@ class ApplicationController < ActionController::Base
     def get_project
       @site ||= Site.where(:cached_domain => request.host).first
     end
-    
 
     def after_sign_in_path_for(resource_or_scope)
       site_home
@@ -62,7 +61,7 @@ class ApplicationController < ActionController::Base
 
     def touch_last_seen
       if current_user && messageboard
-        Role.touch_last_seen(current_user.id, messageboard.id)
+        current_user.recently_active_in!(messageboard)
       end
     end
 

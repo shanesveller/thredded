@@ -16,13 +16,20 @@ class User < ActiveRecord::Base
   has_many :posts
   has_many :private_users
   has_many :private_topics, :through => :private_users
-  
+
   # validates_numericality_of :posts_count, :topics_count
   validates :name, :presence => true, :uniqueness => true, :format => { :with => /\A[a-zA-Z0-9]+\z/, :message => "only letters or numbers allowed" }
   validates :email, :presence => true, :length => {:minimum => 3, :maximum => 254}, :uniqueness => true, :format => {:with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :message => "invalid email address"}
-  
 
   after_save :update_posts
+
+  def recently_active_in!(messageboard)
+    @user_role = roles.for(messageboard).first
+    if @user_role
+      @user_role.last_seen = Time.now
+      @user_role.save!
+    end
+  end
 
   def superadmin?
     valid? && self.superadmin
@@ -63,22 +70,8 @@ class User < ActiveRecord::Base
     self.name
   end
 
-  def self.online(messageboard_id)
-    sql = <<-SQL
-    SELECT u.name
-      FROM users u, roles r
-     WHERE r.messageboard_id = ?
-       AND r.last_seen       > ?
-       AND r.user_id         = u.id
-     ORDER BY lower(u.name)
-    SQL
-
-    # TODO maybe make this configurable?
-    last_seen_time = Time.now - 600
-    self.find_by_sql [sql, messageboard_id, last_seen_time]
-  end
-
   private
+
     def update_posts
       if self.email_changed?
         Post.update_all(["user_email = ?", self.email], ["user_email = ?", self.email_was])
