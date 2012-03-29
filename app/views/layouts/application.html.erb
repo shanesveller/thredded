@@ -22,36 +22,36 @@
 
 	<section id="contentwrap">
     <header role="banner">
+
       <% if site %>
-      <hgroup>
-        <h1><%= site.title %></h1>
-        <h2><%= site.description %></h2>
-      </hgroup>
+        <hgroup>
+          <h1><%= site.title %></h1>
+          <h2><%= site.description %></h2>
+        </hgroup>
       <% end %>
+
       <%= yield :header_nav %>
+
+      <% if messageboard %>
+        <div id="online">
+          <h3>Currently Online</h3>
+          <ul>
+            <% messageboard.active_users.each do |u| %>
+             <li><%= u.name %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
     </header>
   
 		<%= render :partial => "shared/error_msgs" %>
     <section id="content">
-
-      <% if messageboard %>
-        <div id="online">
-          Online: 
-          <% messageboard.active_users.each do |u| %>
-            <%= u.name %> 
-          <% end %>
-        </div>
-      <% end %>
-
       <%= yield %>
     </section>
 
 	</section>
-
-	<footer>
-	</footer>
-
+	<footer> </footer>
   <%= javascript_include_tag "application" %>
-  
 </body>
 </html>
