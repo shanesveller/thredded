@@ -6,7 +6,7 @@ class Post  < ActiveRecord::Base
   include BbcodeFilter
   include MarkdownFilter
   include AttachmentFilter
-  
+
   gravtastic :user_email
   default_scope :order => 'id ASC'
   belongs_to :messageboard, :counter_cache => true
@@ -37,5 +37,5 @@ class Post  < ActiveRecord::Base
     def set_user_email
       self.user_email = self.user.email if user
     end
-    
+
 end
