@@ -64,6 +64,7 @@
 
     h1 { 
       @extend .cell_title;
+      overflow: hidden;
 
       a {
         background: url("/assets/thread_sprite.gif") no-repeat scroll 7px -87px transparent;
@@ -73,7 +74,7 @@
         overflow: hidden;
         padding-left: 30px;
         text-overflow: ellipsis;
-        width: 92%;
+        width: 86%;
         white-space: nowrap;
       }
     }
