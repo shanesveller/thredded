@@ -62,14 +62,7 @@ group :test, :cucumber do
 end
 
 group :development do
-  # 
-  # for '1.9.3' MAKE SURE TO INSTALL WITH :
-  #
-  #   https://gist.github.com/1848409
-  #   bash < <(curl -L https://raw.github.com/gist/1848409)
-  #
-  gem 'ruby-debug-base19', '0.11.26' 
-  gem 'ruby-debug19', '0.11.6'
+  gem 'debugger'
   gem 'guard-livereload'
   gem 'faker'
   gem 'heroku'
