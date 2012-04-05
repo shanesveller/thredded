@@ -32,21 +32,25 @@ class SetupsController < ApplicationController
     when "3"
       @user = User.last
       @site = Site.last
-      @messageboard = Messageboard.create(params[:messageboard].merge!( {:theme => "default", :site => @site} ))
-      @user.admin_of @messageboard
-      @messageboard.topics.create( :user => @user, 
-                                   :last_user => @user, 
-                                   :title => "Welcome to your site's very first thread",
-                                   :posts_attributes => {
-                                     "0" => {
-                                       :content => "There's not a whole lot here for now.", 
-                                       :user => @user, 
-                                       :ip => "127.0.0.1", 
-                                       :messageboard => @messageboard
-                                     }
-                                   })
-      sign_in @user
-      redirect_to root_path if @messageboard.valid?
+      @messageboard = Messageboard.create(params[:messageboard].merge!({:theme => "default"}))
+      if @messageboard.valid?
+        @site.messageboards << @messageboard
+        @site.save
+        @user.admin_of @messageboard
+        @messageboard.topics.create( :user => @user, 
+                                     :last_user => @user, 
+                                     :title => "Welcome to your site's very first thread",
+                                     :posts_attributes => {
+                                       "0" => {
+                                         :content => "There's not a whole lot here for now.", 
+                                         :user => @user, 
+                                         :ip => "127.0.0.1", 
+                                         :messageboard => @messageboard
+                                       }
+                                     })
+        sign_in @user
+        redirect_to root_path 
+      end
     end
   end
 
