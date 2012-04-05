@@ -56,7 +56,7 @@ class ApplicationController < ActionController::Base
 
     def tz_offset
       Time.zone = current_user.time_zone if current_user
-      @tz_offset ||= Time.zone.utc_offset / 1.hour
+      @tz_offset ||= Time.now.utc_offset / 1.hour
     end
 
     def touch_last_seen
