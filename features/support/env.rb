@@ -7,7 +7,7 @@ require 'spork'
 
 Spork.prefork do
 
-  require 'ruby-debug'
+  # require 'ruby-debug'
   require 'cucumber/rails'
   require 'capybara/rails'
   require 'capybara/cucumber'
