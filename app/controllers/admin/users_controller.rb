@@ -5,16 +5,10 @@ class Admin::UsersController < ApplicationController
   end
 
   def update
-    # @roles_params = params[:user].delete(:roles_attributes)
-    if @user.update_without_password params[:user]
-      # unless @roles_params.nil?
-      #   @roles_params.each do |role|
-      #     @role = Role.new(:level => "member")
-      #     @role.user_id = @user.id
-      #     @role.messageboard_id = role[:messageboard_id]
-      #     @role.save
-      #   end
-      # end
+    if params[:user][:password].present? and params[:user][:password_confirmation].present?
+      @user.update_attributes params[:user]
+    else
+      @user.update_without_password params[:user]
     end
     redirect_to edit_admin_site_user_path(site.id, @user.id)
   end

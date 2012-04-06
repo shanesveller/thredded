@@ -3,10 +3,11 @@
 
 <div class="admin_column">
   <h1><%= @user.name %></h1>
-  <%= form_for [@site, @user],
-                      :url => admin_site_user_path(@site.id, @user.id),
-                      :html => { :method => :put, :class => :user_form } do |f| %>
-    <%= render :partial => 'form', :locals => { :f => f } %>
+  <%= nested_form_for [@site, @user], :url => admin_site_user_path(@site.id, @user.id), :html => { :method => :put, :class => :user_form } do |f| %>
+    <%= render :partial => "form", :locals => { :f => f } %>
+
+
     <p> <%= f.submit "Edit User" %> </p>
   <% end %>
 </div>
+

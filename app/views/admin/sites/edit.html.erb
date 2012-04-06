@@ -16,7 +16,7 @@
   <h1>Messageboards</h1>
   <ul>
   <% @site.messageboards.each do |messageboard| -%>
-    <li><%= link_to "edit #{messageboard.name}", edit_admin_site_messageboard_path(@site.id, messageboard.id) %></li>
+    <li><%= link_to messageboard.name, edit_admin_site_messageboard_path(@site.id, messageboard.id) %></li>
   <% end -%>
   </ul>
 </div>

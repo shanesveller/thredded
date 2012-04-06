@@ -4,12 +4,17 @@
 <p><%= f.label :email %>
    <%= f.text_field :email %></p>
 
- <hr />
+<p><%= f.label :password %>
+   <%= f.password_field :password %></p>
 
-<h2>Member of:</h2>
-<% for messageboard in @site.messageboards %>
-  <% f.fields_for :roles, messageboard do |r| %>
-    <%= r.check_box :id %>
-  <% end %>
+<p><%= f.label :password_confirmation %>
+   <%= f.password_field :password_confirmation %></p>
+
+<hr/>
+<h2>Memberships</h2>
+<%= f.fields_for :roles do |roles_form| %>
+  <%= roles_form.hidden_field :level, :value => "member" %>
+  <%= roles_form.collection_select :messageboard_id, @site.messageboards.all, :id, :title %>
+  <%= roles_form.link_to_remove "x" %>
 <% end %>
-
+<p><%= f.link_to_add "Add role", :roles %></p>
