@@ -1,13 +1,30 @@
-<% content_for :page_id do %>sites_edit<% end %>
+<% content_for :page_id do %>admin_sites_edit<% end %>
 <% content_for :page_title do %><%= @site.title %> | Edit<% end %>
 
-<h1>Edit <%= @site.title %></h1>
+<div class="admin_column">
+  <h1>Edit <%= @site.title %></h1>
 
-<%= nested_form_for @site,
-                    :url => admin_site_path(@site),
-                    :html => { :method => :put, :class => :topic_form, :multipart => true } do |f| %>
-  <%= render :partial => 'form', :locals => { :f => f } %>
-  <p>
-    <%= f.submit "Edit Topic" %>
-  </p>
-<% end %>
+  <%= nested_form_for @site,
+                      :url => admin_site_path(@site),
+                      :html => { :method => :put, :class => :topic_form, :multipart => true } do |f| %>
+    <%= render :partial => 'form', :locals => { :f => f } %>
+    <p> <%= f.submit "Edit Topic" %> </p>
+  <% end %>
+
+  <hr />
+
+  <h1>Messageboards</h1>
+  <ul>
+  <% @site.messageboards.each do |messageboard| -%>
+    <li><%= link_to "edit #{messageboard.name}", edit_admin_site_messageboard_path(@site.id, messageboard.id) %></li>
+  <% end -%>
+  </ul>
+</div>
+<div class="admin_column">
+  <h1>Recent Sign-ups</h1>
+  <ul>
+  <% @new_users.each do |user| -%>
+    <li><%= link_to user.name, edit_admin_site_user_path(@site.id, user.id) %></li>
+  <% end -%>
+  </ul>
+</div>

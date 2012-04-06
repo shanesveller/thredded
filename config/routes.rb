@@ -15,8 +15,8 @@ Thredded::Application.routes.draw do
   namespace :admin do
     resources :sites do
       resources :messageboards
+      resources :users
     end
-    resources :users
   end
   
   constraints(PersonalizedDomain.new) do

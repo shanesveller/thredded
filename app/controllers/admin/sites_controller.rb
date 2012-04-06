@@ -1,8 +1,11 @@
 class Admin::SitesController < ApplicationController
   load_and_authorize_resource
 
+  def index
+  end
+
   def edit
-    @site = Site.find(params[:id])
+    @new_users = User.all.map{ |u| u if u.roles.empty? }.compact
   end
 
   def update

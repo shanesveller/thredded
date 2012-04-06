@@ -23,11 +23,15 @@ class SetupsController < ApplicationController
     case step
     when "1"
       @user = User.create(params[:user]) 
+      @user.superadmin = 1
+      @user.save
       redirect_to '/2' if @user.valid?
       flash[:error] = "There were errors creating your user." and render :action => :new unless @user.valid?
     when "2"
       @user = User.last
-      @site = Site.create params[:site].merge!({:user => @user})
+      @site = Site.new params[:site]
+      @site.user = @user
+      @site.save
       redirect_to '/3' if @site.valid?
     when "3"
       @user = User.last

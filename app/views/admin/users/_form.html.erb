@@ -1,0 +1,15 @@
+<p><%= f.label :name, "Username" %>
+   <%= f.text_field :name %></p>
+
+<p><%= f.label :email %>
+   <%= f.text_field :email %></p>
+
+ <hr />
+
+<h2>Member of:</h2>
+<% for messageboard in @site.messageboards %>
+  <% f.fields_for :roles, messageboard do |r| %>
+    <%= r.check_box :id %>
+  <% end %>
+<% end %>
+

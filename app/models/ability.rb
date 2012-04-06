@@ -16,7 +16,7 @@ class Ability
     if user.superadmin?
       can :manage, :all
     end
-    
+
     can :read, Site do |site|
       user.valid? || site.permission == "public"
     end
