@@ -1,5 +1,4 @@
 require "highline"
-require "ruby-debug" 
 
 # A ginormous thank you to the Radiant CMS team for direction in how to implement the setup and bootstrapping of a project.
 # For more information - https://github.com/radiant/radiant/blob/master/lib/radiant/setup.rb
