@@ -6,7 +6,7 @@
                     :html => { :method => :put, :class => :topic_form }) do |f| %>
 
   <p class="content">
-    <%= f.text_area :content, :rows => 5 %>
+    <%= f.text_area :content, {:placeholder => 'Content', :rows => 5} %>
   </p>
 
   <%= f.fields_for :attachments do |attachment_form|  %>

@@ -14,26 +14,37 @@
   margin: 10px 10px 0px 20px;
 }
 .submit_button {
-    border: solid 1px #999;
-    font-size: 14px;
-    font-weight: bold;
-    line-height: 18px;
-    padding: 5px 6px 3px;
-    @include background-image(linear-gradient(#ffffff, #bfbfbf));
+  background-color: #21C831;
+  border: none;
+  border-right: solid 3px #888;
+  border-bottom: solid 3px #888;
+  color: white;
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 18px;
+  padding: 7px 12px;
+  text-transform: lowercase;
+  letter-spacing: 2px;
+  text-shadow: 1px 1px 2px gray;
+}
+.content_input {
+  background: #f3f3f3;
+  border: none;
+  border-right: solid 3px #999;
+  border-bottom: solid 3px #999;
+  color: #333;
+  font-size: 18px; 
+  line-height: 26px; 
+  padding: 6px; 
 }
 
 .topic_form {
   label { display: block; clear: both; font-size: 12px; text-transform: lowercase; margin: 10px 0 4px 0; color: #888; font-size: 12px;  }
   label[for="topic_title"] { display: none; }
-  
+
   textarea { 
-    @include border-radius(3px); 
-    border: solid 1px #999; 
-    font-size: 18px; 
-    line-height: 26px; 
-    padding: 6px; 
+    @extend .content_input;
     width: 98%;
-    color: #333;
   }
 
   p.private_users {
@@ -48,13 +59,15 @@
   }
 
   p.title input { 
-    border: solid 1px #999;
+    background: #f3f3f3;
+    border: none;
+    border-right: solid 3px #999;
+    border-bottom: solid 3px #999;
     color: #333;
     font-size: 26px; 
     line-height: 24px;
     padding: 10px 6px 6px;
     width: 98%;
-    @include border-radius(3px);
   }
 
   p.submit input {
@@ -71,11 +84,13 @@
   #drawer {
 
     #attributes { 
+      background: #999;
+      border-right: solid 3px #eee;
+      border-bottom: solid 3px #eee;
       display: none; 
       margin-top: -2px;
       padding: 9px 7px 7px 7px;
       width: 98%;
-      @include background-image(linear-gradient(#bfbfbf, #999999));
 
       p { padding-bottom: 10px; margin-bottom: 10px; border-bottom: dotted 1px #c0c0c0; }
       p:last-child { padding-bottom: 0px; border: none; }
@@ -99,11 +114,13 @@
     
     .handle a {
         background: #999;
+        border-right: solid 3px #eee;
+        border-bottom: solid 3px #eee;
         font-size: 11px;
         margin-left: 10px;
-        padding: 1px 10px 5px;
+        margin-top: -3px;
+        padding: 4px 12px 6px;
         display: block;
-        @include border-bottom-radius(3px);
         width: 28px;
         color: #fff;
         text-decoration: none;

@@ -42,7 +42,7 @@
                         :html => { :multipart => true }) do |f| %>
       <p>
         <%= f.label :your_reply %>
-        <%= f.text_area :content, :rows => 5 %>
+        <%= f.text_area :content, {:placeholder => 'Your reply', :rows => 5} %>
       </p>
 
       <%= f.fields_for :attachments do |attachment_form|  %>
@@ -51,7 +51,7 @@
       <%= f.link_to_add "Add an attachment", :attachments, :class => "add_attachment" %>
       <%= f.select :filter, @post.filters %>
 
-      <%= f.submit "Submit a reply" %>
+      <%= f.submit "Submit reply" %>
     <% end -%>
   <% end -%>
 

@@ -1,6 +1,6 @@
 <p class="title">
   <%= f.label :title %>
-  <%= f.text_field :title %>
+  <%= f.text_field :title, {:placeholder => 'Title'} %>
 </p>
 
 <% if params[:type] == "private" -%>
@@ -30,7 +30,7 @@
 
   <p class="content">
     <%= post_form.label :content %>
-    <%= post_form.text_area :content, :rows => 5 %>
+    <%= post_form.text_area :content, {:placeholder => 'Content', :rows => 5} %>
   </p>
 
   <%= post_form.fields_for :attachments do |attachment_form|  %>

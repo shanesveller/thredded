@@ -107,14 +107,8 @@
       display: none;
     }
     textarea {
-      display: block;
+      @extend .content_input;
       clear: both;
-      @include border-radius(3px); 
-      border: solid 1px #999; 
-      font-size: 18px; 
-      line-height: 26px; 
-      padding: 6px; 
-      color: #333;
       width: 98%;
       margin-bottom: 10px;
     }
