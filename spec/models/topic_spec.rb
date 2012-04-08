@@ -17,6 +17,20 @@ describe Topic do
     @topic.public?.should be_true
   end
 
+  it "changes updated_at when a new post is added" do
+    old = @topic.updated_at
+    @post = @topic.posts.create({:content => "awesome", :filter => "bbcode", :messageboard => @messageboard, :user => @user})
+    @topic.reload.updated_at.should_not == old
+  end
+
+  it "does not change updated_at when an old post is edited" do
+    @post = Factory.create(:post)
+    old = @post.topic.updated_at
+    @post.content = "alternative content"
+    @post.save
+    @topic.reload.updated_at.to_s.should == old.to_s
+  end
+
   context "when its parent messageboard is for logged in users only" do
     before(:each) do
       @topic.messageboard.security = 'logged_in'
@@ -35,7 +49,7 @@ describe Topic do
   end
 
   context "when its parent messageboard is private" do
-    
+
     before(:each) do
       @topic.messageboard.security = 'private'
     end

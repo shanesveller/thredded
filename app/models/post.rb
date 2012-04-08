@@ -17,7 +17,7 @@ class Post  < ActiveRecord::Base
   validates_presence_of :content, :messageboard_id
   attr_accessible :content, :user, :ip, :filter, :topic, :messageboard, :attachments_attributes
   before_save :set_user_email
-  after_save  :modify_parent_topic
+  after_create  :modify_parent_topic
 
   def created_timestamp
     created_at.strftime("%Y-%m-%dT%H:%M:%S") if created_at
@@ -31,6 +31,7 @@ class Post  < ActiveRecord::Base
 
     def modify_parent_topic
       topic.last_user = user
+      topic.touch
       topic.save
     end
 
