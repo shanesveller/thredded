@@ -12,7 +12,7 @@
     &:last {
       border: none;
     }
-    
+
     header {
       float: left;
       text-align: left;
@@ -25,7 +25,7 @@
       top: 0px;
       left: 0px;
       bottom: 0px;
-      
+
       abbr {
         display: block; clear: both;
         margin-bottom: 7px; 
@@ -118,6 +118,35 @@
     }
     input[type="submit"] {
       @extend .submit_button;
+    }
+  }
+}
+
+#topics_posts article {
+  h1, h2, h3, h4, p, pre, blockquote { margin-bottom: 15px; }
+  h1 { font-size: 2em; }
+  h2 { font-size: 1.8em; }
+  h3 { font-size: 1.6em; }
+  h4 { font-size: 1.3em; }
+  ul, ol { 
+    margin: 0 0 15px 18px;
+    font-size: 13px;
+    li {
+      font-size: 15px;
+    }
+  }
+  li p, li pre { margin-bottom: 15px; }
+  li p:last-child, li pre:last-child { margin-bottom: 0px; }
+  li { margin-bottom: 15px; }
+  pre { padding: 0px; }
+  blockquote {
+    border:1px solid #cda;
+    border-left:3px solid #9a7;
+    background: #efefef;
+    padding:10px 16px;
+    margin-left:0;
+    > *:last-child {
+      margin-bottom: 0px;
     }
   }
 }
