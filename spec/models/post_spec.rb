@@ -28,14 +28,14 @@ describe Post do
       @topic.reload.posts_count.should == 3
       @joel.reload.posts_count.should  == 3
     end
-    
+
     it "updates the topic updated_at field to that of the new post" do
       @topic.posts.create(:user => @joel, :content => "posting here", :messageboard => @messageboard)
       @topic.posts.create(:user => @joel, :content => "posting some more", :messageboard => @messageboard)
       last_post = @topic.posts.last
       @topic.updated_at.should be_within(2.seconds).of(last_post.created_at)
     end
-    
+
     it "sets the post user's email on creation" do
       @new_post = Post.create(:user => @shaun, 
                               :topic => @topic, 
@@ -66,10 +66,27 @@ describe Post do
       @post.filtered_content.should == "this is <strong>bold</strong>"
     end
 
+    it "performs some syntax highlighting with bbcode" do
+      @post.content = "[code]def hello; puts 'world'; end[/code]
+[code:javascript]function(){ console.log('hi'); }[/code]"
+      @post.filter = "bbcode"
+      @post.filtered_content.should == "<div class=\"CodeRay\">\n  <div class=\"code\"><pre><span class=\"keyword\">def</span> <span class=\"function\">hello</span>; puts <span class=\"string\"><span class=\"delimiter\">'</span><span class=\"content\">world</span><span class=\"delimiter\">'</span></span>; <span class=\"keyword\">end</span></pre></div>\n</div>\n<br />\n<div class=\"CodeRay\">\n  <div class=\"code\"><pre><span class=\"keyword\">function</span>(){ console.log(<span class=\"string\"><span class=\"delimiter\">'</span><span class=\"content\">hi</span><span class=\"delimiter\">'</span></span>); }</pre></div>\n</div>\n"
+    end
+
     it "converts markdown to html" do
       @post.content = "# Header\nhttp://www.google.com"
       @post.filter = "markdown"
       @post.filtered_content.should == "<h1>Header</h1>\n\n<p><a href=\"http://www.google.com\">http://www.google.com</a></p>\n"
+    end
+
+    it "performs some syntax highlighting in markdown" do
+      @post.content = "this is code
+
+    def hello; puts 'world'; end
+
+right here"
+      @post.filter = "markdown"
+      @post.filtered_content.should == "<p>this is code</p>\n\n<div class=\"CodeRay\">\n  <div class=\"code\"><pre><span class=\"keyword\">def</span> <span class=\"function\">hello</span>; puts <span class=\"string\"><span class=\"delimiter\">'</span><span class=\"content\">world</span><span class=\"delimiter\">'</span></span>; <span class=\"keyword\">end</span>\n</pre></div>\n</div>\n\n\n<p>right here</p>\n"
     end
 
     it "translates psuedo-image tags to html" do

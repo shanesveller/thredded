@@ -33,6 +33,11 @@ section#contentwrap {
       nav {
         @extend .breadcrumbs;
         margin-bottom: 16px; 
+        &.pagination {
+          margin-bottom: 0px;
+          padding: 8px 12px;
+          a { text-decoration: none; }
+        }
       }
     }
     footer nav {

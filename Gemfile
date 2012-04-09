@@ -28,6 +28,7 @@ gem 'client_side_validations'
 gem 'thin'
 gem 'thredded-theme-metal'        , :git => 'git://github.com/jayroh/thredded-theme-metal.git'
 gem 'redcarpet'
+gem 'coderay'
 
 # Gems used only for assets and not required
 # in production environments by default.

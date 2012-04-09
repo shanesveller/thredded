@@ -5,6 +5,7 @@ class Post  < ActiveRecord::Base
   include TextileFilter
   include BbcodeFilter
   include MarkdownFilter
+  include SyntaxFilter
   include AttachmentFilter
 
   gravtastic :user_email

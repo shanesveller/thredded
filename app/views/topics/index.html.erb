@@ -12,7 +12,6 @@
 <% end %>
 
 <header>
-  <%= paginate @topics %>
   <nav>
     <ul>
       <li><a href="/">Forums</a> &rarr; </li>
@@ -20,6 +19,8 @@
   </nav>
   <h1><%= messageboard.title %></h1>
   <h2>Recent Updates</h2>
+  <%= paginate @topics %>
+
   <div class="title">Topic Title</div>
   <div class="posts">Posts</div>
   <div class="started">Started</div>

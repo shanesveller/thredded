@@ -123,7 +123,7 @@
 }
 
 #topics_posts article {
-  h1, h2, h3, h4, p, pre, blockquote { margin-bottom: 15px; }
+  h1, h2, h3, h4, p, pre, blockquote, .CodeRay { margin-bottom: 15px; }
   h1 { font-size: 2em; }
   h2 { font-size: 1.8em; }
   h3 { font-size: 1.6em; }
@@ -138,7 +138,14 @@
   li p, li pre { margin-bottom: 15px; }
   li p:last-child, li pre:last-child { margin-bottom: 0px; }
   li { margin-bottom: 15px; }
-  pre { padding: 0px; }
+  pre { 
+    padding: 0px; 
+    white-space: pre;
+  }
+  .CodeRay pre {
+    word-wrap: normal;
+    margin: 0;
+  }
   blockquote {
     border:1px solid #cda;
     border-left:3px solid #9a7;
