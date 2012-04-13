@@ -7,10 +7,10 @@
         <a href="/users/<%= post.user.to_param %>"><%= post.user.to_param %></a>
       </cite>
       <div class="meta">
-        <% if post.user && post.user.roles -%>
+        <% if post.user && post.user.roles && post.user.posts_count -%>
           <span class="roles"><%= post.user.roles.for(messageboard).map{|r| r.level }.to_sentence %></span>
+          <span class="posts_count"><%= post.user.posts_count %> posts</span>
         <% end -%>
-        <span class="posts_count"><%= post.user.posts_count %> posts</span>
       </div>
     </header>
     <p><%= post.filtered_content %></p>
