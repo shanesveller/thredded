@@ -1,7 +1,8 @@
 class Admin::UsersController < ApplicationController
   load_and_authorize_resource
 
-  def edit 
+  def edit
+    @user = User.find(params[:id])
   end
 
   def update
