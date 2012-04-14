@@ -5,7 +5,7 @@
   <h1>Edit <%= @site.title %></h1>
 
   <%= nested_form_for @site,
-                      :url => admin_site_path(@site),
+                      :url => admin_site_url(@site.id),
                       :html => { :method => :put, :class => :topic_form, :multipart => true } do |f| %>
     <%= render :partial => 'form', :locals => { :f => f } %>
     <p> <%= f.submit "Edit Topic" %> </p>
