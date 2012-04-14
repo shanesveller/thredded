@@ -11,6 +11,13 @@ module NavigationHelpers
     when /the homepage/
       '/'
 
+    when /the user profile page for "([^\"]+)"/i
+      @user = User.find_by_name($1)
+      user_path(@user)
+
+    when /a user profile that doesn\'t exist/i
+      "/users/dkjflsdfdf"
+
     when /the forgot password page/i
       new_user_password_path
 
