@@ -1,6 +1,6 @@
 <% if user_signed_in? %>
   <% if current_user.superadmin? %>
-    <li> <%= link_to('Admin', edit_admin_site_path(site.id)) %> </li>
+    <li> <%= link_to('Admin', edit_admin_site_path(site)) %> </li>
   <% elsif messageboard && current_user.admins?(messageboard) %>
     <li> <%= link_to('Admin', edit_admin_site_messageboard_path(site.id, messageboard.id)) %> </li>
   <% end %>
