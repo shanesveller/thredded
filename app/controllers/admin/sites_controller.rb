@@ -12,7 +12,11 @@ class Admin::SitesController < ApplicationController
 
   def update
     site.update_attributes(params[:site])
-    redirect_to edit_admin_site_url(@site)
+    if site.cname_alias.empty?
+      redirect_to edit_admin_site_url(@site)
+    else
+      redirect_to edit_admin_site_url(@site, :host => site.cname_alias)
+    end
   end
 
 end
