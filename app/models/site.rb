@@ -30,6 +30,7 @@ class Site  < ActiveRecord::Base
 
 private
 
+  # TODO
   def cache_domain
     @default_site ||= Site.find_by_default_site(true)
     self.cached_domain = if self.cname_alias.blank? && @default_site
