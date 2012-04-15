@@ -26,21 +26,3 @@
 </div>
 <% end -%>
 
-<%= f.fields_for :posts do |post_form| %>
-
-  <p class="content">
-    <%= post_form.label :content %>
-    <%= post_form.text_area :content, {:placeholder => 'Content', :rows => 5} %>
-  </p>
-
-  <%= post_form.fields_for :attachments do |attachment_form|  %>
-    <p class="attachment"> 
-      <%= attachment_form.file_field :attachment %>
-      <%= attachment_form.link_to_remove "Remove this attachment", :class => "remove_attachment" %> 
-    </p>
-  <% end %>
-
-  <%= post_form.link_to_add "Add an attachment", :attachments, :class => "add_attachment" %>
-  <%= post_form.select :filter, Post::Filters %>
-
-<% end %>
