@@ -6,6 +6,6 @@
              :html => { :multipart => true, :class => :topic_form }) do |f| %>
   <%= render :partial => 'form', :locals => { :f => f } %>
   <p class="submit">
-    <input id="topic_submit" name="commit" type="submit" value="Create New Topic" />
+    <input id="topic_submit" name="commit" type="submit" value="Create New Topic" tabindex="3" />
   </p>
 <% end %>
