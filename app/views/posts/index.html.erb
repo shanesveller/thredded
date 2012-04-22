@@ -9,7 +9,7 @@
           <li class="reply_to_topic"><a href="#new_post">Reply To This Topic</a></li>
         <% end -%>
         <% if (current_user && current_user.admins?(messageboard)) || topic.user == current_user  -%>
-          <li class="edit_topic"><%= link_to "edit subject", edit_messageboard_topic_path(messageboard, topic) %></li>
+          <li class="edit_topic"><%= link_to "edit topic", edit_messageboard_topic_path(messageboard, topic) %></li>
         <% end -%>
       </ul>
     </nav>
