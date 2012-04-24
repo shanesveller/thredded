@@ -16,6 +16,7 @@ Background: Default site and messageboard
        And I submit the form
        And I go to the most recently updated thread on "thredded"
        And I click the edit subject link
+      Then I should not see the content field
        And I change the title to "This is an old thread"
        And I click the edit topic button
       Then I should see "This is an old thread"

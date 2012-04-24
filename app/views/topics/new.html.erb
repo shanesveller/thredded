@@ -4,8 +4,13 @@
 <%= nested_form_for([messageboard, @topic], 
              :url => create_messageboard_topic_url(messageboard, @topic, :host => site.cached_domain),
              :html => { :multipart => true, :class => :topic_form }) do |f| %>
+
   <%= render :partial => 'form', :locals => { :f => f } %>
-  <p class="submit">
-    <input id="topic_submit" name="commit" type="submit" value="Create New Topic" tabindex="3" />
-  </p>
+
+  <%= f.fields_for :posts do |post_form| %>
+    <%= render :partial => 'posts/form', :locals => { :f => post_form } %>
+  <% end %>
+
+  <p class="submit"> <%= f.submit "Create New Topic", {tabindex: 3} %> </p>
+
 <% end %>
