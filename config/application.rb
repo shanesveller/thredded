@@ -75,12 +75,6 @@ module Thredded
         ActiveSupport::Dependencies.mechanism = :load
       end
     end
-    
-#   Rack middlewares to use
-#   config.middleware.delete ActionDispatch::Flash
-#   config.middleware.insert_before Warden::Manager, ActionDispatch::Flash
-#   config.middleware.insert_before ActionDispatch::Flash, Rack::Tidy, 'indent-spaces' => 2
-    config.middleware.insert_before Rack::Lock, Refraction
   end
 end 
 

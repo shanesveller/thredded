@@ -10,7 +10,8 @@ module SyntaxFilter
         gsub(/&#39;/,"'").
         gsub(/&amp;/, "&").
         gsub(/&gt;/, ">").
-        gsub(/&lt;/, "<")
+        gsub(/&lt;/, "<").
+        gsub(/\<br \/\>/, "")
       ::CodeRay.scan(temp_code, filter).div(:css => :class)
     end
     content.html_safe

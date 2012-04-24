@@ -37,21 +37,14 @@
   <%= render topic.posts %>
   
   <% if messageboard.posting_for_anonymous? || (current_user && current_user.can_post_to?(messageboard)) -%>
-    <%= nested_form_for([messageboard, topic, @post], 
-                        :url => create_messageboard_topic_post_url(messageboard, topic, @post, :host => site.cached_domain),
-                        :html => { :multipart => true }) do |f| %>
-      <p>
-        <%= f.label :your_reply %>
-        <%= f.text_area :content, {:placeholder => 'Your reply', :rows => 5} %>
-      </p>
+    <%= nested_form_for([messageboard, topic, @post],
+      :url => create_messageboard_topic_post_url(messageboard, topic, @post, :host => site.cached_domain),
+      :html => { :multipart => true }) do |f| %>
 
-      <%= f.fields_for :attachments do |attachment_form|  %>
-        <p class="attachment"> <%= attachment_form.file_field :attachment %><%= attachment_form.link_to_remove "Remove this attachment", :class => "remove_attachment" %> </p>
-      <% end %>
-      <%= f.link_to_add "Add an attachment", :attachments, :class => "add_attachment" %>
-      <%= f.select :filter, @post.filters %>
+      <%= render :partial => 'form', :locals => { :f => f } %>
 
-      <%= f.submit "Submit reply" %>
+      <%= f.submit "Submit reply", { :tabindex => 3 } %>
+
     <% end -%>
   <% end -%>
 

@@ -38,6 +38,7 @@ module MessageboardHelper
       abbr = content_tag :abbr, :class => "updated_at timeago", :title => topic.updated_at.strftime("%Y-%m-%dT%H:%M:%SZ") do
         topic.updated_at.strftime("%b %d, %Y %I:%M:%S %Z")
       end
+
       if can? :read, messageboard
         link_to abbr , messageboard_topic_posts_path(messageboard, topic)
       else
@@ -50,7 +51,7 @@ module MessageboardHelper
 
   def latest_user_for(messageboard)
     if messageboard.topics.first.present? && messageboard.topics.first.user.present?
-      messageboard.topics.first.user_name
+      messageboard.topics.first.last_user.name
     else
       ""
     end

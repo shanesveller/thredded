@@ -40,7 +40,8 @@
 
 .topic_form {
   label { display: block; clear: both; font-size: 12px; text-transform: lowercase; margin: 10px 0 4px 0; color: #888; font-size: 12px;  }
-  label[for="topic_title"] { display: none; }
+  .title label,
+  .content label { display: none; }
 
   textarea { 
     @extend .content_input;
@@ -82,6 +83,7 @@
 
   
   #drawer {
+    margin-bottom: 10px;
 
     #attributes { 
       background: #999;

@@ -67,10 +67,15 @@ describe Post do
     end
 
     it "performs some syntax highlighting with bbcode" do
-      @post.content = "[code]def hello; puts 'world'; end[/code]
-[code:javascript]function(){ console.log('hi'); }[/code]"
+      @post.content = "[code]def hello
+  puts 'world'
+end[/code]
+
+[code:javascript]function(){ 
+  console.log('hi'); 
+}[/code]"
       @post.filter = "bbcode"
-      @post.filtered_content.should == "<div class=\"CodeRay\">\n  <div class=\"code\"><pre><span class=\"keyword\">def</span> <span class=\"function\">hello</span>; puts <span class=\"string\"><span class=\"delimiter\">'</span><span class=\"content\">world</span><span class=\"delimiter\">'</span></span>; <span class=\"keyword\">end</span></pre></div>\n</div>\n<br />\n<div class=\"CodeRay\">\n  <div class=\"code\"><pre><span class=\"keyword\">function</span>(){ console.log(<span class=\"string\"><span class=\"delimiter\">'</span><span class=\"content\">hi</span><span class=\"delimiter\">'</span></span>); }</pre></div>\n</div>\n"
+      @post.filtered_content.should == "<div class=\"CodeRay\">\n  <div class=\"code\"><pre><span class=\"keyword\">def</span> <span class=\"function\">hello</span>\n  puts <span class=\"string\"><span class=\"delimiter\">'</span><span class=\"content\">world</span><span class=\"delimiter\">'</span></span>\n<span class=\"keyword\">end</span></pre></div>\n</div>\n<br />\n<br />\n<div class=\"CodeRay\">\n  <div class=\"code\"><pre><span class=\"keyword\">function</span>(){ \n  console.log(<span class=\"string\"><span class=\"delimiter\">'</span><span class=\"content\">hi</span><span class=\"delimiter\">'</span></span>); \n}</pre></div>\n</div>\n"
     end
 
     it "converts markdown to html" do
