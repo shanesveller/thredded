@@ -25,9 +25,3 @@
     <div class="handle"><a href="#attributes">More</a></div>
   </div>
 <% end -%>
-
-<%= f.fields_for :posts do |post_form| %>
-
-  <%= render :partial => 'posts/form', :locals => { :f => post_form } %>
-
-<% end %>

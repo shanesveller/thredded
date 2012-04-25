@@ -46,6 +46,11 @@ end
 
 # Assertions ==========================
 
+Then /^I should not see the content field$/ do
+  page.should_not have_selector('form .content textarea')
+end
+
+
 Then /^I should be able to edit this thread$/ do
   page.should have_selector('form.topic_form')
 end

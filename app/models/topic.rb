@@ -24,7 +24,7 @@ class Topic < ActiveRecord::Base
   default_scope order('updated_at DESC')
 
   # misc
-  accepts_nested_attributes_for :posts
+  accepts_nested_attributes_for :posts, :reject_if => :updating?
 
 
   # let's slim this down a little bit
@@ -90,6 +90,10 @@ class Topic < ActiveRecord::Base
 
   def self.select_options
     subclasses.map{ |c| c.to_s }.sort
+  end
+
+  def updating?
+    self.id.present?
   end
 
 end
