@@ -62,6 +62,7 @@ group :test, :cucumber do
 end
 
 group :development do
+  gem 'git_remote_branch'
   gem 'debugger'
   gem 'guard-livereload'
   gem 'faker'
