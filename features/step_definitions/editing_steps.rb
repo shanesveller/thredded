@@ -41,7 +41,11 @@ When /^I click the edit topic button$/ do
 end
 
 When /^I click the edit subject link$/ do
-  find_link("edit subject").click
+  find_link("edit topic").click
+end
+
+Then /^I change the title to "([^"]*)"$/ do |title|
+  fill_in "Title", :with => title
 end
 
 # Assertions ==========================

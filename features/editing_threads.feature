@@ -19,7 +19,7 @@ Background: Default site and messageboard
       Then I should not see the content field
        And I change the title to "This is an old thread"
        And I click the edit topic button
-      Then I should see "I edited this content"
+      Then I should see "This is an old thread"
 
   Scenario: The member tries to edit someone elses thread
      Given a new thread by "sal" named "hello friends" exists on "thredded"
