@@ -8,7 +8,8 @@
                       :url => admin_site_url(@site.id),
                       :html => { :method => :put, :class => :topic_form, :multipart => true } do |f| %>
     <%= render :partial => 'form', :locals => { :f => f } %>
-    <p> <%= f.submit "Edit Topic" %> </p>
+    <p> <%= f.submit "Update Site" %> <br/><br /> </p>
+    <p> If you change the cname alias you will be redirected to the new url and will have to log back in</p>
   <% end %>
 
   <hr />
@@ -16,7 +17,7 @@
   <h1>Messageboards</h1>
   <ul>
   <% @site.messageboards.each do |messageboard| -%>
-    <li><%= link_to messageboard.name, edit_admin_site_messageboard_path(@site.id, messageboard.id) %></li>
+    <li><%= link_to messageboard.name, edit_admin_site_messageboard_path(@site.subdomain, messageboard.name) %></li>
   <% end -%>
   </ul>
 </div>
