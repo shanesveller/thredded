@@ -36,16 +36,16 @@ When /^I change the content to "([^"]*)"$/ do |content|
  fill_in "Content", :with => content
 end
 
+When /^I change the title to "([^"]*)"$/ do |title|
+ fill_in "Title", :with => title
+end
+
 When /^I click the edit topic button$/ do
   find_button("Edit Topic").click
 end
 
 When /^I click the edit subject link$/ do
   find_link("edit topic").click
-end
-
-Then /^I change the title to "([^"]*)"$/ do |title|
-  fill_in "Title", :with => title
 end
 
 # Assertions ==========================
