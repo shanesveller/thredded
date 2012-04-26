@@ -42,6 +42,11 @@ module NavigationHelpers
       topic = messageboard.topics.first
       edit_messageboard_topic_url(messageboard, topic, :host => @site.cached_domain)
 
+    when /the latest thread/i
+      messageboard = Messageboard.first
+      topic = messageboard.topics.first
+      messageboard_topic_url(messageboard, topic, :host => @site.cached_domain)
+
     when /the most recently updated thread on "([^\"]+)"/i
       messageboard = @site.messageboards.find_by_name($1)
       topic = messageboard.topics.first
