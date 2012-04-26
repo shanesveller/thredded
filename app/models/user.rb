@@ -47,7 +47,7 @@ class User < ActiveRecord::Base
   def member_of?(messageboard)
     valid? && (superadmin? || roles.for(messageboard).as([:admin, :moderator, :member]).size > 0)
   end
-  
+
   def member_of(messageboard, as='member')
     role = Role.new(:level => as) 
     role.messageboard = messageboard
@@ -57,10 +57,6 @@ class User < ActiveRecord::Base
 
   def admin_of(messageboard)
     member_of(messageboard, 'admin')
-  end
-
-  def can_post_to?(messageboard)
-    messageboard.posting_for_anonymous? || (messageboard.posting_for_logged_in? && self.logged_in?) || (messageboard.posting_for_members? && self.member_of?(messageboard) )
   end
 
   def logged_in?

@@ -4,7 +4,7 @@
     <nav>
       <ul>
         <%= render :partial => 'search/form' %>
-        <% if messageboard.posting_for_anonymous? || (current_user && current_user.can_post_to?(messageboard)) -%>
+        <% if messageboard.postable_by?(current_user) -%>
           <li class="new_topic"><%= link_to "Create a New Topic", new_messageboard_topic_path(messageboard) %></li>
           <li class="reply_to_topic"><a href="#new_post">Reply To This Topic</a></li>
         <% end -%>
@@ -15,46 +15,38 @@
     </nav>
 <% end %>
 
-  <header>
-    <% cache ["posts", "header",  messageboard] do %>
-      <nav class="breadcrumbs">
-        <ul>
-          <li><a href="/">Forums</a> &rarr; </li>
-          <li><%= link_to messageboard.title, messageboard_topics_path(messageboard) %> &rarr; </li>
-        </ul>
-      </nav>
-    <% end %> 
-
-    <% cache ["posts", "header", topic] do %>
-      <h1><%= topic.title %></h1> 
-      <h2><%= topic.posts_count %> posts</h2>
-      <% if topic.users_to_sentence %>
-        <cite><%= topic.users_to_sentence %></cite>
-      <% end %>
+<header>
+  <nav class="breadcrumbs">
+    <ul>
+      <li><a href="/">Forums</a> &rarr; </li>
+      <li><%= link_to messageboard.title, messageboard_topics_path(messageboard) %> &rarr; </li>
+    </ul>
+  </nav>
+  <% cache ["posts", "header", topic] do %>
+    <h1><%= topic.title %></h1> 
+    <h2><%= topic.posts_count %> posts</h2>
+    <% if topic.users_to_sentence %>
+      <cite><%= topic.users_to_sentence %></cite>
     <% end %>
-  </header>
-  
-  <%= render topic.posts %>
-  
-  <% if messageboard.posting_for_anonymous? || (current_user && current_user.can_post_to?(messageboard)) -%>
-    <%= nested_form_for([messageboard, topic, @post],
-      :url => create_messageboard_topic_post_url(messageboard, topic, @post, :host => site.cached_domain),
-      :html => { :multipart => true }) do |f| %>
+  <% end %>
+</header>
 
-      <%= render :partial => 'form', :locals => { :f => f } %>
+<%= render topic.posts %>
 
-      <%= f.submit "Submit reply", { :tabindex => 3 } %>
-
-    <% end -%>
+<% if messageboard.postable_by?(current_user) -%>
+  <%= nested_form_for([messageboard, topic, @post],
+    :url => create_messageboard_topic_post_url(messageboard, topic, @post, :host => site.cached_domain),
+    :html => { :multipart => true }) do |f| %>
+    <%= render :partial => 'form', :locals => { :f => f } %>
+    <%= f.submit "Submit reply", { :tabindex => 3 } %>
   <% end -%>
+<% end -%>
 
-<% cache ["posts", "footer", messageboard] do %>
-  <footer>
-    <nav class="breadcrumbs">
-      <ul>
-        <li><a href="/">Forums</a> &rarr; </li>
-        <li><%= link_to messageboard.title, messageboard_topics_path(messageboard) %> &rarr; </li>
-      </ul>
-    </nav>
-  </footer>
-<% end %>
+<footer>
+  <nav class="breadcrumbs">
+    <ul>
+      <li><a href="/">Forums</a> &rarr; </li>
+      <li><%= link_to messageboard.title, messageboard_topics_path(messageboard) %> &rarr; </li>
+    </ul>
+  </nav>
+</footer>

@@ -17,6 +17,15 @@ class Messageboard < ActiveRecord::Base
 
   attr_accessible :name, :description, :title, :security, :posting_permission, :theme
 
+  def postable_by?(user)
+    if self.posting_for_anonymous? && (self.restricted_to_private? || self.restricted_to_logged_in?)
+      return false
+    end
+    self.posting_for_anonymous? ||
+    (self.posting_for_logged_in? && user.try(:logged_in?)) ||
+    (self.posting_for_members? && user.try(:member_of?, self))
+  end
+
   def restricted_to_private?
     "private" == security
   end
