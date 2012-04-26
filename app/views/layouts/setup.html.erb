@@ -3,18 +3,18 @@
 <head>
   <title><%= yield :page_title %></title>
   <%= stylesheet_link_tag "application" %>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js"></script>
+  <script src="/javascripts/modernizr.js"></script>
   <%= csrf_meta_tag %>
 </head>
 <!-- default layout -->
 <body id="settings">
 
-	<section id="contentwrap">
-		<%= render :partial => "shared/error_msgs" %>
+  <section id="contentwrap">
+    <%= render :partial => "shared/error_msgs" %>
     <section id="content">
       <%= yield %>
     </section>
-	</section>
+  </section>
 
   <%= javascript_include_tag "application" -%>
 </body>

@@ -3,13 +3,12 @@
 <head>
   <title><%= yield :page_title %></title>
   <%= stylesheet_link_tag "application" %>
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js"></script>
+  <script src="/javascripts/modernizr.js"></script>
   <%= csrf_meta_tag %>
 </head>
 <!-- default layout -->
 <body id="<%= yield :page_id %>">
 	<header>
-		
 		<nav id="site_wide">
 			<ul>
         <%= render 'devise/menu/admin_items' %>
@@ -17,25 +16,18 @@
 			  <%= render 'devise/menu/login_items' %>
 			</ul>
 		</nav>
-
 	</header>
 
 	<section id="contentwrap">
     <header role="banner">
       <%= yield :header_nav %>
     </header>
-  
 		<%= render :partial => "shared/error_msgs" %>
     <section id="content">
       <%= yield %>
     </section>
 	</section>
 
-	<footer>
-
-	</footer>
-
   <%= javascript_include_tag "application" %>
 </body>
 </html>
-
