@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120325231817) do
+ActiveRecord::Schema.define(:version => 20120428233517) do
 
   create_table "attachments", :force => true do |t|
     t.string   "attachment"
@@ -131,6 +131,7 @@ ActiveRecord::Schema.define(:version => 20120325231817) do
     t.string   "attribs",         :default => "[]"
     t.boolean  "sticky",          :default => false
     t.integer  "category_id"
+    t.boolean  "locked"
   end
 
   add_index "topics", ["category_id"], :name => "index_topics_on_category_id"

@@ -26,27 +26,6 @@ class Topic < ActiveRecord::Base
   # misc
   accepts_nested_attributes_for :posts, :reject_if => :updating?
 
-
-  # let's slim this down a little bit
-  [:locked].each do |field|
-    class_eval %Q{
-      def #{field}
-        return "0" if self.attribs.nil?
-        self.attribs = ActiveSupport::JSON.decode( self.attribs ) if self.attribs.class == String
-        @#{field} = self.attribs.include?("#{field}") ? "1" : "0"
-      end
-
-      def #{field}=(state)
-        self.attribs = "[]" if self.attribs.nil?
-        current_attribs = ActiveSupport::JSON.decode( self.attribs )
-        current_attribs.delete("#{field}") if state == "0" &&  current_attribs.include?("#{field}")
-        current_attribs << "#{field}"      if state == "1" && !current_attribs.include?("#{field}")
-        self.attribs = ActiveSupport::JSON.encode( current_attribs )
-        return state
-      end
-    }
-  end
- 
   # Full Text Search
   def self.full_text_search(query, messageboard_id)
     sql = <<-SQL
