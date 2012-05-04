@@ -27,7 +27,14 @@
   <div class="updated">Updated</div>
 </header>
 
-<%= render :partial => "topics/topic_condensed", :collection => @topics, :as => :t %>
+<% if @sticky.count %>
+  <section class="sticky">
+    <%= render :partial => "topics/topic_condensed", :collection => @sticky, :as => :t %>
+  </section>
+<% end %>
+<section class="topics">
+  <%= render :partial => "topics/topic_condensed", :collection => @topics, :as => :t %>
+</section>
 
 <footer>
   <% if messageboard.postable_by?(current_user) -%>

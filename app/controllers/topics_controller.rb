@@ -4,16 +4,17 @@ class TopicsController < ApplicationController
   before_filter :pad_topic,   :only => :create
 
   def index
+    @sticky = []
+
     unless site.present? and can? :read, messageboard
-      redirect_to default_home, :flash => { 
-        :error => "You are not authorized access to this messageboard." 
-      }
-      return 
+      redirect_to default_home, :flash => { :error => "You are not authorized access to this messageboard." }
+      return
     end
 
     if params[:q].present?
       @topics = Topic.full_text_search(params[:q], messageboard.id) 
     else
+      @sticky = Topic.stuck if params[:page].nil? || params[:page] == '1'
       @topics = messageboard.topics.page(params[:page]).per(30)
     end
 

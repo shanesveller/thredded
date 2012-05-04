@@ -4,14 +4,16 @@ end
 
 
 Given /^the thread "([^"]*)" is sticky$/ do |title|
-  @topic.find_by_title(title)
+  @topic = Topic.where(title: title).first
   @topic.update_attribute(:sticky, true)
 end
 
-Then /^the top\-most thread should be "([^"]*)"$/ do |arg1|
-  pending # express the regexp above with the code you wish you had
+Then /^the top\-most thread should be "([^"]*)"$/ do |title|
+  within(:css, "#content article:first h1 a") do
+    page.should have_content(title)
+  end
 end
 
 Then /^I should not see the reply form$/ do
-  pending # express the regexp above with the code you wish you had
+  page.should_not have_css("#post_content")
 end

@@ -23,6 +23,10 @@ class Topic < ActiveRecord::Base
   # scopes
   default_scope order('updated_at DESC')
 
+  def self.stuck
+    where(sticky: true)
+  end
+
   # misc
   accepts_nested_attributes_for :posts, :reject_if => :updating?
 
