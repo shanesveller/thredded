@@ -24,7 +24,11 @@ class Topic < ActiveRecord::Base
   default_scope order('updated_at DESC')
 
   def self.stuck
-    where(sticky: true)
+    where('sticky = true')
+  end
+
+  def self.unstuck
+    where('sticky = false OR sticky IS NULL')
   end
 
   # misc
@@ -56,6 +60,17 @@ class Topic < ActiveRecord::Base
 
   def private?
     self.class.to_s == "PrivateTopic"
+  end
+
+  def css_class
+    classes = []
+    classes << "locked" if locked
+    classes << "sticky" if sticky
+    if classes.empty?
+      ""
+    else
+      "class=\"#{classes.join(' ')}\"".html_safe
+    end
   end
 
   def users_to_sentence

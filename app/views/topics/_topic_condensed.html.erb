@@ -1,6 +1,6 @@
   <% if can? :read, t -%>
     <% cache ['line_item', t] do %>
-      <article>
+      <article <%= t.css_class %>>
         <h1><%= link_to t.title, messageboard_topic_posts_path(messageboard, t) %></h1>
         <div  class="post_count"><%= t.posts_count %></div>
         <cite class="started_by">

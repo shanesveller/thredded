@@ -54,11 +54,11 @@
     &.private { background-color: #fcfcd7; border-bottom: solid 2px #aaab72; }
 
     .started_by,
-    .updated_by, 
+    .updated_by,
     .post_count,
     h1 a { 
-      padding-top: 5px; 
-      padding-bottom: 5px; 
+      padding-top: 5px;
+      padding-bottom: 5px;
       @extend .td;
     }
 
@@ -67,6 +67,9 @@
       overflow: hidden;
 
       a {
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
         background: url("/assets/thread_sprite.gif") no-repeat scroll 7px -87px transparent;
         display: inline-block;
         font-weight: normal;
@@ -74,16 +77,16 @@
         overflow: hidden;
         padding-left: 30px;
         text-overflow: ellipsis;
-        width: 86%;
+        width: 100%;
         white-space: nowrap;
       }
     }
-    &.sticky        h1  a { background-position: 10px -28px; }
-    &.locked        h1  a { background-position: 10px -59px; }
-    &.sticky.locked h1  a { background-position: 10px 3px; padding-left: 6%; }
+    &.sticky        h1  a { background-position: 7px -25px; }
+    &.locked        h1  a { background-position: 7px -56px; }
+    &.sticky.locked h1  a { background-position: 7px 5px; padding-left: 49px; }
 
-    cite, 
-    time, 
+    cite,
+    time,
     abbr { border: none; }
 
     .started_by {

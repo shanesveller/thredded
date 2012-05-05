@@ -27,12 +27,8 @@
   <div class="updated">Updated</div>
 </header>
 
-<% if @sticky.count %>
-  <section class="sticky">
-    <%= render :partial => "topics/topic_condensed", :collection => @sticky, :as => :t %>
-  </section>
-<% end %>
 <section class="topics">
+  <%= render :partial => "topics/topic_condensed", :collection => @sticky, :as => :t %>
   <%= render :partial => "topics/topic_condensed", :collection => @topics, :as => :t %>
 </section>
 
