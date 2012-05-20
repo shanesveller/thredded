@@ -9,18 +9,16 @@ Bundler.require *Rails.groups(:assets) if defined?(Bundler)
 
 
 module Thredded
-
   mattr_accessor :themes
   self.themes = {}
 
   class Application < Rails::Application
-
     # speeding up rails per suggestion here - http://dev.theconversation.edu.au/post/5001465621/how-we-shaved-2-seconds-off-our-rails-start-up-time
     # Thank you to Xavier and Pete!
     config.autoload_paths << Rails.root.join("app").to_s
     config.autoload_paths += %W(#{config.root}/lib)
     config.autoload_paths += Dir["#{config.root}/lib/**/"]
-    
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -60,14 +58,21 @@ module Thredded
 
     # JavaScript files you want as :defaults (application.js is always included).
     config.action_view.javascript_expansions[:defaults] = %w(rails)
-#   config.action_view.javascript_expansions[:jquery]   = ["jquery", "jquery-ui"]
+    # config.action_view.javascript_expansions[:jquery]   = ["jquery", "jquery-ui"]
 
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password, :password_confirmation]
-    
+
+    # Send the devise mailer class our domain helper
+    config.to_prepare do
+      Devise::Mailer.class_eval do
+        helper :domain
+      end
+    end
+
     ### Part of a Spork hack. See http://bit.ly/arY19y
     if Rails.env.test?
       initializer :after => :initialize_dependency_mechanism do
@@ -76,7 +81,7 @@ module Thredded
       end
     end
   end
-end 
+end
 
 ActionDispatch::Callbacks.after do
   # Reload the factories
@@ -86,5 +91,4 @@ ActionDispatch::Callbacks.after do
     FactoryGirl.definition_file_paths = [File.join(Rails.root, 'spec', 'factories')]
     FactoryGirl.reload
   end
-
 end
