@@ -4,7 +4,7 @@ gem 'pg'
 
 gem 'rack'
 gem 'rake'                        , '0.9.2.2'
-gem 'rails'                       , '3.1.3'
+gem 'rails'                       , '3.1.6'
 gem 'devise'                      , '1.5.3'
 gem 'cancan'                      , '1.6.4'
 gem 'mini_magick'                 , '3.2.1'
