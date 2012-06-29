@@ -3,8 +3,8 @@ require 'spec_helper'
 describe Role do
 
   before(:each) do
-    @admin_user = Factory(:user, :email => "role@admin.com", :name => "adminUser")
-    @admin = Factory(:role_admin)
+    @admin_user = create(:user, :email => "role@admin.com", :name => "adminUser")
+    @admin = create(:role_admin)
     @messageboard = @admin.messageboard
     @admin_user.roles << @admin
     @admin_user.roles.reload

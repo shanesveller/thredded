@@ -3,9 +3,9 @@ require 'spec_helper'
 describe Topic do
 
   before(:each) do
-    @user = Factory(:user)
-    @messageboard = Factory(:messageboard)
-    @topic  = Factory(:topic, :messageboard => @messageboard)
+    @user = create(:user)
+    @messageboard = create(:messageboard)
+    @topic  = create(:topic, :messageboard => @messageboard)
   end
 
   it "should be associated to a messageboard" do
@@ -24,7 +24,7 @@ describe Topic do
   end
 
   it "does not change updated_at when an old post is edited" do
-    @post = Factory.create(:post)
+    @post = create(:post)
     old = @post.topic.updated_at
     @post.content = "alternative content"
     @post.save
@@ -65,7 +65,7 @@ describe Topic do
     end
 
     it "can be created by a member of the board" do
-      @user = Factory(:user, :name => "coolkid")
+      @user = create(:user, :name => "coolkid")
       @user.member_of(@topic.messageboard)
       ability = Ability.new(@user)
       ability.can?(:create, @topic).should be_true

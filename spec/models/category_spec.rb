@@ -1,13 +1,11 @@
 require 'spec_helper'
 
 describe Category do
-  #pending "add some examples to (or delete) #{__FILE__}"
-
   before(:each) do
-    @user = Factory(:user, :name => "categorytest")
-    @messageboard = Factory(:messageboard)
-    @topic  = Factory(:topic, :messageboard => @messageboard)
-    @category = Factory(:category, :messageboard => @messageboard)
+    @user         = create(:user, name: "categorytest")
+    @messageboard = create(:messageboard)
+    @topic        = create(:topic, messageboard: @messageboard)
+    @category     = create(:category, messageboard: @messageboard)
   end
 
   it "should allow nil category_id" do

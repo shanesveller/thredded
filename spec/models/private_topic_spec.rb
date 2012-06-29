@@ -3,10 +3,10 @@ require 'spec_helper'
 describe PrivateTopic do
 
   before(:each) do
-    @user1 = Factory(:user, :name => "privateuser1")
-    @user2 = Factory(:user, :name => "privateuser2")
-    @messageboard = Factory(:messageboard)
-    @topic = Factory(:private_topic, :messageboard => @messageboard, :users => [@user1, @user2])
+    @user1 = create(:user, :name => "privateuser1")
+    @user2 = create(:user, :name => "privateuser2")
+    @messageboard = create(:messageboard)
+    @topic = create(:private_topic, :messageboard => @messageboard, :users => [@user1, @user2])
   end
 
   it "is private when it has users" do
@@ -15,7 +15,7 @@ describe PrivateTopic do
   
   context "when it is private" do
     it "does not allow someone not involved to read the topic" do
-      @user3 = Factory(:user)
+      @user3 = create(:user)
       ability = Ability.new(@user3)
       ability.can?(:read, @topic).should be_false
     end
@@ -27,7 +27,7 @@ describe PrivateTopic do
 
   describe ".add_user" do
     before(:each) do
-      @joel  = Factory(:user, :name => "joel")
+      @joel  = create(:user, :name => "joel")
     end
     it "should add a user by their username" do
       @topic.add_user("joel")

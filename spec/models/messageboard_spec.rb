@@ -1,16 +1,14 @@
 require 'spec_helper'
-require 'debugger'
 
 describe Messageboard do
-
   before(:each) do
-    @m = Factory(:messageboard)
+    @m = create(:messageboard)
   end
 
   describe ".active_users" do
     it "returns a list of users active in this messageboard" do
-      @john = FactoryGirl.create(:user, :name => "John")
-      @joe  = FactoryGirl.create(:user, :name => "Joe")
+      @john = create(:user, name: "John")
+      @joe  = create(:user, name: "Joe")
       @john.member_of @m
       @joe.member_of @m
       @john.mark_active_in!(@m)
@@ -23,8 +21,9 @@ describe Messageboard do
 
   describe ".postable_by?" do
     before(:each) do
-      @current_user = FactoryGirl.create(:user)
+      @current_user = create(:user)
     end
+
     describe "for public boards" do
       before(:each) do
         @m.security = 'public'
@@ -41,6 +40,7 @@ describe Messageboard do
         @m.postable_by?(@current_user).should be_true
       end
     end
+
     describe "for logged_in boards" do
       before(:each) do
         @m.security = 'logged_in'
@@ -59,6 +59,7 @@ describe Messageboard do
         @m.postable_by?(@current_user).should be_true
       end
     end
+
     describe "for private boards" do
       before(:each) do
         @m.security = 'private'
@@ -99,6 +100,4 @@ describe Messageboard do
       @m.public?.should == true
     end
   end
-
 end
-

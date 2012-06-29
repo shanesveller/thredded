@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Site do
 
-  subject { Factory(:site) }
+  subject { create(:site) }
 
   it { should have_many(:messageboards) }
   it { should belong_to(:user) }
