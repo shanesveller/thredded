@@ -17,14 +17,15 @@ class Post  < ActiveRecord::Base
     :filter,
     :ip,
     :messageboard,
+    :source,
     :topic,
     :user
 
   default_scope order: 'id ASC'
 
   belongs_to :messageboard, counter_cache: true
-  belongs_to :topic,  counter_cache: true
-  belongs_to :user,   counter_cache: true
+  belongs_to :topic, counter_cache: true
+  belongs_to :user, counter_cache: true
   has_many   :attachments
 
   accepts_nested_attributes_for :attachments

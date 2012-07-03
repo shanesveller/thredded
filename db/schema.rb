@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121115012651) do
+ActiveRecord::Schema.define(:version => 20121116180734) do
 
   create_table "attachments", :force => true do |t|
     t.string   "attachment"
@@ -132,22 +132,26 @@ ActiveRecord::Schema.define(:version => 20121115012651) do
   add_index "topic_categories", ["topic_id"], :name => "index_topic_categories_on_topic_id"
 
   create_table "topics", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "last_user_id"
-    t.string   "title"
+    t.integer  "user_id",                                 :null => false
+    t.integer  "last_user_id",                            :null => false
+    t.string   "title",                                   :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "messageboard_id"
+    t.integer  "messageboard_id",                         :null => false
     t.string   "type"
     t.integer  "posts_count",     :default => 0
     t.string   "attribs",         :default => "[]"
     t.boolean  "sticky",          :default => false
     t.boolean  "locked"
     t.string   "slug"
+    t.string   "hash_id",                                 :null => false
+    t.string   "state",           :default => "approved", :null => false
   end
 
+  add_index "topics", ["hash_id"], :name => "index_topics_on_hash_id"
   add_index "topics", ["messageboard_id", "updated_at"], :name => "index_topics_on_messageboard_id_and_updated_at"
   add_index "topics", ["slug"], :name => "index_topics_on_slug"
+  add_index "topics", ["state"], :name => "index_topics_on_state"
 
   create_table "user_topic_reads", :force => true do |t|
     t.integer  "user_id",                    :null => false

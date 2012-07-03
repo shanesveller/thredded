@@ -11,17 +11,33 @@ class Topic < ActiveRecord::Base
   belongs_to :user, counter_cache: true
   belongs_to :messageboard, counter_cache: true, touch: true
 
-  delegate :name, :name=, :email, :email=, to: :user, prefix: true
-  validates_presence_of [:last_user_id, :messageboard_id]
+  validates_presence_of :hash_id
+  validates_presence_of :last_user_id
+  validates_presence_of :messageboard_id
   validates_numericality_of :posts_count
+  validates_uniqueness_of :hash_id
 
-  attr_accessible :category_ids, :last_user, :locked, :messageboard,
-    :posts_attributes, :sticky, :type, :title, :user, :usernames
+  attr_accessible :category_ids,
+    :last_user,
+    :locked,
+    :messageboard,
+    :posts_attributes,
+    :sticky,
+    :type,
+    :title,
+    :user,
+    :usernames
 
   accepts_nested_attributes_for :posts, reject_if: :updating?
   accepts_nested_attributes_for :categories
 
   default_scope order('updated_at DESC')
+
+  delegate :name, :name=, :email, :email=, to: :user, prefix: true
+
+  before_validation do
+    self.hash_id = SecureRandom.hex(10) if self.hash_id.nil?
+  end
 
   def self.stuck
     where('sticky = true')
@@ -76,6 +92,10 @@ class Topic < ActiveRecord::Base
 
   def private?
     false
+  end
+
+  def pending?
+    state == 'pending'
   end
 
   def css_class

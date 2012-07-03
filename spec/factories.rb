@@ -6,6 +6,7 @@ FactoryGirl.define do
   sequence(:other_email) { |n| "other#{n}@email.com" }
   sequence(:other_name) { |n| "other#{n}" }
   sequence(:password) { |n| "password#{n}" }
+  sequence(:topic_hash) { |n| "hash#{n}" }
 
   factory :attachment do
     attachment    { fixture_file_upload('spec/samples/img.png', 'image/png') }
@@ -34,6 +35,39 @@ FactoryGirl.define do
     trait :beer do
       name 'Beer'
       description 'Nectar of the Gods!'
+    end
+  end
+
+  factory :email, class: OpenStruct do
+    to 'email-token'
+    from 'user@email.com'
+    subject 'email subject'
+    body 'Hello!'
+    attachments {[]}
+
+    trait :with_attachment do
+      attachments {[
+        ActionDispatch::Http::UploadedFile.new({
+          filename: 'img.png',
+          type: 'image/png',
+          tempfile: File.new("#{File.expand_path File.dirname(__FILE__)}/samples/img.png")
+        })
+      ]}
+    end
+
+    trait :with_attachments do
+      attachments {[
+        ActionDispatch::Http::UploadedFile.new({
+          filename: 'img.png',
+          type: 'image/png',
+          tempfile: File.new("#{File.expand_path File.dirname(__FILE__)}/samples/img.png")
+        }),
+        ActionDispatch::Http::UploadedFile.new({
+          filename: 'zip.png',
+          type: 'image/png',
+          tempfile: File.new("#{File.expand_path File.dirname(__FILE__)}/samples/zip.png")
+        })
+      ]}
     end
   end
 
@@ -112,8 +146,10 @@ FactoryGirl.define do
   factory :topic do
     user
     messageboard
-    title 'New topic started here'
     association :last_user, factory: :user
+
+    title 'New topic started here'
+    hash_id { FactoryGirl.generate(:topic_hash) }
 
     # look up transient attributes here to clean this up:
     # https://github.com/thoughtbot/factory_girl/blob/master/GETTING_STARTED.md#transient-attributes

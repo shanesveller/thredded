@@ -7,26 +7,21 @@ Then /^I should see an error message$/ do
 end
 
 Given /^I signed up with "(.*)\/(.*)"$/ do |email, password|
-  user = create :user,
-    :email                 => email,
-    :password              => password,
-    :password_confirmation => password
-end 
+  user = create(:user, email: email, password: password,
+    password_confirmation: password)
+end
 
 Given /^I am signed up and confirmed as "(.*)\/(.*)"$/ do |email, password|
-  user = create :user,
-    :name                  => email.split('@').first,
-    :email                 => email,
-    :password              => password,
-    :password_confirmation => password
+  user = create :user, name: email.split('@').first, email: email,
+    password: password, password_confirmation: password
 end
 
 Then /^I should be signed in$/ do
-  step %{I should see "Logout"} 
+  step %{I should see "Logout"}
 end
 
 Then /^I should be signed out$/ do
-  step %{I should see "Login"} 
+  step %{I should see "Login"}
 end
 
 Given /^I have signed in with "(.*)\/(.*)"$/ do |email, password|
@@ -39,44 +34,47 @@ Given /^I am signed in as "(.*)"$/ do |username|
 end
 
 Then /^a confirmation message should be sent to "(.*)"$/ do |email|
-  user = User.find(:first, :conditions => {:email => email})
+  user = User.find(:first, conditions: { email: email })
   assert !user.confirmation_token.blank?
   assert !ActionMailer::Base.deliveries.empty?
+
   result = ActionMailer::Base.deliveries.any? do |email|
     email.to == [user.email] &&
     email.subject =~ /confirm/i &&
     email.body =~ /#{user.confirmation_token}/
   end
+
   assert result
 end
 
 When /^I follow the confirmation link sent to "(.*)"$/ do |email|
-  user = User.find(:first, :conditions => {:email => email})
-  visit new_user_confirmation_path(:user_id => user,
-                                   :token   => user.confirmation_token)
+  user = User.find(:first, conditions: { email: email })
+  visit new_user_confirmation_path(user_id: user,
+    token: user.confirmation_token)
 end
 
 Then /^a password reset message should be sent to "(.*)"$/ do |email|
-  user = User.find(:first, :conditions => {:email => email})
+  user = User.find(:first, conditions: { email: email })
   assert !user.confirmation_token.blank?
   assert !ActionMailer::Base.deliveries.empty?
+
   result = ActionMailer::Base.deliveries.any? do |email|
     email.to == [user.email] &&
     email.subject =~ /password/i &&
     email.body =~ /#{user.confirmation_token}/
   end
+
   assert result
 end
 
 When /^I follow the password reset link sent to "(.*)"$/ do |email|
-  user = User.find(:first, :conditions => {:email => email})
-  visit edit_user_password_path(:user_id => user,
-                                :token   => user.confirmation_token)
+  user = User.find(:first, conditions: { email: email })
+  visit edit_user_password_path(user_id: user, token: user.confirmation_token)
 end
 
 When /^I try to change the password of "(.*)" without token$/ do |email|
-  user = User.find(:first, :conditions => {:email => email})
-  visit edit_user_password_path(:user_id => user)
+  user = User.find(:first, conditions: { email: email })
+  visit edit_user_password_path(user_id: user)
 end
 
 Then /^I should be forbidden$/ do

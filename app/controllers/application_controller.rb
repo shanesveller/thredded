@@ -40,7 +40,7 @@ class ApplicationController < ActionController::Base
   end
 
   def site_home
-    "/"
+    '/'
   end
 
   def site
@@ -69,6 +69,7 @@ class ApplicationController < ActionController::Base
     if current_user
       Time.zone = current_user.time_zone
     end
+
     @tz_offset ||= Time.zone.now.utc_offset / 1.hour
   end
 

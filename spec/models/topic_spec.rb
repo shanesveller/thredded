@@ -1,6 +1,14 @@
 require 'spec_helper'
 
 describe Topic do
+  it { should have_many(:posts) }
+  it { should have_many(:categories) }
+  it { should belong_to(:last_user) }
+  it { should belong_to(:messageboard) }
+
+  it { should validate_presence_of(:last_user_id) }
+  it { should validate_presence_of(:messageboard_id) }
+  it { should validate_uniqueness_of(:hash_id) }
 
   before(:each) do
     @user = create(:user)
@@ -9,21 +17,21 @@ describe Topic do
   end
 
   it "should be associated to a messageboard" do
-    @topic.messageboard = nil
-    @topic.should_not be_valid
+    topic = build(:topic, messageboard: nil)
+    topic.should_not be_valid
   end
 
   it "is public by default" do
-    @topic.public?.should be_true
+    topic = Topic.new
+    topic.public?.should be_true
   end
 
   it "should be able to handle category ids" do
-    @cat1 = create(:category)
-    @cat2 = create(:category, :beer)
-    @topic = Topic.create({:title =>"tghhgggt", :category_ids =>["", @cat1.id.to_s, @cat2.id.to_s], :locked =>"0", :sticky =>"0", :user => @user, :last_user => @user, :user_id => @user.id.to_s, :messageboard => @messageboard, :posts_attributes =>{"0"=>{:content =>"kkgjfhjgfkfghj", :filter =>"bbcode", :user => @user, :ip => "127.0.0.1", :messageboard => @messageboard}}})
-    @topic.valid?.should be_true
+    cat1 = create(:category)
+    cat2 = create(:category, :beer)
+    topic = create(:topic, category_ids: ['', cat1.id, cat2.id])
+    topic.valid?.should be_true
   end
-
 
   it "changes updated_at when a new post is added" do
     old = @topic.updated_at
@@ -57,7 +65,6 @@ describe Topic do
   end
 
   context "when its parent messageboard is private" do
-
     before(:each) do
       @topic.messageboard.security = 'private'
     end
@@ -78,8 +85,5 @@ describe Topic do
       ability = Ability.new(@user)
       ability.can?(:create, @topic).should be_true
     end
-
   end
-
 end
-

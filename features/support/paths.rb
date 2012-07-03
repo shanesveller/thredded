@@ -50,7 +50,7 @@ module NavigationHelpers
     when /the most recently updated thread on "([^\"]+)"/i
       messageboard = @site.messageboards.find_by_name($1)
       topic = messageboard.topics.first
-      messageboard_topic_posts_url(messageboard, topic, :host => @site.cached_domain)
+      messageboard_topic_posts_url(messageboard.name, topic.slug, :host => @site.cached_domain)
 
     when /the sign up page/i
       new_user_registration_url( :host => @site.cached_domain )

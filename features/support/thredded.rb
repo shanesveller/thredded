@@ -5,57 +5,43 @@ After do |scenario|
   DatabaseCleaner.clean
 end
 
-# AfterConfiguration do |config|
-#   unless @after_conf
-#     THREDDED = Hash.new 
-#     THREDDED[:site_name] = "My Messageboard Site"
-#   else
-#     @after_conf = true
-#   end
-# end
-#
 class Array
+  def collect_every(n, fill=false, offset = 0)
+    if block_given?
+      while  offset < size
+        ret = []
 
- def collect_every(n, fill=false, offset = 0)
+        if fill
+          n.times do |x|
+            if offset + x > size - 1 then ret << nil
+            else  ret << self[offset + x] end
+          end
+        else
+          n.times { |x| ret << self[offset + x] unless offset + x > size - 1 }
+        end
 
-  if block_given?
-     while  offset < size
-          ret = []
+        offset += n
+        yield ret
+        ret = nil
+      end
+    else
 
-          if fill
-             n.times do |x| 
-                  if offset + x > size - 1 then ret << nil 
-                  else  ret << self[offset + x] end
-             end
-          else
-             n.times { |x| ret << self[offset + x] unless offset + x > size - 1}
-          end 
+      ret = []
+      while offset < size
+        ret << []
 
-          offset += n
-          yield ret
-          ret = nil
-     end   
-
-  else
-
-   ret = []
-   while  offset < size
-     ret << []
-     if fill
-         n.times do |x|  
+        if fill
+          n.times do |x|
             if offset + x > size - 1 then ret.last << nil
             else ret.last << self[offset + x]; end
-         end
-     else
-         n.times { |x| ret.last << self[offset + x] unless offset + x > size - 1 }
-     end
+          end
+        else
+          n.times { |x| ret.last << self[offset + x] unless offset + x > size - 1 }
+        end
 
-     offset += n
-   end
-   return ret
-
-  end 
-
- end
+        offset += n
+      end
+      return ret
+    end
+  end
 end
-

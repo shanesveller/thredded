@@ -115,6 +115,8 @@ GEM
     git_remote_branch (0.3.3)
       rainbow
     gravtastic (3.1.0)
+    griddler (0.1.0)
+      rails (>= 3.2.0)
     guard (1.0.0)
       ffi (>= 0.5.0)
       thor (~> 0.14.6)
@@ -279,6 +281,7 @@ DEPENDENCIES
   fuubar
   git_remote_branch
   gravtastic (= 3.1.0)
+  griddler
   guard-spork (= 0.2.1)
   highline (= 1.6.1)
   jquery-rails
