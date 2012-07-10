@@ -31,7 +31,9 @@
   <% end %>
 </header>
 
-<%= render topic.posts %>
+<section class="posts">
+  <%= render topic.posts %>
+</section>
 
 <% if messageboard.postable_by?(current_user) && !topic.locked -%>
   <%= nested_form_for([messageboard, topic, @post],

@@ -1,12 +1,13 @@
 #topics_posts {
 
   article {
-    padding: 15px 0 5px 155px;
-    margin-bottom: 10px;
-    min-height: 90px;
+    border-left: solid 1px transparent;
     border-top: solid 2px #eee;
     clear: both;
+    margin-bottom: 10px;
+    min-height: 90px;
     overflow: hidden;
+    padding: 15px 0 5px 155px;
     position: relative;
 
     &:last {
