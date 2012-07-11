@@ -2,6 +2,9 @@ require 'spec_helper'
 require 'debugger'
 
 describe Post do
+  it { should validate_presence_of :content }
+  it { should validate_presence_of :messageboard_id }
+
   describe "#create" do
     before(:each) do
       @shaun = create(:user)

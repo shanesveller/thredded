@@ -30,14 +30,13 @@ class Post  < ActiveRecord::Base
 
   private
 
-    def modify_parent_topic
-      topic.last_user = user
-      topic.touch
-      topic.save
-    end
+  def modify_parent_topic
+    topic.last_user = user
+    topic.touch
+    topic.save
+  end
 
-    def set_user_email
-      self.user_email = self.user.email if user
-    end
-
+  def set_user_email
+    self.user_email = self.user.email if user
+  end
 end
