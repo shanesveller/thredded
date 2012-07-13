@@ -17,6 +17,7 @@ Spork.prefork do
 
   FactoryGirl.definition_file_paths = [File.join(Rails.root, 'spec', 'factories')]
   FactoryGirl.reload
+  World(FactoryGirl::Syntax::Methods)
 
   # Capybara defaults to XPath selectors rather than Webrat's default of CSS3. In
   # order to ease the transition to Capybara we set the default here. If you'd

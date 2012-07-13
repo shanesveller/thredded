@@ -104,7 +104,7 @@ right here"
       @attachment_2 = FactoryGirl.create(:pdfpng,     :post => @post) # 2 pdf
       @attachment_1 = FactoryGirl.create(:attachment, :post => @post) # 1 img 
 
-      expectation = "<img src=\"/uploads/attachment/attachment/#{@attachment_2.id}/pdf.png\" class=\"align_left\" /> <img src=\"/uploads/attachment/attachment/#{@attachment_3.id}/txt.png\" class=\"align_right\" /> <img src=\"/uploads/attachment/attachment/#{@attachment_1.id}/img.png\" /> <img src=\"/uploads/attachment/attachment/#{@attachment_4.id}/zip.png\" width=\"200\" height=\"200\" />"
+      expectation = "<img src=\"/uploads/attachment/#{@attachment_2.id}/pdf.png\" class=\"align_left\" /> <img src=\"/uploads/attachment/#{@attachment_3.id}/txt.png\" class=\"align_right\" /> <img src=\"/uploads/attachment/#{@attachment_1.id}/img.png\" /> <img src=\"/uploads/attachment/#{@attachment_4.id}/zip.png\" width=\"200\" height=\"200\" />"
 
       @post.filtered_content.should == expectation
     end

@@ -1,5 +1,5 @@
 Given /^the default "([^"]*)" website domain is "([^"]*)"$/ do |permission, website|
-  @site ||= Factory(:site,
+  @site ||= create(:site,
                     :cname_alias => website, 
                     :permission => permission, 
                     :default_site => 't')
@@ -12,7 +12,7 @@ end
 
 Given /^the default website has a messageboard named "([^"]*)"$/ do |messageboard|
   @site = Site.find_by_default_site(true)
-  @site.messageboards << Factory(:messageboard, :name => messageboard, :title => messageboard)
+  @site.messageboards << create(:messageboard, :name => messageboard, :title => messageboard)
   @site.save
 end
 
@@ -43,22 +43,22 @@ end
 Given /^a custom cname site exists called "([^"]*)"$/ do |subdomain|
   random_subdomain = (0...4).map{65.+(rand(25)).chr}.join.downcase
   @site = Site.where("cached_domain = ? OR  subdomain = ?", subdomain, subdomain).first
-  @site = Factory(:site, :cname_alias => subdomain, :subdomain => random_subdomain) if @site.nil?
+  @site = create(:site, :cname_alias => subdomain, :subdomain => random_subdomain) if @site.nil?
 end
 
 Given /^"([^"]*)" has two messageboards named "([^"]*)" and "([^"]*)"$/ do |subdomain, messageboard1, messageboard2|
   @site = Site.where("cached_domain = ? OR  subdomain = ?", subdomain, subdomain).first
-  @site.messageboards << Factory(:messageboard, :name => messageboard1, :title => messageboard1, :topics => [Factory(:topic)])
-  @site.messageboards << Factory(:messageboard, :name => messageboard2, :title => messageboard2, :topics => [Factory(:topic)])
+  @site.messageboards << create(:messageboard, :name => messageboard1, :title => messageboard1, :topics => [create(:topic)])
+  @site.messageboards << create(:messageboard, :name => messageboard2, :title => messageboard2, :topics => [create(:topic)])
   @site.save
 end
 
 Then /^I should see the login form$/ do
-  page.should have_selector('form#user_new')
+  page.should have_selector('form#new_user')
 end
 
 Then /^I should not see the login form$/ do
-  page.should_not have_selector('form#user_new')
+  page.should_not have_selector('form#new_user')
 end
 
 Given /^"([^"]*)" is a "([^"]*)" site$/ do |domain, permission|
