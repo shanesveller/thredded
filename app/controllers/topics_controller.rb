@@ -12,8 +12,12 @@ class TopicsController < ApplicationController
       @topics = get_topics
 
       if on_search_page?
-        redirect_if_no_search_results_for @topics
-        render 'search'
+        if @topics.length == 0
+          redirect_to messageboard_topics_path(messageboard), 
+            flash: { error: "No topics found for this search." }
+        else
+          render 'search'
+        end
       end
     end
   end
@@ -68,10 +72,8 @@ class TopicsController < ApplicationController
     params[:q].present?
   end
 
-  def redirect_if_no_search_results_for(topics)
-    if on_search_page? && topics.length == 0
-      redirect_to messageboard_topics_path(messageboard), :flash => { :error => "No topics found for this search." } 
-    end
+  def no_search_results
+
   end
 
   def default_home
