@@ -23,18 +23,18 @@ class TopicsController < ApplicationController
   end
 
   def new
-    @topic = messageboard.topics.build
-    unless can? :create, @topic
-      flash[:error] = "Sorry, you are not authorized to post on this messageboard."
-      redirect_to messageboard_topics_url(messageboard, :host => @site.cached_domain)
-    end
-    @topic.type = "PrivateTopic" if params[:type] == "private"
+    @topic = messageboard.topics.build(type: topic_class)
     @topic.posts.build
+
+    unless can? :create, @topic
+      flash[:error] = 'Sorry, you are not authorized to post on this messageboard.'
+      redirect_to messageboard_topics_url messageboard, host: site.cached_domain
+    end
   end
 
   def create
     @topic = klass.create(params[:topic])
-    redirect_to messageboard_topics_url(messageboard, :host => @site.cached_domain)
+    redirect_to messageboard_topics_url(messageboard, :host => site.cached_domain)
   end
 
   def edit
@@ -43,10 +43,18 @@ class TopicsController < ApplicationController
 
   def update
     topic.update_attributes(params[:topic])
-    redirect_to messageboard_topic_posts_url(messageboard, topic, :host => @site.cached_domain)
+    redirect_to messageboard_topic_posts_url(messageboard, topic, :host => site.cached_domain)
   end
 
   private
+
+  def topic_class
+    if params[:type] == 'private'
+      'PrivateTopic'
+    else
+      'Topic'
+    end
+  end
 
   def get_topics
     if params[:q].present?

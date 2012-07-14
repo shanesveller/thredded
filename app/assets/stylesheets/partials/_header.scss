@@ -1,13 +1,10 @@
 #contentwrap header[role="banner"] {
 
-  float: right; 
+  float: right;
+  padding-top: 23px;
   width: 25%;
 
-  h1, h2 { }
-  h1 { font-size: 22px; font-weight: bold;   text-transform: uppercase; margin-bottom: 15px;  }
-  h2 { font-size: 12px; font-weight: normal; text-transform: lowercase; letter-spacing: 1px; margin-bottom: 20px; }
-
-  .new_topic, .reply_to_topic, .edit_topic {
+  .new_topic, .new_private_topic, .reply_to_topic, .edit_topic {
     margin-bottom: 10px;
 
     a {
@@ -23,8 +20,8 @@
   .online {
     margin-top: 20px;
 
-    ul { 
-      list-style: none; 
+    ul {
+      list-style: none;
       text-transform: lowercase;
       margin: 10px 0 0 0;
     }

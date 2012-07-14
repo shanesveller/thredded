@@ -65,8 +65,8 @@ Background: Default site and messageboard
           | topic 1     | hello I'm first |
      When I sign out
       And I go to the topic listing page
-     Then I should not see "Create a New Topic"
+     Then I should not see "create a new topic"
       And I go to the new thread page for "thredded"
-      And I should see "Sorry, you are not authorized to post on this messageboard."
+     Then I should see "Sorry, you are not authorized to post on this messageboard."
       And I go to the most recently updated thread on "thredded"
-      And I should not see the post reply form 
+     Then I should not see the post reply form 
