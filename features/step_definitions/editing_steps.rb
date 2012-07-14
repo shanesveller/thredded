@@ -3,9 +3,9 @@ require 'debugger'
 
 
 Given /^a new thread by "([^"]*)" named "([^"]*)" exists on "([^"]*)"$/ do |username, title, messageboard|
-  @user = User.where(:name => username).first || Factory(:user, :name => username+"s", :email => "#{username}s@email.com")
+  @user = User.where(:name => username).first || create(:user, :name => username+"s", :email => "#{username}s@email.com")
   @messageboard = Messageboard.where(:name => messageboard).first
-  @topic = Factory :topic, :title => title, :messageboard => @messageboard, :user => @user, :last_user => @user
+  @topic = create :topic, :title => title, :messageboard => @messageboard, :user => @user, :last_user => @user
 end
 
 Given /^the latest thread on "([^"]*)" has several posts$/ do |messageboard|
@@ -24,7 +24,7 @@ Given /^the ([^"]*) post on the most recent thread is mine$/ do |position|
 end
 
 Given /^the ([^"]*) post on the most recent thread is not mine/ do |position|
-  @not_me = Factory(:user, :name => "notme", :email => "notme@email.com")
+  @not_me = create(:user, :name => "notme", :email => "notme@email.com")
   if "last" == position
     @topic.posts.last.user = @not_me
   elsif "first" == position

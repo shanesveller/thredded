@@ -20,7 +20,7 @@ Thredded::Application.routes.draw do
   end
   
   constraints(PersonalizedDomain.new) do
-    root :to => "admin/messageboards#index"
+    root :to => "messageboards#index"
     match "/:messageboard_id(.:format)"                         => 'topics#index',       :as => :messageboard_topics
     match "/:messageboard_id/topics(.:format)"                  => 'topics#create',      :as => :create_messageboard_topic
     match "/:messageboard_id/topics/new/(:type)"                => 'topics#new',         :as => :new_messageboard_topic

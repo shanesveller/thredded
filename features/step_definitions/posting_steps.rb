@@ -10,13 +10,13 @@ end
 
 Given /^a messageboard named "([^"]*)" that I, "([^"]*)", am an? "([^"]*)" of$/ do |messageboard, name, role|
   if !u = User.where(:name => name).first
-    u = Factory :user,
+    u = create :user,
       :name                  => name,
       :email                 => "email@email.com",
       :password              => "password",
       :password_confirmation => "password"
   end
-  m = Factory :messageboard, :name => messageboard
+  m = create :messageboard, :name => messageboard
   u.send "#{role}_of".to_sym, m
 end
 
@@ -88,7 +88,7 @@ When /^I enter a recipient named "([^"]*)", a title "([^"]*)" and content "([^"]
 end
 
 Given /^a private thread exists between "([^"]*)" and "([^"]*)" titled "([^"]*)"$/ do |user1, user2, title|
-  @user1 = Factory(:user, :name => user1, :email => "#{user1}@thredded.com")
-  @user2 = Factory(:user, :name => user2, :email => "#{user2}@thredded.com")
-  @topic = Factory(:private_topic, :messageboard => Messageboard.first, :title => title, :last_user => @user1, :user => @user1, :users => [@user1, @user2])
+  @user1 = create(:user, :name => user1, :email => "#{user1}@thredded.com")
+  @user2 = create(:user, :name => user2, :email => "#{user2}@thredded.com")
+  @topic = create(:private_topic, :messageboard => Messageboard.first, :title => title, :last_user => @user1, :user => @user1, :users => [@user1, @user2])
 end

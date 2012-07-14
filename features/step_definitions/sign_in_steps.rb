@@ -16,14 +16,14 @@ end
 # Database
 
 Given /^I signed up with "(.*)\/(.*)"$/ do |email, password|
-  user = Factory :user,
+  user = create :user,
     :email                 => email,
     :password              => password,
     :password_confirmation => password
 end 
 
 Given /^I am signed up and confirmed as "(.*)\/(.*)"$/ do |email, password|
-  user = Factory :user,
+  user = create :user,
     :name                  => email.split('@').first,
     :email                 => email,
     :password              => password,

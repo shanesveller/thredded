@@ -4,29 +4,18 @@ class TopicsController < ApplicationController
   before_filter :pad_topic,   :only => :create
 
   def index
-
-    unless site.present? and can? :read, messageboard
-      redirect_to default_home, :flash => { :error => "You are not authorized access to this messageboard." }
-      return
-    end
-
-    if params[:q].present?
-      @sticky = []
-      @topics = Topic.full_text_search(params[:q], messageboard.id) 
+    unless can? :read, messageboard
+      redirect_to default_home,
+        flash: { error: 'You are not authorized access to this messageboard.' }
     else
-      # @sticky = Topic.stuck.where(messageboard_id: messageboard.id).order('id DESC') if params[:page].nil? || params[:page] == '1'
-      # @topics = Topic.unstuck.where(messageboard_id: messageboard.id).order('updated_at DESC').page(params[:page]).per(30)
-      # @topics = messageboard.topics.unstuck.order('updated_at DESC').page(params[:page]).per(30)
-      if params[:page].nil? || params[:page] == '1'
-        @sticky = Topic.stuck.where(messageboard_id: messageboard.id).order('id DESC')
-      else
-        @sticky = []
-      end
-      @topics = Topic.unstuck.where(messageboard_id: messageboard.id).order('updated_at DESC').page(params[:page]).per(30)
-    end
+      @sticky = get_sticky_topics
+      @topics = get_topics
 
-    redirect_if_no_search_results_for @topics
-    @messageboards = site.messageboards
+      if on_search_page?
+        redirect_if_no_search_results_for @topics
+        render 'search'
+      end
+    end
   end
 
   def new
@@ -47,46 +36,66 @@ class TopicsController < ApplicationController
   def edit
     authorize! :update, topic
   end
- 
+
   def update
     topic.update_attributes(params[:topic])
     redirect_to messageboard_topic_posts_url(messageboard, topic, :host => @site.cached_domain)
   end
 
-  # ======================================
-
   private
 
-    def redirect_if_no_search_results_for(topics)
-      if params[:q].present? && topics.length == 0
-        redirect_to messageboard_topics_path(messageboard), :flash => { :error => "No topics found for this search." } 
-      end
+  def get_topics
+    if params[:q].present?
+      Topic.full_text_search(params[:q], messageboard.id) 
+    else
+      Topic.unstuck.where(messageboard_id: messageboard.id).order('updated_at DESC').page(params[:page]).per(30)
     end
+  end
 
-    def default_home
-      root_url(:host => site.cached_domain)
+  def get_sticky_topics
+    if on_first_topics_page?
+      Topic.stuck.where(messageboard_id: messageboard.id).order('id DESC')
+    else
+      []
     end
+  end
 
+  def on_first_topics_page?
+    (params[:page].nil? || params[:page] == '1') && !params[:q].present?
+  end
 
-    def klass
-      @klass ||= params[:topic][:type].present? ? params[:topic][:type].constantize : Topic
+  def on_search_page?
+    params[:q].present?
+  end
+
+  def redirect_if_no_search_results_for(topics)
+    if on_search_page? && topics.length == 0
+      redirect_to messageboard_topics_path(messageboard), :flash => { :error => "No topics found for this search." } 
     end
+  end
 
-    def pad_params
-      params[:topic][:user] = current_user
-      params[:topic][:last_user] = current_user
-    end
+  def default_home
+    root_url(:host => site.cached_domain)
+  end
 
-    def pad_topic
-      params[:topic][:user_id] << current_user.id.to_s if current_user and params[:topic][:user_id].present?
-      params[:topic][:last_user] = current_user
-      params[:topic][:messageboard] = messageboard
-    end
+  def klass
+    @klass ||= params[:topic][:type].present? ? params[:topic][:type].constantize : Topic
+  end
 
-    def pad_post
-      params[:topic][:posts_attributes]["0"][:messageboard] = messageboard
-      params[:topic][:posts_attributes]["0"][:ip] = request.remote_ip
-      params[:topic][:posts_attributes]["0"][:user] = current_user
-    end
+  def pad_params
+    params[:topic][:user] = current_user
+    params[:topic][:last_user] = current_user
+  end
 
+  def pad_topic
+    params[:topic][:user_id] << current_user.id.to_s if current_user and params[:topic][:user_id].present?
+    params[:topic][:last_user] = current_user
+    params[:topic][:messageboard] = messageboard
+  end
+
+  def pad_post
+    params[:topic][:posts_attributes]["0"][:messageboard] = messageboard
+    params[:topic][:posts_attributes]["0"][:ip] = request.remote_ip
+    params[:topic][:posts_attributes]["0"][:user] = current_user
+  end
 end
