@@ -37,20 +37,23 @@ class Topic < ActiveRecord::Base
   # Full Text Search
   def self.full_text_search(query, messageboard_id)
     sql = <<-SQL
-    SELECT t.*
-      FROM topics t, posts p
-     WHERE t.messageboard_id = ?
-       AND p.topic_id        = t.id
-       AND to_tsvector('english', p.content) @@ to_tsquery('english', ?)
-     UNION
-    SELECT t.*
-      FROM topics t
-     WHERE t.messageboard_id = ?
-       AND to_tsvector('english', t.title) @@ to_tsquery('english', ?)
+    SELECT x.*
+      FROM (
+        SELECT t.*
+          FROM topics t, posts p
+           WHERE p.topic_id        = t.id
+           AND to_tsvector('english', p.content) @@ to_tsquery('english', ?)
+         UNION 
+        SELECT t.*
+          FROM topics t
+           WHERE to_tsvector('english', t.title) @@ to_tsquery('english', ?)
+           ) as x
+  WHERE x.messageboard_id = ?
+ LIMIT 50 OFFSET ?
     SQL
 
-    search_words = query.sub(' ', '|')
-    self.find_by_sql [sql, messageboard_id, search_words, messageboard_id, search_words]
+    search_words = query.sub(' ', ' & ')
+    self.find_by_sql [sql, search_words, search_words, messageboard_id, 0]
   end
 
   # TODO: Remove permission column from Topics table
