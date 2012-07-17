@@ -52,7 +52,7 @@ class Topic < ActiveRecord::Base
  LIMIT 50 OFFSET ?
     SQL
 
-    search_words = query.sub(' ', ' & ')
+    search_words = query.gsub(' ', ' & ')
     self.find_by_sql [sql, search_words, search_words, messageboard_id, 0]
   end
 
