@@ -1,5 +1,4 @@
 class Topic < ActiveRecord::Base
-
   paginates_per 50 if self.respond_to?(:paginates_per)
 
   # associations
@@ -37,23 +36,29 @@ class Topic < ActiveRecord::Base
   # Full Text Search
   def self.full_text_search(query, messageboard_id)
     sql = <<-SQL
-    SELECT x.*
+    SELECT tops.*, pork.score * 100 as posts_count
       FROM (
-        SELECT t.*
-          FROM topics t, posts p
-           WHERE p.topic_id        = t.id
-           AND to_tsvector('english', p.content) @@ to_tsquery('english', ?)
-         UNION 
-        SELECT t.*
-          FROM topics t
-           WHERE to_tsvector('english', t.title) @@ to_tsquery('english', ?)
-           ) as x
-  WHERE x.messageboard_id = ?
- LIMIT 50 OFFSET ?
+        SELECT meat.id as id, sum(meat.rank) score
+          FROM (
+            SELECT t.id as id, ts_rank(setweight(to_tsvector(p.content), 'B'), pquery) as rank
+              FROM topics t, posts p, to_tsquery('english', ?) as pquery
+             WHERE t.messageboard_id = ?
+               AND t.id              = p.topic_id
+               AND to_tsvector('english', p.content) @@ pquery
+             UNION ALL
+            SELECT t.id as id, ts_rank( setweight(to_tsvector('english', t.title), 'A'), tquery ) as rank
+              FROM topics t, to_tsquery('english', ?) as tquery
+             WHERE t.messageboard_id = ?
+               AND to_tsvector('english', t.title) @@ tquery
+               ) meat
+         GROUP BY meat.id
+         ORDER BY score desc LIMIT 50 OFFSET 0
+           ) pork, topics tops
+         where pork.id = tops.id
     SQL
 
-    search_words = query.gsub(' ', ' & ')
-    self.find_by_sql [sql, search_words, search_words, messageboard_id, 0]
+    search_words = query.gsub(' ', '&' )
+    self.find_by_sql [sql, search_words, messageboard_id, search_words, messageboard_id]
   end
 
   # TODO: Remove permission column from Topics table
@@ -96,5 +101,4 @@ class Topic < ActiveRecord::Base
   def updating?
     self.id.present?
   end
-
 end
