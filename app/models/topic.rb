@@ -38,7 +38,7 @@ class Topic < ActiveRecord::Base
     sql = <<-SQL
     SELECT tops.*, pork.score * 100 as posts_count
       FROM (
-        SELECT meat.id as id, sum(meat.rank) score
+        SELECT meat.id as id, sum(meat.rank) as score
           FROM (
             SELECT t.id as id, ts_rank(setweight(to_tsvector(p.content), 'B'), pquery) as rank
               FROM topics t, posts p, to_tsquery('english', ?) as pquery
