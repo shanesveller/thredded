@@ -22,7 +22,7 @@ class Messageboard < ActiveRecord::Base
       return false
     end
     self.posting_for_anonymous? ||
-    (self.posting_for_logged_in? && user.try(:logged_in?)) ||
+    (self.posting_for_logged_in? && user.try(:valid?)) ||
     (self.posting_for_members? && user.try(:member_of?, self))
   end
 

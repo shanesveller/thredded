@@ -3,6 +3,7 @@ require 'spec_helper'
 describe User do
 
   it { should have_many(:sites) }
+  it { should eager_load(:roles) }
 
   describe ".mark_active_in!(messageboard)" do
     it "updates last_seen to now" do

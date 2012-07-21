@@ -11,10 +11,10 @@ FactoryGirl.define do
     name               { FactoryGirl.generate(:user_name) }
     current_sign_in_at 10.minutes.ago
     last_sign_in_at    10.minutes.ago
-    current_sign_in_ip "192.168.1.1"
-    last_sign_in_ip    "192.168.1.1"
-    superadmin         "f"
-    time_zone          "Eastern Time (US & Canada)"
+    current_sign_in_ip '192.168.1.1'
+    last_sign_in_ip    '192.168.1.1'
+    superadmin         'f'
+    time_zone          'Eastern Time (US & Canada)'
     password
 
     factory :email_confirmed_user do

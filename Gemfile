@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'bb-ruby', '0.9.5'
-gem 'cancan', '1.6.4'
+gem 'cancan', '1.6.8'
 gem 'carrierwave', '0.6.2'
 gem 'client_side_validations'
 gem 'coderay', '~> 1.0.6'

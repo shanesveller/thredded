@@ -1,25 +1,21 @@
 class Topic < ActiveRecord::Base
   paginates_per 50 if self.respond_to?(:paginates_per)
 
-  # associations
-  has_many   :posts, :include => :attachments
+  has_many   :posts, include: :attachments
   has_many   :topic_post_searches
-  belongs_to :last_user, :class_name => "User", :foreign_key => "last_user_id"
-  belongs_to :user, :counter_cache => true
-  belongs_to :messageboard, :counter_cache => true, :touch => true
+  belongs_to :last_user, class_name: 'User', foreign_key: 'last_user_id'
+  belongs_to :user, counter_cache: true
+  belongs_to :messageboard, counter_cache: true, touch: true
   belongs_to :category
 
-  # delegations
-  delegate :name, :name=, :email, :email=, :to => :user, :prefix => true
+  delegate :name, :name=, :email, :email=, to: :user, prefix: true
 
-  # validations
   validates_presence_of [:last_user_id, :messageboard_id]
   validates_numericality_of :posts_count
 
-  # lock it down
-  attr_accessible :type, :title, :user, :last_user, :sticky, :locked, :usernames, :posts_attributes, :messageboard
+  attr_accessible :last_user, :locked, :messageboard, :posts_attributes,
+    :sticky, :type, :title, :user, :usernames
 
-  # scopes
   default_scope order('updated_at DESC')
 
   def self.stuck
@@ -30,10 +26,8 @@ class Topic < ActiveRecord::Base
     where('sticky = false OR sticky IS NULL')
   end
 
-  # misc
   accepts_nested_attributes_for :posts, :reject_if => :updating?
 
-  # Full Text Search
   def self.full_text_search(query, messageboard_id)
     sql = <<-SQL
     SELECT tops.*, pork.score * 100 as posts_count
@@ -61,28 +55,27 @@ class Topic < ActiveRecord::Base
     self.find_by_sql [sql, search_words, messageboard_id, search_words, messageboard_id]
   end
 
-  # TODO: Remove permission column from Topics table
-  def public? 
-    self.class.to_s == "Topic"
+  def public?
+    true
   end
 
   def private?
-    self.class.to_s == "PrivateTopic"
+    false
   end
 
   def css_class
     classes = []
     classes << "locked" if locked
     classes << "sticky" if sticky
-    if classes.empty?
-      ""
-    else
-      "class=\"#{classes.join(' ')}\"".html_safe
-    end
+    classes.empty? ?  "" : "class=\"#{classes.join(' ')}\"".html_safe
+  end
+
+  def users
+    []
   end
 
   def users_to_sentence
-    @users_to_sentence ||= self.users.collect{ |u| u.name.capitalize }.to_sentence if self.class == "PrivateTopic" && self.users
+    ''
   end
 
   def self.inherited(child)
