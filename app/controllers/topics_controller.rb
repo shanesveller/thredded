@@ -4,21 +4,21 @@ class TopicsController < ApplicationController
   before_filter :pad_topic,   :only => :create
 
   def index
-    unless can? :read, messageboard
+    if cannot? :read, messageboard
       redirect_to default_home,
         flash: { error: 'You are not authorized access to this messageboard.' }
-    else
-      @sticky = get_sticky_topics
-      @topics = get_topics
+    end
+    @sticky = get_sticky_topics
+    @topics = get_topics
+    @tracked_user_reads = UserTopicRead.statuses_for(current_user, @topics)
+  end
 
-      if on_search_page?
-        if @topics.length == 0
-          redirect_to messageboard_topics_path(messageboard), 
-            flash: { error: "No topics found for this search." }
-        else
-          render 'search'
-        end
-      end
+  def search
+    @topics = get_search_results
+    @tracked_user_reads = UserTopicRead.statuses_for(current_user, @topics)
+    if @topics.length == 0
+      redirect_to messageboard_topics_path(messageboard),
+        flash: { error: "No topics found for this search." }
     end
   end
 
@@ -56,12 +56,12 @@ class TopicsController < ApplicationController
     end
   end
 
+  def get_search_results
+    Topic.full_text_search(params[:q], messageboard.id)
+  end
+
   def get_topics
-    if params[:q].present?
-      Topic.full_text_search(params[:q], messageboard.id) 
-    else
-      Topic.unstuck.where(messageboard_id: messageboard.id).order('updated_at DESC').page(params[:page]).per(30)
-    end
+    Topic.unstuck.where(messageboard_id: messageboard.id).order('updated_at DESC').page(params[:page]).per(30)
   end
 
   def get_sticky_topics
@@ -73,15 +73,7 @@ class TopicsController < ApplicationController
   end
 
   def on_first_topics_page?
-    (params[:page].nil? || params[:page] == '1') && !params[:q].present?
-  end
-
-  def on_search_page?
-    params[:q].present?
-  end
-
-  def no_search_results
-
+    params[:page].nil? || params[:page] == '1'
   end
 
   def default_home

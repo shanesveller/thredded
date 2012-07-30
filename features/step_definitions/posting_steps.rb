@@ -31,9 +31,9 @@ end
 
 Given /^a thread already exists on "([^"]*)"$/ do |board|
   u = User.last
-  m = Messageboard.where(:name => board).first
-  t = m.topics.create(:last_user => u, :title => "thready thread", :user => u, :post_count => 1)
-  t.posts.create(:content => "FIRST!", :user => u)
+  m = Messageboard.where(name: board).first
+  t = m.topics.create(last_user: u, title: "thready thread", user: u, post_count: 1)
+  t.posts.create(content: "FIRST!", user: u, messageboard: m)
 end
 
 When /^I submit some drivel like "([^"]*)"$/ do |content|

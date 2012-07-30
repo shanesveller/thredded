@@ -3,9 +3,10 @@ require 'debugger'
 
 
 Given /^a new thread by "([^"]*)" named "([^"]*)" exists on "([^"]*)"$/ do |username, title, messageboard|
-  @user = User.where(:name => username).first || create(:user, :name => username+"s", :email => "#{username}s@email.com")
+  @user = User.where(:name => username).first || create(:user, :name => username+"s", :email => "#{username}s@example.com")
   @messageboard = Messageboard.where(:name => messageboard).first
-  @topic = create :topic, :title => title, :messageboard => @messageboard, :user => @user, :last_user => @user
+  @topic = create :topic, title: title, messageboard: @messageboard, user: @user, last_user: @user
+  @post = create :post, user: @user, topic: @topic
 end
 
 Given /^the latest thread on "([^"]*)" has several posts$/ do |messageboard|

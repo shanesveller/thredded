@@ -70,15 +70,20 @@
         -moz-box-sizing: border-box;
         -webkit-box-sizing: border-box;
         box-sizing: border-box;
-        background: url("/assets/thread_sprite.gif") no-repeat scroll 7px -87px transparent;
+        background: url("/images/thread_sprite.gif") no-repeat scroll 7px -87px transparent;
         display: inline-block;
         font-weight: normal;
         font-size: 14px;
         overflow: hidden;
         padding-left: 30px;
+        text-decoration: none;
         text-overflow: ellipsis;
         width: 100%;
         white-space: nowrap;
+
+        &.read {
+          color: #b0b0b0;
+        }
       }
     }
     &.sticky        h1  a { background-position: 7px -25px; }
