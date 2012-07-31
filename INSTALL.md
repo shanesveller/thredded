@@ -7,7 +7,7 @@ I highly suggest using [RVM](https://rvm.beginrescueend.com/) or [RBENV](https:/
 * Install Ruby 1.9.3 -- `rvm install 1.9.3`
 * Install imagemagick, preferably with homebrew -- `brew install imagemagick`
 * create a thredded gemset -- `rvm gemset create thredded`
-* use your new thredded-specific ruby env -- `rvm use 1.9.2@thredded`
+* use your new thredded-specific ruby env -- `rvm use 1.9.3@thredded`
 
 NOTE: You **could** use Ruby 1.9.3 as it's a bit faster but currently has [some issues with ruby-debug19](http://blog.wyeworks.com/2011/11/1/ruby-1-9-3-and-ruby-debug). If you don't plan on using that, then by all means go with 1.9.3 while taking into consideration that it is a relatively new release.
 
