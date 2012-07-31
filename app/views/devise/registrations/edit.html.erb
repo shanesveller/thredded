@@ -24,6 +24,10 @@
   <p><%= f.label :current_password %> <em>(we need your current password to confirm your changes)</em>
   <%= f.password_field :current_password %></p>
 
+  <p><%= f.label :post_filter %> 
+  <%= f.select :post_filter, Post::Filters, {}, :tabindex => 4 %></p>
+
+
   <p><%= f.submit "Update" %></p>
 <% end %>
 

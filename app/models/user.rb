@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   after_save :update_posts
 
   attr_accessible :email, :name, :password, :password_confirmation,
-    :remember_me, :roles_attributes, :time_zone
+    :remember_me, :roles_attributes, :time_zone, :post_filter
 
   default_scope include: :roles
 

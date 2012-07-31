@@ -1,10 +1,19 @@
 class PostsController < ApplicationController
-  include TopicsHelper 
+  include TopicsHelper
   load_and_authorize_resource :only => [:index, :show]
 
   before_filter :pad_post, :only => :create
   helper_method :messageboard, :topic
   layout 'application'
+
+  def index
+    authorize! :show, topic
+    @post = Post.new
+    if current_user && current_user.post_filter
+      @post.filter = current_user.post_filter
+    end
+    currently_read.update_status(topic.posts.last, topic.posts_count)
+  end
 
   def create
     p = topic.posts.create(params[:post])
@@ -13,12 +22,6 @@ class PostsController < ApplicationController
 
   def edit
     authorize! :update, post
-  end
-
-  def index
-    authorize! :show, topic
-    @post = Post.new
-    currently_read.update_status(topic.posts.last, topic.posts_count)
   end
 
   def post

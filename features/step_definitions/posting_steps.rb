@@ -20,6 +20,15 @@ Given /^a messageboard named "([^"]*)" that I, "([^"]*)", am an? "([^"]*)" of$/ 
   u.send "#{role}_of".to_sym, m
 end
 
+Given /^My post filter preference is "([^"]*)"$/ do |filter|
+  @current_user.post_filter = filter
+  @current_user.save!
+end
+
+Then /^The filter at the reply form should default to "([^"]*)"$/ do |filter|
+  field_labeled("post_filter").value.should == filter
+end
+
 When /^I enter a title "([^"]*)" with content "([^"]*)"$/ do |title, content|
   fill_in "Title", :with => title
   fill_in "Content", :with => content
