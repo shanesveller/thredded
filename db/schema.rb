@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120428233517) do
+ActiveRecord::Schema.define(:version => 20120728012307) do
 
   create_table "attachments", :force => true do |t|
     t.string   "attachment"
@@ -136,6 +136,22 @@ ActiveRecord::Schema.define(:version => 20120428233517) do
 
   add_index "topics", ["category_id"], :name => "index_topics_on_category_id"
   add_index "topics", ["messageboard_id"], :name => "index_topics_on_messageboard_id"
+
+  create_table "user_topic_reads", :force => true do |t|
+    t.integer  "user_id",                    :null => false
+    t.integer  "topic_id",                   :null => false
+    t.integer  "post_id",                    :null => false
+    t.integer  "posts_count", :default => 0, :null => false
+    t.integer  "page",        :default => 1, :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+  end
+
+  add_index "user_topic_reads", ["page"], :name => "index_user_topic_reads_on_page"
+  add_index "user_topic_reads", ["post_id"], :name => "index_user_topic_reads_on_post_id"
+  add_index "user_topic_reads", ["posts_count"], :name => "index_user_topic_reads_on_posts_count"
+  add_index "user_topic_reads", ["topic_id"], :name => "index_user_topic_reads_on_topic_id"
+  add_index "user_topic_reads", ["user_id"], :name => "index_user_topic_reads_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                               :default => "",                           :null => false
