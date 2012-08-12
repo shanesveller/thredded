@@ -55,6 +55,7 @@ module Thredded
 
     # Asset Pipeline
     config.assets.enabled = true
+    config.assets.initialize_on_precompile = false
 
     # JavaScript files you want as :defaults (application.js is always included).
     config.action_view.javascript_expansions[:defaults] = %w(rails)

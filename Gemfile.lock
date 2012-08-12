@@ -49,14 +49,16 @@ GEM
       activesupport (>= 3.2.0)
     childprocess (0.3.1)
       ffi (~> 1.0.6)
-    chunky_png (1.2.5)
+    chunky_png (1.2.6)
     client_side_validations (3.1.4)
     coderay (1.0.6)
     columnize (0.3.6)
-    compass (0.11.7)
+    compass (0.12.2)
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
       sass (~> 3.1)
+    compass-rails (1.0.3)
+      compass (>= 0.12.2, < 0.14)
     cucumber (1.1.4)
       builder (>= 2.1.2)
       diff-lcs (>= 1.1.2)
@@ -109,7 +111,7 @@ GEM
       term-ansicolor (~> 1.0.7)
       thor (>= 0.13.6)
     formatador (0.2.3)
-    fssm (0.2.8.1)
+    fssm (0.2.9)
     fuubar (1.0.0)
       rspec (~> 2.0)
       rspec-instafail (~> 0.2.0)
@@ -267,7 +269,7 @@ DEPENDENCIES
   carrierwave (= 0.6.2)
   client_side_validations
   coderay (~> 1.0.6)
-  compass
+  compass-rails
   cucumber-rails (= 1.2.1)
   database_cleaner
   debugger
