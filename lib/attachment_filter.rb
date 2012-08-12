@@ -42,9 +42,8 @@ module AttachmentFilter
       str_buff += '/>'
       # replace in post content
       content = content.sub(full, str_buff)
-    end 
+    end
 
     content.html_safe
   end
-
 end

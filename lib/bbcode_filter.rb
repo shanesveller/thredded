@@ -10,7 +10,13 @@ BB = {
     '<pre><code lang="\1">\2</code></pre>',
     'Code Text',
     '[code]function(){ return true; }[/code]',
-    :code]
+    :code],
+  'Spoilers' => [
+    /\[spoiler\](.*?)\[\/spoiler\1?\]/mi,
+    '<blockquote class="spoiler">\1</blockquote>',
+    'Spoiler Text',
+    '[spoiler]Dumbledore dies[/spoiler]',
+    :spoiler]
 }
 module BbcodeFilter
   require "bb-ruby"

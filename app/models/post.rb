@@ -7,6 +7,7 @@ class Post  < ActiveRecord::Base
   include MarkdownFilter
   include SyntaxFilter
   include AttachmentFilter
+  include EmojiFilter
 
   gravtastic :user_email
   default_scope :order => 'id ASC'

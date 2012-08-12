@@ -157,5 +157,22 @@
     > *:last-child {
       margin-bottom: 0px;
     }
+
+    &.spoiler {
+      color: #efefef;
+
+      &:before {
+        display: block;
+        color: #989898;
+        content: '** spoiler! **';
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 5px;
+      }
+
+      &::selection, &::-moz-selection {
+        color: black;
+      }
+    }
   }
 }
