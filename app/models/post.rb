@@ -29,6 +29,10 @@ class Post  < ActiveRecord::Base
     created_at.strftime("%b %d, %Y %I:%M:%S %Z") if created_at
   end
 
+  def gravatar_url
+    super.gsub /http:/, ''
+  end
+
   private
 
   def modify_parent_topic
