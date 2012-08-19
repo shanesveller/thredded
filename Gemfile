@@ -56,4 +56,6 @@ group :development do
   gem 'foreman'
   gem 'git_remote_branch'
   gem 'heroku'
+  gem 'foreigner'
+  gem 'immigrant'
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120731031133) do
+ActiveRecord::Schema.define(:version => 20120819034324) do
 
   create_table "attachments", :force => true do |t|
     t.string   "attachment"
@@ -31,6 +31,8 @@ ActiveRecord::Schema.define(:version => 20120731031133) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "categories", ["messageboard_id"], :name => "index_categories_on_messageboard_id"
 
   create_table "images", :force => true do |t|
     t.integer  "width"
@@ -79,6 +81,8 @@ ActiveRecord::Schema.define(:version => 20120731031133) do
     t.datetime "updated_at"
   end
 
+  add_index "private_users", ["user_id", "private_topic_id"], :name => "index_private_users_on_user_id_and_private_topic_id"
+
   create_table "roles", :force => true do |t|
     t.string   "level"
     t.integer  "user_id"
@@ -88,8 +92,7 @@ ActiveRecord::Schema.define(:version => 20120731031133) do
     t.datetime "last_seen"
   end
 
-  add_index "roles", ["last_seen"], :name => "index_roles_on_last_seen"
-  add_index "roles", ["messageboard_id"], :name => "index_roles_on_messageboard_id"
+  add_index "roles", ["messageboard_id", "last_seen"], :name => "index_roles_on_messageboard_id_and_last_seen"
   add_index "roles", ["user_id"], :name => "index_roles_on_user_id"
 
   create_table "sessions", :force => true do |t|
@@ -135,7 +138,7 @@ ActiveRecord::Schema.define(:version => 20120731031133) do
   end
 
   add_index "topics", ["category_id"], :name => "index_topics_on_category_id"
-  add_index "topics", ["messageboard_id"], :name => "index_topics_on_messageboard_id"
+  add_index "topics", ["messageboard_id", "updated_at"], :name => "index_topics_on_messageboard_id_and_updated_at"
 
   create_table "user_topic_reads", :force => true do |t|
     t.integer  "user_id",                    :null => false
