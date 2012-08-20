@@ -1,6 +1,7 @@
 class Category < ActiveRecord::Base
-  validates_presence_of :name, :description
+  validates :name, presence: true
 
   belongs_to :messageboard
-  has_many :topics
+  has_many :topic_categories
+  has_many :topics, through: :topic_categories
 end

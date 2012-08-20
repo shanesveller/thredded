@@ -6,7 +6,7 @@ jQuery(document).ready(function() {
   jQuery("abbr.timeago").timeago();
 
   // chosen
-  jQuery("#topics_new #topic_user_id").chosen();
+  jQuery("#topics_new #topic_user_id, #topic_category_ids").chosen();
 
   // drawer under the topic field
   jQuery('.handle a').bind('click', function(){
@@ -78,6 +78,9 @@ jQuery(document).ready(function() {
   ]
   jQuery('section.topics').chaves({ bindings: topic_bindings });
   jQuery('section.posts').chaves({ bindings: post_bindings });
+
+  // charbroil setup
+  // jQuery('.category_list').charbroil({modifier: ['command', 'alt']});
 });
 
 function pad(number, length) {

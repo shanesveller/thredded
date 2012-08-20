@@ -124,6 +124,14 @@ ActiveRecord::Schema.define(:version => 20120901143141) do
 
   add_index "sites", ["cached_domain"], :name => "index_sites_on_cached_domain"
 
+  create_table "topic_categories", :force => true do |t|
+    t.integer "topic_id",    :null => false
+    t.integer "category_id", :null => false
+  end
+
+  add_index "topic_categories", ["category_id"], :name => "index_topic_categories_on_category_id"
+  add_index "topic_categories", ["topic_id"], :name => "index_topic_categories_on_topic_id"
+
   create_table "topics", :force => true do |t|
     t.integer  "user_id"
     t.integer  "last_user_id"
@@ -135,7 +143,6 @@ ActiveRecord::Schema.define(:version => 20120901143141) do
     t.integer  "posts_count",     :default => 0
     t.string   "attribs",         :default => "[]"
     t.boolean  "sticky",          :default => false
-    t.integer  "category_id"
     t.boolean  "locked"
   end
 

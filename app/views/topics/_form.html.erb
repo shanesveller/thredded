@@ -1,14 +1,21 @@
 <p class="title">
   <%= f.label :title %>
-  <%= f.text_field :title, { :placeholder => 'Title', :tabindex => 1 } %>
+  <%= f.text_field :title, { placeholder: 'Title', tabindex: 1 } %>
 </p>
 
 <% if params[:type] == "private" -%>
   <%= f.hidden_field :type %>
   <p class="private_users">
-    <%= f.select(:user_id, messageboard.users.collect{|u| [u.name, u.id]}, {}, { :multiple => true, 'data-placeholder' => 'select users to participate in this topic' }) %>
+    <%= f.select(:user_id, messageboard.users.collect{|u| [u.name, u.id]}, {},
+      { multiple: true, 'data-placeholder' => 'select users to participate in this topic',
+      tabindex: 2 }) %>
   </p>
 <% end -%>
+
+<p class="category">
+  <% category_options = messageboard.categories.collect { |cat| [cat.name, cat.id] } %>
+  <%= f.select :category_ids, category_options, {}, { :multiple => true, 'data-placeholder' => 'categorize this?', :tabindex => 4} %>
+</p>
 
 <% if current_user && current_user.admins?(messageboard) -%>
   <div id="drawer">
@@ -25,3 +32,9 @@
     <div class="handle"><a href="#attributes">More</a></div>
   </div>
 <% end -%>
+
+<% unless action_name == 'edit' %>
+  <%= f.fields_for :posts do |post_form| %>
+    <%= render partial: 'posts/form', locals: { f: post_form } %>
+  <% end %>
+<% end %>

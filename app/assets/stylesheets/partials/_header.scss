@@ -4,7 +4,7 @@
   padding-top: 23px;
   width: 25%;
 
-  .new_topic, .new_private_topic, .reply_to_topic, .edit_topic {
+  .new_topic, .new_private_topic, .reply_to_topic, .edit_topic,  {
     margin-bottom: 10px;
 
     a {
@@ -17,7 +17,7 @@
     }
   }
 
-  .online {
+  .online, .category_list {
     margin-top: 20px;
 
     ul {

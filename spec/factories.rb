@@ -28,6 +28,11 @@ FactoryGirl.define do
   factory :category do
     name 'Funny'
     description 'Pictures of cats'
+
+    trait :beer do
+      name 'Beer'
+      description 'Nectar of the Gods!'
+    end
   end
 
   factory :messageboard do
@@ -80,7 +85,6 @@ FactoryGirl.define do
       level 'member'
     end
   end
-
 
   factory :site do
     user

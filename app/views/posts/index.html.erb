@@ -24,8 +24,9 @@
     </ul>
   </nav>
   <% cache ["posts", "header", topic] do %>
-    <h1><%= topic.title %></h1> 
+    <h1><%= topic.title %></h1>
     <h2><%= topic.posts_count %> posts</h2>
+    <h3><%= topic.categories_to_sentence %></h3>
     <% if topic.users_to_sentence.present? %>
       <cite><%= topic.users_to_sentence %></cite>
     <% end %>

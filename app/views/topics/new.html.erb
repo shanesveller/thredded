@@ -1,16 +1,11 @@
 <% content_for :page_id do %>topics_new<% end %>
-<% content_for :page_title do %><%= site.title %> | <%= messageboard.title %> | Start a New Topic<% end %>
+<% content_for :page_title do %><%= site.title %> | <%= messageboard.title %> | start a new topic<% end %>
 
-<%= nested_form_for([messageboard, @topic], 
-             :url => create_messageboard_topic_url(messageboard, @topic, :host => site.cached_domain),
-             :html => { :multipart => true, :class => :topic_form }) do |f| %>
+<%= nested_form_for([messageboard, @topic],
+  url: create_messageboard_topic_url(messageboard, @topic, host: site.cached_domain),
+  html: { multipart: true, class: :topic_form }) do |f| %>
 
-  <%= render :partial => 'form', :locals => { :f => f } %>
+  <%= render partial: 'form', locals: { f: f } %>
 
-  <%= f.fields_for :posts do |post_form| %>
-    <%= render :partial => 'posts/form', :locals => { :f => post_form } %>
-  <% end %>
-
-  <p class="submit"> <%= f.submit "Create New Topic", {tabindex: 3} %> </p>
-
+  <p class="submit"><%= f.submit "Create New Topic", { tabindex: 3 } %></p>
 <% end %>
