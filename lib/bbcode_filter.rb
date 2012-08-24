@@ -46,6 +46,6 @@ module BbcodeFilter
   end
 
   def filtered_content
-    self.filter.to_sym == :bbcode ? super.bbcode_to_html(BB, true, :disable, ).html_safe : super
+    self.filter.to_sym == :bbcode ? super.bbcode_to_html(BB).html_safe : super
   end
 end
