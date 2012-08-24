@@ -23,6 +23,9 @@ jQuery(document).ready(function() {
     return false;
   });
 
+  // fit videos
+  jQuery('article .content').fitVids();
+
   // check if we're on new topic / post page
   var form_new_topic = jQuery('form#new_topic,form#new_post');
   if (form_new_topic.length > 0) {
