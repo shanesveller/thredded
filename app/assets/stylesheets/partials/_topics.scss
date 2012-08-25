@@ -1,6 +1,6 @@
 .td {
   font-size: 11px;
-  display: block; 
+  display: block;
   float: left;
 }
 
@@ -10,30 +10,30 @@
   float: left;
   overflow: auto;
 }
-.cell_posts   { 
+.cell_posts {
   width: 6%;
   text-align: center;
   display: block;
   overflow: auto;
 }
-.cell_started { 
+.cell_started {
   width: 22%;
   padding-left: 1%;
   display: block;
   overflow: auto;
 }
-.cell_updated { 
-  width: 22%; 
+.cell_updated {
+  width: 22%;
   display: block;
   overflow: auto;
 }
 
 #topics_listing {
 
-  .title, 
-  .started, 
-  .updated, 
-  .posts { 
+  .title,
+  .started,
+  .updated,
+  .posts {
     @extend .table_header;
     overflow: hidden;
   }
@@ -51,7 +51,10 @@
     height: 30px;
 
     &:nth-child(2n+1) { background-color: #F9F9F9; }
-    &.private { background-color: #fcfcd7; border-bottom: solid 2px #aaab72; }
+    &.private {
+      background-color: #fcfcd7;
+      border-left: solid 2px #aaab72;
+    }
 
     .started_by,
     .updated_by,
