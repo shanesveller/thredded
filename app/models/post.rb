@@ -17,16 +17,17 @@ class Post  < ActiveRecord::Base
   has_many   :attachments
   accepts_nested_attributes_for :attachments
   validates_presence_of :content, :messageboard_id
-  attr_accessible :content, :user, :ip, :filter, :topic, :messageboard, :attachments_attributes
+  attr_accessible :attachments_attributes, :content, :filter, :ip,
+    :messageboard, :topic, :user
   before_save :set_user_email
   after_create  :modify_parent_topic
 
-  def created_timestamp
-    created_at.strftime("%Y-%m-%dT%H:%M:%S") if created_at
-  end
-
   def created_date 
     created_at.strftime("%b %d, %Y %I:%M:%S %Z") if created_at
+  end
+
+  def created_timestamp
+    created_at.strftime("%Y-%m-%dT%H:%M:%S") if created_at
   end
 
   def gravatar_url

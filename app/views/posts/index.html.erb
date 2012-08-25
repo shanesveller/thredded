@@ -16,7 +16,7 @@
     </nav>
 <% end %>
 
-<header>
+<header <%= topic.css_class %>>
   <nav class="breadcrumbs">
     <ul>
       <li><a href="/">Forums</a> &rarr; </li>
@@ -26,7 +26,7 @@
   <% cache ["posts", "header", topic] do %>
     <h1><%= topic.title %></h1> 
     <h2><%= topic.posts_count %> posts</h2>
-    <% if topic.users_to_sentence %>
+    <% if topic.users_to_sentence.present? %>
       <cite><%= topic.users_to_sentence %></cite>
     <% end %>
   <% end %>
