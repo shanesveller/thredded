@@ -1,0 +1,15 @@
+/* TEAM */
+Developers: Joel Oliveira & Shaun Butler
+Site: http://thredded.com
+Twitter: @thredded, @jayroh, @shaunbutler
+Location: Brookline, MA. USA.
+
+/* THANKS */
+Everyone: ... at the original MI, former members of JA, the Ruby, Rails and jQuery teams.
+
+/* SITE */
+Last update: Recently.
+Standards: HTML5, CSS3.
+Components: Ruby, Rails, Modernizr, jQuery.
+Software: vim, mac osx, linux, tmux.
+Served: on Heroku.
