@@ -1,133 +1,134 @@
-.td {
-  font-size: 11px;
-  display: block;
-  float: left;
-}
+$topic-padding: 10px;
 
-.cell_title {
-  width: 49%;
-  display: block;
-  float: left;
-  overflow: auto;
-}
-.cell_posts {
-  width: 6%;
-  text-align: center;
-  display: block;
-  overflow: auto;
-}
-.cell_started {
-  width: 22%;
-  padding-left: 1%;
-  display: block;
-  overflow: auto;
-}
-.cell_updated {
-  width: 22%;
-  display: block;
-  overflow: auto;
+section.topics > div {
+  margin: 10px 20px;
+  border-top: solid 3px #AAA;
+
+  @include respond-to(lts) { margin: 0 5px 10px; }
+
+  &.stuck article {
+    @include font-icon-base(iconic, 6em);
+    @extend %iconic-pin;
+    &::before {
+      color: white;
+      position: absolute;
+      right: -85px;
+      top: -4px;
+      z-index: 0;
+    }
+  }
 }
 
 #topics_listing {
-
-  .title,
-  .started,
-  .updated,
-  .posts {
-    @extend .table_header;
-    overflow: hidden;
-  }
-
-  .title        { @extend .cell_title;   }
-  .title:before { content:""; display:inline-block; width: 30px; }
-  .posts        { @extend .cell_posts;   }
-  .started      { @extend .cell_started; }
-  .updated      { @extend .cell_updated; }
-
   article {
     clear: both;
-    position: relative;
+    height: 50px;
     overflow: hidden;
-    height: 30px;
+    padding: $topic-padding 0 $topic-padding 70px;
+    position: relative;
 
     &:nth-child(2n+1) { background-color: #F9F9F9; }
+
     &.private {
       background-color: #fcfcd7;
-      border-left: solid 2px #aaab72;
     }
 
-    .started_by,
-    .updated_by,
-    .post_count,
-    h1 a { 
-      padding-top: 5px;
-      padding-bottom: 5px;
-      @extend .td;
+    a, abbr {
+      position: relative;
     }
 
-    h1 { 
-      @extend .cell_title;
+    .post_count {
+      background: #eee;
+      color: #3f3f3f;
+      display: block;
+      font-size: 15px;
+      font-weight: bold;
+      height: 50px;
+      left: $topic-padding;
+      line-height: 50px;
       overflow: hidden;
+      position: absolute;
+      text-align: center;
+      top: $topic-padding;
+      width: 50px;
+      @include border-radius(5px);
+    }
 
-      a {
-        -moz-box-sizing: border-box;
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
-        background: url("/images/thread_sprite.gif") no-repeat scroll 7px -87px transparent;
-        display: inline-block;
-        font-weight: normal;
-        font-size: 14px;
-        overflow: hidden;
-        padding-left: 30px;
-        text-decoration: none;
-        text-overflow: ellipsis;
-        width: 100%;
-        white-space: nowrap;
 
-        &.read {
-          color: #b0b0b0;
-        }
+    h1 a {
+      display: block;
+      font-weight: normal;
+      font-size: 15px;
+      line-height: 27px;
+      overflow: hidden;
+      text-decoration: none;
+      text-overflow: ellipsis;
+      width: 100%;
+      white-space: nowrap;
+
+      &.read {
+        color: #b0b0b0;
       }
     }
-    &.sticky        h1  a { background-position: 7px -25px; }
-    &.locked        h1  a { background-position: 7px -56px; }
-    &.sticky.locked h1  a { background-position: 7px 5px; padding-left: 49px; }
 
     cite,
     time,
     abbr { border: none; }
 
-    .started_by {
-      @extend .cell_started;
-    }
-    .updated_by { 
-      @extend .cell_updated;
-    }
-    .started_by a,
-    .updated_by a {
+    .started_by,
+    .updated_by {
+      font-size: 12px;
       font-style: normal;
-      font-weight: bold;
-      color: #999;
-      text-decoration: none;
+
+      abbr:after,
+      abbr:after { content: ' by'; }
     }
 
-    .timeago:after {
-      content: " by";
+    .started_by {
+      &:before {
+        content: 'started ';
+      }
+
+      .started_by a {
+        text-decoration: none;
+      }
+
+      @include respond-to(lts) {
+        display: none;
+      }
     }
 
-    .post_count {
-      @extend .cell_posts;
-      background: #eee;
-      height: 19px;
-      overflow: hidden;
+    .updated_by{
+      &:before {
+        content: 'updated ';
+
+        @include respond-to(lts) {
+          display: none;
+        }
+      }
+
+      &:after {
+        content: '\b7';
+        width: 30px;
+        display: inline-block;
+        text-align: center;
+
+        @include respond-to(lts) {
+          display: none;
+        }
+      }
+      .updated_by a {
+        text-decoration: none;
+      }
     }
   }
 
-  footer a {
-    @extend .submit_button;
-    text-decoration: none;
-    display: inline-block;
-    margin: 12px 29px;
+  footer {
+    padding: 5px 20px 20px;
+  }
+
+  footer ul a {
+    @extend %new_topic;
   }
 }
 
@@ -135,6 +136,7 @@
   .handle {
     display: none;
   }
+
   #drawer #attributes {
     background: #EEE;
     border-right: solid 3px #999;
@@ -144,10 +146,12 @@
     width: 98%;
     margin-top: 7px;
   }
+
   #drawer #attributes label {
     color: black;
     @include text-shadow(none);
   }
+
   form input[type="submit"] {
     @extend .submit_button;
     margin-top: 10px;

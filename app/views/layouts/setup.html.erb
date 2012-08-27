@@ -4,10 +4,11 @@
   <title><%= yield :page_title %></title>
   <%= stylesheet_link_tag "application" %>
   <script src="/javascripts/modernizr.js"></script>
+  <link rel="author" href="humans.txt" />
+  <meta name="viewport" content="width=device-width" />
   <%= csrf_meta_tag %>
 </head>
-<!-- default layout -->
-<body id="settings">
+<body id="settings" class="layout-setup">
 
   <section id="contentwrap">
     <%= render :partial => "shared/error_msgs" %>

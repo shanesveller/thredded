@@ -1,0 +1,227 @@
+%action_item {
+  color: black;
+  font-size: 13px;
+  padding: 8px 8px 11px;
+  text-decoration: none;
+  text-transform: lowercase;
+  @include font-icon-base(entypo, 1.1em, .6em);
+
+  &:hover {
+    background-color: #fbfbfb;
+  }
+}
+
+%new_topic {
+  @extend %action_item;
+  @extend %entypo-comment;
+}
+%new_private {
+  @extend %action_item;
+  @extend %entypo-chat;
+}
+
+%search_label {
+  @extend %action_item;
+  @extend %entypo-search;
+}
+
+.breadcrumbs {
+  background: #f9f9f9;
+  color: #999;
+  font-size: 11px;
+  overflow: hidden;
+  white-space: nowrap;
+
+  ul li {
+    float: left;
+    margin-right: 10px;
+  }
+
+  span a {
+    padding: 0 !important;
+  }
+
+  @include respond-to(lts) {
+    @include background-image(linear-gradient(lighten(#AAA, 20%), #AAA));
+    border-bottom: solid 3px lighten(black, 30%);
+
+    a {
+      color: black;
+      font-weight: bold;
+    }
+
+    li { display: none !important; }
+    li:nth-last-of-type(-n+2) {
+      display: inline-block !important;
+
+    }
+    li:last-child {
+      width: 60%;
+      padding-left: 8px;
+
+      span {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+        overflow: hidden;
+        width: 100%;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+  }
+}
+
+#content > header {
+  nav {
+    overflow: hidden;
+
+    .breadcrumbs {
+      li {
+        display: inline-block;
+        @include after-bullet;
+
+        &:last-child:after { display: none; }
+      }
+
+      @include respond-to(lts) {
+        li:after { color: black; }
+        span { color: lighten(black, 30%); }
+      }
+
+      a, span {
+        display: inline-block;
+        text-decoration: none;
+
+        @include respond-to(s) {  font-size: 14px; padding: 14px; }
+        @include respond-to(xs) { font-size: 14px; padding: 14px; }
+      }
+
+      span {
+        padding: 14px;
+      }
+      a {
+        padding: 14px;
+      }
+
+      span a {
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+  }
+
+  h1 {
+    display: inline;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 0 4px 0 20px;
+    text-transform: lowercase;
+  }
+
+  h2 {
+    color: #888;
+    display: block;
+    font-size: 12px;
+    font-weight: normal;
+    padding: 15px 20px 20px;
+
+    @include respond-to(xs) {
+      display: none;
+    }
+  }
+
+  cite {
+    clear: both;
+    color: black;
+    display: block;
+    font-size: .8em;
+    letter-spacing: 1px;
+    padding: 10px 20px;
+    font-style: normal;
+    text-transform: lowercase;
+
+    &:before {
+      color: gray;
+      content: 'in this conversation: '
+    }
+
+    @include respond-to(lts) {
+      display: none;
+    }
+  }
+}
+
+.online {
+  clear: both;
+  display: block;
+  padding: 10px 20px;
+
+  @include respond-to(lts) {
+    visibility: hidden;
+  }
+
+  h3 {
+    color: #888;
+    display: inline;
+    font-size: 11px;
+    font-weight: normal;
+    letter-spacing: 1px;
+    text-transform: lowercase;
+    &:after {
+      content: ': ';
+    }
+  }
+
+  ul {
+    list-style: none;
+    display: inline;
+    padding: 0px;
+    margin: 0px;
+  }
+
+  li {
+    display: inline;
+    font-size: 11px;
+    font-weight: bold;
+  }
+}
+
+.actions {
+  padding: 20px 20px;
+
+  @include respond-to(lts) {
+    padding: 0px;
+    clear: both;
+    overflow: hidden;
+  }
+
+  li {
+    display: block;
+    float: left;
+    padding: 0;
+
+    a {
+      display: block;
+    }
+
+    @include respond-to(lts) {
+      display: block;
+      float: left;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      width: 33%;
+
+      a, label {
+        display: block;
+        padding: 8px 0 11px !important;
+      }
+    }
+
+    // for search_form see _search.scss
+  }
+
+  a { @extend %new_topic; }
+  .new_private_topic a { @extend %new_private; }
+  .search_form label { @extend %search_label; }
+}

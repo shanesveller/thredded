@@ -1,26 +1,27 @@
-.search_form {
-  overflow: hidden;
-  padding-bottom: 20px;
+.actions .search_form {
+  float: right;
+  padding: 0;
+  width: 47%;
 
-  input {
-    float: left;
+  #q {
+    margin-top: 6px;
+    width: 100%;
   }
-  input[type="text"] {
-    width: 66%;
-    display: block;
-    border: solid 1px gray;
-    padding: 2%;
-    margin: 0;
-    font-size: 11px;
-  }
-  input[type="submit"] {
-    width: 19%;
-    margin-left: 1%;
-    border: solid 1px gray;
-    background: #efefef;
-    color: gray;
-    padding: 2% 0px;
-    font-size: 11px;
-    text-transform: lowercase;
+
+  [type="submit"] { display: none; }
+
+  @include respond-to(m) { width: 40%; }
+
+  @include respond-to(lts) {
+    width: 33%;
+
+    #q { display: none; }
+    #q.toggle {
+      display: block;
+      position: absolute;
+      left: 20px;
+      width: 88%;
+      top: 80px;
+    }
   }
 }

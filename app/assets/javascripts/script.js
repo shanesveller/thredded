@@ -1,5 +1,16 @@
 jQuery(document).ready(function() {
 
+  jQuery('[data-toggle]').click(function(){
+    target = this.getAttribute('data-toggle');
+    jQuery(target).toggleClass('toggle');
+  })
+
+  jQuery('.menu_shortcut').click(function(){
+    el = jQuery(this);
+    if(el.attr('href') == '#site_wide'){ el.attr('href', '#') }
+    else { el.attr('href', '#site_wide') }
+  });
+
   // timestamps
   adjust_timestamps();
   jQuery.timeago.settings.allowFuture = true;
@@ -65,22 +76,28 @@ jQuery(document).ready(function() {
   }  // end if (form_new_topic)
 
   // chaves setup
-  topic_bindings = [
-    ['shift+t', 'New Topic', function(){ window.location.href = $('a:contains("Create a New Topic")').attr('href'); }]
-  ]
-  post_bindings = [
-    ['shift+t', 'New Topic', function(){ window.location.href = $('a:contains("Create a New Topic")').attr('href'); }],
-    ['shift+r', 'Post Reply', function(){
-      window.location.hash = '#post_content';
-      setTimeout("jQuery('#post_content').focus()", 100);
-    }],
-    ['t', 'Go to topic listing', function(){ window.location.href = $('nav.breadcrumbs li').eq(1).find('a').attr('href'); }]
-  ]
-  jQuery('section.topics').chaves({ bindings: topic_bindings });
-  jQuery('section.posts').chaves({ bindings: post_bindings });
-
-  // charbroil setup
-  // jQuery('.category_list').charbroil({modifier: ['command', 'alt']});
+  if( !('ontouchstart' in document.documentElement) ){
+    forum_bundings = []
+    topic_bindings = [
+      ['shift+t', 'New Topic', function(){ window.location.href = $('a:contains("new topic")').attr('href'); }],
+      ['f', 'Go to forum listing', function(){ window.location.href = '/'; }]
+    ]
+    post_bindings = [
+      ['shift+t', 'New Topic', function(){ window.location.href = $('a:contains("new topic")').attr('href'); }],
+      ['shift+r', 'Post Reply', function(){
+        window.location.hash = '#post_content';
+        setTimeout("jQuery('#post_content').focus()", 100);
+      }],
+      ['t', 'Go to topic listing', function(){ window.location.href = $('.breadcrumbs li').eq(1).find('a').attr('href'); }],
+      ['f', 'Go to forum listing', function(){ window.location.href = '/'; }]
+    ]
+    jQuery('#messageboards').chaves();
+    jQuery('.topics').chaves({
+      childSelector: 'article',
+      bindings: topic_bindings 
+    });
+    jQuery('section.posts').chaves({ bindings: post_bindings });
+  }
 });
 
 function pad(number, length) {

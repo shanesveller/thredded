@@ -1,15 +1,81 @@
 #flash {
   background-color: #EFF0F1;
-  border: {
-    bottom: 4px solid #888888;
-    right: 4px solid #888888;
-  }
+  border-bottom: 4px solid #888888;
+  border-right: 4px solid #888888;
   margin-bottom: 1%;
   overflow: hidden;
   padding: 1% 2%;
-  width: 68%;
+
+  @include respond-to(s) {
+    border: none;
+    margin-bottom: 0;
+    padding: 5%;
+    position: absolute;
+    width: 82%;
+    margin-left: 4%;
+    margin-right: 4%;
+    top: 75px;
+    z-index: 1000;
+
+    -webkit-animation: moveOut ease-in 1;
+    -moz-animation: moveOut ease-in 1;
+    -o-animation: moveOut ease-in 1;
+    animation: moveOut ease-in 1;
+
+    -webkit-animation-fill-mode: forwards;
+    -moz-animation-fill-mode: forwards;
+    -o-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+
+    webkit-animation-duration: 2s;
+    -moz-animation-duration: 2s;
+    -o-animation-duration: 2s;
+    animation-duration: 2s;
+
+    -webkit-animation-delay: 3s;
+    -moz-animation-delay: 3s;
+    -o-animation-delay: 3s;
+    animation-delay: 3s;
+  }
+
+  @include respond-to(xs) {
+    border: none;
+    margin-bottom: 0;
+    padding: 5%;
+    position: absolute;
+    width: 82%;
+    margin-left: 4%;
+    margin-right: 4%;
+    top: 75px;
+    z-index: 1000;
+
+    -webkit-animation: moveOut ease-in 1;
+    -moz-animation: moveOut ease-in 1;
+    -o-animation: moveOut ease-in 1;
+    animation: moveOut ease-in 1;
+
+    -webkit-animation-fill-mode: forwards;
+    -moz-animation-fill-mode: forwards;
+    -o-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+
+    webkit-animation-duration: 2s;
+    -moz-animation-duration: 2s;
+    -o-animation-duration: 2s;
+    animation-duration: 2s;
+
+    -webkit-animation-delay: 3s;
+    -moz-animation-delay: 3s;
+    -o-animation-delay: 3s;
+    animation-delay: 3s;
+  }
 
   &.notice {
     background-color: #DCF7DD;
   }
 }
+
+@-webkit-keyframes moveOut { from { margin-left: 4%; } to { margin-left: -500px; } }
+@-moz-keyframes moveOut { from { margin-left: 4%; } to { margin-left: -500px; } }
+@-o-keyframes moveOut { from { margin-left: 4%; } to { margin-left: -500px; } }
+@keyframes moveOut { from { margin-left: 4%; } to { margin-left: -500px; } }

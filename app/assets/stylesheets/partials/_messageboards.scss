@@ -1,27 +1,12 @@
-.table_header {
-  background: #333;
-  border: none;
-  color: #fff;
-  display: inline-block; 
-  font-size: 11px;
-  float: left;
-  line-height: 28px;
-  overflow: hidden; 
-  text-transform: uppercase;
-  letter-spacing: 2px;
-}
-
 section#contentwrap #messageboards {
-  > header {
-    overflow: hidden;
+  border-top: solid 3px #AAA;
+  margin: 0 20px 20px 20px;
 
-    > div {
-      @extend .table_header;
-
-      &.messageboard { width: 69%; padding-left: 1%; border-bottom: solid 1px #000; }
-      &.last_post { width: 26%; padding: 0 2%; border-bottom: solid 1px #000; }
-    }
+  @include respond-to(xs) {
+    border: none;
+    margin: 0;
   }
+
   > .messageboard {
     border: solid 1px #ddd;
     border-top: none;
@@ -29,15 +14,49 @@ section#contentwrap #messageboards {
     display: block;
     padding: 1% 1% 1% 1%;
     position: relative;
-    
+
+    @include respond-to(xs) {
+      border: none;
+      padding: 10px;
+    }
+
+    &.active {
+      background: #e8f3f9;
+    }
+
     header {
       background: transparent url(/images/thread_sprite.gif) 6px -89px no-repeat;
+      box-sizing: border-box;
       font-size: 12px;
-      padding-left: 4%;
+      padding-left: 30px;
 
       h2 { font-size: 14px; font-weight: normal; margin-bottom: 4px; }
       h2 a { text-decoration: none; font-weight: bold; }
       h2 a:hover { text-decoration: underline; }
+
+      @include respond-to(xs) {
+        background: none;
+        padding: 0;
+
+        h2 {
+          padding: 0;
+          margin: 0;
+
+          a {
+            line-height: 44px;
+            height: 44px;
+          }
+        }
+
+        .meta {
+          display: none;
+        }
+      }
+
+      @include respond-to(s) {
+        background: none;
+        padding-left: 8px;
+      }
     }
 
     &.private header {
@@ -52,7 +71,6 @@ section#contentwrap #messageboards {
       bottom: 0px;
       left: 70%;
       top: 0px;
-      width: 26%;
       padding: 1% 2%;
       background: #eee;
 
@@ -70,9 +88,37 @@ section#contentwrap #messageboards {
         display: block;
         clear: both;
       }
+
+      @include respond-to(xs) {
+        background: none;
+        clear: both;
+        position: static;
+        padding: 0;
+
+        p {
+          padding: 0;
+          margin: 0;
+
+          &:before {
+            content: 'last posted ';
+          }
+        }
+
+        cite {
+          display: inline;
+          clear: none;
+        }
+      }
+      @include respond-to(s) {
+        abbr { display: none; }
+        p:before {
+          content: 'last post ';
+        }
+      }
     }
   }
 }
+
 #messageboard_listing #content > footer {
   border: solid 1px #ddd;
   border-top: none;

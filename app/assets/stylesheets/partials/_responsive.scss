@@ -1,0 +1,67 @@
+$break-xs: 320px;
+$break-s: 480px;
+$break-m: 600px;
+$break-l: 768px;
+$break-xl: 900px;
+$break-xxl: 1100px;
+
+
+@mixin respond-to($media) {
+  @if $media == xs {
+    @media all and (max-width: $break-xs) {
+      @content;
+    }
+  }
+  @else if $media == lts {
+    @media all and (max-width: $break-s) {
+      @content;
+    }
+  }
+  @else if $media == s {
+    @media all and (min-width: $break-xs + 1) and (max-width: $break-s) {
+      @content;
+    }
+  }
+  @else if $media == m {
+    @media all and (min-width: $break-s + 1) and (max-width: $break-m) {
+      @content;
+    }
+  }
+  @else if $media == l {
+    @media all and (min-width: $break-m + 1) and (max-width: $break-l) {
+      @content;
+    }
+  }
+  @else if $media == xl {
+    @media all and (min-width: $break-l + 1) and (max-width: $break-xl) {
+      @content;
+    }
+  }
+  @else if $media == xxl {
+    @media all and (min-width: $break-xl + 1) and (max-width: $break-xxl) {
+      @content;
+    }
+  }
+}
+
+.show-for-small {
+  display: none;
+
+  @include respond-to(xs) {
+    display: block;
+  }
+  @include respond-to(s) {
+    display: block;
+  }
+}
+
+.hide-for-small {
+  display: inherit;
+
+  @include respond-to(xs) {
+    display: none;
+  }
+  @include respond-to(s) {
+    display: none;
+  }
+}

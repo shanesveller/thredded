@@ -1,28 +1,28 @@
-<article>
+<%= content_tag_for(:article, post) do %>
   <header>
-    <abbr class="timeago" title="<%= post.created_timestamp %>"><%= post.created_date %></abbr>
+    <%= image_tag post.gravatar_url, class: 'avatar' %>
     <cite>
-      <%= image_tag post.gravatar_url, :class => "avatar" %>
       <a href="/users/<%= post.user.to_param %>"><%= post.user.to_param %></a>
     </cite>
     <div class="meta">
       <% if post.user && post.user.roles && post.user.posts_count -%>
-        <span class="roles"><%= post.user.roles.for(messageboard).map{|r| r.level }.to_sentence %></span>
+        <span class="roles"><%= post.user.roles.for(messageboard).map(&:level).to_sentence %></span>
         <span class="posts_count"><%= post.user.posts_count %> posts</span>
-      <% end -%>
+      <%- end -%>
+      <abbr class="timeago" title="<%= post.created_timestamp %>"><%= post.created_date %></abbr>
     </div>
   </header>
+
   <% cache post do %>
     <div class="content">
       <p><%= post.filtered_content %></p>
-      <ul class="attachments">
-        <%= render post.attachments %>
-      </ul>
+      <ul class="attachments"><%= render post.attachments %></ul>
     </div>
   <% end %>
+
   <footer>
     <% if can? :manage, post %>
       <%= link_to "edit post", edit_messageboard_topic_post_path(messageboard, topic, post), {:class => "edit"} %>
     <% end %>
   </footer>
-</article>
+<% end %>

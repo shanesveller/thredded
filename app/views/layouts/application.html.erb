@@ -1,56 +1,45 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title><%= yield :page_title %></title>
-  <%= stylesheet_link_tag "application" %>
-  <script src="/javascripts/modernizr.js"></script>
-  <%= csrf_meta_tag %>
-</head>
-<!-- default layout -->
-<body id="<%= yield :page_id %>" data-tz-offset="<%= tz_offset %>">
-
-  <header>
-    <nav id="site_wide">
-      <% if site %>
-        <h1>
-          <a href="/" title="<%= site.description %>"><%= site.title %></a>
-        </h1>
-      <% end %>
-      <ul>
-        <%= render 'devise/menu/admin_items' %>
-        <%= render 'devise/menu/registration_items' %>
-        <%= render 'devise/menu/login_items' %>
-      </ul>
-    </nav>
-  </header>
-
-  <section id="contentwrap">
-    <header role="banner">
-      <%= yield :header_nav %>
-      <% if messageboard %>
-        <div class="online">
-          <h3>Currently Online</h3>
-          <ul>
-            <% messageboard.active_users.each do |u| %>
-             <li><%= u.name %></li>
-            <% end %>
-          </ul>
-        </div>
-        <div class="category_list">
-          <h3>Categories</h3>
-          <ul>
-            <% messageboard.categories.order("categories.name ASC").each do |c| %>
-              <li><%= link_to c.name, messageboard_topics_by_category_path(messageboard, c) %></li>
-            <% end %>
-        </div>
-      <% end %>
+  <head>
+    <title><%= yield :page_title %></title>
+    <%= stylesheet_link_tag "application" %>
+    <script src="/javascripts/modernizr.js"></script>
+    <link rel="author" href="humans.txt" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <%= csrf_meta_tag %>
+  </head>
+  <!-- default layout -->
+  <body id="<%= yield :page_id %>" data-tz-offset="<%= tz_offset %>" class="layout-application">
+    <header>
+      <nav id="site_wide">
+        <% if site %>
+          <h1>
+            <a href="/" title="<%= site.description %>"><%= site.title %></a>
+          </h1>
+        <% end %>
+        <ul>
+          <%= render 'devise/menu/admin_items' %>
+          <%= render 'devise/menu/registration_items' %>
+          <%= render 'devise/menu/login_items' %>
+        </ul>
+      </nav>
+      <a href="#" class="show-for-small menu_shortcut">Site Nav</a>
     </header>
-    <%= render :partial => "shared/error_msgs" %>
-    <section id="content">
-      <%= yield %>
-    </section>
-  </section>
 
-  <%= javascript_include_tag "application" %>
-</body>
+    <section id="contentwrap">
+      <%= render :partial => 'shared/error_msgs' %>
+      <section id="content">
+        <%= yield %>
+      </section>
+    </section>
+
+    <footer>
+      <ul>
+        <li><a href="/">thredded</a> &copy; <%= Time.now.year %> joel oliveira (<a href="http://twitter.com/jayroh">@jayroh</a>)</li>
+        <li>An open source ruby on rails messageboard / forum. Want to make it better? Fork at <a href="https://github.com/jayroh/thredded">github</a>!</li>
+      </ul>
+    </footer>
+
+    <%= javascript_include_tag "application" %>
+  </body>
 </html>

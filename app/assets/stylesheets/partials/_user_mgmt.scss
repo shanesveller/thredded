@@ -1,0 +1,29 @@
+#session_mgmt #content {
+
+  h1 {
+    text-transform: lowercase;
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+
+  form {
+    p {
+      display: block;
+      clear: both;
+      padding: 10px 0;
+
+      label {
+        display: inline-block;
+        width: 40%;
+      }
+
+      em {
+        display: block;
+        clear: both;
+        font-size: .8em;
+        opacity: .8;
+        width: 40%;
+      }
+    }
+  }
+}

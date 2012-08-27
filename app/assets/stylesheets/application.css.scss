@@ -1,28 +1,44 @@
-/*
- * This is a manifest file that'll automatically include all the stylesheets available in this directory
- * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
- * the top of the compiled file, but it's generally better to create a new file per style scope.
- *= require_self
-*/
+@charset "UTF-8";
 @import "compass";
+@import "font-icons";
+@include font-icon-family(entypo);
+@include font-icon-family(iconic);
 
 $sans-serif-font-family: 'Lucida Grande','Trebuchet MS',Arial,Helvetica,sans-serif;
 $serif-font-family: Georgia, Cambria, "Times New Roman", Times, serif;
 
+@mixin after-bullet {
+  &:after {
+    content: ' \b7';
+    font-size: 14px;
+  }
+}
+
+@mixin before-bullet {
+  &:before {
+    content: '\b7   ';
+    font-size: 14px;
+  }
+}
+
+@import "partials/responsive";
 @import "partials/boilerplate";
 @import "partials/layout";
 @import "partials/flash_messages";
-@import "partials/header";
-@import "partials/footer";
+@import "partials/site_header";
+@import "partials/content_header";
+@import "partials/content_footer";
+@import "partials/site_footer";
 @import "partials/messageboards";
 @import "partials/topics";
 @import "partials/posts";
 @import "partials/syntax_highlighting";
-@import "partials/new_topic";
-@import "partials/chosen";
 @import "partials/forms";
 @import "partials/setup";
 @import "partials/search";
 @import "partials/admin";
 @import "partials/chaves";
-@import "nav_bar.css.scss";
+@import "partials/user_mgmt";
+@import "chosen/chosen-base";
+@import "chosen/chosen-single";
+@import "chosen/chosen-multi";

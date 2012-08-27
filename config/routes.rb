@@ -1,4 +1,6 @@
 Thredded::Application.routes.draw do
+  mount_sextant if Rails.env.development?
+
   constraints(SetupThredded.new) do
     root :to => "setups#new"
     match "/:step" => 'setups#new', :constraints => { :step => /\d{1}/ }, :as => :new_setup, :via => :get

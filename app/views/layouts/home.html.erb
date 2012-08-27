@@ -4,29 +4,31 @@
   <title><%= yield :page_title %></title>
   <%= stylesheet_link_tag "application" %>
   <script src="/javascripts/modernizr.js"></script>
+  <link rel="author" href="humans.txt" />
+  <meta name="viewport" content="width=device-width" />
   <%= csrf_meta_tag %>
 </head>
 <!-- default layout -->
-<body id="<%= yield :page_id %>">
-	<header>
-		<nav id="site_wide">
-			<ul>
+<body id="<%= yield :page_id %>" class="layout-home">
+  <header>
+    <nav id="site_wide">
+      <ul>
         <%= render 'devise/menu/admin_items' %>
-			  <%= render 'devise/menu/registration_items' %>
-			  <%= render 'devise/menu/login_items' %>
-			</ul>
-		</nav>
-	</header>
+        <%= render 'devise/menu/registration_items' %>
+        <%= render 'devise/menu/login_items' %>
+      </ul>
+    </nav>
+  </header>
 
-	<section id="contentwrap">
+  <section id="contentwrap">
     <header role="banner">
       <%= yield :header_nav %>
     </header>
-		<%= render :partial => "shared/error_msgs" %>
+    <%= render :partial => "shared/error_msgs" %>
     <section id="content">
       <%= yield %>
     </section>
-	</section>
+  </section>
 
   <%= javascript_include_tag "application" %>
 </body>

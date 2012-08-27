@@ -1,9 +1,19 @@
 <% content_for :page_id do %>topics_edit<% end %>
-<% content_for :page_title do %><%= site.title %> | <%= messageboard.title %> | Edit Topic<% end %>
-
-<%= nested_form_for [@messageboard, @topic], 
-                    :url => messageboard_topic_path(@messageboard, @topic), 
-                    :html => { :method => :put, :class => :topic_form, :multipart => true } do |f| %>
-  <%= render :partial => 'form', :locals => { :f => f } %>
-  <%= f.submit "Edit Topic" %>
+<% content_for :page_title do %>
+  <%= site.title %> | <%= messageboard.title %> | Edit Topic
 <% end %>
+
+<div class="forms">
+  <ul>
+    <%= nested_form_for [@messageboard, @topic],
+      url: messageboard_topic_path(@messageboard, @topic),
+      html: { method: :put, class: :topic_form, multipart: true } do |f| %>
+
+      <%= render partial: 'form', locals: { f: f } %>
+
+      <li class="submit">
+        <%= f.submit 'Update Topic' %>
+      </li>
+    <% end %>
+  </ul>
+</div>

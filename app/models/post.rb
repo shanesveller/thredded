@@ -10,19 +10,19 @@ class Post  < ActiveRecord::Base
   include EmojiFilter
 
   gravtastic :user_email
-  default_scope :order => 'id ASC'
-  belongs_to :messageboard, :counter_cache => true
-  belongs_to :topic,  :counter_cache => true
-  belongs_to :user,   :counter_cache => true
+  default_scope order: 'id ASC'
+  belongs_to :messageboard, counter_cache: true
+  belongs_to :topic,  counter_cache: true
+  belongs_to :user,   counter_cache: true
   has_many   :attachments
   accepts_nested_attributes_for :attachments
   validates_presence_of :content, :messageboard_id
   attr_accessible :attachments_attributes, :content, :filter, :ip,
     :messageboard, :topic, :user
-  before_save :set_user_email
+  before_validation :set_user_email
   after_create  :modify_parent_topic
 
-  def created_date 
+  def created_date
     created_at.strftime("%b %d, %Y %I:%M:%S %Z") if created_at
   end
 
@@ -43,6 +43,8 @@ class Post  < ActiveRecord::Base
   end
 
   def set_user_email
-    self.user_email = self.user.email if user
+    if user
+      self.user_email = user.email
+    end
   end
 end

@@ -39,11 +39,13 @@ When /^I change the title to "([^"]*)"$/ do |title|
 end
 
 When /^I click the edit topic button$/ do
-  find_button("Edit Topic").click
+  find_button("Update Topic").click
 end
 
 When /^I click the edit subject link$/ do
-  find_link("edit topic").click
+  within :css, '.breadcrumbs' do
+    find_link('edit').click
+  end
 end
 
 Then /^I should not see the content field$/ do

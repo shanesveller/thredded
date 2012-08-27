@@ -1,0 +1,18 @@
+#content > footer {
+  nav {
+    margin-top: 16px;
+
+    &.pagination {
+      margin-top: 0;
+
+      .current, .gap, a {
+        display: inline-block;
+        text-decoration: none;
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+        text-align: center;
+      }
+    }
+  }
+}

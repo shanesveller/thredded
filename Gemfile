@@ -1,5 +1,6 @@
 source 'http://rubygems.org'
 
+gem 'RedCloth', '4.2.9'
 gem 'bb-ruby', '0.9.5'
 gem 'cancan', '1.6.8'
 gem 'carrierwave', '0.6.2'
@@ -12,10 +13,10 @@ gem 'fog', '~> 1.4.0'
 gem 'gravtastic', '3.1.0'
 gem 'highline', '1.6.1'
 gem 'kaminari', '0.13.0'
-gem 'nested_form', '~> 0.2.0'
-gem 'nokogiri', '1.5.0'
 gem 'mini_magick', '3.2.1'
 gem 'multi_json'
+gem 'nested_form', '~> 0.2.0'
+gem 'nokogiri', '1.5.0'
 gem 'pg'
 gem 'rack'
 gem 'rails', '3.2.6'
@@ -24,11 +25,13 @@ gem 'rake', '0.9.2.2'
 gem 'redcarpet', '~> 2.1.1'
 gem 'rspec-rails', '2.11.0'
 gem 'thin'
-gem 'RedCloth', '4.2.9'
 
 group :assets do
+  gem 'font-icons', '~> 1.0.3.beta', require: 'font-icons'
+  gem 'chosen.scss', '1.0.8', require: 'chosen.scss'
   gem 'jquery-rails'
   gem 'sass-rails', '3.2.5'
+  gem 'sass', '3.2.1'
   gem 'therubyracer'
   gem 'uglifier'
 end
@@ -53,8 +56,7 @@ end
 
 group :development do
   gem 'faker'
-  gem 'foreman'
   gem 'git_remote_branch'
-  gem 'heroku'
   gem 'pry'
+  gem 'sextant'
 end

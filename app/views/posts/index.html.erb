@@ -1,36 +1,40 @@
 <% content_for :page_id do %>topics_posts<% end %>
-<% content_for :page_title do %><%= site.title %> | <%= topic.title %> | Posts<% end %>
-<% content_for :header_nav do %>
-    <nav>
-      <ul>
-        <%= render :partial => 'search/form' %>
-        <% if (current_user && current_user.admins?(messageboard)) || topic.user == current_user  -%>
-          <li class="edit_topic"><%= link_to "edit topic", edit_messageboard_topic_path(messageboard, topic) %></li>
-        <% end -%>
-        <% if messageboard.postable_by?(current_user) -%>
-          <li class="new_topic"><%= link_to "new topic", new_messageboard_topic_path(messageboard) %></li>
-          <li class="new_private_topic"><%= link_to "private topic", new_messageboard_topic_path(messageboard, type: 'private') %></li>
-          <li class="reply_to_topic"><a href="#new_post">Reply To This Topic</a></li>
-        <% end -%>
-      </ul>
-    </nav>
+<% content_for :page_title do %>
+  <%= site.title %> | <%= topic.title %> | Posts
 <% end %>
 
 <header <%= topic.css_class %>>
-  <nav class="breadcrumbs">
-    <ul>
-      <li><a href="/">Forums</a> &rarr; </li>
-      <li><%= link_to messageboard.title, messageboard_topics_path(messageboard) %> &rarr; </li>
+  <nav>
+    <ul class="breadcrumbs">
+      <li><a href="/">Forums</a></li>
+      <li><%= link_to messageboard.title,
+        messageboard_topics_path(messageboard) %></li>
+      <li>
+        <span>
+          <%= topic.title %>
+
+          <% if (current_user && current_user.admins?(messageboard)) || topic.user == current_user  -%>
+            <%= link_to 'edit', edit_messageboard_topic_path(messageboard, topic) %>
+          <% end -%>
+        </span>
+      </li>
+    </ul>
+    <ul class="actions">
+      <%= render partial: 'search/form' %>
+      <% if messageboard.postable_by?(current_user) -%>
+        <li class='new_topic'><%= link_to 'new topic',
+          new_messageboard_topic_path(messageboard) %></li>
+        <li class='new_private_topic'><%= link_to 'private topic',
+          new_messageboard_topic_path(messageboard, type: 'private') %></li>
+      <%- end -%>
     </ul>
   </nav>
-  <% cache ["posts", "header", topic] do %>
-    <h1><%= topic.title %></h1>
-    <h2><%= topic.posts_count %> posts</h2>
-    <h3><%= topic.categories_to_sentence %></h3>
-    <% if topic.users_to_sentence.present? %>
-      <cite><%= topic.users_to_sentence %></cite>
-    <% end %>
+
+  <% if topic.users_to_sentence.present? %>
+    <cite><%= topic.users_to_sentence %></cite>
   <% end %>
+
+  <%= render partial: 'shared/currently_online' %>
 </header>
 
 <section class="posts">
@@ -38,19 +42,20 @@
 </section>
 
 <% if messageboard.postable_by?(current_user) && !topic.locked -%>
-  <%= nested_form_for([messageboard, topic, @post],
-    :url => create_messageboard_topic_post_url(messageboard, topic, @post, :host => site.cached_domain),
-    :html => { :multipart => true }) do |f| %>
-    <%= render :partial => 'form', :locals => { :f => f } %>
-    <%= f.submit "Submit reply", { :tabindex => 3 } %>
-  <% end -%>
+  <div class="forms">
+    <%= nested_form_for([messageboard, topic, @post],
+      url: create_messageboard_topic_post_url(messageboard, topic, @post, host: site.cached_domain),
+      html: { multipart: true }) do |f| %>
+      <ul>
+        <%= render :partial => 'form', :locals => { :f => f } %>
+        <li class="submit"><%= f.submit "Submit reply", { :tabindex => 3 } %></li>
+      </ul>
+    <% end -%>
+  </div>
 <% end -%>
 
 <footer>
-  <nav class="breadcrumbs">
-    <ul>
-      <li><a href="/">Forums</a> &rarr; </li>
-      <li><%= link_to messageboard.title, messageboard_topics_path(messageboard) %> &rarr; </li>
-    </ul>
+  <nav>
+    <%# paginate @posts %>
   </nav>
 </footer>

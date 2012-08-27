@@ -56,7 +56,7 @@ Given /^I create the following new threads:$/ do |topics_table|
   topics_table.hashes.each_with_index { |topic, i|
     # travel 10 seconds in the future so all new topics aren't at the same time
     Timecop.travel(Time.now.advance(:seconds => i*10))
-    
+
     # create topics and posts
     t = m.topics.create(:last_user => u, :title => topic[:title], :messageboard => m, :user => u, :post_count => 1)
     p = t.posts.create(:content => topic[:content], :user => u, :messageboard => m)
@@ -65,9 +65,11 @@ end
 
 Then /^the topic listing should look like the following:$/ do |topics_table|
   html = Capybara::Node::Simple.new(body)
-  header = html.find('#content header').all('div').map {|r| r.text }
-  cells = html.all('#content article h1 a, #content article .post_count, #content article .started_by a, #content article .updated_by a, #content article div').map {|c| c.text }.collect_every(4)
-  table = cells.insert(0, header)
+  cells = html.
+    all('#content article h1 a, #content article .post_count, #content article .started_by a, #content article .updated_by a, #content article div').
+    map(&:text).
+    collect_every(4)
+  table = cells.insert(0, ['Posts','Topic Title','Started','Updated'])
   topics_table.diff!(table)
 end
 

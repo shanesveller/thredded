@@ -1,79 +1,76 @@
 #topics_posts {
 
   article {
-    border-left: solid 1px transparent;
-    border-top: solid 2px #eee;
-    clear: both;
-    margin-bottom: 10px;
-    min-height: 90px;
-    overflow: hidden;
-    padding: 15px 0 5px 155px;
-    position: relative;
-
-    &:last {
-      border: none;
-    }
+    @include box-shadow(1px 1px 1px gray);
+    background: #f6f7f8;
+    font-size: .8em;
+    margin: 10px 15px;
+    padding: 10px 15px;
 
     header {
-      float: left;
-      text-align: left;
-      background: #eee;
-      font-size: 11px;
-      padding: 10px;
-      overflow: hidden;
-      width: 120px;
-      position: absolute;
-      top: 0px;
-      left: 0px;
-      bottom: 0px;
+      line-height: 1.6em;
+      height: 41px;
+
+      .avatar {
+        width: 42px;
+        height: 42px;
+        border-radius: 5px;
+        float: left;
+        margin-right: 15px;
+        @include box-shadow(1px 1px 1px gray);
+      }
+
+      cite {
+        font-style: normal;
+        @include after-bullet;
+
+        a {
+          text-decoration: none;
+          text-transform: capitalize;
+        }
+      }
+
+      span.roles {
+        @include after-bullet;
+
+        @include respond-to(xs) {
+          display: none;
+        }
+      }
 
       abbr {
-        display: block; clear: both;
-        margin-bottom: 7px; 
-        border: none;
-      }
-
-      img {
         display: block;
-        float: left;
-        width: 32px;
-        height: auto;
-        border: solid 2px #fff;
-        margin-right: 8px;
+        border-bottom: none;
       }
 
-      a {
-        color: #999;
-        text-decoration: none;
-        margin-bottom: 3px;
-        display: block;
-        font-weight: bold;
-        font-size: 13px;
-        font-style: normal;
-        color: #0d75b6;
+      .meta {
+        display: inline;
+        color: gray;
       }
+    }
 
-      .meta { display: block; overflow: auto; }
-      .roles { display: block; margin-bottom: 3px; }
-      .posts_count { display: block; margin-bottom: 3px; }
+    .content {
+      padding-top: 10px;
+      margin-left: 57px;
+
+      @include respond-to(lts){
+        font-size: .9em !important;
+        padding-top: 15px;
+        padding-bottom: 5px;
+      }
     }
 
     footer {
-      font-size: 12px;
-      position: absolute;
-      bottom: 0px;
-      right: 0px;
-      padding: 4px;
-      opacity: 0;
-      @include transition(opacity .4s linear);
-    }
-    &:hover footer {
-      opacity: 1;
-    }
+      margin-left: 57px;
+      font-size: .8em;
 
-    p {
-      font-size: .9em;
-      line-height: 1.3em;
+      a {
+        text-decoration: none;
+
+        &:hover {
+          border-bottom: dotted 1px;
+        }
+      }
     }
 
     .attachments {
@@ -103,21 +100,14 @@
 
   #new_post {
     p {
-      border-top: solid 2px #EEE;
-      padding-top: 16px;
     }
     label {
       display: none;
     }
     textarea {
       @extend .content_input;
-      clear: both;
-      width: 98%;
-      margin-bottom: 10px;
     }
     select {
-      float: right;
-      margin-top: 9px;
     }
     input[type="submit"] {
       @extend .submit_button;
@@ -125,63 +115,56 @@
   }
 }
 
-#topics_posts #content > header {
-  padding-bottom: 30px;
-
-  h2 {
-    display: inline;
-  }
-
-  cite {
-    color: gray;
-    display: inline-block;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-
-    &:before {
-      content: 'Starring: ';
-      font-size: 12px;
-      font-style: normal;
-      letter-spacing: 0px;
-      margin-right: 10px;
-      text-transform: lowercase;
-    }
-  }
-}
-
 #topics_posts article {
-  h1, h2, h3, h4, p, pre, blockquote, .CodeRay { margin-bottom: 15px; }
+  h1, h2, h3, h4, p, pre, ul, blockquote, .CodeRay {
+    margin-bottom: 15px;
+
+    &:empty { display: none; }
+  }
   h1 { font-size: 2em; }
   h2 { font-size: 1.8em; }
   h3 { font-size: 1.6em; }
   h4 { font-size: 1.3em; }
   img { max-width: 100%; }
-  ul, ol { 
-    margin: 0 0 15px 18px;
-    font-size: 13px;
-    li {
-      font-size: 15px;
-    }
+  p { line-height: 1.6em; }
+
+  ul, ol {
+    li { font-size: 15px; }
   }
-  li p, li pre { margin-bottom: 15px; }
-  li p:last-child, li pre:last-child { margin-bottom: 0px; }
-  li { margin-bottom: 15px; }
-  pre { 
-    padding: 0px; 
+
+  li p,
+  li pre {
+
+  }
+
+  li p:last-child,
+  li pre:last-child {
+    margin-bottom: 0px;
+  }
+
+  li { }
+
+  pre {
+    padding: 0px;
     white-space: pre;
   }
+
   .CodeRay pre {
     word-wrap: normal;
     margin: 0;
   }
+
   blockquote {
-    border:1px solid #cda;
-    border-left:3px solid #9a7;
-    background: #efefef;
+    @include box-shadow(1px 1px 1px gray);
+    background: rgba(255, 255, 255, 0.8);
     padding:10px 16px;
     margin-left:0;
+
     > *:last-child {
+      margin-bottom: 0px;
+    }
+
+    blockquote {
       margin-bottom: 0px;
     }
 
