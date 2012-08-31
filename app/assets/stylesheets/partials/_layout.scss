@@ -28,7 +28,8 @@ section#contentwrap {
     border-bottom: solid 4px #888;
 
     header {
-      h1 { font-size: 20px; font-weight: bold; text-transform: uppercase; margin-bottom: 6px; }
+      /* ERMAHGERD PUL RKEST */
+      h1 { font-size: 20px; font-weight: bold; text-transform: lowercase; margin-bottom: 6px; }
       h2 { margin-bottom: 20px; font-weight: normal; color: #888; font-size: 12px; }
       nav {
         @extend .breadcrumbs;
