@@ -45,7 +45,7 @@ class Topic < ActiveRecord::Base
            where pork.id = tops.id
     SQL
 
-    search_words = query.gsub(' ', '&' )
+    search_words = query.strip.gsub(' ', '&' )
     find_by_sql [sql, search_words, messageboard_id, search_words, messageboard_id]
   end
 
