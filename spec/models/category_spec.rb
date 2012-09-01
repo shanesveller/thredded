@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe Category do
   before(:each) do
-    @user         = create(:user, name: "categorytest")
     @messageboard = create(:messageboard)
     @topic        = create(:topic, messageboard: @messageboard)
     @category     = create(:category, messageboard: @messageboard)

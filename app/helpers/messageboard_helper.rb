@@ -20,7 +20,10 @@ module MessageboardHelper
   end
 
   def meta_for(messageboard)
-    "#{messageboard.topics_count} topic(s), #{messageboard.posts_count} post(s)"
+    topics = messageboard.topics_count
+    posts  = messageboard.posts_count
+    "#{number_to_human topics} topics,
+      #{number_to_human posts} posts".downcase
   end
 
   def admin_link_for(messageboard)

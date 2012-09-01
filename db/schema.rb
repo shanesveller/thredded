@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120819034324) do
+ActiveRecord::Schema.define(:version => 20120901143141) do
 
   create_table "attachments", :force => true do |t|
     t.string   "attachment"
@@ -55,8 +55,10 @@ ActiveRecord::Schema.define(:version => 20120819034324) do
     t.integer  "topics_count",       :default => 0
     t.integer  "posts_count",        :default => 0
     t.string   "title"
+    t.boolean  "closed",             :default => false,       :null => false
   end
 
+  add_index "messageboards", ["closed"], :name => "index_messageboards_on_closed"
   add_index "messageboards", ["name", "site_id"], :name => "index_messageboards_on_name_and_site_id", :unique => true
 
   create_table "posts", :force => true do |t|

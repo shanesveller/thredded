@@ -3,7 +3,10 @@
 
 <header>
   <h1>Messageboards</h1>
-  <h2><%= site.messageboards.count %> Messageboard(s), <%= site.topics_count %> Threads and <%= site.posts_count %> Posts</h2>
+  <h2>
+    <%= number_to_human(site.messageboards.count).downcase %> messageboards,
+    <%= number_to_human(site.topics_count, precision: 4).downcase %> topics,
+    and <%= number_to_human(site.posts_count, precision: 5).downcase %> posts</h2>
 </header>
 
 <section id="messageboards">

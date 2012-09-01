@@ -1,8 +1,28 @@
 require 'spec_helper'
 
 describe Messageboard do
+  it { should have_db_column(:closed) }
+  it { should have_db_index(:closed) }
+
   before(:each) do
-    @m = create(:messageboard)
+    @m = create(:messageboard, topics_count: 10)
+  end
+
+  it 'returns only open messageboards' do
+    closed = create(:messageboard, closed: true)
+    all_boards = Messageboard.all
+
+    all_boards.should include(@m)
+    all_boards.should_not include(closed)
+  end
+
+  it 'orders by number of topics, descending' do
+    meh = create(:messageboard, topics_count: 500)
+    lots = create(:messageboard, topics_count: 1000)
+    all_boards = Messageboard.all
+
+    all_boards.first.should == lots
+    all_boards.last.should == @m
   end
 
   describe ".active_users" do
