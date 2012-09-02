@@ -129,7 +129,6 @@ ActiveRecord::Schema.define(:version => 20120901143141) do
     t.integer "category_id", :null => false
   end
 
-  add_index "topic_categories", ["category_id"], :name => "index_topic_categories_on_category_id"
   add_index "topic_categories", ["topic_id"], :name => "index_topic_categories_on_topic_id"
 
   create_table "topics", :force => true do |t|
@@ -146,7 +145,6 @@ ActiveRecord::Schema.define(:version => 20120901143141) do
     t.boolean  "locked"
   end
 
-  add_index "topics", ["category_id"], :name => "index_topics_on_category_id"
   add_index "topics", ["messageboard_id", "updated_at"], :name => "index_topics_on_messageboard_id_and_updated_at"
 
   create_table "user_topic_reads", :force => true do |t|
