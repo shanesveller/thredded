@@ -4,7 +4,7 @@ class Notifier
   end
 
   def notifications_for_at_users
-    members = notifiable_members
+    members = at_notifiable_members
 
     if members.present?
       PostMailer.at_notification(@post, members).deliver
@@ -12,7 +12,7 @@ class Notifier
     end
   end
 
-  def notifiable_members
+  def at_notifiable_members
     emails_notified = @post.post_notifications.map(&:email)
     at_names = AtNotificationExtractor.new(@post.content).extract
     members = @post.messageboard.members_from_list(at_names).all
@@ -20,11 +20,18 @@ class Notifier
     members.delete @post.user
     members = exclude_previously_notified(members, emails_notified)
     members = exclude_those_that_are_not_private(members)
+    members = exclude_those_opting_out_of_at_notifications(members)
 
     members
   end
 
   private
+
+  def exclude_those_opting_out_of_at_notifications(members)
+    members.reject do |member|
+      !member.at_notifications_for?(@post.messageboard)
+    end
+  end
 
   def exclude_those_that_are_not_private(members)
     members.reject do |member|

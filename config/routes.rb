@@ -12,11 +12,14 @@ Thredded::Application.routes.draw do
     resource :setup
   end
 
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'registrations' }
   resources :users
 
   constraints(PersonalizedDomain.new) do
     root to: 'messageboards#index'
+
+    resources :preferences
+
     constraints(lambda{|req| req.env["QUERY_STRING"].include? 'q=' }) do
       match "/:messageboard_id(.:format)" => 'topics#search', as: :messageboard_search, via: :get
     end
@@ -37,6 +40,7 @@ Thredded::Application.routes.draw do
         resources :posts
       end
     end
+
   end
 
   root to: 'home#index'

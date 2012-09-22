@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Notifier, '#notifiable_members' do
+describe Notifier, '#at_notifiable_members' do
   before do
     sam  = create(:user, name: 'sam')
     @joel = create(:user, name: 'joel', email: 'joel@example.com')
@@ -13,11 +13,11 @@ describe Notifier, '#notifiable_members' do
 
   it 'returns 2 users mentioned, not including post author' do
     notifier = Notifier.new(@post)
-    notifiable_members = notifier.notifiable_members
+    at_notifiable_members = notifier.at_notifiable_members
 
-    notifiable_members.should have(2).items
-    notifiable_members.should include @joel
-    notifiable_members.should include @john
+    at_notifiable_members.should have(2).items
+    at_notifiable_members.should include @joel
+    at_notifiable_members.should include @john
   end
 
   it 'does not return any users already emailed about this post' do
@@ -25,8 +25,8 @@ describe Notifier, '#notifiable_members' do
       email: 'joel@example.com')
     notifier = Notifier.new(@post)
 
-    notifier.notifiable_members.should have(1).item
-    notifier.notifiable_members.should include @john
+    notifier.at_notifiable_members.should have(1).item
+    notifier.at_notifiable_members.should include @john
   end
 
   it 'does not return users not included in a private topic' do
@@ -34,8 +34,18 @@ describe Notifier, '#notifiable_members' do
       last_user: @post.user, messageboard: @post.messageboard, users: [@joel])
     notifier = Notifier.new(@post)
 
-    notifier.notifiable_members.should have(1).item
-    notifier.notifiable_members.should include @joel
+    notifier.at_notifiable_members.should have(1).item
+    notifier.at_notifiable_members.should include @joel
+  end
+
+  it 'does not return users that set their preference to "no @ notifications"' do
+    create(:preference, notify_on_mention: false, user: @joel, messageboard: @post.messageboard)
+    notifier = Notifier.new(@post)
+    at_notifiable_members = notifier.at_notifiable_members
+
+    at_notifiable_members.should have(1).items
+    at_notifiable_members.should include @john
+    at_notifiable_members.should_not include @joel
   end
 end
 

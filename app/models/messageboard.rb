@@ -23,22 +23,23 @@ class Messageboard < ActiveRecord::Base
     message: 'should be between 1 and 16 characters'
 
   belongs_to :site
-  has_many :topics
   has_many :categories
+  has_many :preferences
   has_many :posts
   has_many :roles
+  has_many :topics
   has_many :users, through: :roles
 
   def active_users
     sql = <<-SQL
-    SELECT u.id,
-           u.name,
-           u.email
-      FROM users u, roles r
-     WHERE r.messageboard_id = ?
-       AND r.last_seen       > ?
-       AND r.user_id         = u.id
-     ORDER BY lower(u.name)
+      SELECT u.id,
+             u.name,
+             u.email
+        FROM users u, roles r
+       WHERE r.messageboard_id = ?
+         AND r.last_seen       > ?
+         AND r.user_id         = u.id
+       ORDER BY lower(u.name)
     SQL
 
     User.find_by_sql [sql, self.id, 5.minutes.ago]
@@ -49,8 +50,7 @@ class Messageboard < ActiveRecord::Base
   end
 
   def postable_by?(user)
-    if self.posting_for_anonymous? && (self.restricted_to_private? ||
-      self.restricted_to_logged_in?)
+    if self.posting_for_anonymous? && (self.restricted_to_private? || self.restricted_to_logged_in?)
         return false
     end
     self.posting_for_anonymous? ||

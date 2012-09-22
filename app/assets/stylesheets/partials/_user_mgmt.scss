@@ -1,28 +1,53 @@
 #session_mgmt #content {
-
   h1 {
-    text-transform: lowercase;
-    font-size: 20px;
+    color: black;
+    font-weight: normal;
+    text-transform: capitalize;
+    font-size: 11px;
     margin-bottom: 15px;
+    padding: 14px;
   }
 
-  form {
-    p {
-      display: block;
-      clear: both;
-      padding: 10px 0;
+  fieldset {
+    @extend .forms;
+    @extend .columnar;
 
-      label {
-        display: inline-block;
-        width: 40%;
-      }
+    label {
+      font-weight: bold;
 
-      em {
-        display: block;
+      @include respond-to(lts) {
         clear: both;
-        font-size: .8em;
-        opacity: .8;
-        width: 40%;
+        text-align: left;
+        width: 100%;
+        margin-right: 0;
+      }
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    select,
+    input[type='text'],
+    input[type='password'],
+    input[type='email'] {
+      min-width: 310px;
+    }
+
+    em {
+      font-size: 11px;
+
+      @include respond-to(lts) {
+        clear: both;
+      }
+    }
+
+    .submit {
+      @extend .push;
+
+      input {
+        @extend .btn;
+        @extend .btn-square;
       }
     }
   }

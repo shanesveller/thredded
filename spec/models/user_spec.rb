@@ -2,10 +2,37 @@ require 'spec_helper'
 
 describe User do
 
+  it { should have_many(:preferences) }
   it { should have_many(:sites) }
   it { should eager_load(:roles) }
 
-  describe ".mark_active_in!(messageboard)" do
+  describe '#at_notifications_for?' do
+    it 'is true for those without any preference' do
+      user = build_stubbed(:user)
+      messageboard = build_stubbed(:messageboard)
+      user.at_notifications_for?(messageboard).should be_true
+    end
+
+    it 'is false for those who un-check it in their preferences' do
+      user = build_stubbed(:user)
+      messageboard = build_stubbed(:messageboard)
+      preference = build_stubbed(:preference, notify_on_mention: false, user: user, messageboard: messageboard)
+      user.stubs(preference_for: preference)
+
+      user.at_notifications_for?(messageboard).should be_false
+    end
+
+    it 'is true for those who check it in their preferences' do
+      user = build_stubbed(:user)
+      messageboard = build_stubbed(:messageboard)
+      preference = build_stubbed(:preference, notify_on_mention: true, user: user, messageboard: messageboard)
+      user.stubs(preference_for: preference)
+
+      user.at_notifications_for?(messageboard).should be_true
+    end
+  end
+
+  describe ".mark_active_in!" do
     it "updates last_seen to now" do
       @now_time = Time.local(2011, 9, 1, 12, 0, 0)
       @messageboard = create(:messageboard)

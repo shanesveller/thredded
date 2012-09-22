@@ -98,6 +98,11 @@ FactoryGirl.define do
     filter 'bbcode'
   end
 
+  factory :preference do
+    notify_on_mention false
+    notify_on_message false
+  end
+
   factory :private_topic do
     title 'New private topic started here'
     user

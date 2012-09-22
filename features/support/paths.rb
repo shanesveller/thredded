@@ -11,6 +11,9 @@ module NavigationHelpers
     when /the homepage/
       '/'
 
+    when /my profile page/i
+      '/users/edit'
+
     when /the user profile page for "([^\"]+)"/i
       @user = User.find_by_name($1)
       user_path(@user)

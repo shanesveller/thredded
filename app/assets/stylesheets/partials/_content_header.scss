@@ -26,7 +26,7 @@
   @extend %entypo-search;
 }
 
-.breadcrumbs {
+%top_border_bar {
   background: #f9f9f9;
   clear: both;
   color: #999;
@@ -34,6 +34,14 @@
   font-size: 11px;
   overflow: hidden;
   white-space: nowrap;
+}
+
+#content > h1 {
+  @extend %top_border_bar;
+}
+
+.breadcrumbs {
+  @extend %top_border_bar;
 
   li {
     float: left;

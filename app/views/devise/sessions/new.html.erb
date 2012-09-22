@@ -15,8 +15,8 @@
     <ul>
       <li>
         <%= f.label :email %>
-        <%= f.text_field :email,
-          type: 'email', autocapitalize: 'off', autocorrect: 'off' %>
+        <%= f.email_field :email, autocapitalize: 'off',
+          autocorrect: 'off', autofocus: 'autofocus' %>
       </li>
 
       <li>

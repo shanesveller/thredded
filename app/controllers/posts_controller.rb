@@ -50,7 +50,7 @@ class PostsController < ApplicationController
   end
 
   def extra_data
-    %Q{data-latest-read='#{@read_status.post_id || 0}'} if @read_status
+    %Q{data-latest-read=#{@read_status.post_id || 0}} if @read_status
   end
 
   def internal_to_topic?

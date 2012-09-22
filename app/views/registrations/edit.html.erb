@@ -1,0 +1,87 @@
+<% content_for :page_id do %>session_mgmt<% end %>
+<% content_for :page_title do %><%= site.title %> | Edit <%= resource_name.to_s.humanize %><% end %>
+
+<h1>Edit Your Account</h1>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name),
+  html: { method: :put, class: 'session_mgmt' }) do |f| %>
+  <%= devise_error_messages! %>
+  <fieldset>
+    <legend>Your Profile</legend>
+    <ul>
+      <li>
+        <%= f.label :name %>
+        <%= f.text_field :name, autofocus: 'autofocus' %>
+      </li>
+
+      <li>
+        <%= f.label :email %>
+        <%= f.email_field :email, autocapitalize: 'off', autocorrect: 'off', disabled: 'disabled' %>
+      </li>
+
+      <li>
+        <%= f.label :password %>
+        <%= f.password_field :password %>
+        <em>(leave blank if you don't want to change it)</em>
+      </li>
+
+      <li>
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation %>
+      </li>
+
+      <li>
+        <%= f.label :time_zone %>
+        <%= f.time_zone_select :time_zone %>
+      </li>
+
+      <li>
+        <%= f.label :current_password %>
+        <%= f.password_field :current_password %>
+        <em>(we need your current password to confirm your changes)</em>
+      </li>
+
+      <li>
+        <%= f.label :post_filter %>
+        <%= f.select :post_filter, Post::Filters, {} %>
+        <em>(your most commonly used post filter)</em>
+      </li>
+
+      <li class="submit"><%= f.submit 'Update Your Profile' %></li>
+    </ul>
+  </fieldset>
+<% end %>
+
+<fieldset data-section='preferences'>
+  <legend>Update Preferences For Your Messageboards</legend>
+  <% unless params['messageboard'] %>
+    <form action="<%= request.path %>" method="get" accept-charset="utf-8">
+      <ul>
+        <li>
+          <label for="messageboard_name">Select Messageboard</label>
+          <%= select(:messageboard, :name, current_user.messageboards.map(&:name)) %>
+        </li>
+        <li class="submit"><%= submit_tag 'Submit' %></li>
+      </ul>
+    </form>
+  <% else %>
+    <%= form_for @preference do |f| %>
+      <ul>
+        <li>
+          <%= f.label :notify_on_mention, "Notify me when I am @'ed" %>
+          <%= f.check_box :notify_on_mention %>
+        </li>
+        <li class="submit"><%= f.submit 'Update Preferences' %></li>
+      </ul>
+    <% end %>
+  <% end %>
+</fieldset>
+
+<fieldset>
+  <legend>Cancel Your Account? <small>Really??</small></legend>
+  <p>
+   <%= link_to 'Cancel My Account',
+        registration_path(resource_name), data: { confirm: 'Are you sure? :(' },
+        method: :delete, class: 'btn red' %>
+  </p>
+</fieldset>

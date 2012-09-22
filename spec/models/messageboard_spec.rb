@@ -3,6 +3,7 @@ require 'spec_helper'
 describe Messageboard do
   it { should have_db_column(:closed) }
   it { should have_db_index(:closed) }
+  it { should have_many(:preferences) }
 
   before(:each) do
     @m = create(:messageboard, topics_count: 10)

@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   has_many :posts
   has_many :private_users
   has_many :private_topics, through: :private_users
+  has_many :preferences
 
   accepts_nested_attributes_for :roles, allow_destroy: true
 
@@ -34,6 +35,16 @@ class User < ActiveRecord::Base
     if @user_role
       @user_role.last_seen = Time.now
       @user_role.save!
+    end
+  end
+
+  def at_notifications_for?(messageboard)
+    preference = preference_for(messageboard)
+
+    if preference
+      preference.notify_on_mention
+    else
+      true
     end
   end
 
@@ -76,5 +87,9 @@ class User < ActiveRecord::Base
     if self.email_changed?
       Post.update_all(["user_email = ?", self.email], ["user_email = ?", self.email_was])
     end
+  end
+
+  def preference_for(messageboard)
+    self.preferences.where(messageboard_id: messageboard).first
   end
 end
