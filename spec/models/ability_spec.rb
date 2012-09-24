@@ -1,6 +1,5 @@
 require 'spec_helper'
 require 'cancan/matchers'
-require 'debugger'
 
 describe User, 'abilities' do
   context 'for a public site' do

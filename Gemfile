@@ -43,6 +43,7 @@ group :test, :cucumber do
   gem 'fuubar'
   gem 'guard-spork', '0.2.1'
   gem 'launchy', '2.0.5'
+  gem 'pry'
   gem 'rack-test', '0.6.1'
   gem 'rb-fsevent'
   gem 'shoulda-matchers', '1.2.0'
@@ -51,9 +52,9 @@ group :test, :cucumber do
 end
 
 group :development do
-  gem 'debugger'
   gem 'faker'
   gem 'foreman'
   gem 'git_remote_branch'
   gem 'heroku'
+  gem 'pry'
 end

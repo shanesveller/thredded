@@ -1,7 +1,3 @@
-require 'debugger'
-# Setup ===============================
-
-
 Given /^a new thread by "([^"]*)" named "([^"]*)" exists on "([^"]*)"$/ do |username, title, messageboard|
   @user = User.where(:name => username).first || create(:user, :name => username+"s", :email => "#{username}s@example.com")
   @messageboard = Messageboard.where(:name => messageboard).first
@@ -50,12 +46,9 @@ When /^I click the edit subject link$/ do
   find_link("edit topic").click
 end
 
-# Assertions ==========================
-
 Then /^I should not see the content field$/ do
   page.should_not have_selector('form .content textarea')
 end
-
 
 Then /^I should be able to edit this thread$/ do
   page.should have_selector('form.topic_form')

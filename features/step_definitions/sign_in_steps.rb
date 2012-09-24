@@ -1,6 +1,3 @@
-# All following steps thanks to the guys at Thoughtbot, and the Clearance gem
-
-# General
 Then /^I should see error messages$/ do
   step %{I should see "errors prohibited"}
 end
@@ -10,10 +7,8 @@ Then /^I should see an error message$/ do
 end
 
 Then /^I debug$/ do
-  debugger
+  binding.pry
 end
-
-# Database
 
 Given /^I signed up with "(.*)\/(.*)"$/ do |email, password|
   user = create :user,
@@ -29,8 +24,6 @@ Given /^I am signed up and confirmed as "(.*)\/(.*)"$/ do |email, password|
     :password              => password,
     :password_confirmation => password
 end
-
-# Session
 
 Then /^I should be signed in$/ do
   step %{I should see "Logout"} 
@@ -48,8 +41,6 @@ end
 Given /^I am signed in as "(.*)"$/ do |username|
   step %{I have signed in with "#{username}@email.com/mypassword"}
 end
-
-# Emails
 
 Then /^a confirmation message should be sent to "(.*)"$/ do |email|
   user = User.find(:first, :conditions => {:email => email})
@@ -95,8 +86,6 @@ end
 Then /^I should be forbidden$/ do
   assert_response :forbidden
 end
-
-# Actions
 
 When /^I sign in as "(.*)\/(.*)"$/ do |email, password|
   step %{I go to the sign in page}

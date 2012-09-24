@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'debugger'
 
 describe UserTopicRead do
   it { should have_db_column(:user_id) }
