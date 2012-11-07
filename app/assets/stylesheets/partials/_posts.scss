@@ -55,6 +55,7 @@
 
       @include respond-to(lts){
         font-size: .9em !important;
+        margin-left: 0px;
         padding-top: 15px;
         padding-bottom: 5px;
       }

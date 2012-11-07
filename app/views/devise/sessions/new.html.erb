@@ -10,11 +10,13 @@
 </header>
 
 <div class="forms">
-  <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :class => "session_mgmt"}) do |f| %>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name),
+    html: { class: 'session_mgmt' }) do |f| %>
     <ul>
       <li>
         <%= f.label :email %>
-        <%= f.text_field :email %>
+        <%= f.text_field :email,
+          type: 'email', autocapitalize: 'off', autocorrect: 'off' %>
       </li>
 
       <li>
@@ -32,8 +34,8 @@
       <% end -%>
 
       <li class="submit">
-        <%= f.submit "Sign in" %>
-        <%= render :partial => "devise/shared/links" %>
+        <%= f.submit 'Sign in' %>
+        <%= render partial: 'devise/shared/links' %>
       </li>
     </ul>
   <% end %>

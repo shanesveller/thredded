@@ -5,7 +5,7 @@
     </header>
     <% content_tag :p, messageboard.description if messageboard.description %>
     <% admin_link_for(messageboard) %>
-    
+
     <footer>
       <p>
         <%= latest_thread_for(messageboard) %>
