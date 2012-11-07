@@ -1,5 +1,9 @@
 jQuery(document).ready(function() {
 
+  jQuery('article .content').
+    find('a[href^="http://"], a[href^="https://"]').
+    attr('target', '_blank');
+
   jQuery('[data-toggle]').click(function(){
     target = this.getAttribute('data-toggle');
     jQuery(target).toggleClass('toggle');
