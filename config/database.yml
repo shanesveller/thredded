@@ -1,0 +1,16 @@
+defaults: &defaults
+  adapter: postgresql
+  encoding: UTF8
+  min_messages: WARNING
+
+development:
+  <<: *defaults
+  database: thredded_dev
+
+test:
+  <<: *defaults
+  database: thredded_test
+
+production:
+  <<: *defaults
+  database: thredded_dev

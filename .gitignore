@@ -8,7 +8,6 @@ log/*
 *.swp
 config/mongoid.yml
 config/thredded_config.yml
-config/database.yml
 .bundle
 db/*.sqlite3
 tmp/**/*

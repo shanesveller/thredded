@@ -1,0 +1,5 @@
+script:
+  - "bundle exec rake db:migrate db:test:prepare spec cucumber"
+
+before_script:
+  - "psql -c 'create database thredded_test;' -U postgres"
