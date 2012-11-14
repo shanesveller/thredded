@@ -52,6 +52,7 @@
     .content {
       padding-top: 10px;
       margin-left: 57px;
+      overflow: auto;
 
       @include respond-to(lts){
         font-size: .9em !important;
@@ -128,6 +129,16 @@
   h4 { font-size: 1.3em; }
   img { max-width: 100%; }
   p { line-height: 1.6em; }
+
+  .align_left {
+    margin: 0 10px 10px 0;
+    float: left;
+  }
+
+  .align_right {
+    margin: 0 0 10px 10px;
+    float: right;
+  }
 
   ul, ol {
     li { font-size: 15px; }
