@@ -27,7 +27,7 @@ class Post  < ActiveRecord::Base
   end
 
   def created_timestamp
-    created_at.strftime("%Y-%m-%dT%H:%M:%SZ") if created_at
+    created_at.strftime("%Y-%m-%dT%H:%M:%S") if created_at
   end
 
   def gravatar_url
