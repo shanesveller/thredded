@@ -53,6 +53,7 @@
       padding-top: 10px;
       margin-left: 57px;
       overflow: auto;
+      clear: both;
 
       @include respond-to(lts){
         font-size: .9em !important;
@@ -65,6 +66,10 @@
     footer {
       margin-left: 57px;
       font-size: .8em;
+
+      @include respond-to(lts){
+        margin-left: 0px;
+      }
 
       a {
         text-decoration: none;
