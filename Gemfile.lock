@@ -104,6 +104,7 @@ GEM
     font-icons (1.0.3.beta)
       compass (>= 0.11)
     formatador (0.2.3)
+    friendly_id (4.0.9)
     fssm (0.2.9)
     fuubar (1.0.0)
       rspec (~> 2.0)
@@ -274,6 +275,7 @@ DEPENDENCIES
   faker
   fog (~> 1.4.0)
   font-icons (~> 1.0.3.beta)
+  friendly_id (~> 4.0.1)
   fuubar
   git_remote_branch
   gravtastic (= 3.1.0)

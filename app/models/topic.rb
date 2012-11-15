@@ -1,5 +1,8 @@
 class Topic < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :title, use: :scoped, scope: :messageboard
   paginates_per 50 if self.respond_to?(:paginates_per)
+
   has_many   :posts, include: :attachments
   has_many   :topic_categories
   has_many   :categories, through: :topic_categories

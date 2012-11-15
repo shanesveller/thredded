@@ -2,6 +2,8 @@ class Messageboard < ActiveRecord::Base
   attr_accessible :description, :name, :posting_permission, :security, :theme,
     :title
 
+  default_scope where(closed: false).order('topics_count DESC')
+
   validates_numericality_of :topics_count
   validates_inclusion_of :security, in: %w{private logged_in public}
   validates_inclusion_of :posting_permission,
@@ -34,10 +36,6 @@ class Messageboard < ActiveRecord::Base
     SQL
 
     User.find_by_sql [sql, self.id, 5.minutes.ago]
-  end
-
-  def self.default_scope
-    where(closed: false).order('topics_count DESC')
   end
 
   def postable_by?(user)

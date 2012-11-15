@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120901143141) do
+ActiveRecord::Schema.define(:version => 20121115012651) do
 
   create_table "attachments", :force => true do |t|
     t.string   "attachment"
@@ -143,9 +143,11 @@ ActiveRecord::Schema.define(:version => 20120901143141) do
     t.string   "attribs",         :default => "[]"
     t.boolean  "sticky",          :default => false
     t.boolean  "locked"
+    t.string   "slug"
   end
 
   add_index "topics", ["messageboard_id", "updated_at"], :name => "index_topics_on_messageboard_id_and_updated_at"
+  add_index "topics", ["slug"], :name => "index_topics_on_slug"
 
   create_table "user_topic_reads", :force => true do |t|
     t.integer  "user_id",                    :null => false
