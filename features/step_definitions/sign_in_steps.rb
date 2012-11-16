@@ -6,10 +6,6 @@ Then /^I should see an error message$/ do
   step %{I should see "error prohibited"}
 end
 
-Then /^I debug$/ do
-  binding.pry
-end
-
 Given /^I signed up with "(.*)\/(.*)"$/ do |email, password|
   user = create :user,
     :email                 => email,

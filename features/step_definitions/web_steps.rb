@@ -204,6 +204,14 @@ Then /^(?:|I )should have the following query string:$/ do |expected_pairs|
   end
 end
 
+Then /^I pry$/ do
+  binding.pry
+end
+
+Then /^I debug$/ do
+  binding.pry
+end
+
 Then /^show me the page$/ do
   save_and_open_page
 end

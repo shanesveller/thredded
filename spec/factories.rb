@@ -47,10 +47,17 @@ FactoryGirl.define do
   end
 
   factory :post do
-    sequence(:content) { |n| "A post about the number #{n}" }
     user
     topic
     messageboard
+
+    sequence(:content) { |n| "A post about the number #{n}" }
+    ip '127.0.0.1'
+    filter 'bbcode'
+  end
+
+  factory :post_with_no_associations, class: 'Post' do
+    sequence(:content) { |n| "A post about the number #{n}" }
     ip '127.0.0.1'
     filter 'bbcode'
   end
@@ -106,10 +113,21 @@ FactoryGirl.define do
     user
     messageboard
     title 'New topic started here'
-    association :last_user, :factory => :user
+    association :last_user, factory: :user
+
+    # look up transient attributes here to clean this up:
+    # https://github.com/thoughtbot/factory_girl/blob/master/GETTING_STARTED.md#transient-attributes
+
+    trait :with_3_posts do
+      posts { create_list(:post, 3) }
+    end
 
     trait :with_5_posts do
       posts { create_list(:post, 5) }
+    end
+
+    trait :with_7_posts do
+      posts { create_list(:post, 7) }
     end
   end
 

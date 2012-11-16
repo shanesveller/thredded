@@ -98,9 +98,14 @@ jQuery(document).ready(function() {
     jQuery('#messageboards').chaves();
     jQuery('.topics').chaves({
       childSelector: 'article',
-      bindings: topic_bindings 
+      bindings: topic_bindings
     });
     jQuery('section.posts').chaves({ bindings: post_bindings });
+  }
+
+  if($('[data-latest-read]').length){
+    scroll_to_post = $('body').data('latest-read');
+    $.scrollTo('#post_'+scroll_to_post, 1000, {easing:'easeInQuart'} )
   }
 });
 

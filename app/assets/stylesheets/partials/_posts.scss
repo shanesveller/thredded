@@ -4,7 +4,7 @@
     @include box-shadow(1px 1px 1px gray);
     background: #f6f7f8;
     font-size: .8em;
-    margin: 10px 15px;
+    margin: 10px 20px;
     padding: 10px 15px;
 
     header {
@@ -49,7 +49,7 @@
       }
     }
 
-    .content {
+    div.content {
       padding-top: 10px;
       margin-left: 57px;
       overflow: auto;

@@ -3,15 +3,16 @@
     margin-top: 16px;
 
     &.pagination {
-      margin-top: 0;
+      margin: 0 30px;
 
       .current, .gap, a {
         display: inline-block;
-        text-decoration: none;
-        width: 50px;
-        height: 50px;
-        line-height: 50px;
+        font-size: 12px;
+        height: 40px;
+        line-height: 40px;
         text-align: center;
+        text-decoration: none;
+        width: 40px;
       }
     }
   }

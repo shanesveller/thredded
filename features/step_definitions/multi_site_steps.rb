@@ -1,13 +1,12 @@
 Given /^the default "([^"]*)" website domain is "([^"]*)"$/ do |permission, website|
-  @site ||= create(:site,
-                    :cname_alias => website, 
-                    :permission => permission, 
-                    :default_site => 't')
+  @site ||= create(:site, cname_alias: website, permission: permission,
+    default_site: 't', user: create(:user, email: 'owner@email.com',
+    name: 'owner'))
 end
 
 Given /^I visit "([^"]*)"$/ do |domain|
   @site = Site.find_by_cached_domain(domain)
-  visit root_url(:host => @site.cached_domain)
+  visit root_url(host: @site.cached_domain)
 end
 
 Given /^the default website has a messageboard named "([^"]*)"$/ do |messageboard|

@@ -1,5 +1,5 @@
 class Post  < ActiveRecord::Base
-  require "gravtastic"
+  require 'gravtastic'
   include Gravtastic
   include BaseFilter
   include TextileFilter
@@ -10,15 +10,27 @@ class Post  < ActiveRecord::Base
   include EmojiFilter
 
   gravtastic :user_email
+  paginates_per 50
+
+  attr_accessible :attachments_attributes,
+    :content,
+    :filter,
+    :ip,
+    :messageboard,
+    :topic,
+    :user
+
   default_scope order: 'id ASC'
+
   belongs_to :messageboard, counter_cache: true
   belongs_to :topic,  counter_cache: true
   belongs_to :user,   counter_cache: true
   has_many   :attachments
+
   accepts_nested_attributes_for :attachments
+
   validates_presence_of :content, :messageboard_id
-  attr_accessible :attachments_attributes, :content, :filter, :ip,
-    :messageboard, :topic, :user
+
   before_validation :set_user_email
   after_create  :modify_parent_topic
 

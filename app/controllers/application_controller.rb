@@ -3,7 +3,12 @@ class ApplicationController < ActionController::Base
   before_filter :site
   before_filter :theme_layout, except: [:delete, :update, :create]
   before_filter :touch_last_seen
-  helper_method :default_site, :messageboard, :site, :topic, :tz_offset
+  helper_method :default_site,
+    :extra_data,
+    :messageboard,
+    :site,
+    :topic,
+    :tz_offset
 
   rescue_from CanCan::AccessDenied do |exception|
     flash[:error] = exception.message
@@ -11,6 +16,10 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def extra_data
+    ''
+  end
 
   def theme_layout
     if site && site.theme && ::Thredded.themes.keys.include?(site.theme.to_sym)
