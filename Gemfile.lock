@@ -44,7 +44,7 @@ GEM
       rack-test (>= 0.5.4)
       selenium-webdriver (~> 2.0)
       xpath (~> 0.1.4)
-    carrierwave (0.6.2)
+    carrierwave (0.7.1)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
     childprocess (0.3.1)
@@ -262,7 +262,7 @@ DEPENDENCIES
   bourne
   cancan (= 1.6.8)
   capybara (= 1.1.2)
-  carrierwave (= 0.6.2)
+  carrierwave (= 0.7.1)
   chosen.scss (= 1.0.8)
   client_side_validations
   coderay (~> 1.0.6)

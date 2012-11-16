@@ -12,6 +12,8 @@ FactoryGirl.define do
     content_type  'image/png'
     file_size     1000
 
+    factory :imgpng
+
     factory :pdfpng do
       attachment  { fixture_file_upload('spec/samples/pdf.png', 'image/png') }
     end
