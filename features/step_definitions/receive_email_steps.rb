@@ -3,5 +3,6 @@ When /^"([^"]*)" sends an email to "([^"]*)" with subject "([^"]*)" and body "([
     'from' => user_email,
     'subject' => email_subject,
     'text' => email_body,
-    'to' => board_email
+    'to' => board_email,
+    'attachments' => '0'
 end
