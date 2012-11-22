@@ -144,6 +144,10 @@ FactoryGirl.define do
   end
 
   factory :topic do
+    ignore do
+      with_posts 0
+    end
+
     user
     messageboard
     association :last_user, factory: :user
@@ -151,19 +155,10 @@ FactoryGirl.define do
     title 'New topic started here'
     hash_id { FactoryGirl.generate(:topic_hash) }
 
-    # look up transient attributes here to clean this up:
-    # https://github.com/thoughtbot/factory_girl/blob/master/GETTING_STARTED.md#transient-attributes
-
-    trait :with_3_posts do
-      posts { create_list(:post, 3) }
-    end
-
-    trait :with_5_posts do
-      posts { create_list(:post, 5) }
-    end
-
-    trait :with_7_posts do
-      posts { create_list(:post, 7) }
+    after(:create) do |topic, evaluator|
+      evaluator.with_posts.times do
+        create(:post, topic: topic, messageboard: topic.messageboard)
+      end
     end
   end
 

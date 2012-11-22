@@ -40,7 +40,7 @@ describe UserTopicRead, '#find_or_create_by_user_and_topic' do
 
     it 'sets it to the 1st post on page 1' do
       page = '1'
-      topic = create(:topic, :with_7_posts)
+      topic = create(:topic, with_posts: 7)
       first_post = topic.posts[0]
       user_topic_read = UserTopicRead.find_or_create_by_user_and_topic(user, topic, page)
 
@@ -51,7 +51,7 @@ describe UserTopicRead, '#find_or_create_by_user_and_topic' do
 
     it 'sets it to the 7th post in total, 1st post on that page, in page 2' do
       page = '2'
-      topic = create(:topic, :with_7_posts)
+      topic = create(:topic, with_posts: 7)
       sixth_post = topic.posts[5]
       user_topic_read = UserTopicRead.find_or_create_by_user_and_topic(user, topic, page)
 
@@ -67,7 +67,7 @@ describe UserTopicRead, '.update_read_status!' do
     before do
       Post.paginates_per 5
       @user = create(:user)
-      @topic = create(:topic, :with_3_posts)
+      @topic = create(:topic, with_posts: 3)
       @page = 1
       @old_read = create(:user_topic_read, topic_id: @topic.id, user_id: @user.id,
         post_id: @topic.posts.last.id, posts_count: 3, page: @page)
@@ -111,7 +111,7 @@ describe UserTopicRead, '.update_read_status!' do
 
     it 'goes back to page 1, 7 posts total - stays page 2, 7 posts.' do
       user = create(:user)
-      topic = create(:topic, :with_7_posts)
+      topic = create(:topic, with_posts: 7)
       old_read = create(:user_topic_read, topic_id: topic.id, user_id: user.id, post_id: topic.posts.last.id, posts_count: 7, page: 2)
 
       UserTopicRead.stubs(:find_by_user_id_and_topic_id).returns(old_read)
