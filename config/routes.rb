@@ -1,4 +1,6 @@
 Thredded::Application.routes.draw do
+  ActiveAdmin.routes(self)
+
   mount_sextant if Rails.env.development?
 
   match '/mail/receive' => 'griddler/emails#create', via: :post
@@ -12,14 +14,6 @@ Thredded::Application.routes.draw do
 
   devise_for :users
   resources :users
-
-  namespace :admin do
-    resources :sites do
-      resources :messageboards
-      resources :users
-    end
-  end
-
 
   constraints(PersonalizedDomain.new) do
     root to: 'messageboards#index'

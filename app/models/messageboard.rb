@@ -1,13 +1,19 @@
 class Messageboard < ActiveRecord::Base
-  attr_accessible :description, :name, :posting_permission, :security, :theme,
+  SECURITY = %w{private logged_in public}
+  PERMISSIONS = %w{members logged_in anonymous}
+
+  attr_accessible :description,
+    :name,
+    :posting_permission,
+    :security,
+    :theme,
     :title
 
   default_scope where(closed: false).order('topics_count DESC')
 
   validates_numericality_of :topics_count
-  validates_inclusion_of :security, in: %w{private logged_in public}
-  validates_inclusion_of :posting_permission,
-    in: %w{members logged_in anonymous}
+  validates_inclusion_of :security, in: SECURITY
+  validates_inclusion_of :posting_permission, in: PERMISSIONS
   validates_presence_of :name, :title
   validates_format_of :name, with: /^[\w\-]+$/, on: :create,
     message: 'should be letters, nums, dash, underscore only.'

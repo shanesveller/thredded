@@ -24,7 +24,7 @@ class TopicsController < ApplicationController
 
   def new
     @topic = messageboard.topics.build(type: topic_class)
-    @topic.posts.build
+    @topic.posts.build(filter: current_user.try(:post_filter))
 
     unless can? :create, @topic
       flash[:error] = 'Sorry, you are not authorized to post on this messageboard.'

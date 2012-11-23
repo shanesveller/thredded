@@ -15,6 +15,12 @@ class ApplicationController < ActionController::Base
     redirect_to site_home
   end
 
+  def authenticate_admin_user!
+    unless current_user && current_user.superadmin?
+      redirect_to '/'
+    end
+  end
+
   private
 
   def extra_data

@@ -29,7 +29,9 @@ class PostsController < ApplicationController
   end
 
   def post
-    @post ||= topic.posts.find(params[:post_id])
+    post = topic.posts.find(params[:post_id])
+    post.filter = current_user.try(:post_filter)
+    @post ||= post
   end
 
   def update

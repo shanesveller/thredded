@@ -1,6 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'RedCloth', '4.2.9'
+gem 'activeadmin', '~> 0.5.0'
 gem 'bb-ruby', '0.9.5'
 gem 'cancan', '1.6.8'
 gem 'carrierwave', '0.7.1'
@@ -29,11 +30,12 @@ gem 'rspec-rails', '2.11.0'
 gem 'thin'
 
 group :assets do
-  gem 'font-icons', '~> 1.0.3.beta', require: 'font-icons'
   gem 'chosen.scss', '1.0.8', require: 'chosen.scss'
+  gem 'coffee-rails', '~> 3.2.2'
+  gem 'font-icons', '~> 1.0.3.beta', require: 'font-icons'
   gem 'jquery-rails'
-  gem 'sass-rails', '3.2.5'
   gem 'sass', '3.2.1'
+  gem 'sass-rails', '3.2.5'
   gem 'therubyracer'
   gem 'uglifier'
 end

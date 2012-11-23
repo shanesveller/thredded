@@ -1,4 +1,6 @@
 class Topic < ActiveRecord::Base
+  STATES = %w{pending approved}
+
   extend FriendlyId
   friendly_id :title, use: :scoped, scope: :messageboard
   paginates_per 50 if self.respond_to?(:paginates_per)
@@ -11,6 +13,7 @@ class Topic < ActiveRecord::Base
   belongs_to :user, counter_cache: true
   belongs_to :messageboard, counter_cache: true, touch: true
 
+  validates_inclusion_of :state, in: STATES
   validates_presence_of :hash_id
   validates_presence_of :last_user_id
   validates_presence_of :messageboard_id
