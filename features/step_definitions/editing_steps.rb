@@ -1,45 +1,52 @@
 Given /^a new thread by "([^"]*)" named "([^"]*)" exists on "([^"]*)"$/ do |username, title, messageboard|
-  @user = User.where(:name => username).first || create(:user, :name => username+"s", :email => "#{username}s@example.com")
-  @messageboard = Messageboard.where(:name => messageboard).first
-  @topic = create :topic, title: title, messageboard: @messageboard, user: @user, last_user: @user
-  @post = create :post, user: @user, topic: @topic
+  @user = User.where(name: username).first ||
+    create(:user, name: "#{username}s", email: "#{username}s@example.com")
+  @messageboard = Messageboard.where(name: messageboard).first
+  @topic = create(:topic, title: title, messageboard: @messageboard,
+    user: @user, last_user: @user)
+  @post = create(:post, user: @user, topic: @topic)
 end
 
 Given /^the latest thread on "([^"]*)" has several posts$/ do |messageboard|
   step %{a new thread by "joel" named "oh hello" exists on "#{messageboard}"}
+
   2.times do |index|
-    @topic.posts.create(:content => "post ##{index}", :user => @user, :messageboard => @messageboard)
+    @topic.posts.create(content: "post ##{index}", user: @user,
+      messageboard: @messageboard)
   end
+
   @topic.save
 end
 
 Given /^the ([^"]*) post on the most recent thread is mine$/ do |position|
-  post = @topic.posts.last if "last" == position
-  post = @topic.posts.first if "first" == position
+  post = @topic.posts.last if 'last' == position
+  post = @topic.posts.first if 'first' == position
   post.user = @current_user
   post.save
 end
 
 Given /^the ([^"]*) post on the most recent thread is not mine/ do |position|
-  @not_me = create(:user, :name => "notme", :email => "notme@email.com")
-  if "last" == position
+  @not_me = create(:user, name: 'notme', email: 'notme@email.com')
+
+  if 'last' == position
     @topic.posts.last.user = @not_me
-  elsif "first" == position
+  elsif 'first' == position
     @topic.posts.first.user = @not_me
   end
+
   @topic.save
 end
 
 When /^I change the content to "([^"]*)"$/ do |content|
- fill_in "Content", :with => content
+ fill_in 'Content', with: content
 end
 
 When /^I change the title to "([^"]*)"$/ do |title|
- fill_in "Title", :with => title
+ fill_in 'Title', with: title
 end
 
 When /^I click the edit topic button$/ do
-  find_button("Update Topic").click
+  find_button('Update Topic').click
 end
 
 When /^I click the edit subject link$/ do
@@ -70,4 +77,19 @@ end
 
 Then /^I should not see an edit link for the ([^"]*) post$/ do |position|
   page.should_not have_selector("article:#{position} footer a.edit")
+end
+
+When /^I click the edit link for the ([^"]*) post$/ do |position|
+  find("article:#{position} footer a.edit").click
+end
+
+When /^I update it to "([^"]*)"$/ do |content|
+  fill_in 'Content', with: content
+  click_button 'Update Post'
+end
+
+Then /^I should see "([^"]*)" in the ([^"]*) post$/ do |content, position|
+  within :css, "article:#{position} .content" do
+    page.should have_content(content)
+  end
 end

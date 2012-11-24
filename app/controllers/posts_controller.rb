@@ -21,7 +21,7 @@ class PostsController < ApplicationController
 
   def create
     p = topic.posts.create(params[:post])
-    redirect_to messageboard_topic_posts_url(messageboard, topic, host: @site.cached_domain)
+    redirect_to :back
   end
 
   def edit
@@ -48,7 +48,7 @@ class PostsController < ApplicationController
   end
 
   def extra_data
-    %Q{data-latest-read='#{@read_status.post_id || 0}'}
+    %Q{data-latest-read='#{@read_status.post_id || 0}'} if @read_status
   end
 
   def internal_to_topic?

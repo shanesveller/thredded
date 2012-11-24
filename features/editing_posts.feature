@@ -15,6 +15,9 @@ Background: Default site and messageboard
      Given the last post on the most recent thread is mine
       When I go to the most recently updated thread on "thredded"
       Then I should see an edit link for the last post
+      When I click the edit link for the last post
+       And I update it to "edited this"
+      Then I should see "edited this" in the last post
 
   Scenario: The member tries to edit someone elses thread
      Given the first post on the most recent thread is not mine
