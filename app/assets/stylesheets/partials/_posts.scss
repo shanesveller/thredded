@@ -1,5 +1,4 @@
 #topics_posts {
-
   article {
     @include box-shadow(1px 1px 1px gray);
     background: #f6f7f8;
@@ -114,8 +113,21 @@
     textarea {
       @extend .content_input;
     }
-    select {
+
+    .filter-help {
+      background: #efefef;
+      border-radius: 10px;
+      color: gray;
+      display: inline-block;
+      font-size: 11px;
+      font-weight: bold;
+      height: 20px;
+      line-height: 20px;
+      text-align: center;
+      text-decoration: none;
+      width: 20px;
     }
+
     input[type="submit"] {
       @extend .submit_button;
     }

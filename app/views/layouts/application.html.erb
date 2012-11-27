@@ -26,7 +26,8 @@
     </header>
 
     <section id="contentwrap">
-      <%= render :partial => 'shared/error_msgs' %>
+      <%= render partial: 'shared/error_msgs' %>
+      <%= render partial: 'pseudohelp/help' %>
       <section id="content">
         <%= yield %>
       </section>

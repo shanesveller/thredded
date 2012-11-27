@@ -7,4 +7,5 @@
 //= require jquery
 //= require jquery_ujs
 //= require rails.validations
+//= require pseudohelp/pseudohelp
 //= require_tree .

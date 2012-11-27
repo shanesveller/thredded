@@ -1,7 +1,6 @@
 require "coderay"
 
 module SyntaxFilter
-
   def filtered_content
     content = String.new(super)
     content = content.to_s.gsub(/\<pre\>\<code( lang="(.+?)")?\>(.+?)\<\/code\>\<\/pre\>/m) do
@@ -16,5 +15,4 @@ module SyntaxFilter
     end
     content.html_safe
   end
-
 end

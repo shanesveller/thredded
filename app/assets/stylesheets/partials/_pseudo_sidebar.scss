@@ -1,0 +1,187 @@
+.pseudohelp-visible section#contentwrap  { width: 49%; }
+
+.pseudo-backdrop { display: none; }
+.pseudo-container {
+  background: white;
+  border-bottom: solid 4px #888;
+  border-right: solid 4px #888;
+  position: fixed;
+  right: 2.5%;
+  bottom: 72px;
+  top: 67px;
+  overflow: hidden;
+  width: 44%;
+  display: none;
+
+  .pseudohelp-visible & {
+    display: block;
+  }
+
+  section {
+    overflow-y: scroll;
+    position: absolute;
+    top: 40px;
+    bottom: 0px;
+    width: 100%;
+
+    > div {
+      display: none;
+
+      &.visible {
+        display: block;
+      }
+    }
+  }
+
+  header {
+    ul {
+      background: #F9F9F9;
+      clear: both;
+      color: #999;
+      display: block;
+      font-size: 11px;
+      list-style: none;
+      margin: 0;
+      overflow: hidden;
+      padding: 10px;
+      white-space: nowrap;
+    }
+
+    li {
+      display: inline-block;
+    }
+
+    a {
+      @extend .btn;
+      @extend .btn-round;
+      @extend .btn-small;
+    }
+
+    .search {
+      float: right;
+
+      input {
+        @extend .input-search;
+      }
+    }
+  }
+
+  footer {
+    position: fixed;
+    font-size: 10px;
+    bottom: 43px;
+    padding-left: 10px;
+
+    a {
+      text-decoration: none;
+    }
+  }
+
+  code {
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -o-pre-wrap;
+  }
+
+  table {
+    margin: 0px;
+    font-size: .8em;
+    width: 100%;
+
+    th {
+      background: #ececec;
+      text-align: left;
+      font-size: 12px;
+      padding: 4px;
+      border-top: solid 10px white;
+    }
+
+    tbody {
+      padding-top: 10px;
+    }
+
+    tr:first-child td {
+      padding-top: 14px;
+    }
+
+    tr:nth-child(odd) td {
+      background: #f8f8f8;
+    }
+
+    th, td {
+      width: 46%;
+      padding: 2%;
+      vertical-align: top;
+    }
+
+    h1 { font-size: 12px; margin-bottom: 5px; }
+    h2 { font-size: 11px; margin-bottom: 5px;  }
+    h5 { font-size: 9px; margin-bottom: 5px; }
+    p { margin-bottom: 10px; }
+    ul { margin-bottom: 10px; }
+    img { max-width: 100%; }
+    fieldset {
+      legend {
+        font-size: 10px;
+
+        &::after {
+          content: ' said:';
+        }
+      }
+      blockquote {
+        font-size: 10px;
+        padding: 4px;
+        border-right: solid 1px gray;
+        border-bottom: solid 1px gray;
+      }
+    }
+
+    table {
+      margin: 0;
+
+      th {
+        font-size: 11px;
+        padding: 5px !important;
+        border: solid 2px silver;
+      }
+
+      tbody {
+        padding: 0;
+      }
+
+      td {
+        padding: 5px !important;
+        border: solid 2px silver;
+      }
+    }
+  }
+}
+
+@media all and (max-width: 900px) {
+  .psuedo-container {
+    section > div td:last-child { display: none; }
+
+    li.search {
+      float: none;
+      clear: both;
+      width: 100%;
+      display: block;
+      padding-top: 12px;
+
+      input {
+        width: 100%;
+        box-sizing: border-box;
+      }
+    }
+
+    li.bbcode, li.textile, li.markdown {
+      width: 30%;
+      margin: 0 1.2%;
+
+      a {
+        width: 100%;
+        box-sizing: border-box;
+      }
+    }
+  }
+}

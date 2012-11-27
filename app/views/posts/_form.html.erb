@@ -11,6 +11,11 @@
     </li>
   <% end -%>
 
-  <%= f.link_to_add 'Add an attachment', :attachments,
-    { class: 'add_attachment', tabindex: 5 }%>
-  <%= f.select :filter, Post::Filters, {}, tabindex: 4 %>
+  <li>
+    <%= f.link_to_add 'Add an attachment', :attachments,
+      { class: 'add_attachment', tabindex: 5 }%>
+  </li>
+  <li>
+    <%= f.select :filter, Post::Filters, {}, tabindex: 4 %>
+    <a href="#pseudo-help" title="huh?" class="hide-for-small filter-help" id="filter-help">?</a>
+  </li>

@@ -93,7 +93,8 @@ jQuery(document).ready(function() {
         setTimeout("jQuery('#post_content').focus()", 100);
       }],
       ['t', 'Go to topic listing', function(){ window.location.href = $('.breadcrumbs li').eq(1).find('a').attr('href'); }],
-      ['f', 'Go to forum listing', function(){ window.location.href = '/'; }]
+      ['f', 'Go to forum listing', function(){ window.location.href = '/'; }],
+      ['m', 'Toggle the markup/filter help', function(){ Pseudohelp.toggle(); }]
     ]
     jQuery('#messageboards').chaves();
     jQuery('.topics').chaves({

@@ -1,5 +1,5 @@
 module BbcodeFilter
-  require "bb-ruby"
+  require 'bb-ruby'
 
   BB = {
     'Code' => [
@@ -12,7 +12,7 @@ module BbcodeFilter
       /\[code:(.+)?\](.*?)\[\/code\1?\]/mi,
       '<pre><code lang="\1">\2</code></pre>',
       'Code Text',
-      '[code]function(){ return true; }[/code]',
+      '[code:javascript]function(){ return true; }[/code]',
       :code],
     'Spoilers' => [
       /\[spoiler\](.*?)\[\/spoiler\1?\]/mi,
