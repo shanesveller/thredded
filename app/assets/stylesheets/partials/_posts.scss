@@ -105,11 +105,10 @@
   }
 
   #new_post {
-    p {
-    }
     label {
       display: none;
     }
+
     textarea {
       @extend .content_input;
     }
@@ -126,6 +125,10 @@
       text-align: center;
       text-decoration: none;
       width: 20px;
+
+      @include respond-to(lts){
+        display: none;
+      }
     }
 
     input[type="submit"] {
