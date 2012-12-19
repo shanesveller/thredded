@@ -49,13 +49,11 @@ group :test, :cucumber do
   gem 'database_cleaner'
   gem 'factory_girl_rails', '3.4.0'
   gem 'fuubar'
-  gem 'guard-spork', '0.2.1'
   gem 'launchy', '2.0.5'
   gem 'pry'
   gem 'rack-test', '0.6.1'
   gem 'rb-fsevent'
   gem 'shoulda-matchers', '1.2.0'
-  gem 'spork', '0.9.2'
   gem 'timecop'
 end
 
@@ -64,4 +62,5 @@ group :development do
   gem 'git_remote_branch'
   gem 'pry'
   gem 'sextant'
+  gem 'zeus'
 end
