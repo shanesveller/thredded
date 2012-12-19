@@ -6,10 +6,6 @@ I highly suggest using [RVM](https://rvm.beginrescueend.com/) or [RBENV](https:/
 
 * Install Ruby 1.9.3 -- `rvm install 1.9.3`
 * Install imagemagick, preferably with homebrew -- `brew install imagemagick`
-* create a thredded gemset -- `rvm gemset create thredded`
-* use your new thredded-specific ruby env -- `rvm use 1.9.3@thredded`
-
-NOTE: You **could** use Ruby 1.9.3 as it's a bit faster but currently has [some issues with ruby-debug19](http://blog.wyeworks.com/2011/11/1/ruby-1-9-3-and-ruby-debug). If you don't plan on using that, then by all means go with 1.9.3 while taking into consideration that it is a relatively new release.
 
 ***
 
@@ -21,58 +17,58 @@ One more file needs to be created - **config/database.yml**. There are two sampl
 
 *_config/database.yml_* (for postgres)
 
-	defaults: &defaults
-	  adapter: postgresql
-	  encoding: UTF8
-	  host: localhost
-	  port: 5432
-	  
-	development:
-	  <<: *defaults
-	  database: thredded_dev
-	  username: username
-	  password: password
-	
-	test:
-	  <<: *defaults
-	  database: thredded_test
-	  username: username
-	  password: password
-	
-	production:
-	  <<: *defaults
-	  database: thredded_production
-	  username: username
-	  password: password
+  defaults: &defaults
+    adapter: postgresql
+    encoding: UTF8
+    host: localhost
+    port: 5432
+
+  development:
+    <<: *defaults
+    database: thredded_dev
+    username: username
+    password: password
+
+  test:
+    <<: *defaults
+    database: thredded_test
+    username: username
+    password: password
+
+  production:
+    <<: *defaults
+    database: thredded_production
+    username: username
+    password: password
 
 *_config/database.yml_* (for mysql)
 
-	defaults: &defaults
-	  adapter: mysql2
-	  encoding: utf8
-	  reconnect: false
-	  pool: 5
-	  username: root
-	  password: 
-	  socket: /tmp/mysql.sock
-	
-	development:
-	  <<: *defaults
-	  database: thredded_dev
-	  username: username
-	  password: password
-	
-	test:
-	  <<: *defaults
-	  database: thredded_test
-	  username: username
-	  password: password
-	
-	test:
-	  <<: *defaults
-	  database: thredded_production
-	  username: username
-	  password: password
+  defaults: &defaults
+    adapter: mysql2
+    encoding: utf8
+    reconnect: false
+    pool: 5
+    username: root
+    password:
+    socket: /tmp/mysql.sock
+
+  development:
+    <<: *defaults
+    database: thredded_dev
+    username: username
+    password: password
+
+  test:
+    <<: *defaults
+    database: thredded_test
+    username: username
+    password: password
+
+  test:
+    <<: *defaults
+    database: thredded_production
+    username: username
+    password: password
 
 ***
 
@@ -80,21 +76,17 @@ One more file needs to be created - **config/database.yml**. There are two sampl
 
 Now that those two files are created and the settings are correct we can move on to installing the gems, creating the DB and getting set up.
 
-* Install the gems with 
+* Install the gems with
 
-		bundle install
+    bundle install
 
 * create the database, migrate the tables and seed with your own data:
 
-		bundle exec rake db:create db:migrate
+    bundle exec rake db:create db:migrate db:test:prepare
 
-* and for your testing environment
+* start the server with
 
-		RAILS_ENV=test bundle exec rake db:create db:migrate
-
-* start the server with 
-
-		rails s
+    rails s
 
 * Open your local server up in your browser and follow the setup "wizard". That will help you set up your site and first messageboard, and you should be ready to go!
 
