@@ -28,7 +28,7 @@ Pseudohelp.configure do |config|
       videos: {
         'Youtube' => {
           'input' => '[youtube]http://www.youtube.com/watch?v=123456[/youtube]',
-          'output' => '<img src="//www.skibowl.com/winter/sites/all/themes/winter-2012/images/youtube_player.jpg" />'
+          'output' => '<img src="/assets/pseudohelp/youtube_player.jpg" />'
         }
       }
     },
