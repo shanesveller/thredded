@@ -62,5 +62,5 @@ group :development do
   gem 'git_remote_branch'
   gem 'pry'
   gem 'sextant'
-  gem 'zeus'
+  gem 'zeus', '0.13.1'
 end
