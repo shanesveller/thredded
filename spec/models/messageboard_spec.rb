@@ -121,3 +121,19 @@ describe Messageboard do
     end
   end
 end
+
+describe Messageboard, '#members_from_list' do
+  it 'returns members from array of strings (usernames)' do
+    board = create(:messageboard)
+    joel = create(:user, name: 'joel')
+    steve = create(:user, name: 'steve')
+    john = create(:user, name: 'john')
+    joel.member_of(board)
+    steve.member_of(board)
+    board_members_from_list = board.members_from_list(%w(joel steve john))
+
+    board_members_from_list.should include(joel)
+    board_members_from_list.should include(steve)
+    board_members_from_list.should_not include(john)
+  end
+end

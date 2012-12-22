@@ -8,6 +8,7 @@ class Post  < ActiveRecord::Base
   include SyntaxFilter
   include AttachmentFilter
   include EmojiFilter
+  include AtNotificationFilter
 
   gravtastic :user_email
   paginates_per 50

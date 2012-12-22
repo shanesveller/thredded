@@ -4,69 +4,68 @@ describe Post do
   it { should validate_presence_of :content }
   it { should validate_presence_of :messageboard_id }
 
-  describe "#create" do
+  describe '#create' do
     after(:each) do
       Timecop.return
     end
 
-    it "updates the parent topic with the latest post author" do
-      @joel  = create(:user)
-      @topic = create(:topic)
+    it 'updates the parent topic with the latest post author' do
+      joel  = create(:user)
+      topic = create(:topic)
+      post = create(:post, user: joel, topic: topic)
 
-      @post = create(:post, user: @joel, topic: @topic)
-
-      @topic.reload.last_user.should == @joel
+      topic.reload.last_user.should == joel
     end
 
     it "increments the topic's and user's post counts" do
-      @joel  = create(:user)
-      @topic = create(:topic)
+      joel  = create(:user)
+      topic = create(:topic)
 
       3.times do
-        @topic.posts.create!(user: @joel, last_user: @joel, content: "content",
-          messageboard: @topic.messageboard)
+        topic.posts.create!(user: joel, last_user: joel, content: 'content',
+          messageboard: topic.messageboard)
       end
 
-      @topic.reload.posts_count.should == 3
-      @joel.reload.posts_count.should  == 3
+      topic.reload.posts_count.should == 3
+      joel.reload.posts_count.should  == 3
     end
 
-    it "updates the topic updated_at field to that of the new post" do
-      @joel  = create(:user)
-      @topic = create(:topic)
-      @topic.posts.create(user: @joel, content: "posting here",
-        messageboard: @topic.messageboard)
-      @topic.posts.create(user: @joel, content: "posting more",
-        messageboard: @topic.messageboard)
-      last_post = @topic.posts.last
+    it 'updates the topic updated_at field to that of the new post' do
+      joel  = create(:user)
+      topic = create(:topic)
+      topic.posts.create(user: joel, content: "posting here",
+        messageboard: topic.messageboard)
+      topic.posts.create(user: joel, content: "posting more",
+        messageboard: topic.messageboard)
+      last_post = topic.posts.last
 
-      @topic.updated_at.should be_within(2.seconds).of(last_post.created_at)
+      topic.updated_at.should be_within(2.seconds).of(last_post.created_at)
     end
 
     it "sets the post user's email on creation" do
-      @shaun = create(:user)
-      @topic = create(:topic, last_user: @shaun)
+      shaun = create(:user)
+      topic = create(:topic, last_user: shaun)
 
-      @new_post = Post.create(user: @shaun,
-        topic: @topic,
-        messageboard: @topic.messageboard,
-        content: "this is a post from shaun",
-        ip: "255.255.255.0",
-        filter: "bbcode")
+      new_post = Post.create(user: shaun,
+        topic: topic,
+        messageboard: topic.messageboard,
+        content: 'this is a post from shaun',
+        ip: '255.255.255.0',
+        filter: 'bbcode')
 
-      @new_post.user_email.should == @new_post.user.email
+      new_post.user_email.should == new_post.user.email
     end
   end
 
-  describe ".filtered_content" do
+  describe '.filtered_content' do
     before(:each) do
       @post  = build(:post)
     end
 
-    it "converts textile to html" do
-      @post.content = "this is *bold*"
-      @post.filter = "textile"
-      @post.filtered_content.should == "<p>this is <strong>bold</strong></p>"
+    it 'converts textile to html' do
+      @post.content = 'this is *bold*'
+      @post.filter = 'textile'
+      @post.filtered_content.should == '<p>this is <strong>bold</strong></p>'
     end
 
     it "converts bbcode to html" do
@@ -120,6 +119,15 @@ right here"
       expectation = "<img src=\"/uploads/attachment/3/pdf.png\" class=\"align_left\" /> <img src=\"/uploads/attachment/2/txt.png\" class=\"align_right\" /> <img src=\"/uploads/attachment/4/img.png\" /> <img src=\"/uploads/attachment/1/zip.png\" width=\"200\" height=\"200\" />"
 
       post.filtered_content.should == expectation
+    end
+
+    it 'links @names of members' do
+      Messageboard.any_instance.stubs(members_from_list: %w{sam joe})
+      post = build_stubbed(:post,
+        content: 'for @sam but not @al or @kek. And @joe.')
+      expectation = 'for <a href="/users/sam">@sam</a> but not @al or @kek. And <a href="/users/joe">@joe</a>.'
+
+      post.filtered_content.should eq expectation
     end
   end
 end

@@ -50,7 +50,7 @@ class User < ActiveRecord::Base
   end
 
   def member_of(messageboard, as='member')
-    role = Role.new(:level => as) 
+    role = Role.new(level: as)
     role.messageboard = messageboard
     role.save
     roles << role
