@@ -1,20 +1,42 @@
-<%= form_for(@site, :validate => true, :as => :site, :url => create_setup_path(:step => step || '2'), :method => :post) do |f| %>
-  <%= f.hidden_field :default_site, :value => true %>
+<%= form_for(@site, validate: true, as: :site,
+  url: create_setup_path(step: step || '2'), method: :post) do |f| %>
+  <%= f.hidden_field :default_site, value: true %>
+  <ul>
+    <li>
+      <%= f.label :title %>
+      <%= f.text_field :title %>
+    </li>
 
-  <p><%= f.label :title %>
-  <%= f.text_field :title %></p>
+    <li>
+      <%= f.label :description %>
+      <%= f.text_field :description %>
+    </li>
 
-  <p><%= f.label :description %>
-  <%= f.text_field :description %></p>
+    <li>
+      <%= f.label :cname_alias, 'Site Domain' %>
+      <%= f.text_field :cname_alias, value: request.host %>
+    </li>
 
-  <p><%= f.label :cname_alias, "Site Domain" %>
-    <%= f.text_field :cname_alias, :value => request.host %></p>
+    <li>
+      <%= f.label :email_from, 'Emails from this site will come from' %>
+      <%= f.text_field :email_from %>
+      <span>This is the "no reply" email address you would like to have as your "reply-to" address.</span>
+    </li>
 
-  <p><%= f.label :email_from, "Emails from this site will come from" %>
-    <%= f.text_field :email_from %></p>
+    <li>
+      <%= f.label :email_subject_prefix %>
+      <%= f.text_field :email_subject_prefix %>
+      <span>This will prepend email subjects from your site. Eg: <em>"[Thredded] You have been sent a new private topic"</em></span>
+    </li>
 
-  <p><%= f.label :email_subject_prefix %>
-    <%= f.text_field :email_subject_prefix %></p>
+    <li>
+      <%= f.label :incoming_email_host %>
+      <%= f.text_field :incoming_email_host %>
+      <span>If you plan on using something like the <a href="http://sendgrid.com/docs/API_Reference/Webhooks/parse.html" target="_blank">Sendgrid Parse</a> service (recommended) you will be able to process incoming emails. This incoming email host is the hostname you set at Sendgrid. Eg: <em>reply.yourwebsite.com</em></span>
+    </li>
 
-  <p><%= f.submit "Continue" %></p>
+    <li>
+      <%= f.submit 'Continue' %>
+    </li>
+  </ul>
 <% end %>

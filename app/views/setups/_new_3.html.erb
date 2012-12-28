@@ -1,18 +1,33 @@
-<%= form_for(@messageboard, :validate => true, :as => :messageboard, :url => create_setup_path(:step => step || '3'), :method => :post) do |f| %>
-  <p><%= f.label :title %>
-  <%= f.text_field :title %></p>
+<%= form_for(@messageboard, validate: true, as: :messageboard,
+  url: create_setup_path(step: step || '3'), method: :post) do |f| %>
+  <ul>
+    <li>
+      <%= f.label :title %>
+      <%= f.text_field :title %>
+    </li>
 
-  <p><%= f.label :name, "Slug (letters and numbers only - no spaces or special characters)" %>
-  <%= f.text_field :name %></p>
+    <li>
+      <%= f.label :name, 'Slug (letters and numbers only - no spaces or special characters)' %>
+      <%= f.text_field :name %>
+    </li>
 
-  <p><%= f.label :description %>
-  <%= f.text_field :description %></p>
+    <li>
+      <%= f.label :description %>
+      <%= f.text_field :description %>
+    </li>
 
-  <p><%= f.label :security %>
-    <%= f.select :security, [:private, :public, :logged_in] %></p>
+    <li>
+      <%= f.label :security %>
+      <%= f.select :security, [:private, :public, :logged_in] %>
+    </li>
 
-  <p><%= f.label :posting_permission %>
-    <%= f.select :posting_permission, [:members, :logged_in, :anonymous] %></p>
+    <li>
+      <%= f.label :posting_permission %>
+      <%= f.select :posting_permission, [:members, :logged_in, :anonymous] %>
+    </li>
 
-  <p><%= f.submit "Continue" %></p>
+    <li>
+      <%= f.submit 'Continue' %>
+    </li>
+  </ul>
 <% end %>

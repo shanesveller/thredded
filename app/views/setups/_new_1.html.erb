@@ -1,18 +1,28 @@
-<%= form_for(@user, :validate => true, :as => :user, :url => create_setup_path(:step => step || '1'), :method => :post) do |f| %>
+<%= form_for(@user, validate: true, as: :user,
+  url: create_setup_path(step: step || '1'), method: :post) do |f| %>
+  <ul>
+    <li>
+      <%= f.label :name, 'Username' %>
+      <%= f.text_field :name %>
+    </li>
 
-  <p><%= f.label :name, "Username" %>
-  <%= f.text_field :name %></p>
+    <li>
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+    </li>
 
-  <p><%= f.label :email %>
-  <%= f.text_field :email %></p>
+    <li>
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+    </li>
 
-  <p><%= f.label :password %>
-   <%= f.password_field :password %></p>
-        
-  <p><%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation %></p>
+    <li>
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation %>
+    </li>
 
-  <h2>Roles</h2>
-
-  <p><%= f.submit "Continue" %></p>
+    <li>
+      <%= f.submit 'Continue' %>
+    </li>
+  </ul>
 <% end %>

@@ -28,6 +28,7 @@ class Post  < ActiveRecord::Base
   belongs_to :topic, counter_cache: true
   belongs_to :user, counter_cache: true
   has_many   :attachments
+  has_many   :post_notifications
 
   accepts_nested_attributes_for :attachments
 

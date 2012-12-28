@@ -1,0 +1,15 @@
+- write above this line to post a reply -
+
+thredded.com | <%= @post.user.name %> just mentioned you in a post! Their post:
+
+---
+
+<%= @post.content %>
+
+---
+
+Feel free to reply above or head to the following -- <%= messageboard_topic_posts_url(@post.messageboard, @post.topic, anchor: "post_#{@post.id}") %> -- to view the conversation.
+
+Love,
+
+The Thredded Mail-Bot

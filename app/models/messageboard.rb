@@ -45,7 +45,7 @@ class Messageboard < ActiveRecord::Base
   end
 
   def members_from_list(user_list)
-    self.users.where(name: user_list)
+    self.users.where('lower(name) in (?)', user_list.map(&:downcase))
   end
 
   def postable_by?(user)

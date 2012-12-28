@@ -5,6 +5,7 @@ require 'bourne'
 require 'database_cleaner'
 require 'factory_girl_rails'
 require 'shoulda-matchers'
+require 'chronic'
 require 'timecop'
 
 module Devise

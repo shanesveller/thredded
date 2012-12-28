@@ -45,6 +45,7 @@ group :test, :cucumber do
   gem 'addressable', '2.2.6'
   gem 'bourne'
   gem 'capybara', '1.1.2'
+  gem 'chronic'
   gem 'cucumber-rails', '1.2.1', require: false
   gem 'database_cleaner'
   gem 'factory_girl_rails', '3.4.0'
@@ -60,6 +61,7 @@ end
 group :development do
   gem 'faker'
   gem 'git_remote_branch'
+  gem 'letter_opener'
   gem 'pry'
   gem 'sextant'
   gem 'zeus', '0.13.1'

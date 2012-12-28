@@ -123,14 +123,14 @@ describe Messageboard do
 end
 
 describe Messageboard, '#members_from_list' do
-  it 'returns members from array of strings (usernames)' do
+  it 'returns members from array of case-insensitive strings (usernames)' do
     board = create(:messageboard)
-    joel = create(:user, name: 'joel')
+    joel = create(:user, name: 'Joel')
     steve = create(:user, name: 'steve')
     john = create(:user, name: 'john')
     joel.member_of(board)
     steve.member_of(board)
-    board_members_from_list = board.members_from_list(%w(joel steve john))
+    board_members_from_list = board.members_from_list(%w(joel Steve john))
 
     board_members_from_list.should include(joel)
     board_members_from_list.should include(steve)

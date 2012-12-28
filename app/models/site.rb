@@ -1,6 +1,7 @@
 class Site  < ActiveRecord::Base
   attr_accessible :cname_alias, :default_site, :description, :email_from,
-    :email_subject_prefix, :permission, :subdomain, :theme, :title
+    :email_subject_prefix, :incoming_email_host, :permission, :subdomain,
+    :theme, :title
 
   belongs_to :user
   has_many :messageboards

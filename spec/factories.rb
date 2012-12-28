@@ -90,6 +90,8 @@ FactoryGirl.define do
     filter 'bbcode'
   end
 
+  factory :post_notification
+
   factory :post_with_no_associations, class: 'Post' do
     sequence(:content) { |n| "A post about the number #{n}" }
     ip '127.0.0.1'
@@ -140,6 +142,7 @@ FactoryGirl.define do
     home                 'messageboards'
     email_from           'Site <email@email.com>'
     email_subject_prefix '[Email] '
+    incoming_email_host  'reply.email.com'
     default_site         'f'
   end
 
