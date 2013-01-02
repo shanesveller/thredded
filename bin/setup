@@ -1,0 +1,114 @@
+#!/bin/bash
+
+txtreset=$(tput sgr0)    # Text reset
+txtgreen=$(tput setaf 2) # Green
+txtred=$(tput setaf 1)   # Red
+
+
+echo    ""
+echo    "  ${txtgreen}** Thredded setup **${txtreset}"
+echo    ""
+echo    "  For optimal preparedness you should be:"
+echo    "  1. Authenticated into github from the command-line"
+echo    "  2. Be using something like RVM, RBEnv or chruby."
+echo    ""
+echo    "  [Optional]"
+echo    "  a. Have the heroku toolbelt installed."
+echo    "  b. Be logged into heroku from the command-line."
+echo    "  c. Have your amazon s3 secret id and key available."
+echo    ""
+read -p "  To continue press [ENTER]:"
+echo    ""
+
+# check the version of ruby
+RUBY_VERSION=`ruby -e "print RUBY_VERSION"`
+if [ "$RUBY_VERSION" != "1.9.3" ]; then
+  echo "${txtred}"
+  echo "  Thredded supports ruby 1.9.3 only. Please make sure you have installed and are using 1.9.3."
+  echo "${txtreset}"
+  exit
+fi
+
+# 0. check for github auth
+if [ ! -f ~/.ssh/id_rsa.pub ]; then
+  echo "${txtred}"
+  echo "  We cannot find a SSH key pair. You will need this to establish"
+  echo "  a secure connection with GitHub. Please follow the instructions"
+  echo "  at the link below and run this script again."
+  echo "  "
+  echo "  https://help.github.com/articles/generating-ssh-keys"
+  echo "${txtreset}"
+  exit
+fi
+
+# 1. check for postgres
+if ! type "psql" >/dev/null 2>/dev/null; then
+  echo "${txtred}"
+  echo "  We have detected that you do not have Postgresql installed."
+  echo "  Please make sure to install Postgres first before re-running this."
+  echo "  For Ubuntu/Debian: `sudo apt-get install postgresql-9.1`"
+  echo "  For Max OSX: `brew install postgresql`"
+  echo "${txtreset}"
+  exit
+fi
+
+# 2. test that bundler exists (gem install bundler if not)
+if ! type "bundle"; then
+  echo "${txtgreen}*  Installing bundler.${txtreset}"
+  gem install bundler
+fi
+
+# 3. bundle install
+echo "${txtgreen}*  Installing gems via bundler.${txtreset}"
+echo ''
+bundle install
+
+# 4. prompt for <enter> until user has edited database.yml
+read -p '*  Ensure that the contents of config/database.yml are corrent. Once you are ready press [ENTER]:'
+
+# 5. rake db:create db:migrate db:test:prepare
+echo "${txtgreen}*  Creating databases - development and test.${txtreset}"
+echo ''
+rake db:drop db:create db:migrate db:test:prepare
+
+# 6. prompt for full test suite run. y? `rake`. n? continue
+read -p '*  Would you like to run the test suite? (y/n)? '
+if [ "$REPLY" == "y" ]; then
+  rake
+fi
+
+# 7. ask if they want to fork to their own github account?
+read -p '*  Would you like to fork this repo from jayroh/thredded to your own github account? (y/n)? '
+if [ "$REPLY" == "y" ]; then
+  hub fork
+fi
+
+# 8. If `heroku` is available ask if they want to create an app
+if type "heroku"; then
+  read -p "*  Would you like to create and deploy to heroku [NOTE: You will need your amazon s3 'access key id' and 'secret access key'] (y/n)? "
+  if [ "$REPLY" == "y" ]; then
+    read -p "* Paste your Access Key ID: " ACCESS_KEY_ID
+    read -p "* Paste your Secret Access Key: " SECRET_ACCESS_KEY
+
+    git add -A
+    git commit -m "Commit before deploy to heroku"
+
+    heroku apps:create
+    APP_NAME=`heroku config | cut -d\  -f1`
+
+    heroku addons:add sendgrid:starter
+    heroku config:set AWS_ACCESS_KEY_ID=$ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$SECRET_ACCESS_KEY
+    heroku config:add SECRET_TOKEN="$(bundle exec rake secret)"
+    git push heroku master
+    heroku run rake db:migrate --app $APP_NAME
+    echo "${txtgreen}*  Thredded app deployed to heroku as '$APP_NAME'.${txtreset}"
+    echo "${txtgreen}*  Sendgrid addon created for '$APP_NAME'${txtreset}"
+    echo "${txtgreen}*  The website can be viewed at http://$APP_NAME.herokuapp.com${txtreset}"
+  fi
+fi
+
+echo ""
+echo "  * * *"
+echo ""
+echo "  ${txtgreen}All set!${txtreset} To run the app locally : 'rails s'${txtreset}"
+echo ""

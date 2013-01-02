@@ -64,6 +64,7 @@ end
 group :development do
   gem 'faker'
   gem 'git_remote_branch'
+  gem 'hub'
   gem 'letter_opener'
   gem 'pry'
   gem 'sextant'

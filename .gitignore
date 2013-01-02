@@ -16,7 +16,9 @@ tmp/**/*
 tmp/*
 db/sphinx/*
 public/uploads/tmp/*
-bin
 latest.dump
 custom_plan.rb
 zeus.json
+bin
+!bin/setup
+!bin/vagrant-setup

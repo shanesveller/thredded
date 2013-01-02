@@ -1,0 +1,61 @@
+#!/bin/bash
+
+txtreset=$(tput sgr0)    # Text reset
+txtgreen=$(tput setaf 2) # Green
+
+echo ''
+echo 'This script will install everything needed for development of Thredded.'
+echo 'The last step is to log into Heroku via their toolbelt. While everything '
+echo 'is installing you should find your heroku email and password.'
+echo ''
+read -p 'To continue press [ENTER]:'
+echo ''
+echo "${txtgreen}* Installing core dependencies.${txtreset}"
+echo ''
+sudo apt-get -y install build-essential zlib1g-dev curl \
+git-core libtool libyaml-dev libssl-dev libssl0.9.8 libxslt-dev \
+libxml2-dev libreadline6-dev xclip
+
+
+echo "${txtgreen}* Checking for SSH key pair.${txtreset}"
+
+if [ ! -f ~/.ssh/id_rsa.pub ]; then
+  echo '  SSH Key pair does not exist so we will help you create it.'
+  read -p '  Please enter your email address: '
+  ssh-keygen -t rsa -C "$REPLY"
+else
+  echo '  Key pair found. Continuing ...'
+fi
+
+echo ''
+echo "${txtgreen}* Installing ruby.${txtreset}"
+echo ''
+
+cd ~
+curl -O ftp://ftp.ruby-lang.org/pub/ruby/ruby-1.9.3-p385.tar.gz
+tar -xzf ruby-1.9.3-p385.tar.gz
+cd ~/ruby-1.9.3-p385/ext/openssl && ruby extconf.rb
+cd ~/ruby-1.9.3-p385/ext/readline && ruby extconf.rb
+cd ~/ruby-1.9.3-p385 && ./configure && make && sudo make install && cd ~
+export PATH=/usr/local/bin:$PATH
+echo "export PATH=/usr/local/bin:\$PATH" >> ~/.bashrc
+sudo gem install bundler
+
+
+echo ''
+echo "${txtgreen}* Installing postgres.${txtreset}"
+echo ''
+sudo apt-add-repository -y ppa:pitti/postgresql
+sudo apt-get -y update
+sudo apt-get -y install postgresql-9.2 libpq-dev
+sudo -u postgres createuser --superuser vagrant
+
+echo ""
+echo "${txtgreen}* Installing heroku toolbelt.${txtreset}"
+echo ""
+wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+heroku auth:login
+heroku keys:add ~/.ssh/id_rsa.pub
+
+echo ""
+echo "${txtgreen}Done!${txtreset}"
