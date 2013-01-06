@@ -1,5 +1,9 @@
 .topics.jquery-chaves .active {
   background-color: #e8f3f9 !important;
+
+  &.private {
+    background-color: #E3E3C2 !important;
+  }
 }
 
 #topics_posts .posts.jquery-chaves .active {

@@ -1,4 +1,5 @@
 jQuery(document).ready(function() {
+  not_a_touch_device = !('ontouchstart' in document.documentElement)
 
   jQuery('article .content').
     find('a[href^="http://"], a[href^="https://"]').
@@ -80,7 +81,7 @@ jQuery(document).ready(function() {
   }  // end if (form_new_topic)
 
   // chaves setup
-  if( !('ontouchstart' in document.documentElement) ){
+  if(not_a_touch_device){
     forum_bundings = []
     topic_bindings = [
       ['shift+t', 'New Topic', function(){ window.location.href = $('a:contains("new topic")').attr('href'); }],
@@ -107,6 +108,15 @@ jQuery(document).ready(function() {
   if($('[data-latest-read]').length){
     scroll_to_post = $('body').data('latest-read');
     $.scrollTo('#post_'+scroll_to_post, 1000, {easing:'easeInQuart'} )
+
+    if(not_a_touch_device){
+      scroll_to_el = $('#post_'+scroll_to_post);
+
+      jQuery('section.posts > article').removeClass('active');
+      $.fn.chaves.active = scroll_to_el;
+      $.fn.chaves.index = scroll_to_el.index();
+      scroll_to_el.addClass('active');
+    }
   }
 });
 
