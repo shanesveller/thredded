@@ -130,6 +130,10 @@ section.topics > div {
 }
 
 #topics_edit {
+  #contentwrap #content {
+    overflow: visible;
+  }
+
   .handle {
     display: none;
   }
