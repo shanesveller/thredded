@@ -31,8 +31,16 @@
 </section>
 
 <footer>
-  <% if messageboard.postable_by?(current_user) -%>
-    <%= link_to 'Create a New Topic',
-      new_messageboard_topic_path(messageboard) %>
-  <%- end -%>
+  <nav>
+    <%- if messageboard.postable_by?(current_user) -%>
+      <ul class="actions">
+        <li><%= link_to 'Create a New Topic',
+          new_messageboard_topic_path(messageboard) %></li>
+      </ul>
+    <%- end -%>
+    <ul class="breadcrumbs">
+      <li><a href="/">Forums</a></li>
+      <li><span><%= messageboard.title %></span></li>
+    </ul>
+  </nav>
 </footer>
