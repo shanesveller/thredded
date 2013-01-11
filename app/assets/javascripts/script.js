@@ -10,10 +10,10 @@ jQuery(document).ready(function() {
     jQuery(target).toggleClass('toggle');
   })
 
-  jQuery('.menu_shortcut').click(function(){
-    el = jQuery(this);
-    if(el.attr('href') == '#site_wide'){ el.attr('href', '#') }
-    else { el.attr('href', '#site_wide') }
+  jQuery('.menu_shortcut').click(function(e){
+    e.preventDefault();
+
+    $('body').toggleClass('show-site-nav')
   });
 
   // timestamps
