@@ -16,6 +16,11 @@ jQuery(document).ready(function() {
     $('body').toggleClass('show-site-nav')
   });
 
+  // prevent double click on submit buttons
+  $('form').submit(function(e){
+    $(this).find('input[type="submit"]').prop('disabled', true);
+  });
+
   // timestamps
   adjust_timestamps();
   jQuery.timeago.settings.allowFuture = true;
