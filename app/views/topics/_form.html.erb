@@ -12,14 +12,16 @@
   </li>
 <% end -%>
 
-<li class="category">
-  <% category_options = messageboard.categories.collect { |cat| [cat.name, cat.id] } %>
-  <%= f.select :category_ids, category_options, {}, {
-      multiple: true,
-      'data-placeholder' => 'Category',
-      tabindex: 4
-    } %>
-</li>
+<% if messageboard.categories.any? %>
+  <li class="category">
+    <% category_options = messageboard.categories.collect { |cat| [cat.name, cat.id] } %>
+    <%= f.select :category_ids, category_options, {}, {
+        multiple: true,
+        'data-placeholder' => 'Category',
+        tabindex: 4
+      } %>
+  </li>
+<% end %>
 
 <% if current_user && current_user.admins?(messageboard) -%>
   <li class="locked">

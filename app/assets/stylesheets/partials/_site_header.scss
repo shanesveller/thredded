@@ -11,8 +11,8 @@
 .standalone {
   .menu_shortcut { top: 25px; }
 
-  .breadcrumbs { border-top: solid 20px #ddd; }
-  .show-site-nav .breadcrumbs { border-top: none; }
+  header .breadcrumbs { border-top: solid 20px #ddd; }
+  .show-site-nav header .breadcrumbs { border-top: none; }
 
   .show-site-nav #site_wide { border-top: solid 20px #393939; }
 }
