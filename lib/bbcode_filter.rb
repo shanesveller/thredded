@@ -21,7 +21,7 @@ module BbcodeFilter
       '[spoiler]Dumbledore dies[/spoiler]',
       :spoiler],
     'YouTube' => [
-      /\[youtube\]http\:\/\/(www\.)?youtube.com\/((watch)?\?vi?=|embed\/)(.*?)\[\/youtube\1?\]/i,
+      /\[youtube\]https?\:\/\/(www\.)?youtube.com\/((watch)?\?vi?=|embed\/)(.*?)\[\/youtube\1?\]/i,
       '<iframe class="youtube" width="560" height="315" src="//www.youtube.com/embed/\4?&rel=0&theme=light&showinfo=0&hd=1&autohide=1&color=white" frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
       'Youtube Video',
       :video],
