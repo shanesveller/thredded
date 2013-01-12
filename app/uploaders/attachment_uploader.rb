@@ -8,11 +8,11 @@ class AttachmentUploader < CarrierWave::Uploader::Base
     "uploads/#{mounted_as}/#{model.id}"
   end
 
-  version :thumb, :if => :image? do
+  version :thumb, if: :image? do
     process :resize_to_fit => [90, 90]
   end
 
-  version :mobile, :if => :image? do
+  version :mobile, if: :image? do
     process :resize_to_limit => [480, 2000]
   end
 
