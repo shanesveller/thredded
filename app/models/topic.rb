@@ -89,6 +89,10 @@ class Topic < ActiveRecord::Base
     find_by_sql [sql, search_words, messageboard_id, search_words, messageboard_id]
   end
 
+  def last_user
+    super || NullUser.new
+  end
+
   def public?
     true
   end

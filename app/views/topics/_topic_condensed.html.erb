@@ -11,7 +11,7 @@
       <%= link_to t.last_user.name, user_path(t.last_user) %>
     </cite>
     <cite class="started_by">
-      <abbr class="started_at timeago" 
+      <abbr class="started_at timeago"
         title="<%= t.created_at.strftime('%Y-%m-%dT%H:%M:%S') %>">
         <%= t.created_at.strftime('%b %d, %Y %I:%M:%S %Z') %>
       </abbr>
