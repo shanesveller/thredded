@@ -23,6 +23,11 @@ Thredded::Application.routes.draw do
     constraints(lambda{|req| req.env["QUERY_STRING"].include? 'q=' }) do
       match "/:messageboard_id(.:format)" => 'topics#search', as: :messageboard_search, via: :get
     end
+
+    match '/login' => redirect('/users/sign_in')
+    match '/log_in' => redirect('/users/sign_in')
+    match '/sign_in' => redirect('/users/sign_in')
+
     match '/:messageboard_id(.:format)' => 'topics#index', as: :messageboard_topics
     match '/:messageboard_id/topics(.:format)' => 'topics#create', as: :create_messageboard_topic
     match '/:messageboard_id/topics/new/(:type)' => 'topics#new', as: :new_messageboard_topic
@@ -40,7 +45,6 @@ Thredded::Application.routes.draw do
         resources :posts
       end
     end
-
   end
 
   root to: 'home#index'
