@@ -50,9 +50,7 @@ When /^I click the edit topic button$/ do
 end
 
 When /^I click the edit subject link$/ do
-  within :css, '.breadcrumbs' do
-    find_link('edit').click
-  end
+  find('header .breadcrumbs a', text: 'edit').click
 end
 
 Then /^I should not see the content field$/ do

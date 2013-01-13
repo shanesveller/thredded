@@ -3,12 +3,10 @@ Given /^posts are paginated every (\d+) posts$/ do |post_num|
 end
 
 Given /^the latest thread on "([^"]*)" has (\d+) posts$/ do |name, post_num|
-  board = Messageboard.find_by_name(name)
+  board = Messageboard.where(name: name).first
   @topic = create(:topic, messageboard: board)
 
-  post_num.to_i.times do
-    create(:post, topic: @topic, messageboard: board)
-  end
+  create_list :post, post_num.to_i, topic: @topic, messageboard: board
 end
 
 Then /^the latest read post should be the (first|fifth|sixth) post$/ do |post_index|
@@ -26,15 +24,14 @@ Then /^the latest read post should be the (first|fifth|sixth) post$/ do |post_in
 end
 
 When /^I click to page (\d+) and view the latest post$/ do |page_num|
-  within :css, 'footer .pagination' do
-    click_link page_num
-  end
+  first('footer .pagination a', text: page_num).click
 end
 
 When /^(\d+) more people post on the latest thread$/ do |reply_num|
-  reply_num.to_i.times do
-    create(:post, topic: @topic, messageboard: @topic.messageboard, user: User.first)
-  end
+  create_list :post, reply_num.to_i,
+    topic: @topic,
+    messageboard: @topic.messageboard,
+    user: User.first
 end
 
 Then /^I should see (\d+) posts$/ do |post_num|

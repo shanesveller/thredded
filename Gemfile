@@ -27,7 +27,7 @@ gem 'rails', '3.2.11'
 gem 'rails_emoji', '~> 1.5'
 gem 'rake', '0.9.2.2'
 gem 'redcarpet', '~> 2.1.1'
-gem 'rspec-rails', '2.11.0'
+gem 'rspec-rails', '~> 2.12.2'
 gem 'thin'
 
 group :assets do
@@ -44,12 +44,12 @@ end
 group :test, :cucumber do
   gem 'addressable', '~> 2.3.2'
   gem 'bourne'
-  gem 'capybara', '1.1.2'
+  gem 'capybara', '~> 2.0.2'
   gem 'chronic'
-  gem 'cucumber-rails', '1.3.0', require: false
+  gem 'cucumber-rails', '~> 1.3.0', require: false
   gem 'database_cleaner'
   gem 'email_spec', '1.4.0'
-  gem 'factory_girl_rails', '3.4.0'
+  gem 'factory_girl_rails', '~> 4.1.0'
   gem 'fuubar'
   gem 'launchy', '~> 2.1.2'
   gem 'pry'
