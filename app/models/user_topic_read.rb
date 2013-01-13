@@ -15,6 +15,7 @@ class UserTopicRead < ActiveRecord::Base
 
       if user_topic_read.blank?
         posts_count = [post_limit * (page - 1), topic.posts.size].min
+        posts_count = [posts_count, 1].max
         last_post = topic.posts.each_slice(post_limit).to_a[page - 1].first
 
         user_topic_read = create(

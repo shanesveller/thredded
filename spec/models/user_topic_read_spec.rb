@@ -45,7 +45,7 @@ describe UserTopicRead, '#find_or_create_by_user_and_topic' do
       user_topic_read = UserTopicRead.find_or_create_by_user_and_topic(user, topic, page)
 
       user_topic_read.post_id.should == first_post.id
-      user_topic_read.posts_count.should == 0
+      user_topic_read.posts_count.should == 1
       user_topic_read.page.should == 1
     end
 
