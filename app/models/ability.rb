@@ -17,7 +17,7 @@ class Ability
     # if posting permission is logged_in  - logged in can post
     # if posting permission is anonymous  - anonymous can post
 
-    user ||= User.new
+    user ||= NullUser.new
 
     can :manage, :all if user.superadmin?
 
