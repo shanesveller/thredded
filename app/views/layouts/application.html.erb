@@ -2,7 +2,7 @@
 <html>
   <head>
     <title><%= yield :page_title %></title>
-    <%= stylesheet_link_tag "application" %>
+    <%= stylesheet_link_tag 'application' %>
     <script src="/javascripts/head.js?v=1"></script>
     <link rel="shortcut icon" href="/favicon.ico">
     <link rel="shortcut icon" href="/favicon.png">
@@ -52,6 +52,7 @@
       </ul>
     </footer>
 
-    <%= javascript_include_tag "application" %>
+    <%= javascript_include_tag 'application' %>
+    <%= render partial: 'shared/google_analytics' %>
   </body>
 </html>
