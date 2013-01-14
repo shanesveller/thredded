@@ -28,6 +28,7 @@ Thredded::Application.routes.draw do
     match '/log_in' => redirect('/users/sign_in')
     match '/sign_in' => redirect('/users/sign_in')
     match '/forgot_password' => redirect('/users/password/new')
+    match '/user/forgot_username' => redirect('/users/password/new')
 
     match '/:messageboard_id(.:format)' => 'topics#index', as: :messageboard_topics
     match '/:messageboard_id/topics(.:format)' => 'topics#create', as: :create_messageboard_topic
