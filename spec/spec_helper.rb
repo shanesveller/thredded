@@ -1,4 +1,4 @@
-ENV["RAILS_ENV"] ||= 'test'
+ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
 require 'bourne'
@@ -23,7 +23,7 @@ Devise.setup do |config|
   config.stretches = 0
 end
 
-Dir[Rails.root.join("spec/support/**/*.rb")].each {|file| require file }
+Dir[Rails.root.join('spec/support/**/*.rb')].each {|file| require file }
 
 counter = -1
 
@@ -31,6 +31,7 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
   config.mock_with :mocha
   config.use_transactional_fixtures = false
+  config.include Features, type: :feature
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction

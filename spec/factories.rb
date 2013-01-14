@@ -139,8 +139,8 @@ FactoryGirl.define do
   factory :site do
     user
     sequence(:subdomain) { |n| "site#{n}" }
-    cached_domain        'website.com'
-    cname_alias          'website.com'
+    cached_domain        'www.website.com'
+    cname_alias          'www.website.com'
     permission           'public'
     title                'Default website'
     description          'default website description'
