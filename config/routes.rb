@@ -27,7 +27,10 @@ Thredded::Application.routes.draw do
     match '/login' => redirect('/users/sign_in')
     match '/log_in' => redirect('/users/sign_in')
     match '/sign_in' => redirect('/users/sign_in')
+    match '/logout' => redirect('/users/sign_out')
+    match '/log_out' => redirect('/users/sign_out')
     match '/forgot_password' => redirect('/users/password/new')
+    match '/user/forgot_password' => redirect('/users/password/new')
     match '/user/forgot_username' => redirect('/users/password/new')
 
     match '/:messageboard_id(.:format)' => 'topics#index', as: :messageboard_topics
@@ -35,9 +38,10 @@ Thredded::Application.routes.draw do
     match '/:messageboard_id/topics/new/(:type)' => 'topics#new', as: :new_messageboard_topic
     match "/:messageboard_id/topics/category/:category_id" => 'topics#by_category', as: :messageboard_topics_by_category
     match '/:messageboard_id/:topic_id/edit(.:format)' => 'topics#edit', as: :edit_messageboard_topic
-    match '/:messageboard_id/:topic_id(.:format)' => 'topics#update', as: :messageboard_topic, :via => :put
+    match '/:messageboard_id/:topic_id(.:format)' => 'topics#update', as: :messageboard_topic, via: :put
     match '/:messageboard_id/:topic_id(.:format)' => 'posts#index', as: :messageboard_topic_posts
-    match '/:messageboard_id/:topic_id/posts(.:format)' => 'posts#create', as: :create_messageboard_topic_post
+    match '/:messageboard_id/:topic_id/posts(.:format)' => 'posts#index', as: :messageboard_topic_posts, via: :get
+    match '/:messageboard_id/:topic_id/posts(.:format)' => 'posts#create', as: :create_messageboard_topic_post, via: :post
     match '/:messageboard_id/:topic_id/:post_id(.:format)' => 'posts#update', via: :put
     match '/:messageboard_id/:topic_id/:post_id(.:format)' => 'posts#show', as:  :messageboard_topic_post
     match '/:messageboard_id/:topic_id/:post_id/edit(.:format)' => 'posts#edit', as:  :edit_messageboard_topic_post
