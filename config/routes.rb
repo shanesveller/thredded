@@ -40,7 +40,7 @@ Thredded::Application.routes.draw do
     match '/:messageboard_id/:topic_id/edit(.:format)' => 'topics#edit', as: :edit_messageboard_topic
     match '/:messageboard_id/:topic_id(.:format)' => 'topics#update', as: :messageboard_topic, via: :put
     match '/:messageboard_id/:topic_id(.:format)' => 'posts#index', as: :messageboard_topic_posts
-    match '/:messageboard_id/:topic_id/posts(.:format)' => 'posts#index', as: :messageboard_topic_posts, via: :get
+    match '/:messageboard_id/:topic_id/posts(.:format)' => 'posts#index', via: :get
     match '/:messageboard_id/:topic_id/posts(.:format)' => 'posts#create', as: :create_messageboard_topic_post, via: :post
     match '/:messageboard_id/:topic_id/:post_id(.:format)' => 'posts#update', via: :put
     match '/:messageboard_id/:topic_id/:post_id(.:format)' => 'posts#show', as:  :messageboard_topic_post

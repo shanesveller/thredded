@@ -1,0 +1,11 @@
+<span style="font-size:11px; color: gray;">- write above this line to post a reply -</span>
+
+<%= @post.user.name %> just mentioned you in "<%= link_to @post.topic.title, messageboard_topic_posts_url(@post.messageboard, @post.topic, anchor: "post_#{@post.id}") %>". Their post:
+
+
+<blockquote><%= @post.filtered_content %></blockquote>
+
+
+Feel free to reply above or <%= link_to 'head to the thread', messageboard_topic_posts_url(@post.messageboard, @post.topic, anchor: "post_#{@post.id}") %> to view the conversation.
+
+Thredded Mail-Bot

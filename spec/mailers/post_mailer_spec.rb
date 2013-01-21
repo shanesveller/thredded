@@ -25,7 +25,7 @@ describe PostMailer, 'at_notification' do
   end
 
   it 'renders the body' do
-    @mail.body.encoded.should include('joel just mentioned you in a post')
+    @mail.body.encoded.should include('joel just mentioned you in')
     @mail.body.encoded.should include('hey @john @sam blarghy blurp')
   end
 end

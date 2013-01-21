@@ -39,13 +39,7 @@ class User < ActiveRecord::Base
   end
 
   def at_notifications_for?(messageboard)
-    preference = preference_for(messageboard)
-
-    if preference
-      preference.notify_on_mention
-    else
-      true
-    end
+    preference_for(messageboard).notify_on_mention
   end
 
   def admins?(messageboard)
@@ -90,6 +84,7 @@ class User < ActiveRecord::Base
   end
 
   def preference_for(messageboard)
-    self.preferences.where(messageboard_id: messageboard).first
+    self.preferences.where(messageboard_id: messageboard).first ||
+      NullPreference.new
   end
 end
