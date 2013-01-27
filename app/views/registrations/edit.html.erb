@@ -1,11 +1,14 @@
 <% content_for :page_id do %>session_mgmt<% end %>
-<% content_for :page_title do %><%= site.title %> | Edit <%= resource_name.to_s.humanize %><% end %>
+<% content_for :page_title do %>
+  <%= site.title %> | Edit <%= resource_name.to_s.humanize %>
+<% end %>
 
 <h1>Edit Your Account</h1>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name),
   html: { method: :put, class: 'session_mgmt' }) do |f| %>
   <%= devise_error_messages! %>
+
   <fieldset>
     <legend>Your Profile</legend>
     <ul>
@@ -16,7 +19,8 @@
 
       <li>
         <%= f.label :email %>
-        <%= f.email_field :email, autocapitalize: 'off', autocorrect: 'off', disabled: 'disabled' %>
+        <%= f.email_field :email, autocapitalize: 'off',
+          autocorrect: 'off', disabled: 'disabled' %>
       </li>
 
       <li>
@@ -55,25 +59,9 @@
 <fieldset data-section='preferences'>
   <legend>Update Preferences For Your Messageboards</legend>
   <% unless params['messageboard'] %>
-    <form action="<%= request.path %>" method="get" accept-charset="utf-8">
-      <ul>
-        <li>
-          <label for="messageboard_name">Select Messageboard</label>
-          <%= select(:messageboard, :name, current_user.messageboards.map(&:name)) %>
-        </li>
-        <li class="submit"><%= submit_tag 'Submit' %></li>
-      </ul>
-    </form>
+    <%= render partial: 'form_selecting_messageboard' %>
   <% else %>
-    <%= form_for @preference do |f| %>
-      <ul>
-        <li>
-          <%= f.label :notify_on_mention, "Notify me when I am @'ed" %>
-          <%= f.check_box :notify_on_mention %>
-        </li>
-        <li class="submit"><%= f.submit 'Update Preferences' %></li>
-      </ul>
-    <% end %>
+    <%= render partial: 'form_preferences', locals: { preference: @preference } %>
   <% end %>
 </fieldset>
 

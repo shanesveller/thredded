@@ -1,0 +1,13 @@
+<%= form_for preference do |f| %>
+  <ul>
+    <li>
+      <%= f.label :notify_on_mention, "Notify me when I am @'ed" %>
+      <%= f.check_box :notify_on_mention %>
+    </li>
+    <li>
+      <%= f.label :notify_on_message, "Notify me when I am included in a private topic" %>
+      <%= f.check_box :notify_on_message %>
+    </li>
+    <li class="submit"><%= f.submit 'Update Preferences' %></li>
+  </ul>
+<% end %>

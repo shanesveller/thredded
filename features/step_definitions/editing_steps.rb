@@ -28,13 +28,9 @@ end
 Given /^the ([^"]*) post on the most recent thread is not mine/ do |position|
   @not_me = create(:user, name: 'notme', email: 'notme@email.com')
 
-  if 'last' == position
-    @topic.posts.last.user = @not_me
-  elsif 'first' == position
-    @topic.posts.first.user = @not_me
-  end
-
-  @topic.save
+  post = @topic.posts.send(position.to_sym)
+  post.user = @not_me
+  post.save
 end
 
 When /^I change the content to "([^"]*)"$/ do |content|

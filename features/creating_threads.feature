@@ -41,6 +41,8 @@ Background: Default site and messageboard
      Then I should see "Joel and John"
       And I should see "sup john"
       And I should see "This is a private thread"
+      And "john@email.com" should receive an email
+      And "joel@email.com" should receive no emails
 
   Scenario: A user cannot see a private thread
     Given a private thread exists between "Sal" and "John" titled "sal and john only please"
@@ -69,4 +71,4 @@ Background: Default site and messageboard
       And I go to the new thread page for "thredded"
      Then I should see "Sorry, you are not authorized to post on this messageboard."
       And I go to the most recently updated thread on "thredded"
-     Then I should not see the post reply form 
+     Then I should not see the post reply form

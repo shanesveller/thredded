@@ -86,7 +86,7 @@ When /^I sign in as "(.*)\/(.*)"$/ do |email, password|
   step %{I fill in "Email" with "#{email}"}
   step %{I fill in "Password" with "#{password}"}
   step %{I press "Sign in"}
-  @current_user = User.find_by_email(email)
+  @current_user = User.where(email: email.downcase).first
 end
 
 When /^I sign out$/ do

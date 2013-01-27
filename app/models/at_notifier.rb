@@ -1,4 +1,4 @@
-class Notifier
+class AtNotifier
   def initialize(post)
     @post = post
   end
@@ -13,12 +13,11 @@ class Notifier
   end
 
   def at_notifiable_members
-    emails_notified = @post.post_notifications.map(&:email)
     at_names = AtNotificationExtractor.new(@post.content).extract
     members = @post.messageboard.members_from_list(at_names).all
 
     members.delete @post.user
-    members = exclude_previously_notified(members, emails_notified)
+    members = exclude_previously_notified(members)
     members = exclude_those_that_are_not_private(members)
     members = exclude_those_opting_out_of_at_notifications(members)
 
@@ -39,7 +38,9 @@ class Notifier
     end
   end
 
-  def exclude_previously_notified(members, emails_notified)
+  def exclude_previously_notified(members)
+    emails_notified = @post.post_notifications.map(&:email)
+
     members.reject do |member|
       emails_notified.include? member.email
     end

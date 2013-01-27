@@ -7,8 +7,8 @@ class PostMailer < ActionMailer::Base
     reply_to = "#{post.topic.hash_id}@#{site.incoming_email_host}"
     bcc = users.map(&:email)
     no_reply = site.email_from
-    subject = "#{site.email_subject_prefix} Someone just mentioned you in a post."
+    subject = "#{site.email_subject_prefix} #{post.topic.title}"
 
-    mail(from: no_reply, to: no_reply, bcc: bcc, reply_to: reply_to, subject: subject)
+    mail from: no_reply, to: no_reply, bcc: bcc, reply_to: reply_to, subject: subject
   end
 end

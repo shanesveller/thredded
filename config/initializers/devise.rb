@@ -1,5 +1,3 @@
-# Use this hook to configure devise mailer, warden hooks and so forth. The first
-# four configuration values can also be set straight in your models.
 Devise.setup do |config|
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in DeviseMailer.
@@ -140,4 +138,10 @@ Devise.setup do |config|
   #   end
   #   manager.default_strategies(:scope => :user).unshift :twitter_oauth
   # end
+
+  if Rails.env.test?
+    config.warden do |manager|
+      manager.default_strategies(:scope => :user).unshift :no_pass
+    end
+  end
 end

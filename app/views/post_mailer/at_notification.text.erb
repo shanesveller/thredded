@@ -1,13 +1,10 @@
 - write above this line to post a reply -
 
-<%= @post.user.name %> just mentioned you in "<%= @post.topic.title %>". Their post:
-
----
 
 <%= @post.content %>
 
 ---
 
-Feel free to reply above or head to the following -- <%= messageboard_topic_posts_url(@post.messageboard, @post.topic, anchor: "post_#{@post.id}") %> -- to view the conversation.
+This email was sent to you because <%= @post.user.name %> mentioned you in "<%= @post.topic.title %>". Feel free to reply above or head to the following -- <%= messageboard_topic_posts_url(@post.messageboard, @post.topic, anchor: "post_#{@post.id}") %> -- to view the conversation.
 
-Thredded Mail-Bot
+To unsubscribe from these emails, visit your account page: <%= edit_user_registration_url %>

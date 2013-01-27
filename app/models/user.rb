@@ -42,6 +42,10 @@ class User < ActiveRecord::Base
     preference_for(messageboard).notify_on_mention
   end
 
+  def private_message_notifications_for?(messageboard)
+    preference_for(messageboard).notify_on_message
+  end
+
   def admins?(messageboard)
     valid? && (superadmin? || roles.for(messageboard).as(['admin']).size > 0)
   end

@@ -12,8 +12,8 @@ Then /^I should be notified when someone mentions me$/ do
 
   steps %Q{
     When "email@email.com" opens the email
-    Then they should see "hi @#{me.name}" in the email body
-    And they should see "just mentioned you in a post" in the email body
+    Then they should see "@#{me.name}" in the email body
+    And they should see "mentioned you in" in the email body
   }
 end
 

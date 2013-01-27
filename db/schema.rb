@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130101194708) do
+ActiveRecord::Schema.define(:version => 20130129151502) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -207,25 +207,25 @@ ActiveRecord::Schema.define(:version => 20130101194708) do
   add_index "user_topic_reads", ["user_id"], :name => "index_user_topic_reads_on_user_id"
 
   create_table "users", :force => true do |t|
-    t.string   "email",                               :default => "",                           :null => false
-    t.string   "encrypted_password",   :limit => 128, :default => "",                           :null => false
+    t.string   "email",                                 :default => "",                           :null => false
+    t.string   "encrypted_password",     :limit => 128, :default => "",                           :null => false
     t.string   "reset_password_token"
-    t.string   "remember_token"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                       :default => 0
+    t.integer  "sign_in_count",                         :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.string   "authentication_token"
     t.string   "name"
-    t.boolean  "superadmin",                          :default => false,                        :null => false
-    t.integer  "posts_count",                         :default => 0
-    t.datetime "created_at",                                                                    :null => false
-    t.datetime "updated_at",                                                                    :null => false
-    t.integer  "topics_count",                        :default => 0
-    t.string   "time_zone",                           :default => "Eastern Time (US & Canada)"
+    t.boolean  "superadmin",                            :default => false,                        :null => false
+    t.integer  "posts_count",                           :default => 0
+    t.datetime "created_at",                                                                      :null => false
+    t.datetime "updated_at",                                                                      :null => false
+    t.integer  "topics_count",                          :default => 0
+    t.string   "time_zone",                             :default => "Eastern Time (US & Canada)"
     t.string   "post_filter"
+    t.datetime "reset_password_sent_at"
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true

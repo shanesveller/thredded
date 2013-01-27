@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Notifier, '#at_notifiable_members' do
+describe AtNotifier, '#at_notifiable_members' do
   before do
     sam  = create(:user, name: 'sam')
     @joel = create(:user, name: 'joel', email: 'joel@example.com')
@@ -12,7 +12,7 @@ describe Notifier, '#at_notifiable_members' do
   end
 
   it 'returns 2 users mentioned, not including post author' do
-    notifier = Notifier.new(@post)
+    notifier = AtNotifier.new(@post)
     at_notifiable_members = notifier.at_notifiable_members
 
     at_notifiable_members.should have(2).items
@@ -23,7 +23,7 @@ describe Notifier, '#at_notifiable_members' do
   it 'does not return any users already emailed about this post' do
     prev_notifications = create(:post_notification, post: @post,
       email: 'joel@example.com')
-    notifier = Notifier.new(@post)
+    notifier = AtNotifier.new(@post)
 
     notifier.at_notifiable_members.should have(1).item
     notifier.at_notifiable_members.should include @john
@@ -32,7 +32,7 @@ describe Notifier, '#at_notifiable_members' do
   it 'does not return users not included in a private topic' do
     @post.topic = create(:private_topic, user: @post.user,
       last_user: @post.user, messageboard: @post.messageboard, users: [@joel])
-    notifier = Notifier.new(@post)
+    notifier = AtNotifier.new(@post)
 
     notifier.at_notifiable_members.should have(1).item
     notifier.at_notifiable_members.should include @joel
@@ -40,7 +40,7 @@ describe Notifier, '#at_notifiable_members' do
 
   it 'does not return users that set their preference to "no @ notifications"' do
     create(:preference, notify_on_mention: false, user: @joel, messageboard: @post.messageboard)
-    notifier = Notifier.new(@post)
+    notifier = AtNotifier.new(@post)
     at_notifiable_members = notifier.at_notifiable_members
 
     at_notifiable_members.should have(1).items
@@ -49,7 +49,7 @@ describe Notifier, '#at_notifiable_members' do
   end
 end
 
-describe Notifier, '#notifications_for_at_users' do
+describe AtNotifier, '#notifications_for_at_users' do
   before do
     sam  = create(:user, name: 'sam')
     @joel = create(:user, name: 'joel', email: 'joel@example.com')
@@ -62,7 +62,7 @@ describe Notifier, '#notifications_for_at_users' do
   end
 
   it 'does not notify any users already emailed about this post' do
-    notifier = Notifier.new(@post)
+    notifier = AtNotifier.new(@post)
     notifier.notifications_for_at_users
     notified_emails = @post.post_notifications.map(&:email)
 

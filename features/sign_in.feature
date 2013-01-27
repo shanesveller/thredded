@@ -30,4 +30,7 @@ Feature: Sign in
     When I go to the forgot password page
      And I fill in "Email" with "confirmed@person.com"
      And I press "Send me reset password instructions"
-    Then I should see "You will receive an email with instructions about how to reset your password in a few minutes."
+    Then "confirmed@person.com" should receive an email
+    When "confirmed@person.com" opens the email
+    Then they should see "Reset password instructions" in the email subject
+     And they should see "Someone has requested a link to change your password" in the email body

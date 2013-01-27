@@ -1,11 +1,10 @@
 <span style="font-size:11px; color: gray;">- write above this line to post a reply -</span>
 
-<%= @post.user.name %> just mentioned you in "<%= link_to @post.topic.title, messageboard_topic_posts_url(@post.messageboard, @post.topic, anchor: "post_#{@post.id}") %>". Their post:
 
+<%= @post.filtered_content %>
 
-<blockquote><%= @post.filtered_content %></blockquote>
+<hr />
 
+<p>This email was sent to you because <%= @post.user.name %> mentioned you in "<%= link_to @post.topic.title, messageboard_topic_posts_url(@post.messageboard, @post.topic, anchor: "post_#{@post.id}") %>".  Feel free to reply above or <%= link_to 'head to the thread', messageboard_topic_posts_url(@post.messageboard, @post.topic, anchor: "post_#{@post.id}") %> to view the conversation.</p>
 
-Feel free to reply above or <%= link_to 'head to the thread', messageboard_topic_posts_url(@post.messageboard, @post.topic, anchor: "post_#{@post.id}") %> to view the conversation.
-
-Thredded Mail-Bot
+<p>To unsubscribe from these emails, visit your <%= link_to 'account page', edit_user_registration_url %> page.</p>

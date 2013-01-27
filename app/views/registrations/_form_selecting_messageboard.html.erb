@@ -1,0 +1,9 @@
+<form action="<%= request.path %>" method="get" accept-charset="utf-8">
+  <ul>
+    <li>
+      <label for="messageboard_name">Select Messageboard</label>
+      <%= select(:messageboard, :name, current_user.messageboards.map(&:name)) %>
+    </li>
+    <li class="submit"><%= submit_tag 'Submit' %></li>
+  </ul>
+</form>
