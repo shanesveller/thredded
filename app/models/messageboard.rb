@@ -15,7 +15,7 @@ class Messageboard < ActiveRecord::Base
   validates_inclusion_of :security, in: SECURITY
   validates_inclusion_of :posting_permission, in: PERMISSIONS
   validates_presence_of :name, :title
-  validates_format_of :name, with: /^[\w\-]+$/, on: :create,
+  validates_format_of :name, with: /\A[\w\-]+\z/, on: :create,
     message: 'should be letters, nums, dash, underscore only.'
   validates_uniqueness_of :name,
     message: 'must be a unique board name. Try again.', scope: :site_id
