@@ -8,21 +8,6 @@ require 'shoulda-matchers'
 require 'chronic'
 require 'timecop'
 
-module Devise
-  module Models
-    module DatabaseAuthenticatable
-      protected
-      def password_digest(password)
-        password
-      end
-    end
-  end
-end
-
-Devise.setup do |config|
-  config.stretches = 0
-end
-
 Dir[Rails.root.join('spec/support/**/*.rb')].each {|file| require file }
 
 counter = -1

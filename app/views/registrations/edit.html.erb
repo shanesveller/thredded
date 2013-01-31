@@ -24,25 +24,8 @@
       </li>
 
       <li>
-        <%= f.label :password %>
-        <%= f.password_field :password %>
-        <em>(leave blank if you don't want to change it)</em>
-      </li>
-
-      <li>
-        <%= f.label :password_confirmation %>
-        <%= f.password_field :password_confirmation %>
-      </li>
-
-      <li>
         <%= f.label :time_zone %>
         <%= f.time_zone_select :time_zone %>
-      </li>
-
-      <li>
-        <%= f.label :current_password %>
-        <%= f.password_field :current_password %>
-        <em>(we need your current password to confirm your changes)</em>
       </li>
 
       <li>
@@ -56,6 +39,34 @@
   </fieldset>
 <% end %>
 
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name),
+  html: { method: :put, class: 'session_mgmt' }) do |f| %>
+  <%= devise_error_messages! %>
+
+  <fieldset>
+    <legend>Change Your Password</legend>
+    <ul>
+      <li>
+        <%= f.label :password %>
+        <%= f.password_field :password, placeholder: 'Your new password' %>
+      </li>
+
+      <li>
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation, placeholder: 'Your new password one more time' %>
+      </li>
+
+      <li>
+        <%= f.label :current_password %>
+        <%= f.password_field :current_password, placeholder: 'Your current password' %>
+        <em>(... so we can confirm your changes)</em>
+      </li>
+
+      <li class="submit"><%= f.submit 'Change Your Password' %></li>
+    </ul>
+  </fieldset>
+<% end %>
+
 <fieldset data-section='preferences'>
   <legend>Update Preferences For Your Messageboards</legend>
   <% unless params['messageboard'] %>
@@ -64,6 +75,11 @@
     <%= render partial: 'form_preferences', locals: { preference: @preference } %>
   <% end %>
 </fieldset>
+
+<br />
+<br />
+<br />
+<br />
 
 <fieldset>
   <legend>Cancel Your Account? <small>Really??</small></legend>

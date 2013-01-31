@@ -138,10 +138,4 @@ Devise.setup do |config|
   #   end
   #   manager.default_strategies(:scope => :user).unshift :twitter_oauth
   # end
-
-  if Rails.env.test?
-    config.warden do |manager|
-      manager.default_strategies(:scope => :user).unshift :no_pass
-    end
-  end
 end
