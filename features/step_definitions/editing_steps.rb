@@ -33,6 +33,15 @@ Given /^the ([^"]*) post on the most recent thread is not mine/ do |position|
   post.save
 end
 
+Given /^the last post is formatted with "(.*?)"$/ do |filter|
+  last_post = Post.last
+  last_post.update_attribute(:filter, filter)
+end
+
+Then /^the selected post filter is "(.*?)"$/ do |filter|
+  find('#post_filter').value.should eq filter
+end
+
 When /^I change the content to "([^"]*)"$/ do |content|
  fill_in 'Content', with: content
 end

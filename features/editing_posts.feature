@@ -19,6 +19,13 @@ Background: Default site and messageboard
        And I update it to "edited this"
       Then I should see "edited this" in the last post
 
+  Scenario: The edited post retains its filter
+     Given the last post on the most recent thread is mine
+       And the last post is formatted with "markdown"
+      When I go to the most recently updated thread on "thredded"
+       And I click the edit link for the last post
+      Then the selected post filter is "markdown"
+
   Scenario: The member tries to edit someone elses thread
      Given the first post on the most recent thread is not mine
        And the last post on the most recent thread is mine
