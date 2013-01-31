@@ -38,7 +38,7 @@ describe Topic do
     @topic  = create(:topic, messageboard: @messageboard)
   end
 
-  it 'should be associated to a messageboard' do
+  it 'is associated with a messageboard' do
     topic = build(:topic, messageboard: nil)
     topic.should_not be_valid
   end
@@ -48,7 +48,7 @@ describe Topic do
     topic.public?.should be_true
   end
 
-  it 'should be able to handle category ids' do
+  it 'handles category ids' do
     cat1 = create(:category)
     cat2 = create(:category, :beer)
     topic = create(:topic, category_ids: ['', cat1.id, cat2.id])
@@ -57,21 +57,19 @@ describe Topic do
 
   it 'changes updated_at when a new post is added' do
     old = @topic.updated_at
-    @post = @topic.posts.create({
-      content: 'awesome',
-      filter: 'bbcode',
-      messageboard: @messageboard,
-      user: @user,
-    })
-    @topic.reload.updated_at.should_not == old
+    create(:post, topic: @topic)
+
+    @topic.reload.updated_at.should_not eq old
   end
 
   it 'does not change updated_at when an old post is edited' do
-    @post = create(:post)
-    old = @post.topic.updated_at
-    @post.content = 'alternative content'
-    @post.save
-    @topic.reload.updated_at.to_s.should == old.to_s
+    Timecop.freeze(1.month.ago) do
+      @post = create(:post)
+    end
+
+    old_time = @post.topic.updated_at
+    @post.update_attribute(:content, 'hi there')
+    @post.topic.reload.updated_at.to_s.should eq old_time.to_s
   end
 
   context 'when its parent messageboard is for logged in users only' do
