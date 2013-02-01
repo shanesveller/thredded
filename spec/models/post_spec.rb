@@ -82,16 +82,49 @@ describe Post, '.filtered_content' do
     @post.filtered_content.should eq 'this is <strong>bold</strong>'
   end
 
-  it 'performs some syntax highlighting with bbcode' do
-    input = %Q([code]def hello
-puts 'world'
-end[/code]
+  it 'handles quotes' do
+    @post.content = '[quote]hi[/quote] [quote="john"]hey[/quote]'
+    @post.filter = 'bbcode'
+    expected_output = '</p><fieldset><blockquote><p>hi</p></blockquote></fieldset><fieldset><legend>"john"</legend><blockquote><p>hey</p></blockquote></fieldset><p>'
+    @post.filtered_content.should eq expected_output
+  end
 
-[code:javascript]function(){
-console.log('hi');
-}[/code])
+  it 'handles nested quotes' do
+    @post.content = '[quote=joel][quote=john]hello[/quote] hi[/quote]'
+    @post.filter = 'bbcode'
+    expected_output = '</p><fieldset><legend>joel</legend><blockquote><fieldset><legend>john</legend><blockquote><p>hello</p></blockquote></fieldset><p> hi</p></blockquote></fieldset><p>'
+    @post.filtered_content.should eq expected_output
+  end
 
-    expected_output = %Q(<div class="CodeRay">\n  <div class="code"><pre><span class="keyword">def</span> <span class="function">hello</span>\nputs <span class="string"><span class="delimiter">'</span><span class="content">world</span><span class="delimiter">'</span></span>\n<span class="keyword">end</span></pre></div>\n</div>\n<br />\n<br />\n<div class="CodeRay">\n  <div class="code"><pre><span class="keyword">function</span>(){\nconsole.log(<span class="string"><span class="delimiter">'</span><span class="content">hi</span><span class="delimiter">'</span></span>);\n}</pre></div>\n</div>\n)
+  it 'performs specific syntax highlighting with bbcode' do
+    input = <<-EOCODE.strip_heredoc
+      [code:ruby]def hello
+      puts 'world'
+      end[/code]
+
+      [code:javascript]function(){
+      console.log('hi');
+      }[/code]
+    EOCODE
+
+    expected_output = %Q(<div class="CodeRay">\n  <div class="code"><pre><span class="keyword">def</span> <span class="function">hello</span>\nputs <span class="string"><span class="delimiter">'</span><span class="content">world</span><span class="delimiter">'</span></span>\n<span class="keyword">end</span></pre></div>\n</div>\n<br />\n<br />\n<div class="CodeRay">\n  <div class="code"><pre><span class="keyword">function</span>(){\nconsole.log(<span class="string"><span class="delimiter">'</span><span class="content">hi</span><span class="delimiter">'</span></span>);\n}</pre></div>\n</div>\n<br />\n)
+
+    @post.filter = 'bbcode'
+    @post.content = input
+
+    @post.filtered_content.should eq expected_output
+  end
+
+  it 'performs specific syntax highlighting with bbcode' do
+    input = <<-EOCODE.strip_heredoc
+      [code:javascript]function(){
+      console.log('hi');
+      }[/code]
+
+      that was code
+    EOCODE
+
+    expected_output = %Q(<div class="CodeRay">\n  <div class="code"><pre><span class="keyword">function</span>(){\nconsole.log(<span class="string"><span class="delimiter">'</span><span class="content">hi</span><span class="delimiter">'</span></span>);\n}</pre></div>\n</div>\n<br />\n<br />\nthat was code<br />\n)
 
     @post.filter = 'bbcode'
     @post.content = input

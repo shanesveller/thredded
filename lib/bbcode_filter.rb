@@ -2,18 +2,6 @@ module BbcodeFilter
   require 'bb-ruby'
 
   BB = {
-    'Code' => [
-      /\[code\](.*?)\[\/code\1?\]/mi,
-      '<pre><code>\1</code></pre>',
-      'Code Text',
-      '[code]function(){ return true; }[/code]',
-      :code],
-    'Code with lang' => [
-      /\[code:(.+)?\](.*?)\[\/code\1?\]/mi,
-      '<pre><code lang="\1">\2</code></pre>',
-      'Code Text',
-      '[code:javascript]function(){ return true; }[/code]',
-      :code],
     'Spoilers' => [
       /\[spoiler\](.*?)\[\/spoiler\1?\]/mi,
       '<blockquote class="spoiler">\1</blockquote>',
@@ -25,18 +13,6 @@ module BbcodeFilter
       '<iframe class="youtube" width="560" height="315" src="//www.youtube.com/embed/\4?&rel=0&theme=light&showinfo=0&hd=1&autohide=1&color=white" frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
       'Youtube Video',
       :video],
-    'Quote' => [
-      /\[quote(:.*)?=(?:&quot;)?(.*?)(?:&quot;)?\](.*?)\[\/quote\1?\]/mi,
-      '</p><fieldset><legend><p>\2</p></legend><blockquote>\3</blockquote></fieldset><p>',
-      'Quote with citation',
-      "[quote=mike]Now is the time...[/quote]",
-      :quote],
-    'Quote (Sourceless)' => [
-      /\[quote(:.*)?\](.*?)\[\/quote\1?\]/mi,
-      '</p><fieldset><blockquote><p>\2</p></blockquote></fieldset><p>',
-      'Quote (sourceclass)',
-      "[quote]Now is the time...[/quote]",
-      :quote]
   }
 
   def self.included(base)
@@ -46,6 +22,31 @@ module BbcodeFilter
   end
 
   def filtered_content
-    self.filter.to_sym == :bbcode ? super.bbcode_to_html(BB).html_safe : super
+    if self.filter.to_sym == :bbcode
+      content = replace_code_tags(super)
+      content = replace_quote_tags(content)
+      content = content.bbcode_to_html(BB).html_safe
+      remove_empty_p_tags(content)
+    else
+      super
+    end
+  end
+
+  def replace_code_tags(content)
+    content = content.gsub(/\[code\]/, '<pre><code>')
+    content = content.gsub(/\[code:(\D+?)\]/, '<pre><code lang="\1">')
+    content = content.gsub(/\[\/code\]/, '</code></pre>')
+    content.html_safe
+  end
+
+  def replace_quote_tags(content)
+    content = content.gsub(/\[quote(:.*)?=(?:&quot;)?(.*?)(?:&quot;)?\]/, '</p><fieldset><legend>\2</legend><blockquote><p>')
+    content = content.gsub(/\[quote(:.*?)?\]/, '</p><fieldset><blockquote><p>')
+    content = content.gsub(/\[\/quote\]/, '</p></blockquote></fieldset><p>')
+    content.html_safe
+  end
+
+  def remove_empty_p_tags(content)
+    content.gsub(/&lt;p&gt;\s*?&lt;\/p&gt;/, '')
   end
 end
