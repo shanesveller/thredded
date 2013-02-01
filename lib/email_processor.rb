@@ -3,7 +3,8 @@ class EmailProcessor
 
   def initialize(email)
     @email = email
-    @user, @messageboard = extract_user_and_messageboard
+    @user = find_user
+    @messageboard = find_messageboard
   end
 
   def self.process(email)
@@ -14,24 +15,19 @@ class EmailProcessor
   def create_or_update_topic
     if can_post_to_topic?
       topic = find_or_build_topic
-      topic.posts.build(
+      post = topic.posts.build(
         user: user,
-        user_email: user.email,
         content: email.body,
         source: 'email',
         messageboard: messageboard,
         attachments_attributes: attachment_params,
       )
+      post.user_email = user.email
+
       topic.save
     else
       return false
     end
-  end
-
-  def extract_user_and_messageboard
-    user = User.where(email: email.from).first
-    messageboard = Messageboard.where(name: messageboard_name).first
-    user && messageboard ? [user, messageboard] : []
   end
 
   private
@@ -52,7 +48,7 @@ class EmailProcessor
   end
 
   def find_or_build_topic
-    topic = messageboard.topics.where(hash_id: topic_hash).first
+    topic = find_topic
 
     if topic.nil?
       topic = messageboard.topics.build(title: email.subject)
@@ -64,11 +60,15 @@ class EmailProcessor
     topic
   end
 
-  def messageboard_name
-    email.to.split('-')[0]
+  def find_topic
+    Topic.where(hash_id: email.to).first
   end
 
-  def topic_hash
-    email.to.split('-')[1]
+  def find_messageboard
+    Messageboard.where(name: email.to).first || find_topic.try(:messageboard)
+  end
+
+  def find_user
+    User.where(email: email.from).first
   end
 end

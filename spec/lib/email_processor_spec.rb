@@ -30,35 +30,48 @@ describe EmailProcessor, '.process' do
         title: 'argument', hash_id: '1234')
     end
 
-    it 'creates a new pending topic if no topic specified' do
-      email = build(:email, from: 'john@email.com', to: 'mi',
-        subject: 'introduction', body: 'HI!')
-      EmailProcessor.process(email)
+    context 'to existing topic' do
+      it 'replies to a topic if specified' do
+        email = build(:email, from: 'joel@email.com', to: '1234',
+          subject: 'response', body: 'wrong!')
+        EmailProcessor.process(email)
 
-      latest_topic.pending?.should == true
-      latest_topic.title.should == 'introduction'
-      latest_post.source.should == 'email'
-      latest_post.content.should == 'HI!'
+        latest_topic.pending?.should == false
+        latest_topic.title.should == 'argument'
+        latest_topic.last_user.email.should == 'joel@email.com'
+        latest_post.source.should == 'email'
+        latest_post.content.should == 'wrong!'
+      end
     end
 
-    it 'replies to a topic if specified' do
-      email = build(:email, from: 'joel@email.com', to: 'mi-1234',
-        subject: 'response', body: 'wrong!')
-      EmailProcessor.process(email)
+    context 'to messageboard directly' do
+      it 'creates a new pending topic if no topic specified' do
+        email = build(:email,
+          from: 'john@email.com',
+          to: 'mi',
+          subject: 'introduction',
+          body: 'HI!'
+        )
+        EmailProcessor.process(email)
 
-      latest_topic.pending?.should == false
-      latest_topic.title.should == 'argument'
-      latest_topic.last_user.email.should == 'joel@email.com'
-      latest_post.source.should == 'email'
-      latest_post.content.should == 'wrong!'
-    end
+        latest_topic.pending?.should eq true
+        latest_topic.title.should eq 'introduction'
+        latest_post.source.should eq 'email'
+        latest_post.content.should eq 'HI!'
+      end
 
-    it 'attaches a file' do
-      email = build(:email, :with_attachments, from: 'joel@email.com', to: 'mi',
-        subject: 'photo!', body: 'awesome!')
-      EmailProcessor.process(email)
 
-      latest_post.attachments.should_not be_empty
+      it 'attaches a file' do
+        email = build(:email, :with_attachments,
+          from: 'joel@email.com',
+          to: 'mi',
+          subject: 'photo!',
+          body: 'awesome!'
+        )
+        EmailProcessor.process(email)
+
+        latest_post.attachments.should_not be_empty
+      end
     end
 
     def latest_topic
@@ -68,41 +81,5 @@ describe EmailProcessor, '.process' do
     def latest_post
       Post.last!
     end
-  end
-end
-
-describe EmailProcessor, '.extract_user_and_messageboard' do
-  it 'returns both the user and messageboard if they exist' do
-    email = build(:email, from: 'user@email.com', to: 'mi')
-    user = create(:user, email: 'user@email.com')
-    messageboard = create(:messageboard, name: 'mi')
-    processor = EmailProcessor.new(email)
-
-    processor.extract_user_and_messageboard.should == [user, messageboard]
-  end
-
-  it 'returns user and messageboard if to is for a specific thread' do
-    email = build(:email, from: 'user@email.com', to: 'mi-1234')
-    user = create(:user, email: 'user@email.com')
-    messageboard = create(:messageboard, name: 'mi')
-    processor = EmailProcessor.new(email)
-
-    processor.extract_user_and_messageboard.should == [user, messageboard]
-  end
-
-  it 'returns empty array if user does not match' do
-    email = build(:email, from: 'nope@email.com', to: 'mi')
-    messageboard = create(:messageboard, name: 'mi')
-    processor = EmailProcessor.new(email)
-
-    processor.extract_user_and_messageboard.should == []
-  end
-
-  it 'returns empty array if messageboard does not match' do
-    email = build(:email, from: 'user@email.com', to: 'nope')
-    user = create(:user, email: 'user@email.com')
-    processor = EmailProcessor.new(email)
-
-    processor.extract_user_and_messageboard.should == []
   end
 end
