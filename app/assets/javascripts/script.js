@@ -27,7 +27,7 @@ jQuery(document).ready(function() {
   jQuery("abbr.timeago").timeago();
 
   // chosen
-  jQuery("#topics_new #topic_user_id, #topic_category_ids").chosen();
+  jQuery(".topic_form #topic_user_id, #topic_category_ids").chosen();
 
   // drawer under the topic field
   jQuery('.handle a').bind('click', function(){

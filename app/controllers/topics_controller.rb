@@ -1,13 +1,15 @@
 class TopicsController < ApplicationController
-  before_filter :pad_params,  :only => [:create, :update]
-  before_filter :pad_post,    :only => :create
-  before_filter :pad_topic,   :only => :create
+  before_filter :pad_params,  only: [:create, :update]
+  before_filter :pad_post,    only: :create
+  before_filter :pad_topic,   only: :create
+  helper_method :category_options, :selected_users, :users_options
 
   def index
     if cannot? :read, messageboard
       redirect_to default_home,
         flash: { error: 'You are not authorized access to this messageboard.' }
     end
+
     @sticky = get_sticky_topics
     @topics = get_topics
     @tracked_user_reads = UserTopicRead.statuses_for(current_user, @topics)
@@ -16,6 +18,7 @@ class TopicsController < ApplicationController
   def search
     @topics = get_search_results
     @tracked_user_reads = UserTopicRead.statuses_for(current_user, @topics)
+
     if @topics.length == 0
       redirect_to messageboard_topics_path(messageboard),
         flash: { error: "No topics found for this search." }
@@ -34,13 +37,13 @@ class TopicsController < ApplicationController
 
   def by_category
     @sticky = get_sticky_topics
-    @topics = get_topics_by_category params[:category_id] 
+    @topics = get_topics_by_category params[:category_id]
     @category_name = Category.find(params[:category_id]).name
   end
 
   def create
     @topic = klass.create(params[:topic])
-    redirect_to messageboard_topics_url(messageboard, :host => site.cached_domain)
+    redirect_to messageboard_topics_url(messageboard, host: site.cached_domain)
   end
 
   def edit
@@ -49,16 +52,28 @@ class TopicsController < ApplicationController
 
   def update
     topic.update_attributes(params[:topic])
-    redirect_to messageboard_topic_posts_url(messageboard, topic, :host => site.cached_domain)
+    redirect_to messageboard_topic_posts_url(messageboard, topic, host: site.cached_domain)
   end
 
   private
 
+  def users_options
+    messageboard.users.collect{ |user| [user.name, user.id] }
+  end
+
+  def selected_users
+    { selected: topic.users.map(&:id) }
+  end
+
+  def category_options
+    messageboard.categories.collect { |cat| [cat.name, cat.id] }
+  end
+
   def topic_class
     if params[:type] == 'private'
-      'PrivateTopic'
+      PrivateTopic
     else
-      'Topic'
+      Topic
     end
   end
 
@@ -67,11 +82,19 @@ class TopicsController < ApplicationController
   end
 
   def get_topics_by_category(category_id)
-    topics = Category.find(category_id).topics.unstuck.for_messageboard(messageboard).order_by_updated.on_page(params[:page])
+    topics = Category.find(category_id)
+      .topics
+      .unstuck
+      .for_messageboard(messageboard)
+      .order_by_updated
+      .on_page(params[:page])
   end
 
   def get_topics
-    Topic.unstuck.for_messageboard(messageboard).order_by_updated.on_page(params[:page])
+    Topic
+      .unstuck
+      .for_messageboard(messageboard)
+      .order_by_updated.on_page(params[:page])
   end
 
   def get_sticky_topics
@@ -91,7 +114,8 @@ class TopicsController < ApplicationController
   end
 
   def klass
-    @klass ||= params[:topic][:type].present? ? params[:topic][:type].constantize : Topic
+    @klass ||= params[:topic][:type].present? ?
+      params[:topic][:type].constantize : Topic
   end
 
   def pad_params
@@ -100,7 +124,10 @@ class TopicsController < ApplicationController
   end
 
   def pad_topic
-    params[:topic][:user_id] << current_user.id.to_s if current_user and params[:topic][:user_id].present?
+    if signed_in? && params[:topic][:user_id].present?
+      params[:topic][:user_id] << current_user.id.to_s
+    end
+
     params[:topic][:last_user] = current_user
     params[:topic][:messageboard] = messageboard
   end

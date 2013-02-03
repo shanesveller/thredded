@@ -1,29 +1,34 @@
 <li class="title">
   <%= f.label :title %>
-  <%= f.text_field :title, { placeholder: 'Title', tabindex: 1, autofocus: 'autofocus' } %>
+  <%= f.text_field :title, {
+    placeholder: 'Title',
+    tabindex: 1,
+    autofocus: 'autofocus'
+  } %>
 </li>
 
-<% if params[:type] == "private" -%>
+<% if params[:type] == "private" || f.object.private? %>
   <%= f.hidden_field :type %>
   <li class="private_users">
-    <%= f.select(:user_id, messageboard.users.collect{|u| [u.name, u.id]}, {},
-      { multiple: true, 'data-placeholder' => 'select users to participate in this topic',
-      tabindex: 2 }) %>
+    <%= f.select :user_id, users_options, selected_users, {
+        multiple: true,
+        'data-placeholder' => 'select users to participate in this topic',
+        tabindex: 2
+      } %>
   </li>
-<% end -%>
+<% end %>
 
 <% if messageboard.categories.any? %>
   <li class="category">
-    <% category_options = messageboard.categories.collect { |cat| [cat.name, cat.id] } %>
     <%= f.select :category_ids, category_options, {}, {
         multiple: true,
-        'data-placeholder' => 'Category',
+        'data-placeholder' => 'Categories',
         tabindex: 4
       } %>
   </li>
 <% end %>
 
-<% if current_user && current_user.admins?(messageboard) -%>
+<% if current_user && current_user.admins?(messageboard) %>
   <li class="locked">
     <%= f.label :locked do %>
       Locked <%= f.check_box :locked %>
@@ -31,11 +36,11 @@
   </li>
 
   <li class="sticky">
-    <%= f.label :sticky do -%>
-      Sticky <%= f.check_box :sticky -%>
+    <%= f.label :sticky do %>
+      Sticky <%= f.check_box :sticky %>
     <% end %>
   </li>
-<% end -%>
+<% end %>
 
 <% unless action_name == 'edit' %>
   <%= f.fields_for :posts do |post_form| %>

@@ -3,6 +3,21 @@
   <%= site.title %> | <%= messageboard.title %> | Edit Topic
 <% end %>
 
+<header>
+  <nav>
+    <ul class="breadcrumbs">
+      <li><a href="/">Forums</a></li>
+      <li><%= link_to messageboard.title,
+        messageboard_topic_posts_path(messageboard, topic) %></li>
+      <li>
+        <span>
+          Editing Topic - <%= link_to topic.title, [messageboard, topic] %>
+        </span>
+      </li>
+    </ul>
+  </nav>
+</header>
+
 <div class="forms">
   <ul>
     <%= nested_form_for [@messageboard, @topic],
