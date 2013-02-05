@@ -18,17 +18,10 @@ The second version?  Also terrible.
 
 So, that's right - this is it's 3rd Rails-based incarnation. This time with a full(-ish) test suite.
 
-## An Admission
-
-The Thredded code-base is by no means a pinnacle in software engineering.  I won't be winning any code-quality competitions anytime soon. However, I'm trying my damndest to iterate and improve everything in here constantly. The important thing right now is that this works well for its users and is fun to use.  What's under the hood _will_ get better. For those familiar with the theory of the human "lizard brain" you might notice this admission as my method to push aside the nagging voice and just put this out for people to use.
-
-Poke around the source and take a look. If there's anything that's been overlooked or approached with an ignorant eye, let me know and send me an email.  Or, even better (of course), fork, commit and send a pull request.  I'm open to any and all thoughts.
-
 ## Requirements:
 
-* ImageMagick is installed
 * postgres (search currently only works with pg, using pg's fulltext search capabilities)
-
+* sendgrid (for incoming email)
 
 ## Features:
 
