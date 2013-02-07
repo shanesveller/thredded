@@ -16,3 +16,5 @@ db/sphinx/*
 public/uploads/tmp/*
 bin
 latest.dump
+custom_plan.rb
+zeus.json
