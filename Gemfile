@@ -66,5 +66,5 @@ group :development do
   gem 'letter_opener'
   gem 'pry'
   gem 'sextant'
-  gem 'zeus', '0.13.1'
+  gem 'zeus'
 end

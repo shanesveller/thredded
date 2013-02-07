@@ -368,4 +368,4 @@ DEPENDENCIES
   thin
   timecop
   uglifier
-  zeus (= 0.13.1)
+  zeus
