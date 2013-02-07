@@ -1,4 +1,4 @@
-source 'http://rubygems.org'
+source 'https://rubygems.org'
 
 gem 'RedCloth', '4.2.9'
 gem 'activeadmin', '~> 0.5.0'
