@@ -1,4 +1,5 @@
 class TopicsController < ApplicationController
+  before_filter :ensure_messageboard_exists
   before_filter :pad_params,  only: [:create, :update]
   before_filter :pad_post,    only: :create
   before_filter :pad_topic,   only: :create
@@ -109,10 +110,6 @@ class TopicsController < ApplicationController
     params[:page].nil? || params[:page] == '1'
   end
 
-  def default_home
-    root_url(:host => site.cached_domain)
-  end
-
   def klass
     @klass ||= params[:topic][:type].present? ?
       params[:topic][:type].constantize : Topic
@@ -136,5 +133,12 @@ class TopicsController < ApplicationController
     params[:topic][:posts_attributes]["0"][:messageboard] = messageboard
     params[:topic][:posts_attributes]["0"][:ip] = request.remote_ip
     params[:topic][:posts_attributes]["0"][:user] = current_user
+  end
+
+  def ensure_messageboard_exists
+    if messageboard.blank?
+      redirect_to default_home,
+        flash: { error: 'This messageboard does not exist.' }
+    end
   end
 end

@@ -2,6 +2,7 @@ class PostsController < ApplicationController
   include TopicsHelper
   load_and_authorize_resource only: [:index, :show]
 
+  before_filter :ensure_topic_exists
   before_filter :pad_post, only: :create
   helper_method :messageboard, :topic
   layout 'application'
@@ -66,5 +67,12 @@ class PostsController < ApplicationController
     params[:post][:ip] = request.remote_ip
     params[:post][:user] = current_user
     params[:post][:messageboard] = messageboard
+  end
+
+  def ensure_topic_exists
+    if topic.blank?
+      redirect_to default_home,
+        flash: { error: 'This topic does not exist.' }
+    end
   end
 end

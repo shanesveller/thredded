@@ -53,6 +53,10 @@ class ApplicationController < ActionController::Base
     @site ||= requested_host_site or default_site
   end
 
+  def default_home
+    root_url(host: site.cached_domain)
+  end
+
   def default_site
     @default_site ||= Site.find_by_default_site(true)
   end
@@ -68,7 +72,9 @@ class ApplicationController < ActionController::Base
   end
 
   def topic
-    @topic ||= messageboard.topics.find(params[:topic_id])
+    if messageboard
+      @topic ||= messageboard.topics.find(params[:topic_id])
+    end
   end
 
   def tz_offset

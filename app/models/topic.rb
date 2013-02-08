@@ -127,18 +127,21 @@ class Topic < ActiveRecord::Base
         Topic.model_name
       end
     end
+
     super
   end
 
   def self.select_options
-    subclasses.map{ |c| c.to_s }.sort
+    subclasses.map(&:to_s).sort
   end
 
   def updating?
-    self.id.present?
+    id.present?
   end
 
   def categories_to_sentence
-    self.categories.map{ |c| c.name }.to_sentence if self.categories
+    if categories
+      categories.map(&:name).to_sentence
+    end
   end
 end
