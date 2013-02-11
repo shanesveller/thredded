@@ -2,8 +2,15 @@ Thredded::Application.routes.draw do
   ActiveAdmin.routes(self)
 
   mount_sextant if Rails.env.development?
+  devise_for :users, controllers: { registrations: 'registrations', sessions: 'sessions' }
+  resources :users
+
+  devise_scope :user do
+    match '/auth/:provider/callback', to: 'sessions#create'
+  end
 
   match '/mail/receive' => 'griddler/emails#create', via: :post
+  match '/auth/failure', to: redirect('/')
 
   constraints(SetupThredded.new) do
     root to: 'setups#new'
@@ -11,9 +18,6 @@ Thredded::Application.routes.draw do
     match '/:step' => 'setups#create', constraints: { step: /\d{1}/ }, as: :create_setup, via: :post
     resource :setup
   end
-
-  devise_for :users, controllers: { registrations: 'registrations' }
-  resources :users
 
   constraints(PersonalizedDomain.new) do
     root to: 'messageboards#index'

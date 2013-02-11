@@ -71,6 +71,11 @@ FactoryGirl.define do
     end
   end
 
+  factory :identity do
+    uid '1'
+    provider 'github'
+  end
+
   factory :messageboard do
     sequence(:name) { |n| "messageboard#{n}" }
     sequence(:title) { |n| "Messageboard #{n}" }

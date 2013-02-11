@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   include ActiveModel::Dirty
 
+  has_many :identities
   has_many :sites
   has_many :roles
   has_many :messageboards, through: :roles
@@ -14,21 +15,50 @@ class User < ActiveRecord::Base
 
   after_save :update_posts
 
-  attr_accessible :email, :name, :password, :password_confirmation,
-    :remember_me, :roles_attributes, :time_zone, :post_filter
+  attr_accessible :email,
+    :name,
+    :password,
+    :password_confirmation,
+    :post_filter,
+    :provider,
+    :remember_me,
+    :roles_attributes,
+    :time_zone,
+    :uid
 
   default_scope include: :roles
 
-  devise :database_authenticatable, :recoverable, :registerable, :rememberable,
-    :token_authenticatable, :trackable, :validatable
+  devise :database_authenticatable,
+    :recoverable,
+    :registerable,
+    :rememberable,
+    :token_authenticatable,
+    :trackable
 
-  validates :name, presence: true, uniqueness: true, format: {
-    with: /\A[a-zA-Z0-9]+\z/, message: 'only letters or numbers allowed' }
+  validates :name,
+    presence: true,
+    uniqueness: true,
+    format: {
+      with: /\A[a-zA-Z0-9]+\z/,
+      message: 'only letters or numbers allowed'
+    }
 
-  validates :email, presence: true, length: { minimum: 3, maximum: 254},
-    uniqueness: true, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i,
-    message: 'invalid email address' }
+  validates :email,
+    presence: true,
+    uniqueness: true,
+    length: {
+      minimum: 3,
+      maximum: 254
+    },
+    format: {
+      with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i,
+      message: 'invalid email address'
+    }
 
+  def self.from_omniauth(auth_hash)
+    where(email: auth_hash['info']['email']).first ||
+      create_from_omniauth(auth_hash)
+  end
 
   def mark_active_in!(messageboard)
     @user_role = roles.for(messageboard).first
@@ -80,6 +110,10 @@ class User < ActiveRecord::Base
   end
 
   private
+
+  def self.create_from_omniauth(auth_hash)
+    create!(email: auth_hash['info']['email'], name: auth_hash['info']['nickname'])
+  end
 
   def update_posts
     if self.email_changed?

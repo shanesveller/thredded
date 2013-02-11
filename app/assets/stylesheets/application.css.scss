@@ -1,8 +1,19 @@
-@charset "UTF-8";
-@import "compass";
-@import "font-icons";
+@charset 'UTF-8';
+@import 'compass';
+@import 'font-icons';
 @include font-icon-family(entypo);
 @include font-icon-family(iconic);
+
+@font-face {
+  font-family: 'Socialico';
+  src: url('/fonts/socialico/socialico-webfont.eot');
+  src: url('/fonts/socialico/socialico-webfont.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/socialico/socialico-webfont.woff') format('woff'),
+    url('/fonts/socialico/socialico-webfont.ttf') format('truetype'),
+    url('/fonts/socialico/socialico-webfont.svg#socialicoregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
 
 $sans-serif-font-family: 'Lucida Grande','Trebuchet MS',Arial,Helvetica,sans-serif;
 $serif-font-family: Georgia, Cambria, "Times New Roman", Times, serif;

@@ -52,3 +52,23 @@
     }
   }
 }
+
+.provider {
+  @extend .btn;
+  @extend .btn-square;
+  padding-left: 27px;
+  position: relative;
+
+  &:before {
+    font-family: 'Socialico';
+    font-size: 28px;
+    color: black;
+    text-shadow: 0 1px 0px #ffffff;
+    position: absolute;
+    left: 9px;
+    top: 4px;
+  }
+
+  &.github:before { content: 'G'; }
+}
+

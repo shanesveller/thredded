@@ -1,11 +1,40 @@
 require 'spec_helper'
 
-describe User do
-
+describe User, 'associations' do
   it { should have_many(:preferences) }
   it { should have_many(:sites) }
+  it { should have_many(:identities) }
   it { should eager_load(:roles) }
+end
 
+describe User, '#from_omniauth' do
+  let(:auth_github) {
+    {
+      'provider' => 'github',
+      'uid' => '123',
+      'info' => {
+        'nickname' => 'jayroh',
+        'email' => 'joel@example.com',
+      }
+    }
+  }
+
+  it 'finds user when they exist' do
+    user = create(:user, email: 'joel@example.com')
+
+    User.from_omniauth(auth_github).should eq user
+  end
+
+  it 'creates a user when they do not exist yet' do
+    user = User.from_omniauth(auth_github)
+
+    user.should be_valid
+    user.should be_persisted
+    user.name.should eq 'jayroh'
+  end
+end
+
+describe User do
   describe '#at_notifications_for?' do
     it 'is true for those without any preference' do
       user = build_stubbed(:user)
