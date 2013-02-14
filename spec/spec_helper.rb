@@ -12,6 +12,17 @@ Dir[Rails.root.join('spec/support/**/*.rb')].each {|file| require file }
 
 counter = -1
 
+OmniAuth.config.test_mode = true
+OmniAuth.config.mock_auth[:github] = {
+  'uid' => '12345',
+  'provider' => 'github',
+  'info' => {
+    'email' => 'foo@example.com',
+    'nickname' => 'foobar',
+    'name' => 'Foo Bar'
+  }
+}
+
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
   config.mock_with :mocha
