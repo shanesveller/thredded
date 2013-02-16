@@ -8,6 +8,16 @@
     padding: 14px;
   }
 
+  p {
+    font-size: .8em;
+    line-height: 1.4em;
+    margin-bottom: 20px;
+  }
+
+  hr {
+    margin: 30px 20px;
+  }
+
   fieldset {
     @extend .forms;
     @extend .columnar;

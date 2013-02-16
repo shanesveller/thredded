@@ -5,6 +5,36 @@
 
 <h1>Edit Your Account</h1>
 
+<% if session[:signed_in_with] %>
+  <%= form_tag identity_path, method: :put, class: 'link_identity' do %>
+    <fieldset>
+      <legend>Link Your Account</legend>
+
+      <p>
+        You have logged in with an external service like GitHub, Facebook or Twitter
+        and might have an account here already. If you would like to link your external
+        service's identity with your existing account, submit your email and password below.
+        The next time you log in with that external identity you'll be using the
+        correct account here!
+      </p>
+
+      <ul>
+        <li>
+          <%= label_tag :email %>
+          <%= email_field :identity, :email, autocapitalize: 'off', value: '', placeholder: 'Your account email', autocorrect: 'off' %>
+        </li>
+        <li>
+          <%= label_tag :password %>
+          <%= password_field :identity, :password, placeholder: 'Your account password' %>
+        </li>
+        <li class="submit"><%= submit_tag 'Link Your Account', id: 'identity_submit' %></li>
+      </ul>
+    </fieldset>
+
+    <hr />
+  <% end %>
+<% end %>
+
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name),
   html: { method: :put, class: 'session_mgmt' }) do |f| %>
   <%= devise_error_messages! %>

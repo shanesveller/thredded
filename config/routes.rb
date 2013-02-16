@@ -11,6 +11,7 @@ Thredded::Application.routes.draw do
 
   match '/mail/receive' => 'griddler/emails#create', via: :post
   match '/auth/failure', to: redirect('/')
+  match '/identities' => 'identities#update', as: :identity, via: :put
 
   constraints(SetupThredded.new) do
     root to: 'setups#new'
