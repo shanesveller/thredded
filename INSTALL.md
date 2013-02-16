@@ -16,7 +16,7 @@ Before installing all the gem dependencies take note of which RDBMS you'll be us
 One more file needs to be created - **config/database.yml**. There are two sample database.yml files for both pg and mysql. Copy one of those two files to **config/database.yml** and configure for your environment & database.
 
 *_config/database.yml_* (for postgres)
-
+```
   defaults: &defaults
     adapter: postgresql
     encoding: UTF8
@@ -40,9 +40,10 @@ One more file needs to be created - **config/database.yml**. There are two sampl
     database: thredded_production
     username: username
     password: password
+```
 
 *_config/database.yml_* (for mysql)
-
+```
   defaults: &defaults
     adapter: mysql2
     encoding: utf8
@@ -69,7 +70,7 @@ One more file needs to be created - **config/database.yml**. There are two sampl
     database: thredded_production
     username: username
     password: password
-
+```
 ***
 
 # Setup
