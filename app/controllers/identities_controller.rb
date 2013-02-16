@@ -17,6 +17,7 @@ class IdentitiesController < ApplicationController
   def link_existing_user_to_current_identity
     identity = current_user.identities.where(provider: session[:signed_in_with]).first
     identity.update_attributes(user: existing_user)
+    sign_in existing_user
   end
 
   def existing_user

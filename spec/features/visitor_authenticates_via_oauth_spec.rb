@@ -65,6 +65,7 @@ feature 'Visitor authenticates w/Oauth' do
 
     def signed_in_as_previous_user?
       has_css? '#flash', text: 'Your Github account is now linked to joel@example.com.'
+      find('#user_email').value.should == 'joel@example.com'
     end
 
     def able_to_link_account?
