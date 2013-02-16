@@ -31,6 +31,18 @@ feature 'Visitor authenticates w/Oauth' do
     expect(visitor).to_not be_able_to_link_account
   end
 
+  scenario 'After linking account user should be able to log out and in with right account' do
+    user = the_previous_user
+    visitor = the_new_visitor
+    visitor.signs_up_via_github
+    visitor.links_github_with_existing_account
+    visitor.signs_out
+    visitor.signs_up_via_github
+    visitor.goes_to_edit_account
+
+    expect(visitor).to be_signed_in_as_previous_user
+  end
+
   def the_previous_user
     @the_previous_user ||= create(:user, email: 'joel@example.com', password: 'password')
   end
@@ -50,6 +62,10 @@ feature 'Visitor authenticates w/Oauth' do
       find('#identity_submit').click
     end
 
+    def signs_out
+      visit '/users/sign_out'
+    end
+
     def signs_up_via_github
       visit '/users/sign_in'
       find('a.github').click
@@ -64,13 +80,16 @@ feature 'Visitor authenticates w/Oauth' do
     end
 
     def signed_in_as_previous_user?
-      has_css? '#flash', text: 'Your Github account is now linked to joel@example.com.'
       find('#user_email').value.should == 'joel@example.com'
     end
 
     def able_to_link_account?
-      visit edit_user_registration_path
+      goes_to_edit_account
       has_css? 'legend', text: 'Link Your Account'
+    end
+
+    def goes_to_edit_account
+      visit edit_user_registration_path
     end
   end
 end
