@@ -1,22 +1,18 @@
 # Thredded [![Build Status](https://secure.travis-ci.org/jayroh/thredded.png?branch=master)](https://travis-ci.org/jayroh/thredded) [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/jayroh/thredded)
 
+The vast majority of messageboard, or "forum", software out there is garbage. Either it's old, bloated or boring. Thredded is an effort to be a modern take on the forum/messageboard space with a modern stack, using modern methodologies - ruby, rails, pg, test-driven.
+
+If you're looking for variations on a theme - see [Discourse], [Forem], [Tectura] or [Heterotic Beast]. The last two are forks from Rick Olsen and Courtenay's [Altered Beast]. Of those it should be noted that Forem is an engine - not a standalone app.
+
+[Discourse]: http://www.discourse.org/
+[Forem]: https://www.github.com/radar/forem
+[Tectura]: https://github.com/caelum/tectura
+[Heterotic Beast]: https://github.com/distler/heterotic_beast
+[Altered Beast]: https://www.github.com/courtenay/altered_beast
+
 ## Installation:
 
 If you just want to know how to install - please head to [the Installation instructions](https://github.com/jayroh/thredded/blob/master/INSTALL.md). Details on getting things running on Heroku are included.
-
-## Why?
-
-Two reasons. The vast majority of messageboard, or "forum", software out there is garbage.  And I can't find any current and maintained projects running on Rails (specifically version 3).
-
-## History
-
-This project started years ago as a side project to keep busy while the first big dot-com stuff hit the fan and things on my plate at work got real lean. Back then this was built on PHP with Mysql - like many things. The users knew what they wanted and I wanted to be able to add features without digging through someone else's cess-pool of mangled code.  I wanted my *own* cess-pool of mangled code.
-
-Eventually I discovered RoR and re-developed everything with Rails.  That version was terrible.
-
-The second version?  Also terrible.
-
-So, that's right - this is it's 3rd Rails-based incarnation. This time with a full(-ish) test suite.
 
 ## Requirements:
 
@@ -27,25 +23,47 @@ So, that's right - this is it's 3rd Rails-based incarnation. This time with a fu
 
 Whatever's stricken out still needs to be implemented
 
+* Multi-tenanted - by full domain or subdomain.
 * Security per messageboard - private, public or logged in users only
 * Permissions to post - anonymous, members or logged in users only
 * Attaching images to posts
 * Attaching documents to posts
-* Content Filters - bbcode, textile
-* Locking threads
-* Sticky / Pinned threads
-* Private threads
-* Fully theme'able
+* Content Filters - bbcode, textile, markdown
+* Locking topics
+* Sticky / Pinned topics
+* Private topics
 * Placement of attached images to posts
-* <del>Logging in via twitter, github, facebook, linked in, and Gmail</del>
-* Search
-* <del>Import and Export</del>
+* Logging in via github <del>twitter, facebook, linked in, and Gmail</del>
+* Full-text search
 
+## Testing w/Zeus
 
-## Speeding Up Tests
+I prefer [zeus](https://github.com/burke/zeus) over spork. To run the test suite with zeus visit the zeus repo on github for how to do so: <https://github.com/burke/zeus>
 
-Using [zeus](https://github.com/burke/zeus) now instead of Spork/Guard. Run `zeus start` in a separate terminal. Switch to your active terminal while zeus is running in that separate terminal and ..
+## Contributing
 
-To run the entire suite you can run `zeus rake`, and for either rspec or cucumber `zeus rake spec` and `zeus rake cucumber` respectively.
+Everyone loves pull requests. Here are some guidelines:
 
-For more information visit the zeus repo on github : <https://github.com/burke/zeus>
+1. Fork the repo.
+2. Run the tests. Only pull requests with passing tests will be accepted, and it's great
+   to know that you have a clean slate: `bundle && rake`
+3. Add a test for your change. Only refactoring and documentation changes
+   require no new tests. If you are adding functionality or fixing a bug, it needs
+   a test!
+4. Make the test pass.
+5. I prefer that code adheres to the
+   [thoughtbot Style Guide](https://github.com/thoughtbot/guides/tree/master/style)
+   so take a look there, or know that I might refer to it in PR's. :)
+6. Push to your fork and submit a pull request.
+
+## Thanks / Acknowledgements
+
+* Shaun @thedudewiththething
+* Jim @saturnflyer
+* Caleb @calebthompson
+* Gabe @gabrielpreston
+* Christian @christianmadden
+* Jacob @jacobbednarz
+* Jeffrey @semanticart
+* Nick @qrush
+* The entire MI, JA, LGN and MWA crews (thank you all)

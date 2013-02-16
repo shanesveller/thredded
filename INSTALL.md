@@ -1,21 +1,29 @@
-# Initial Setup
+# Setup
 
-(for heroku - see [the bottom of this file](#heroku))
+I suggest using [RVM] or [RBENV] to manage your ruby VMs. I will assume you are
+using RVM, so if more information is needed please take the time to watch Ryan
+Bates' screencast on [getting started with Ruby on Rails].
 
-I highly suggest using [RVM](https://rvm.beginrescueend.com/) or [RBENV](https://github.com/sstephenson/rbenv) to manage your ruby vm's. I'll assume you're using RVM, so if more information is needed please take the time to watch Ryan Bates' screencast on [getting started with Ruby on Rails](http://railscasts.com/episodes/310-getting-started-with-rails). You should probably watch it anyway.
+[RVM]:https://rvm.beginrescueend.com/
+[RBENV]:https://github.com/sstephenson/rbenv
+[getting started with Ruby on Rails]:http://railscasts.com/episodes/310-getting-started-with-rails
 
 * Install Ruby 1.9.3 -- `rvm install 1.9.3`
 * Install imagemagick, preferably with homebrew -- `brew install imagemagick`
 
 ***
 
-# Config Files
+## Configuration
 
-Before installing all the gem dependencies take note of which RDBMS you'll be using and adjust the Gemfile accordingly. The default is Postgres (the **_pg_** gem) but if you'd like to use Mysql you may comment out `gem 'pg'` and instead use the Mysql2 gem -- `gem 'mysql2'`
+Your database config needs to be created - `config/database.yml`. There is a
+sample `database.yml` file for pg. Copy one of those two files to
+**config/database.yml** and configure for your environment & database.
 
-One more file needs to be created - **config/database.yml**. There are two sample database.yml files for both pg and mysql. Copy one of those two files to **config/database.yml** and configure for your environment & database.
+**NOTE:** Because of the use of Postgres's full-text search capabilities in the
+source, Thredded no longer supports mysql out of the box.
 
-*_config/database.yml_* (for postgres)
+*_config/database.yml_*
+
 ```
   defaults: &defaults
     adapter: postgresql
@@ -42,46 +50,15 @@ One more file needs to be created - **config/database.yml**. There are two sampl
     password: password
 ```
 
-*_config/database.yml_* (for mysql)
-```
-  defaults: &defaults
-    adapter: mysql2
-    encoding: utf8
-    reconnect: false
-    pool: 5
-    username: root
-    password:
-    socket: /tmp/mysql.sock
-
-  development:
-    <<: *defaults
-    database: thredded_dev
-    username: username
-    password: password
-
-  test:
-    <<: *defaults
-    database: thredded_test
-    username: username
-    password: password
-
-  test:
-    <<: *defaults
-    database: thredded_production
-    username: username
-    password: password
-```
 ***
 
-# Setup
+## Setup
 
-Now that those two files are created and the settings are correct we can move on to installing the gems, creating the DB and getting set up.
-
-* Install the gems with
+* Install the gem dependencies with
 
     bundle install
 
-* create the database, migrate the tables and seed with your own data:
+* Create the database, migrate the tables and seed with your own data:
 
     bundle exec rake db:create db:migrate db:test:prepare
 
@@ -89,7 +66,7 @@ Now that those two files are created and the settings are correct we can move on
 
     rails s
 
-* Open your local server up in your browser and follow the setup "wizard". That will help you set up your site and first messageboard, and you should be ready to go!
+* Open your local server up in your browser and follow the setup "wizard". That will help you set up your site and first messageboard
 
 ## Heroku <a name="heroku"></a>
 
