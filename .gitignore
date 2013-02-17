@@ -1,3 +1,5 @@
+.vagrant
+Vagrantfile
 .env
 tags
 public/uploads
