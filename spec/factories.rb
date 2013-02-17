@@ -29,8 +29,8 @@ FactoryGirl.define do
   end
 
   factory :category do
-    name 'Funny'
-    description 'Pictures of cats'
+    sequence(:name) { |n| "category#{n}" }
+    sequence(:description) { |n| "Category #{n}" }
 
     trait :beer do
       name 'Beer'
@@ -159,6 +159,7 @@ FactoryGirl.define do
   factory :topic do
     ignore do
       with_posts 0
+      with_categories 0
     end
 
     user
@@ -171,6 +172,10 @@ FactoryGirl.define do
     after(:create) do |topic, evaluator|
       evaluator.with_posts.times do
         create(:post, topic: topic, messageboard: topic.messageboard)
+      end
+
+      evaluator.with_categories.times do
+        topic.categories << create(:category)
       end
     end
   end

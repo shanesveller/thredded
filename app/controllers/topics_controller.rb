@@ -79,7 +79,7 @@ class TopicsController < ApplicationController
   end
 
   def get_search_results
-    Topic.full_text_search(params[:q], messageboard.id)
+    Topic.full_text_search(params[:q], messageboard)
   end
 
   def get_topics_by_category(category_id)
