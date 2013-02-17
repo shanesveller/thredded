@@ -62,31 +62,15 @@ class Topic < ActiveRecord::Base
     order('updated_at DESC')
   end
 
-  def self.full_text_search(query, messageboard_id)
-    sql = <<-SQL
-      SELECT tops.*, pork.score * 100 as posts_count
-        FROM (
-          SELECT meat.id as id, sum(meat.rank) as score
-            FROM (
-              SELECT t.id as id, ts_rank(setweight(to_tsvector(p.content), 'B'), pquery) as rank
-                FROM topics t, posts p, to_tsquery('english', ?) as pquery
-               WHERE t.messageboard_id = ?
-                 AND t.id              = p.topic_id
-                 AND to_tsvector('english', p.content) @@ pquery
-               UNION ALL
-              SELECT t.id as id, ts_rank( setweight(to_tsvector('english', t.title), 'A'), tquery ) as rank
-                FROM topics t, to_tsquery('english', ?) as tquery
-               WHERE t.messageboard_id = ?
-                 AND to_tsvector('english', t.title) @@ tquery
-                 ) meat
-           GROUP BY meat.id
-           ORDER BY score desc LIMIT 50 OFFSET 0
-             ) pork, topics tops
-           where pork.id = tops.id
-    SQL
-
-    search_words = query.strip.gsub(' ', '&' )
-    find_by_sql [sql, search_words, messageboard_id, search_words, messageboard_id]
+  def self.full_text_search(query, messageboard)
+    if query.empty?
+      []
+    else
+      sql_builder = SearchSqlBuilder.new(query)
+      sql = sql_builder.build
+      sql_params = [sql, messageboard.id].concat(sql_builder.binds)
+      find_by_sql sql_params
+    end
   end
 
   def last_user

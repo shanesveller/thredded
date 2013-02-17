@@ -35,5 +35,10 @@ describe TopicsController do
       get :search, messageboard_id: @messageboard.id, q: '  hi  '
       response.should be_success
     end
+
+    it 'returns nothing when query is empty' do
+      get :search, messageboard_id: @messageboard.id, q: ''
+      flash[:error].should eq("No topics found for this search.")
+    end
   end
 end
