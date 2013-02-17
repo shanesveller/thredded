@@ -78,9 +78,9 @@ h1.setup-header {
 
 }
 
-#flash, .error {
+.error {
     background-color: #ffb6c1 !important;
-    border: 1px solid #b0171f;
+    border: 1px solid #b0171f !important;
     color: #b0171f;
     width: $setup-container-width;
     margin: 0 auto;
