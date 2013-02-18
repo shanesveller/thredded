@@ -17,11 +17,6 @@ section#contentwrap {
   }
 
   section#content {
-    // overflow: hidden;
-    // padding: 8px;
-    // border-right: solid 4px #888;
-    // border-bottom: solid 4px #888;
-
     @include respond-to(xs) { border: none; }
     @include respond-to(s) { border: none; }
   }

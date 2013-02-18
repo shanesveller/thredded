@@ -33,7 +33,6 @@ h1.setup-header {
     line-height: 20px;
   }
 
-  /* Labels and input fields */
   dl {
    width: 100%;
    overflow: hidden;
@@ -49,7 +48,6 @@ h1.setup-header {
    width: 65%;
 
      input {
-      /* Remove the 90's style inset shadow */
       box-shadow: 0 0 0 !important;
       border-radius: 4px;
       -moz-border-radius: 4px;
@@ -57,7 +55,6 @@ h1.setup-header {
       width: 350px;
       padding: 3px 8px;
       color: #838383;
-      /* Extra margin for the error handling text */
       margin-right: 10px;
     }
   }
