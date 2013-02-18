@@ -15,10 +15,10 @@
       <dd>
         <%= f.text_field :name %>
         <br>
-        <span class="setup-explanation-text">
+        <p class="setup-explanation-text">
           A friendly and easy to remember URL for your messageboard
           (alphanumeric characters only).
-        </span>
+        </p>
       </dd>
 
 
@@ -29,10 +29,10 @@
       <dd>
         <%= f.select :security, [:private, :public, :logged_in] %>
         <br>
-        <span class="setup-explanation-text">
+        <p class="setup-explanation-text">
           This will set the visibility of your messageboard to the public
           members.
-        </span>
+        </p>
       </dd>
 
 
@@ -40,9 +40,9 @@
       <dd>
         <%= f.select :posting_permission, [:members, :logged_in, :anonymous] %>
         <br>
-        <span class="setup-explanation-text">
+        <p class="setup-explanation-text">
           The required minimum permissions to post in your messageboard.
-        </span>
+        </p>
       </dd>
     </dl>
 

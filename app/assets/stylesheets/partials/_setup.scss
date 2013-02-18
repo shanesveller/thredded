@@ -1,17 +1,18 @@
 $setup-container-width: 900px;
 $sans-font-stack: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
-.setup-background-tile {
+body#settings {
   background: url('/images/background-tile.jpg') repeat;
-}
 
-h1.setup-header {
-  width: $setup-container-width;
-  margin: 0 auto;
-  background: none !important;
-  font-family: $sans-font-stack;
-  font-size: 25px !important;
-  padding: 10px 0;
+  h1 {
+    width: $setup-container-width;
+    margin: 0 auto;
+    background: none !important;
+    font-family: $sans-font-stack;
+    font-size: 25px !important;
+    padding: 10px 0;
+  }
+
 }
 
 #setup-container {
@@ -23,7 +24,6 @@ h1.setup-header {
 
   color: #646363;
   font-weight: 200;
-  line-height: 35px;
   font-size: 18px;
   font-family: $sans-font-stack;
 
@@ -46,6 +46,7 @@ h1.setup-header {
   dd {
    float: left;
    width: 65%;
+   padding-bottom: 10px;
 
      input {
       box-shadow: 0 0 0 !important;
@@ -68,9 +69,10 @@ h1.setup-header {
     margin-top: 20px;
   }
 
-  .setup-explanation-text {
+  p.setup-explanation-text {
     font-size: 12px;
     line-height: 15px;
+    padding: 3px 0 15px 0;
   }
 
 }

@@ -22,28 +22,28 @@
       <dt><%= f.label :email_from, 'Emails from this site will come from' %></dt>
       <dd><%= f.text_field :email_from %>
         <br>
-        <span class="setup-explanation-text">
+        <p class="setup-explanation-text">
           This is the "no reply" email address you would like to have as your
           "reply-to" address.
-        </span>
+        </p>
       </dd>
 
       <dt><%= f.label :email_subject_prefix %></dt>
       <dd><%= f.text_field :email_subject_prefix %>
         <br>
-        <span class="setup-explanation-text">
+        <p class="setup-explanation-text">
           This will prepend email subjects from your site. Eg: <em>"[Thredded]
           You have been sent a new private topic"</em>
-        </span>
+        </p>
       </dd>
 
       <dt><%= f.label :incoming_email_host %></dt>
       <dd><%= f.text_field :incoming_email_host %>
         <br>
-        <span class="setup-explanation-text">
+        <p class="setup-explanation-text">
           This incoming email host is the hostname you set at your email relay
           provider. Eg: <em>reply.yourwebsite.com</em>
-        </span>
+        </p>
       </dd>
     </dl>
 
