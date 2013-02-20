@@ -4,7 +4,10 @@ class PrivateTopic < Topic
   attr_accessible :user_id
 
   def add_user(user)
-    user = User.find_by_name(user) if String == user.class
+    if String == user.class
+      user = User.find_by_name(user)
+    end
+
     users << user
   end
 
@@ -18,11 +21,11 @@ class PrivateTopic < Topic
 
   def user_id=(ids)
     if ids.size > 0
-      self.users = User.where(:id => ids.uniq)
+      self.users = User.where(id: ids.uniq)
     end
   end
 
   def users_to_sentence
-    users.map{ |u| u.name.capitalize }.to_sentence
+    users.map{ |user| user.name.capitalize }.to_sentence
   end
 end

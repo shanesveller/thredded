@@ -21,6 +21,25 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  protected
+
+  def merge_default_topics_params
+    params.deep_merge!({
+      topic: {
+        last_user: current_user,
+        messageboard: messageboard,
+        user: current_user,
+        posts_attributes: {
+          '0' => {
+            messageboard: messageboard,
+            ip: request.remote_ip,
+            user: current_user,
+          }
+        }
+      }
+    })
+  end
+
   private
 
   def extra_data
@@ -88,6 +107,13 @@ class ApplicationController < ActionController::Base
   def touch_last_seen
     if current_user && messageboard
       current_user.mark_active_in!(messageboard)
+    end
+  end
+
+  def ensure_messageboard_exists
+    if messageboard.blank?
+      redirect_to default_home,
+        flash: { error: 'This messageboard does not exist.' }
     end
   end
 end

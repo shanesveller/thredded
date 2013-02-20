@@ -7,43 +7,4 @@
   } %>
 </li>
 
-<% if params[:type] == "private" || f.object.private? %>
-  <%= f.hidden_field :type %>
-  <li class="private_users">
-    <%= f.select :user_id, users_options, selected_users, {
-        multiple: true,
-        'data-placeholder' => 'select users to participate in this topic',
-        tabindex: 2
-      } %>
-  </li>
-<% end %>
-
-<% if messageboard.categories.any? %>
-  <li class="category">
-    <%= f.select :category_ids, category_options, {}, {
-        multiple: true,
-        'data-placeholder' => 'Categories',
-        tabindex: 4
-      } %>
-  </li>
-<% end %>
-
-<% if current_user && current_user.admins?(messageboard) %>
-  <li class="locked">
-    <%= f.label :locked do %>
-      Locked <%= f.check_box :locked %>
-    <% end %>
-  </li>
-
-  <li class="sticky">
-    <%= f.label :sticky do %>
-      Sticky <%= f.check_box :sticky %>
-    <% end %>
-  </li>
-<% end %>
-
-<% unless action_name == 'edit' %>
-  <%= f.fields_for :posts do |post_form| %>
-    <%= render partial: 'posts/form', locals: { f: post_form } %>
-  <% end %>
-<% end %>
+<%= render partial: 'topic_form', locals: { f: f, messageboard: messageboard } %>

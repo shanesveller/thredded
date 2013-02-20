@@ -35,7 +35,7 @@ When /^I enter a title "([^"]*)" with content "([^"]*)"$/ do |title, content|
 end
 
 When /^I submit the form$/ do
-  click_button "Create New Topic"
+  find('.submit input').click
 end
 
 Given /^a thread already exists on "([^"]*)"$/ do |board|

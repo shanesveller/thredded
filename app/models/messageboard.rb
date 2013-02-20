@@ -28,6 +28,7 @@ class Messageboard < ActiveRecord::Base
   has_many :posts
   has_many :roles
   has_many :topics
+  has_many :private_topics
   has_many :users, through: :roles
 
   def active_users

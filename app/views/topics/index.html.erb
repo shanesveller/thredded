@@ -15,7 +15,7 @@
         <li class='new_topic'><%= link_to 'new topic',
           new_messageboard_topic_path(messageboard) %></li>
         <li class='new_private_topic'><%= link_to 'private topic',
-          new_messageboard_topic_path(messageboard, type: 'private') %></li>
+          new_messageboard_private_topic_path(messageboard) %></li>
       <%- end -%>
     </ul>
   </nav>

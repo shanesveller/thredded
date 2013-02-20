@@ -1,0 +1,19 @@
+<li class="title">
+  <%= f.label :title %>
+  <%= f.text_field :title, {
+    placeholder: 'Title',
+    tabindex: 1,
+    autofocus: 'autofocus'
+  } %>
+</li>
+
+<li class="private_users">
+  <%= f.select :user_id, messageboard.users_options,
+      { selected: f.object.users.map(&:id) }, {
+        multiple: true,
+        'data-placeholder' => 'select users to participate in this topic',
+        tabindex: 2
+      } %>
+</li>
+
+<%= render partial: 'topics/topic_form', locals: { f: f, messageboard: messageboard } %>

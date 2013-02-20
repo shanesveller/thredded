@@ -54,6 +54,10 @@ class Ability
 
     can :manage, PrivateTopic, user_id: user.id
 
+    can :create, PrivateTopic do |private_topic|
+      user.member_of?(private_topic.messageboard)
+    end
+
     can :read, PrivateTopic do |private_topic|
       private_topic.users.include?(user)
     end
