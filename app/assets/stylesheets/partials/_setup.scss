@@ -4,6 +4,10 @@ $sans-font-stack: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 body#settings {
   background: url('/images/background-tile.jpg') repeat;
 
+  section#contentwrap section#content {
+    background: transparent;
+  }
+
   h1 {
     width: $setup-container-width;
     margin: 0 auto;

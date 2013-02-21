@@ -17,6 +17,8 @@ section#contentwrap {
   }
 
   section#content {
+    overflow: hidden;
+    background: #fff;
     @include respond-to(xs) { border: none; }
     @include respond-to(s) { border: none; }
   }
