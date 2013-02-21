@@ -66,6 +66,7 @@ class SearchSqlBuilder
 
   def parse_by
     search_users = []
+
     @terms.each do |term|
 
       if term.include? 'by:'
