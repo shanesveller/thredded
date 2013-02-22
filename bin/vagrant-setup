@@ -32,11 +32,14 @@ echo "${txtgreen}* Installing ruby.${txtreset}"
 echo ''
 
 cd ~
-curl -O ftp://ftp.ruby-lang.org/pub/ruby/ruby-1.9.3-p385.tar.gz
-tar -xzf ruby-1.9.3-p385.tar.gz
-cd ~/ruby-1.9.3-p385/ext/openssl && ruby extconf.rb
-cd ~/ruby-1.9.3-p385/ext/readline && ruby extconf.rb
-cd ~/ruby-1.9.3-p385 && ./configure && make && sudo make install && cd ~
+
+DOWNLOAD_RUBY=ruby-1.9.3-p392
+curl -O ftp://ftp.ruby-lang.org/pub/ruby/$DOWNLOAD_RUBY.tar.gz
+tar -xzf $DOWNLOAD_RUBY.tar.gz
+cd ~/$DOWNLOAD_RUBY/ext/openssl && ruby extconf.rb
+cd ~/$DOWNLOAD_RUBY/ext/readline && ruby extconf.rb
+cd ~/$DOWNLOAD_RUBY
+./configure && make && sudo make install && cd ~
 export PATH=/usr/local/bin:$PATH
 echo "export PATH=/usr/local/bin:\$PATH" >> ~/.bashrc
 sudo gem install bundler
