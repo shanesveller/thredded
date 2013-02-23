@@ -4,7 +4,7 @@ body {
 
 section#contentwrap {
   margin: 1em 2.5%;
-  width: 95%; 
+  width: 95%;
 
   @include respond-to(xs) {
     margin: 0;
@@ -19,10 +19,8 @@ section#contentwrap {
   section#content {
     overflow: hidden;
     background: #fff;
-    border-right: solid 4px #888;
-    border-bottom: solid 4px #888;
-
     @include respond-to(xs) { border: none; }
     @include respond-to(s) { border: none; }
   }
+
 }

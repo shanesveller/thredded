@@ -1,42 +1,52 @@
 <%= form_for(@site, validate: true, as: :site,
   url: create_setup_path(step: step || '2'), method: :post) do |f| %>
   <%= f.hidden_field :default_site, value: true %>
-  <ul>
-    <li>
-      <%= f.label :title %>
-      <%= f.text_field :title %>
-    </li>
 
-    <li>
-      <%= f.label :description %>
-      <%= f.text_field :description %>
-    </li>
+  <div id="setup-container">
+    <p class="setup-overview-text">
+      Below are the global configuration options for your messageboard.
+      These can be altered at a later date by visiting the administration
+      section of your thredded messageboard.
+    </p>
 
-    <li>
-      <%= f.label :cname_alias, 'Site Domain' %>
-      <%= f.text_field :cname_alias, value: request.host %>
-    </li>
+    <dl>
+      <dt><%= f.label :title %></dt>
+      <dd><%= f.text_field :title %></dd>
 
-    <li>
-      <%= f.label :email_from, 'Emails from this site will come from' %>
-      <%= f.text_field :email_from %>
-      <span>This is the "no reply" email address you would like to have as your "reply-to" address.</span>
-    </li>
+      <dt><%= f.label :description %></dt>
+      <dd><%= f.text_field :description %></dd>
 
-    <li>
-      <%= f.label :email_subject_prefix %>
-      <%= f.text_field :email_subject_prefix %>
-      <span>This will prepend email subjects from your site. Eg: <em>"[Thredded] You have been sent a new private topic"</em></span>
-    </li>
+      <dt><%= f.label :cname_alias, 'Site Domain' %></dt>
+      <dd><%= f.text_field :cname_alias, value: request.host %></dd>
 
-    <li>
-      <%= f.label :incoming_email_host %>
-      <%= f.text_field :incoming_email_host %>
-      <span>If you plan on using something like the <a href="http://sendgrid.com/docs/API_Reference/Webhooks/parse.html" target="_blank">Sendgrid Parse</a> service (recommended) you will be able to process incoming emails. This incoming email host is the hostname you set at Sendgrid. Eg: <em>reply.yourwebsite.com</em></span>
-    </li>
+      <dt><%= f.label :email_from, 'Emails from this site will come from' %></dt>
+      <dd><%= f.text_field :email_from %>
+        <br>
+        <p class="setup-explanation-text">
+          This is the "no reply" email address you would like to have as your
+          "reply-to" address.
+        </p>
+      </dd>
 
-    <li>
-      <%= f.submit 'Continue' %>
-    </li>
-  </ul>
+      <dt><%= f.label :email_subject_prefix %></dt>
+      <dd><%= f.text_field :email_subject_prefix %>
+        <br>
+        <p class="setup-explanation-text">
+          This will prepend email subjects from your site. Eg: <em>"[Thredded]
+          You have been sent a new private topic"</em>
+        </p>
+      </dd>
+
+      <dt><%= f.label :incoming_email_host %></dt>
+      <dd><%= f.text_field :incoming_email_host %>
+        <br>
+        <p class="setup-explanation-text">
+          This incoming email host is the hostname you set at your email relay
+          provider. Eg: <em>reply.yourwebsite.com</em>
+        </p>
+      </dd>
+    </dl>
+
+    <%= f.submit 'Continue', :class => 'btn setup-continue-btn' %>
+  </div>
 <% end %>

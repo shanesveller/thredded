@@ -1,28 +1,28 @@
 <%= form_for(@user, validate: true, as: :user,
   url: create_setup_path(step: step || '1'), method: :post) do |f| %>
-  <ul>
-    <li>
-      <%= f.label :name, 'Username' %>
-      <%= f.text_field :name %>
-    </li>
 
-    <li>
-      <%= f.label :email %>
-      <%= f.text_field :email %>
-    </li>
+  <div id="setup-container">
+    <p class="setup-overview-text">
+      It is easy to get started with thredded.
+      By following these simple steps you will be on your way to creating
+      your own community.
+    </p>
 
-    <li>
-      <%= f.label :password %>
-      <%= f.password_field :password %>
-    </li>
+    <dl>
+      <dt><%= f.label :name, 'Username' %></dt>
+      <dd><%= f.text_field :name %></dd>
 
-    <li>
-      <%= f.label :password_confirmation %>
-      <%= f.password_field :password_confirmation %>
-    </li>
+      <dt><%= f.label :email %></dt>
+      <dd><%= f.text_field :email %></dd>
 
-    <li>
-      <%= f.submit 'Continue' %>
-    </li>
-  </ul>
+      <dt><%= f.label :password %></dt>
+      <dd><%= f.password_field :password %></dd>
+
+      <dt><%= f.label :password_confirmation %></dt>
+      <dd><%= f.password_field :password_confirmation %></dd>
+    </dl>
+
+    <%= f.submit 'Continue', :class => 'btn setup-continue-btn' %>
+</div>
+
 <% end %>
