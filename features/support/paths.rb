@@ -30,6 +30,9 @@ module NavigationHelpers
       messageboard = @site.messageboards.find_by_name($1)
       new_messageboard_private_topic_url(messageboard, host: @site.cached_domain)
 
+    when /the forum listing page/i
+      messageboards_url(host: @site.cached_domain)
+
     when /the topic listing page/i
       messageboard = @site.messageboards.first
       messageboard_topics_url(messageboard, host: @site.cached_domain)

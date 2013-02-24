@@ -2,6 +2,26 @@ require 'spec_helper'
 require 'cancan/matchers'
 
 describe User, 'abilities' do
+  context 'for a private messageboard' do
+    it 'allows a member to view it' do
+      user = build_stubbed(:user)
+      messageboard = build_stubbed(:messageboard, :private)
+      user.stubs(member_of?: true)
+      ability = Ability.new(user)
+
+      ability.should be_able_to(:read, messageboard)
+    end
+
+    it 'does not allow a non-members to view it' do
+      user = build_stubbed(:user)
+      messageboard = build_stubbed(:messageboard, :private)
+      user.stubs(member_of?: false)
+      ability = Ability.new(user)
+
+      ability.should_not be_able_to(:read, messageboard)
+    end
+  end
+
   context 'for a public site' do
     it 'allows any user' do
       ability = Ability.new(User.new)

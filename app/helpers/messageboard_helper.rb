@@ -1,13 +1,4 @@
 module MessageboardHelper
-
-  def privacy_class(messageboard)
-    if can? :read, messageboard
-      ''
-    else
-      'private'
-    end
-  end
-
   def link_or_text_to(messageboard)
     @link_or_text = ''
 

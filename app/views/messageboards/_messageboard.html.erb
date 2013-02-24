@@ -1,4 +1,5 @@
-  <div class="messageboard <%= privacy_class(messageboard) %>">
+<% if can? :read, messageboard %>
+  <div class="messageboard">
     <header>
       <h2><%= link_or_text_to(messageboard) %></h2>
       <div class="meta"><%= meta_for(messageboard) %></div>
@@ -13,3 +14,4 @@
       </p>
     </footer>
   </div>
+<% end %>

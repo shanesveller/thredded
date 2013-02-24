@@ -83,6 +83,10 @@ FactoryGirl.define do
     theme 'default'
     security 'public'
     posting_permission  'anonymous'
+
+    trait :private do
+      security 'private'
+    end
   end
 
   factory :post do
