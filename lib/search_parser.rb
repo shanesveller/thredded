@@ -5,30 +5,41 @@ class SearchParser
   end
 
   def parse
-    parse_keywords.concat(parse_text)
+    parsed_input = parse_keywords
+    parsed_input['text'] = parse_text
+
+    parsed_input
     #['Alpine', 'Spring', '"Alpine Spring"', 'in:Beer', 'by:shaun']
+    # {'in' => [Beer, Stupid],
+    # by => [shaun, joel],
+    # text => [Alpine, Spring, "Alpine Spring"] }
   end
 
   def parse_keywords
-    found_terms = []
+    found_terms_hash = {}
 
     @keywords.each do |keyword|
-      regex = Regexp.new(keyword+'\s*:\s*\w+')
-      found_for_keyword = @query.scan(regex)
+      regex = Regexp.new(keyword+'\s*:\s*\w+', Regexp::IGNORECASE)
+      keyword_scan = @query.scan(regex)
       @query = @query.gsub(regex, '')
-      if found_for_keyword.present?
-        found_terms.concat( found_for_keyword )
+      if keyword_scan.present?
+        keyword_scan.each do |term|
+          keyword_term = term.gsub(' ', '').split(':')
+          if found_terms_hash[keyword].nil?
+            found_terms_hash[keyword] = []
+          end
+          found_terms_hash[keyword] << keyword_term[1]
+        end
       end
     end
 
-    found_terms = found_terms.map {|term| term.gsub(' ', '') }
-    found_terms.uniq
+    found_terms_hash
   end
 
   def parse_text
     regex = Regexp.new('\"[^"]*\"')
     found_terms = @query.scan(regex)
     @query = @query.sub(regex,'')
-    found_terms.concat( @query.split(/\s+/) )
+    found_terms.concat(@query.split(/\s+/))
   end
 end

@@ -66,9 +66,9 @@ class Topic < ActiveRecord::Base
     if query.empty?
       []
     else
-      sql_builder = SearchSqlBuilder.new(query)
+      sql_builder = SearchSqlBuilder.new(query, messageboard)
       sql = sql_builder.build
-      sql_params = [sql, messageboard.id].concat(sql_builder.binds)
+      sql_params = [sql].concat(sql_builder.binds)
       find_by_sql sql_params
     end
   end
