@@ -10,6 +10,10 @@ module PageObject
 
     def signs_up_via_github
       visit '/users/sign_in'
+      clicks_github_sign_in_link
+    end
+
+    def clicks_github_sign_in_link
       find('a.github').click
     end
 

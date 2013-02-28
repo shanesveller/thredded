@@ -25,5 +25,20 @@ module PageObject
       goes_to_edit_account
       has_css? 'legend', text: 'Link Your Account'
     end
+
+    def visits_the_latest_thread_on(messageboard)
+      topic = messageboard.topics.order('id desc').first
+      visit messageboard_topic_posts_path(messageboard, topic)
+    end
+
+    def on_latest_thread_on?(messageboard)
+      topic = messageboard.topics.order('id desc').first
+      find('header .breadcrumbs').has_content?(topic.title)
+    end
+
+    def submits_email_address
+      fill_in 'user_email', with: 'joel@example.com'
+      find('.submit input').click
+    end
   end
 end

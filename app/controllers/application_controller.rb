@@ -57,7 +57,7 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource_or_scope)
-    site_home
+    session[:redirect_url] || site_home
   end
 
   def after_sign_out_path_for(resource_or_scope)

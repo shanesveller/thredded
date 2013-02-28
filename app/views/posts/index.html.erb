@@ -44,18 +44,23 @@
 <footer>
   <%= paginate @posts %>
 
-  <% if messageboard.postable_by?(current_user) && !topic.locked -%>
+  <% if messageboard.postable_by?(current_user) && !topic.locked %>
     <div class="forms">
       <%= nested_form_for([messageboard, topic, @post],
         url: create_messageboard_topic_post_url(messageboard, topic, @post, host: site.cached_domain),
         html: { multipart: true }) do |f| %>
         <ul>
           <%= render partial: 'form', locals: { f: f } %>
-          <li class="submit"><%= f.submit "Submit reply", { tabindex: 3 } %></li>
+          <li class="submit"><%= f.submit 'Submit reply', { tabindex: 3 } %></li>
         </ul>
-      <% end -%>
+      <% end %>
     </div>
-  <% end -%>
+  <% elsif !signed_in? %>
+    <div class="sign_in_to_post">
+      <%= render partial: 'login_form',
+        locals: { resource: User.new, resource_name: :user } %>
+    </div>
+  <% end %>
 
   <nav>
     <ul class="breadcrumbs">
@@ -68,7 +73,7 @@
 
           <% if (current_user && current_user.admins?(messageboard)) || topic.user == current_user  -%>
             <%= link_to 'edit', edit_messageboard_topic_path(messageboard, topic) %>
-          <% end -%>
+          <% end %>
         </span>
       </li>
     </ul>

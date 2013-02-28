@@ -1,0 +1,27 @@
+<% content_for :page_id do %>session_mgmt<% end %>
+<% content_for :page_title do %>
+  <%= site.title %> | Your email address
+<% end %>
+
+<h1>Your Email Address</h1>
+
+<%= form_for :user, url: user_session_path, html: { method: :post } do |f| %>
+  <fieldset id="email_address">
+    <ul>
+      <li>
+        In order to create your account we're going to need your email address.
+        <small>We <strong>promise</strong> not to share it. Seriously!</small>
+      </li>
+
+      <li>
+        <%= f.label :email %>
+        <%= f.text_field :email, autofocus: 'autofocus',
+          placeholder: 'Your email address' %>
+      </li>
+
+      <li class="submit">
+        <%= submit_tag 'Submit your email' %>
+      </li>
+    </ul>
+  </fieldset>
+<% end %>

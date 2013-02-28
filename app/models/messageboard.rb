@@ -52,11 +52,12 @@ class Messageboard < ActiveRecord::Base
 
   def postable_by?(user)
     if self.posting_for_anonymous? && (self.restricted_to_private? || self.restricted_to_logged_in?)
-        return false
+        false
+    else
+      self.posting_for_anonymous? ||
+        (self.posting_for_logged_in? && user.try(:valid?)) ||
+        (self.posting_for_members? && user.try(:member_of?, self))
     end
-    self.posting_for_anonymous? ||
-    (self.posting_for_logged_in? && user.try(:valid?)) ||
-    (self.posting_for_members? && user.try(:member_of?, self))
   end
 
   def posting_for_anonymous?

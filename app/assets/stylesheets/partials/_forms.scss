@@ -456,3 +456,18 @@ input.input-search {
     }
   }
 }
+
+.sign_in_to_post {
+  @extend .forms;
+  padding-top: 15px;
+  padding-bottom: 5px;
+
+  h3 {
+    margin: 0 0 15px 0;
+  }
+
+  a {
+    font-size: .8em;
+    text-decoration: none;
+  }
+}

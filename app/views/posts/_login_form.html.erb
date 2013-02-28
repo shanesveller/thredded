@@ -1,0 +1,36 @@
+<%= form_for(resource, as: resource_name, url: session_path(resource_name),
+  html: { class: 'session_mgmt' }) do |f| %>
+  <input name="after_sign_in_redirect" type="hidden" value="<%= request.fullpath %>" />
+
+  <h3>
+    Sign in below to respond.
+  </h3>
+  <ul>
+    <li>
+      <%= f.email_field :email, autocapitalize: 'off',
+        autocorrect: 'off', autofocus: 'autofocus', placeholder: 'Email' %>
+    </li>
+
+    <li>
+      <%= f.password_field :password, placeholder: 'Password' %>
+    </li>
+
+    <% if devise_mapping.rememberable? %>
+      <li>
+        <%= f.label :remember_me do %>
+          <%= f.check_box :remember_me %>
+          Remember me
+        <% end %>
+      </li>
+    <% end %>
+
+    <li class="submit">
+      <%= f.submit 'Sign in' %>
+      <%= link_to 'Sign in with Github', auth_github_path(origin: request.fullpath), class: 'provider github' %>
+    </li>
+    <li>
+      <%= link_to 'Sign up for an account', new_user_registration_path %>
+    </li>
+  </ul>
+<% end %>
+
