@@ -10,6 +10,10 @@ If you're looking for variations on a theme - see [Discourse], [Forem], [Tectura
 [Heterotic Beast]: https://github.com/distler/heterotic_beast
 [Altered Beast]: https://www.github.com/courtenay/altered_beast
 
+## Demo
+
+Check out [Thredded.com](https://www.thredded.com/) for a taste. 
+
 ## Installation:
 
 If you just want to know how to install - please head to [the Installation instructions](https://github.com/jayroh/thredded/blob/master/INSTALL.md). Details on getting things running on Heroku are included.
