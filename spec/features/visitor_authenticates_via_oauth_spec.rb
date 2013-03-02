@@ -1,4 +1,5 @@
 require 'spec_helper'
+require_relative '../support/page_objects/visitor'
 
 feature 'Visitor authenticates w/Oauth' do
   before do
@@ -48,48 +49,6 @@ feature 'Visitor authenticates w/Oauth' do
   end
 
   def the_new_visitor
-    Visitor.new
-  end
-
-  class Visitor
-    include Capybara::DSL
-    include Rails.application.routes.url_helpers
-
-    def links_github_with_existing_account
-      visit edit_user_registration_path
-      fill_in 'identity_email', with: 'joel@example.com'
-      fill_in 'identity_password', with: 'password'
-      find('#identity_submit').click
-    end
-
-    def signs_out
-      visit '/users/sign_out'
-    end
-
-    def signs_up_via_github
-      visit '/users/sign_in'
-      find('a.github').click
-    end
-
-    def seeing_notice_to_link_account?
-      has_content? 'If you would like to link'
-    end
-
-    def logged_in?
-      has_css? 'header nav a', text: 'Logout'
-    end
-
-    def signed_in_as_previous_user?
-      find('#user_email').value.should == 'joel@example.com'
-    end
-
-    def able_to_link_account?
-      goes_to_edit_account
-      has_css? 'legend', text: 'Link Your Account'
-    end
-
-    def goes_to_edit_account
-      visit edit_user_registration_path
-    end
+    PageObject::Visitor.new
   end
 end
