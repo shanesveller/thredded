@@ -7,6 +7,12 @@ Given /^a new thread by "([^"]*)" named "([^"]*)" exists on "([^"]*)"$/ do |user
   @post = create(:post, user: @user, topic: @topic)
 end
 
+Given /^"(.*?)" is in the "(.*?)" category$/ do |title, category|
+  category = create(:category, name: category)
+  messageboard = @topic.messageboard
+  messageboard.categories << category
+end
+
 Given /^the latest thread on "([^"]*)" has several posts$/ do |messageboard|
   step %{a new thread by "joel" named "oh hello" exists on "#{messageboard}"}
 

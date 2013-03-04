@@ -29,5 +29,6 @@ Background: Default site and messageboard
   Scenario: An admin edits someone elses thread
      Given I am an admin for "thredded"
        And a new thread by "sal" named "sup dudes" exists on "thredded"
+       And "sup dudes" is in the "funny" category
       When I go to edit the latest thread
       Then I should be able to edit this thread
