@@ -12,7 +12,9 @@ If you're looking for variations on a theme - see [Discourse], [Forem], [Tectura
 
 ## Demo
 
-Check out [Thredded.com](https://www.thredded.com/) for a taste. 
+Check out [thredded.com](https://www.thredded.com/) for a live demo or [check out a few screenshots](http://imgur.com/a/CZ277).
+
+<a href="http://imgur.com/7X0Wrh9"><img src="http://i.imgur.com/7X0Wrh9.png" title="" alt="" /></a>
 
 ## Installation:
 
