@@ -42,11 +42,13 @@ describe PrivateTopicNotifier, '#private_topic_recipients' do
     john = create(:user)
     site = create(:site)
     messageboard = create(:messageboard, site: site)
-    private_topic = create(:private_topic, user: john, users: [john, joel, sam],
-      posts: [create(:post)], messageboard: messageboard)
+    private_topic = create(:private_topic, user: john,
+      users: [john, joel, sam], messageboard: messageboard)
+    create(:post, content: 'hi', topic: private_topic)
+
     PrivateTopicNotifier.new(private_topic).notifications_for_private_topic
 
     private_topic.posts.first.post_notifications.map(&:email)
-      .should eq([joel.email, sam.email])
+      .should eq(['sam@example.com', 'joel@example.com'])
   end
 end

@@ -9,11 +9,14 @@ describe PostMailer, 'at_notification' do
     john = build_stubbed(:user, email: 'john@email.com')
     sam = build_stubbed(:user, email: 'sam@email.com')
     topic = build_stubbed(:topic, hash_id: 'abcd', title: 'A title')
+
     post = build_stubbed(:post, topic: topic, user: joel,
       content: 'hey @john @sam blarghy blurp')
     post.messageboard.stubs(:site).returns(site)
-    users = [john, sam]
-    @mail = PostMailer.at_notification(post, users)
+    Post.stubs(:find).returns(post)
+
+    emails = ['john@email.com', 'sam@email.com']
+    @mail = PostMailer.at_notification(post.id, emails)
   end
 
   it 'sets the correct headers' do

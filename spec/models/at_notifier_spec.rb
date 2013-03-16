@@ -54,8 +54,7 @@ describe AtNotifier, '#notifications_for_at_users' do
     sam  = create(:user, name: 'sam')
     @joel = create(:user, name: 'joel', email: 'joel@example.com')
     @john = create(:user, name: 'john', email: 'john@example.com')
-    @post = create(:post, user: sam, content: 'hey @joel and @john. - @sam')
-    @post.messageboard.site = create(:site)
+    @post = create_post_by(sam)
     @joel.member_of @post.messageboard
     @john.member_of @post.messageboard
     sam.member_of @post.messageboard
@@ -69,5 +68,12 @@ describe AtNotifier, '#notifications_for_at_users' do
     notified_emails.should have(2).items
     notified_emails.should include('joel@example.com')
     notified_emails.should include('john@example.com')
+  end
+
+  def create_post_by(user)
+    site = create(:site)
+    messageboard = create(:messageboard, site: site)
+    create(:post, user: user,
+      content: 'hi @joel and @john. @sam', messageboard: messageboard)
   end
 end

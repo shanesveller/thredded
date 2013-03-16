@@ -51,24 +51,29 @@ When /^I submit some drivel like "([^"]*)"$/ do |content|
 end
 
 Given /^I create the following new threads:$/ do |topics_table|
-  u = User.last
-  m = Messageboard.first
-  topics_table.hashes.each_with_index { |topic, i|
-    # travel 10 seconds in the future so all new topics aren't at the same time
-    Timecop.travel(Time.now.advance(seconds: i*10))
+  user = User.last
+  messageboard = Messageboard.first
 
-    # create topics and posts
-    t = m.topics.create(last_user: u, title: topic[:title], messageboard: m, user: u, post_count: 1)
-    p = t.posts.create(content: topic[:content], user: u, messageboard: m)
-  }
+  topics_table.hashes.each_with_index do |topic, i|
+    Timecop.travel(10.seconds.from_now) do
+      new_topic = messageboard.topics.create(last_user: user,
+        title: topic[:title], messageboard: messageboard, user: user,
+        post_count: 1)
+
+      new_topic.posts.create(content: topic[:content],
+        user: user, messageboard: messageboard)
+    end
+  end
 end
 
 Then /^the topic listing should look like the following:$/ do |topics_table|
   html = Capybara::Node::Simple.new(body)
+
   cells = html.
     all('#content article h1 a, #content article .post_count, #content article .started_by a, #content article .updated_by a, #content article div').
     map(&:text).
     collect_every(4)
+
   table = cells.insert(0, ['Posts','Topic Title','Started','Updated'])
   topics_table.diff!(table)
 end
@@ -101,7 +106,9 @@ end
 Given /^a private thread exists between "([^"]*)" and "([^"]*)" titled "([^"]*)"$/ do |user1, user2, title|
   @user1 = create(:user, name: user1, email: "#{user1}@thredded.com")
   @user2 = create(:user, name: user2, email: "#{user2}@thredded.com")
-  @topic = create(:private_topic, messageboard: Messageboard.first,
-    title: title, last_user: @user1, user: @user1, users: [@user1, @user2],
-    posts: [create(:post)])
+  messageboard = Messageboard.first
+  messageboard.site = Site.first
+  messageboard.save
+  post = build(:post, content: 'hi', topic: @topic)
+  @topic = create(:private_topic, messageboard: messageboard, title: title, last_user: @user1, user: @user1, users: [@user1, @user2], posts: [post])
 end
