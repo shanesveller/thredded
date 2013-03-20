@@ -148,7 +148,7 @@ GEM
     git_remote_branch (0.3.3)
       rainbow
     gravtastic (3.1.0)
-    griddler (0.3.0)
+    griddler (0.4.0)
       htmlentities
       rails (>= 3.2.0)
     has_scope (0.5.1)
@@ -361,7 +361,7 @@ DEPENDENCIES
   fuubar
   git_remote_branch
   gravtastic (= 3.1.0)
-  griddler (~> 0.3.0)
+  griddler
   highline (= 1.6.1)
   htmlentities
   hub
