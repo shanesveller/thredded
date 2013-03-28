@@ -13,6 +13,18 @@ module BbcodeFilter
       '<iframe class="youtube" width="560" height="315" src="//www.youtube.com/embed/\4?&rel=0&theme=light&showinfo=0&hd=1&autohide=1&color=white" frameborder="0" allowfullscreen="allowfullscreen"></iframe>',
       'Youtube Video',
       :video],
+    'Link (Legacy)' => [
+      /\[link=(?:&quot;)?(.*?)(?:&quot;)?\](.*?)\[\/link\]/mi,
+      '<a href="\1">\2</a>',
+      'Hyperlink to somewhere else',
+      'Maybe try looking on [link=http://google.com]Google[/link]?',
+      :link],
+    'Link (Legacy Implied)' => [
+      /\[link\](.*?)\[\/link\]/mi,
+      '<a href="\1">\1</a>',
+      'Hyperlink (legacy implied)',
+      "Maybe try looking on [link]http://google.com[/link]",
+      :link],
   }
 
   def self.included(base)
