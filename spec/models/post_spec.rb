@@ -70,6 +70,20 @@ describe Post, '.filtered_content' do
     @post  = build(:post)
   end
 
+  it 'renders implied legacy links' do
+    @post.content = 'go to [link]http://google.com[/link]'
+    @post.filter = 'bbcode'
+
+    @post.filtered_content.should eq 'go to <a href="http://google.com">http://google.com</a>'
+  end
+
+  it 'renders legacy links' do
+    @post.content = 'let me [link=http://google.com]google[/link] that'
+    @post.filter = 'bbcode'
+
+    @post.filtered_content.should eq 'let me <a href="http://google.com">google</a> that'
+  end
+
   it 'converts textile to html' do
     @post.content = 'this is *bold*'
     @post.filter = 'textile'
