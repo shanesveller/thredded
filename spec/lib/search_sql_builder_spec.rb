@@ -15,7 +15,7 @@ describe SearchSqlBuilder, 'build' do
 
     @topic1.posts.create!(messageboard: @messageboard, content: 'spring board cats', user: @joel)
     @topic2.posts.create!(messageboard: @messageboard, content: 'alpine spring is very refreshing', user: @shaun)
-    @topic3.posts.create!(messageboard: @messageboard, content: 'some other topic content', user: @shaun)
+    @topic3.posts.create!(messageboard: @messageboard, content: 'some other Topic content', user: @shaun)
   end
 
   it 'finds results for a text search' do
@@ -59,16 +59,21 @@ describe SearchSqlBuilder, 'build' do
   end
 
   it 'finds results from the topic title or post content' do
-    search_query = "made"
+    search_query = 'made'
     Topic.full_text_search(search_query, @messageboard).should include(@topic1)
     Topic.full_text_search(search_query, @messageboard).should include(@topic2)
     Topic.full_text_search(search_query, @messageboard).should_not include(@topic3)
   end
 
-  it 'finds results from the topic title or post content' do
-    search_query = "made"
-    Topic.full_text_search(search_query, @messageboard).should include(@topic1)
+  it 'finds results regardless of case in topic and post' do
+    search_query = '"shaun made"'
     Topic.full_text_search(search_query, @messageboard).should include(@topic2)
+    Topic.full_text_search(search_query, @messageboard).should_not include(@topic1)
     Topic.full_text_search(search_query, @messageboard).should_not include(@topic3)
+
+    search_query = '"topic content"'
+    Topic.full_text_search(search_query, @messageboard).should include(@topic3)
+    Topic.full_text_search(search_query, @messageboard).should_not include(@topic1)
+    Topic.full_text_search(search_query, @messageboard).should_not include(@topic2)
   end
 end
