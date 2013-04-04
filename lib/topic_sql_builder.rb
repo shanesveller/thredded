@@ -7,7 +7,7 @@ class TopicSqlBuilder < TableSqlBuilder
 
       search_text.each do |term|
         if (is_quoted(term))
-          add_where('t.title like ?', term.gsub('"', '%'))
+          add_where('t.title ILIKE ?', term.gsub('"', '%'))
         end
       end
     end

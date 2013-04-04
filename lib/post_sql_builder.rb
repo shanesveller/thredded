@@ -9,7 +9,7 @@ class PostSqlBuilder < TableSqlBuilder
 
       search_text.each do |term|
         if (is_quoted(term))
-          add_where('p.content like ?', term.gsub('"', '%'))
+          add_where('p.content ILIKE ?', term.gsub('"', '%'))
         end
       end
     end
