@@ -19,6 +19,10 @@ class PrivateTopic < Topic
     true
   end
 
+  def self.for_user(user)
+    joins(:private_users).where(private_users: {user_id: user.id})
+  end
+
   def user_id=(ids)
     if ids.size > 0
       self.users = User.where(id: ids.uniq)

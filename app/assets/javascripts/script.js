@@ -88,25 +88,33 @@ jQuery(document).ready(function() {
   // chaves setup
   if(not_a_touch_device){
     forum_bundings = []
+
     topic_bindings = [
       ['shift+t', 'New Topic', function(){ window.location.href = $('a:contains("new topic")').attr('href'); }],
+      ['t', 'Go to topic listing', function(){ window.location.href = $('.topic_nav .topic_list a').attr('href'); }],
+      ['p', 'Go to private topic listing', function(){ window.location.href = $('.topic_nav .private_topic_list a').attr('href'); }],
       ['f', 'Go to forum listing', function(){ window.location.href = '/'; }]
     ]
+
     post_bindings = [
       ['shift+t', 'New Topic', function(){ window.location.href = $('a:contains("new topic")').attr('href'); }],
       ['shift+r', 'Post Reply', function(){
         window.location.hash = '#post_content';
         setTimeout("jQuery('#post_content').focus()", 100);
       }],
-      ['t', 'Go to topic listing', function(){ window.location.href = $('.breadcrumbs li').eq(1).find('a').attr('href'); }],
+      ['t', 'Go to topic listing', function(){ window.location.href = $('.topic_nav .topic_list a').attr('href'); }],
+      ['p', 'Go to private topic listing', function(){ window.location.href = $('.topic_nav .private_topic_list a').attr('href'); }],
       ['f', 'Go to forum listing', function(){ window.location.href = '/'; }],
       ['m', 'Toggle the markup/filter help', function(){ Pseudohelp.toggle(); }]
     ]
+
     jQuery('#messageboards').chaves();
+
     jQuery('.topics').chaves({
       childSelector: 'article',
       bindings: topic_bindings
     });
+
     jQuery('section.posts').chaves({ bindings: post_bindings });
   }
 

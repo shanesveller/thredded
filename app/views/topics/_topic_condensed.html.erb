@@ -1,4 +1,4 @@
-<% if can? :read, t -%>
+<% cache(["topic_condensed", t, already_read(t, @tracked_user_reads)]) do %>
   <article <%= t.css_class %>>
     <div  class="post_count"><%= t.posts_count %></div>
     <h1><%= link_to t.title, messageboard_topic_posts_path(messageboard, t),

@@ -30,6 +30,7 @@ gem 'rake', '0.9.2.2'
 gem 'redcarpet', '~> 2.1.1'
 gem 'rspec-rails', '~> 2.12.2'
 gem 'thin'
+gem 'cache_digests'
 
 group :assets do
   gem 'chosen.scss', '1.0.8', require: 'chosen.scss'
@@ -67,5 +68,5 @@ group :development do
   gem 'letter_opener'
   gem 'pry'
   gem 'sextant'
-  gem 'zeus'
+  gem 'rack-mini-profiler'
 end

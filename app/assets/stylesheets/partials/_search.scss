@@ -1,20 +1,27 @@
-.actions .search_form {
-  float: right;
+.search_form {
+  display: inline-block;
   padding: 0;
-  width: 47%;
+
+  form {
+    display: inline;
+  }
 
   #q {
-    margin-top: 6px;
+    height: 32px;
     width: 100%;
+    padding: 10px 0;
+    -webkit-appearance: none;
+    -webkit-box-shadow: none;
+    border: none;
+    font-size: 12px;
+    font-style: italic;
   }
 
   [type="submit"] { display: none; }
 
-  @include respond-to(m) { width: 40%; }
+  @include respond-to(m) { }
 
   @include respond-to(lts) {
-    width: 33%;
-
     #q { display: none; }
     #q.toggle {
       display: block;

@@ -13,9 +13,13 @@ describe SearchSqlBuilder, 'build' do
     @topic3 = create(:topic, messageboard: @messageboard,
                     title: 'Shaun created another topic', user: @shaun, with_categories: 1)
 
+    @private_topic = create(:private_topic, messageboard: @messageboard,
+                    title: 'A Private Topic', user: @shaun)
+
     @topic1.posts.create!(messageboard: @messageboard, content: 'spring board cats', user: @joel)
     @topic2.posts.create!(messageboard: @messageboard, content: 'alpine spring is very refreshing', user: @shaun)
     @topic3.posts.create!(messageboard: @messageboard, content: 'some other Topic content', user: @shaun)
+    @private_topic.posts.create!(messageboard: @messageboard, content: 'some private content', user: @shaun)
   end
 
   it 'finds results for a text search' do
@@ -75,5 +79,10 @@ describe SearchSqlBuilder, 'build' do
     Topic.full_text_search(search_query, @messageboard).should include(@topic3)
     Topic.full_text_search(search_query, @messageboard).should_not include(@topic1)
     Topic.full_text_search(search_query, @messageboard).should_not include(@topic2)
+  end
+
+  it 'does not find private topics' do
+    search_query = 'private'
+    Topic.full_text_search(search_query, @messageboard).should_not include(@private_topic)
   end
 end

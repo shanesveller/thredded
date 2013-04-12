@@ -5,11 +5,12 @@ class TopicsController < ApplicationController
     if cannot? :read, messageboard
       error = 'You are not authorized access to this messageboard.'
       redirect_to default_home, flash: { error: error }
+    else
+      @sticky = get_sticky_topics
+      @topics = get_topics
+      @tracked_user_reads =
+        UserTopicRead.statuses_for(current_user, @topics) || [NullTopicRead.new]
     end
-
-    @sticky = get_sticky_topics
-    @topics = get_topics
-    @tracked_user_reads = UserTopicRead.statuses_for(current_user, @topics)
   end
 
   def search
@@ -68,10 +69,11 @@ class TopicsController < ApplicationController
   end
 
   def get_topics_by_category(category_id)
-    topics = Category.find(category_id)
+    Category.find(category_id)
       .topics
       .unstuck
       .for_messageboard(messageboard)
+      .for_user(current_user)
       .order_by_updated
       .on_page(params[:page])
   end
@@ -80,12 +82,18 @@ class TopicsController < ApplicationController
     Topic
       .unstuck
       .for_messageboard(messageboard)
-      .order_by_updated.on_page(params[:page])
+      .for_user(current_user)
+      .public
+      .on_page(params[:page])
   end
 
   def get_sticky_topics
     if on_first_topics_page?
-      Topic.stuck.for_messageboard(messageboard).order('id DESC')
+      Topic
+        .stuck
+        .for_messageboard(messageboard)
+        .for_user(current_user)
+        .order('id DESC')
     else
       []
     end

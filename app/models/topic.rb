@@ -62,6 +62,18 @@ class Topic < ActiveRecord::Base
     where(messageboard_id: messageboard.id)
   end
 
+  def self.for_user(user)
+    if user.present?
+      joins(messageboard: :roles).where(roles: {user_id: user.id})
+    else
+      self
+    end
+  end
+
+  def self.public
+    where('type is null')
+  end
+
   def self.order_by_updated
     order('updated_at DESC')
   end

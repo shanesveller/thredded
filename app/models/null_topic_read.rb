@@ -10,4 +10,8 @@ class NullTopicRead
   def post_id
     0
   end
+
+  def topic_id
+    0
+  end
 end

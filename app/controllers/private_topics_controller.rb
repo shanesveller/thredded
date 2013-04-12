@@ -1,6 +1,17 @@
 class PrivateTopicsController < ApplicationController
   before_filter :ensure_messageboard_exists
 
+  def index
+    if cannot? :read, messageboard
+      error = 'You are not authorized access to this messageboard.'
+      redirect_to default_home, flash: { error: error }
+    else
+      @private_topics = get_private_topics
+      @tracked_user_reads =
+        UserTopicRead.statuses_for(current_user, @private_topics) || [NullTopicRead.new]
+    end
+  end
+
   def new
     @private_topic = messageboard.private_topics.build
     @private_topic.posts.build(
@@ -19,5 +30,14 @@ class PrivateTopicsController < ApplicationController
     merge_default_topics_params
     @private_topic = PrivateTopic.create(params[:topic])
     redirect_to messageboard_topics_url(messageboard)
+  end
+
+  private
+
+  def get_private_topics
+    PrivateTopic
+      .for_messageboard(messageboard)
+      .for_user(current_user)
+      .on_page(params[:page])
   end
 end

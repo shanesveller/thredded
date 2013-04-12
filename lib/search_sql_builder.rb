@@ -12,7 +12,7 @@ class SearchSqlBuilder
      @post_builder.sql,
       'UNION',
      @topic_builder.sql,
-      ')', @order_by, 'LIMIT 50'
+      ') and type is null', @order_by, 'LIMIT 50'
     ].join(' ')
   end
 

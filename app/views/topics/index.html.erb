@@ -10,7 +10,6 @@
       <li><span><%= messageboard.title %></span></li>
     </ul>
     <ul class="actions">
-      <%= render partial: 'search/form' %>
       <% if messageboard.postable_by?(current_user) -%>
         <li class='new_topic'><%= link_to 'new topic',
           new_messageboard_topic_path(messageboard) %></li>
@@ -20,20 +19,28 @@
     </ul>
   </nav>
   <%= render partial: 'shared/currently_online' %>
+  <%= render partial: 'shared/topic_nav' %>
 </header>
 
-<section class="topics">
-  <%- if @sticky.any? -%>
-    <div class="stuck">
-      <%= render partial: 'topics/topic_condensed',
-        collection: @sticky, as: :t %>
-    </div>
-  <%- end -%>
-  <div class="currently">
-    <%= render partial: 'topics/topic_condensed',
-      collection: @topics, as: :t %>
-  </div>
-</section>
+  <section class="topics">
+    <% if @sticky.first %>
+      <% cache(['sticky_topic_list', @sticky.first, @tracked_user_reads.first]) do %>
+        <div class="stuck">
+          <%= render partial: 'topics/topic_condensed',
+            collection: @sticky, as: :t %>
+        </div>
+      <%- end -%>
+    <%- end -%>
+
+    <% if @topics.first %>
+      <% cache(['public_topic_list', @topics.first, @tracked_user_reads.first]) do %>
+        <div class="currently">
+          <%= render partial: 'topics/topic_condensed',
+            collection: @topics, as: :t %>
+        </div>
+      <% end -%>
+    <% end -%>
+  </section>
 
 <footer>
   <%= paginate @topics %>
