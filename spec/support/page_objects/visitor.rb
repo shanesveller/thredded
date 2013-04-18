@@ -6,11 +6,25 @@ module PageObject
     include PageObject::Authentication
     include Rails.application.routes.url_helpers
 
+    attr_accessor :visitor
+
+    def initialize
+      @visitor = ::User.new(name: 'anonymous', email: 'anon@email.com')
+    end
+
+    def has_redirected_with_error?
+      has_content?("No user exists named #{@visitor.name}")
+    end
+
     def links_github_with_existing_account
       visit edit_user_registration_path
       fill_in 'identity_email', with: 'joel@example.com'
       fill_in 'identity_password', with: 'password'
       find('#identity_submit').click
+    end
+
+    def load_page
+      visit user_path(@visitor)
     end
 
     def seeing_notice_to_link_account?

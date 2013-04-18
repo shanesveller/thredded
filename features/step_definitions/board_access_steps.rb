@@ -17,6 +17,7 @@ Given /^I am not a member of "(.*)"$/ do |name|
 end
 
 Given /^I am an anonymous visitor$/ do
+  create(:user)
   user = User.new
 end
 

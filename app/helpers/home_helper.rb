@@ -1,11 +1,9 @@
 module HomeHelper
-
   def messageboard_greeting
     if @messageboard
-      @messageboard.name + " home"
+      "#{@messageboard.name} home"
     else
-      "Welcome to "+ default_site.title
+      "Welcome to #{app_config.title}"
     end
   end
-
 end

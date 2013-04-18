@@ -145,19 +145,13 @@ FactoryGirl.define do
     end
   end
 
-  factory :site do
-    user
-    sequence(:subdomain) { |n| "site#{n}" }
-    cached_domain        'www.website.com'
-    cname_alias          'www.website.com'
+  factory :app_config do
     permission           'public'
     title                'Default website'
     description          'default website description'
-    home                 'messageboards'
     email_from           'Site <email@email.com>'
     email_subject_prefix '[Email] '
     incoming_email_host  'reply.email.com'
-    default_site         'f'
   end
 
   factory :topic do

@@ -1,6 +1,4 @@
 require 'spec_helper'
-require_relative '../support/page_objects/owner'
-require_relative '../support/page_objects/setup'
 
 feature 'Setting up the site' do
   scenario 'bootstraps the app' do

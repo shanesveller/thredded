@@ -1,15 +1,20 @@
 <% content_for :page_id do %>session_mgmt<% end %>
-<% content_for :page_title do %><%= site.title %> | Forgot Your Password?<% end %>
+<% content_for :page_title do %>
+  <%= app_config.title %> | Forgot Your Password?
+<% end %>
 
 <h1>Forgot your password?</h1>
 
-<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post, :class => "session_mgmt" }) do |f| %>
+<%= form_for(resource, as: resource_name, url: password_path(resource_name),
+  html: { method: :post, class: 'session_mgmt' }) do |f| %>
   <%= devise_error_messages! %>
 
-  <p><%= f.label :email %>
-  <%= f.text_field :email %></p>
+  <p>
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+  </p>
 
-  <p><%= f.submit "Send me reset password instructions" %></p>
+  <p><%= f.submit 'Send me reset password instructions' %></p>
 <% end %>
 
-<%= render :partial => "devise/shared/links" %>
+<%= render partial: 'devise/shared/links' %>

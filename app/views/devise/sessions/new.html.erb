@@ -1,5 +1,5 @@
 <% content_for :page_id do %>session_mgmt<% end %>
-<% content_for :page_title do %><%= site.title %> | Log In<% end %>
+<% content_for :page_title do %><%= app_config.title %> | Log In<% end %>
 
 <header>
   <nav>
@@ -10,5 +10,6 @@
 </header>
 
 <div class="forms">
-  <%= render partial: 'form', locals: { resource: resource, resource_name: resource_name } %>
+  <%= render partial: 'form',
+    locals: { resource: resource, resource_name: resource_name } %>
 </div>

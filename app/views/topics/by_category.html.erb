@@ -1,13 +1,13 @@
 <% content_for :page_id do %>topics_listing<% end %>
-<% content_for :page_title do %><%= site.title %> | <%= messageboard.title %> | Recent Topics<% end %>
+<% content_for :page_title do %><%= app_config.title %> | <%= messageboard.title %> | Recent Topics<% end %>
 <% content_for :header_nav do %>
     <nav>
       <ul>
-        <%= render :partial => 'search/form' %>
+        <%= render partial: 'search/form' %>
         <% if messageboard.postable_by?(current_user) -%>
-          <li class="new_topic"><%= link_to "new topic", new_messageboard_topic_path(messageboard) %></li>
-          <li class="new_private_topic"><%= link_to "private topic", new_messageboard_topic_path(messageboard, type: 'private') %></li>
-        <% end -%>
+          <li class="new_topic"><%= link_to 'new topic', new_messageboard_topic_path(messageboard) %></li>
+          <li class="new_private_topic"><%= link_to 'private topic', new_messageboard_topic_path(messageboard, type: 'private') %></li>
+        <% end %>
       </ul>
     </nav>
 <% end %>
@@ -30,12 +30,12 @@
 </header>
 
 <section class="topics">
-  <%= render :partial => "topics/topic_condensed", :collection => @sticky, :as => :t %>
-  <%= render :partial => "topics/topic_condensed", :collection => @topics, :as => :t %>
+  <%= render partial: 'topics/topic_condensed', collection: @sticky, as: :t %>
+  <%= render partial: 'topics/topic_condensed', collection: @topics, as: :t %>
 </section>
 
 <footer>
   <% if messageboard.postable_by?(current_user) -%>
-    <%= link_to "Create a New Topic", new_messageboard_topic_path(messageboard) %>
-  <% end -%>
+    <%= link_to 'Create a New Topic', new_messageboard_topic_path(messageboard) %>
+  <% end %>
 </footer>

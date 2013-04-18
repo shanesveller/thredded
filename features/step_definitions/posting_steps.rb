@@ -79,10 +79,8 @@ Then /^the topic listing should look like the following:$/ do |topics_table|
 end
 
 Given /^another member named "([^"]*)" exists$/ do |name|
-  u = User.create(name:                  name,
-                  email:                 "#{name}@email.com",
-                  password:              "password",
-                  password_confirmation: "password")
+  u = User.create(name: name, email: "#{name}@email.com",
+    password: "password", password_confirmation: "password")
 end
 
 Given /^"([^"]*)" is a member of "([^"]*)"$/ do |name, board|
@@ -107,8 +105,7 @@ Given /^a private thread exists between "([^"]*)" and "([^"]*)" titled "([^"]*)"
   @user1 = create(:user, name: user1, email: "#{user1}@thredded.com")
   @user2 = create(:user, name: user2, email: "#{user2}@thredded.com")
   messageboard = Messageboard.first
-  messageboard.site = Site.first
-  messageboard.save
   post = build(:post, content: 'hi', topic: @topic)
-  @topic = create(:private_topic, messageboard: messageboard, title: title, last_user: @user1, user: @user1, users: [@user1, @user2], posts: [post])
+  @topic = create(:private_topic, messageboard: messageboard, title: title,
+    last_user: @user1, user: @user1, users: [@user1, @user2], posts: [post])
 end

@@ -2,9 +2,10 @@ require 'spec_helper'
 require 'cancan/matchers'
 
 describe User, 'abilities' do
+  let(:user) { User.new }
+
   context 'for a private messageboard' do
     it 'allows a member to view it' do
-      user = build_stubbed(:user)
       messageboard = build_stubbed(:messageboard, :private)
       user.stubs(member_of?: true)
       ability = Ability.new(user)
@@ -13,7 +14,6 @@ describe User, 'abilities' do
     end
 
     it 'does not allow a non-members to view it' do
-      user = build_stubbed(:user)
       messageboard = build_stubbed(:messageboard, :private)
       user.stubs(member_of?: false)
       ability = Ability.new(user)
@@ -21,29 +21,6 @@ describe User, 'abilities' do
       ability.should_not be_able_to(:read, messageboard)
     end
   end
-
-  context 'for a public site' do
-    it 'allows any user' do
-      ability = Ability.new(User.new)
-      site = build_stubbed(:site, permission: 'public')
-      ability.should be_able_to(:read, site)
-    end
-  end
-
-  context 'for a site that requires users to log in' do
-    it 'allows a logged in user' do
-      ability = Ability.new(build_stubbed(:user))
-      site = build_stubbed(:site, permission: 'logged_in')
-      ability.should be_able_to(:read, site)
-    end
-
-    it 'does not allow an anonymous user' do
-      ability = Ability.new(User.new)
-      site = build_stubbed(:site, permission: 'logged_in')
-      ability.should_not be_able_to(:read, site)
-    end
-  end
-
 
   context 'for a topic' do
     it 'allows a user to read it' do
@@ -56,48 +33,45 @@ describe User, 'abilities' do
       before do
         @messageboard = build_stubbed(:messageboard, security: 'private')
         @topic = build_stubbed(:topic, messageboard: @messageboard)
-        @user = build_stubbed(:user)
       end
 
       it 'allows a member to create a topic' do
-        @user.stubs(:member_of?).returns(true)
-        ability = Ability.new(@user)
+        user.stubs(:member_of?).returns(true)
+        ability = Ability.new(user)
         ability.should be_able_to(:create, @topic)
       end
 
       it 'allows a member to read a topic' do
-        @user.stubs(:member_of?).returns(true)
-        ability = Ability.new(@user)
+        user.stubs(:member_of?).returns(true)
+        ability = Ability.new(user)
         ability.should be_able_to(:read, @topic)
       end
 
       it 'does not allow a logged in user to create a topic' do
-        @user.stubs(:member_of?).returns(false)
-        ability = Ability.new(@user)
+        user.stubs(:member_of?).returns(false)
+        ability = Ability.new(user)
         ability.should_not be_able_to(:create, @topic)
       end
 
       it 'does not allow a logged in user to read a topic' do
-        @user.stubs(:member_of?).returns(false)
-        ability = Ability.new(@user)
+        user.stubs(:member_of?).returns(false)
+        ability = Ability.new(user)
         ability.should_not be_able_to(:create, @topic)
       end
 
       it 'does not allow a logged in user to list topics' do
-        @user.stubs(:member_of?).returns(false)
-        ability = Ability.new(@user)
+        user.stubs(:member_of?).returns(false)
+        ability = Ability.new(user)
         ability.should_not be_able_to(:index, @topic)
       end
 
       it 'does not allow anonymous to create a topic' do
-        @user = User.new
-        ability = Ability.new(@user)
+        ability = Ability.new(user)
         ability.should_not be_able_to(:create, @topic)
       end
 
       it 'does not allow anonymous to read a topic' do
-        @user = User.new
-        ability = Ability.new(@user)
+        ability = Ability.new(user)
         ability.should_not be_able_to(:read, @topic)
       end
     end

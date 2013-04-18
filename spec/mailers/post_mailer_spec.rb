@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe PostMailer, 'at_notification' do
   before do
-    site = build_stubbed(:site, email_from: 'no-reply@thredded.com',
+    create(:app_config, email_from: 'no-reply@thredded.com',
       incoming_email_host: 'reply.thredded.com',
       email_subject_prefix: '[Thredded]')
     joel = build_stubbed(:user, name: 'joel')
@@ -12,7 +12,6 @@ describe PostMailer, 'at_notification' do
 
     post = build_stubbed(:post, topic: topic, user: joel,
       content: 'hey @john @sam blarghy blurp')
-    post.messageboard.stubs(:site).returns(site)
     Post.stubs(:find).returns(post)
 
     emails = ['john@email.com', 'sam@email.com']

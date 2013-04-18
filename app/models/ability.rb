@@ -21,12 +21,6 @@ class Ability
 
     can :manage, :all if user.superadmin?
 
-    can :read, Site, permission: 'public'
-
-    can :read, Site do |site|
-      site.permission == 'logged_in' && user.valid?
-    end
-
     can :read, Messageboard do |messageboard|
       user.can_read_messageboard?(messageboard)
     end

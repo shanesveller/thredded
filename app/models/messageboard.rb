@@ -18,11 +18,10 @@ class Messageboard < ActiveRecord::Base
   validates_format_of :name, with: /\A[\w\-]+\z/, on: :create,
     message: 'should be letters, nums, dash, underscore only.'
   validates_uniqueness_of :name,
-    message: 'must be a unique board name. Try again.', scope: :site_id
+    message: 'must be a unique board name. Try again.'
   validates_length_of :name, within: 1..16,
     message: 'should be between 1 and 16 characters'
 
-  belongs_to :site
   has_many :categories
   has_many :preferences
   has_many :posts

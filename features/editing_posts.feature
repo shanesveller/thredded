@@ -4,8 +4,7 @@ Feature: Edit an existing post
   Should either be an admin or be the original poster
 
 Background: Default site and messageboard
-    Given the default "public" website domain is "example.com"
-      And the default website has a messageboard named "thredded"
+    Given there is a messageboard named "thredded"
       And I am signed in as "joel"
       And I am a member of "thredded"
       And "thredded" is "public"

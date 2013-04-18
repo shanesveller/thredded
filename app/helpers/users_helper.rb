@@ -1,5 +1,4 @@
 module UsersHelper
-
   def resource_name
     :user
   end
@@ -12,8 +11,7 @@ module UsersHelper
     @devise_mapping ||= Devise.mappings[:user]
   end
 
-  def site 
-    @site ||= Site.find_by_slug(params[:site_id])
+  def app_config
+    @app_config ||= AppConfig.first
   end
-
 end

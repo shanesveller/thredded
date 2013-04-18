@@ -1,14 +1,14 @@
 module Features
   def default_messageboard
-    @messageboard ||= create(:messageboard, site: default_site)
+    @messageboard ||= create(:messageboard)
   end
 
   def default_user
     @user ||= create(:user, password:'password', password_confirmation:'password')
   end
 
-  def default_site
-    @default_site ||= create(:site, default_site: true, user: default_user)
+  def default_config
+    @default_config ||= create(:app_config)
   end
 
   def sign_in_with_default_user
@@ -35,5 +35,5 @@ module Features
 
   alias create_default_messageboard default_messageboard
   alias create_default_user default_user
-  alias create_default_site default_site
+  alias create_default_config default_config
 end

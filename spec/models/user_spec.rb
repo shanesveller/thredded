@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe User, 'associations' do
   it { should have_many(:preferences) }
-  it { should have_many(:sites) }
   it { should have_many(:identities) }
   it { should eager_load(:roles) }
 end

@@ -1,12 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  before_filter :site
-  before_filter :theme_layout, except: [:delete, :update, :create]
   before_filter :touch_last_seen
-  helper_method :default_site,
-    :extra_data,
+  helper_method :extra_data,
     :messageboard,
-    :site,
     :topic,
     :tz_offset
 
@@ -46,14 +42,8 @@ class ApplicationController < ActionController::Base
     ''
   end
 
-  def theme_layout
-    if site && site.theme && ::Thredded.themes.keys.include?(site.theme.to_sym)
-      prepend_view_path ::Thredded.themes[site.theme.to_sym]
-    end
-  end
-
   def get_project
-    @site ||= Site.where(cached_domain: request.host).first
+    @app_config ||= AppConfig.first
   end
 
   def after_sign_in_path_for(resource_or_scope)
@@ -68,25 +58,12 @@ class ApplicationController < ActionController::Base
     '/'
   end
 
-  def site
-    @site ||= requested_host_site or default_site
-  end
-
   def default_home
-    root_url(host: site.cached_domain)
-  end
-
-  def default_site
-    @default_site ||= Site.find_by_default_site(true)
-  end
-
-  def requested_host_site
-    Site.where(cached_domain: request.host).
-      includes(:messageboards).order('messageboards.id ASC').first
+    root_url
   end
 
   def messageboard
-    @messageboard ||= site.messageboards.where(name: params[:messageboard_id]).
+    @messageboard ||= Messageboard.where(name: params[:messageboard_id]).
       order('id ASC').first
   end
 

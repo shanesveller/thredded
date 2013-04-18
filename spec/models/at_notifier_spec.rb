@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe AtNotifier, '#at_notifiable_members' do
   before do
+    create(:app_config)
     sam  = create(:user, name: 'sam')
     @joel = create(:user, name: 'joel', email: 'joel@example.com')
     @john = create(:user, name: 'john', email: 'john@example.com')
@@ -51,6 +52,7 @@ end
 
 describe AtNotifier, '#notifications_for_at_users' do
   before do
+    create(:app_config)
     sam  = create(:user, name: 'sam')
     @joel = create(:user, name: 'joel', email: 'joel@example.com')
     @john = create(:user, name: 'john', email: 'john@example.com')
@@ -71,8 +73,7 @@ describe AtNotifier, '#notifications_for_at_users' do
   end
 
   def create_post_by(user)
-    site = create(:site)
-    messageboard = create(:messageboard, site: site)
+    messageboard = create(:messageboard)
     create(:post, user: user,
       content: 'hi @joel and @john. @sam', messageboard: messageboard)
   end

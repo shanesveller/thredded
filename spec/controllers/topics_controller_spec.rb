@@ -3,15 +3,13 @@ require 'spec_helper'
 describe TopicsController do
   before do
     @user = create(:user)
-    @site = create(:site)
-    @messageboard = create(:messageboard, site: @site)
+    @messageboard = create(:messageboard)
     @topic = create(:topic, messageboard: @messageboard, title: 'hi')
     @post = create(:post, topic: @topic, content: 'hi')
     controller.stubs(:get_topics).returns([@topic])
     controller.stubs(:get_sticky_topics).returns([])
     controller.stubs(:cannot?).returns(false)
     controller.stubs(:current_user).returns(@user)
-    controller.stubs(:site).returns(@site)
     controller.stubs(:messageboard).returns(@messageboard)
   end
 

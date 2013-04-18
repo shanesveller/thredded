@@ -23,9 +23,9 @@
   <body id="<%= yield :page_id %>" data-tz-offset="<%= tz_offset %>" class="layout-application" <%= extra_data %>>
     <header>
       <nav id="site_wide">
-        <% if site %>
+        <% if app_config %>
           <h1>
-            <a href="/" title="<%= site.description %>"><%= site.title %></a>
+            <a href="/" title="<%= app_config.description %>"><%= app_config.title %></a>
           </h1>
         <% end %>
         <ul>

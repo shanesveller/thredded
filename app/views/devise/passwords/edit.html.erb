@@ -1,19 +1,24 @@
 <% content_for :page_id do %>session_mgmt<% end %>
-<% content_for :page_title do %><%= site.title %> | Change Your Password<% end %>
+<% content_for :page_title do %><%= app_config.title %> | Change Your Password<% end %>
 
 <h1>Change your password</h1>
 
-<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put, :class => "session_mgmt" }) do |f| %>
+<%= form_for(resource, as: resource_name, url: password_path(resource_name),
+  html: { method: :put, class: 'session_mgmt' }) do |f| %>
   <%= devise_error_messages! %>
   <%= f.hidden_field :reset_password_token %>
 
-  <p><%= f.label :password %>
-  <%= f.password_field :password %></p>
+  <p>
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  </p>
 
-  <p><%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation %></p>
+  <p>
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation %>
+  </p>
 
-  <p><%= f.submit "Change my password" %></p>
+  <p><%= f.submit 'Change my password' %></p>
 <% end %>
 
-<%= render :partial => "devise/shared/links" %>
+<%= render partial: 'devise/shared/links' %>

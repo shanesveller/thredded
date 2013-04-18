@@ -1,6 +1,6 @@
 <% content_for :page_id do %>topics_posts<% end %>
 <% content_for :page_title do %>
-  <%= site.title %> | <%= topic.title %> | Posts
+  <%= app_config.title %> | <%= topic.title %> | Posts
 <% end %>
 
 <header <%= topic.css_class %>>
@@ -47,7 +47,7 @@
   <% if messageboard.postable_by?(current_user) && !topic.locked %>
     <div class="forms">
       <%= nested_form_for([messageboard, topic, @post],
-        url: create_messageboard_topic_post_url(messageboard, topic, @post, host: site.cached_domain),
+        url: create_messageboard_topic_post_path(messageboard, topic, @post),
         html: { multipart: true }) do |f| %>
         <ul>
           <%= render partial: 'form', locals: { f: f } %>

@@ -4,8 +4,7 @@ Feature: Tracking user behavior in a topic
   Should see a difference between new and read topics
 
 Background: Default site and messageboard
-    Given the default "public" website domain is "example.com"
-      And the default website has a messageboard named "thredded"
+    Given there is a messageboard named "thredded"
       And I am signed in as "Joel"
       And I am a member of "thredded"
       And "thredded" is "public"

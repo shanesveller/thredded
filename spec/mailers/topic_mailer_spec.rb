@@ -3,7 +3,7 @@ require "spec_helper"
 describe TopicMailer do
   describe "message_notification" do
     it 'sends the right message' do
-      site = build_stubbed(:site, email_from: 'no-reply@thredded.com',
+      create(:app_config, email_from: 'no-reply@thredded.com',
         incoming_email_host: 'reply.thredded.com',
         email_subject_prefix: '[Thredded]')
       joel = build_stubbed(:user, name: 'joel')
@@ -11,7 +11,6 @@ describe TopicMailer do
       sam = build_stubbed(:user, name: 'sam', email: 'sam@example.com')
       topic = build_stubbed(:private_topic, title: 'Private message',
         users: [john, sam], user: joel, posts: [build_stubbed(:post)])
-      topic.messageboard.stubs(:site).returns(site)
       emails = ['john@example.com', 'sam@example.com']
       Topic.stubs(:find).returns(topic)
       mail = TopicMailer.message_notification(topic.id, emails)

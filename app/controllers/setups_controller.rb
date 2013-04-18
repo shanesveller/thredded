@@ -11,7 +11,7 @@ class SetupsController < ApplicationController
       when '1'
         @user = User.new
       when '2'
-        @site = Site.new
+        @app_config = AppConfig.new
       when '3'
         @messageboard = Messageboard.new
     end
@@ -32,27 +32,20 @@ class SetupsController < ApplicationController
       end
     when '2'
       @user = User.last
-      @site = Site.new params[:site]
-      @site.user = @user
-      @site.save
-
-      if @site.valid?
-        redirect_to '/3'
-      end
+      @app_config = AppConfig.create(params[:app_config])
+      redirect_to '/3' if @app_config.valid?
     when '3'
       @user = User.last
-      @site = Site.last
+      @site = AppConfig.first
       messageboard_params = params[:messageboard].merge!({theme: 'default'})
       @messageboard = Messageboard.create(messageboard_params)
 
       if @messageboard.valid?
-        @site.messageboards << @messageboard
-        @site.save
         @user.admin_of @messageboard
         @messageboard.topics.create(
           user: @user,
           last_user: @user,
-          title: "Welcome to your site's very first thread",
+          title: "Welcome to your messageboard's very first thread",
           posts_attributes: {
             '0' => {
               content: "There's not a whole lot here for now.",
@@ -73,14 +66,14 @@ class SetupsController < ApplicationController
 
   def not_on_correct_step
     step == '1' && User.any? ||
-      step == '2' && (Site.any? || User.scoped.empty?) ||
-      step == '3' && (Messageboard.any? || Site.scoped.empty? || User.scoped.empty?)
+      step == '2' && (AppConfig.any? || User.scoped.empty?) ||
+      step == '3' && (Messageboard.any? || AppConfig.scoped.empty? || User.scoped.empty?)
   end
 
   def correct_step
-    if User.any? && Site.any? && Messageboard.scoped.empty?
+    if User.any? && AppConfig.any? && Messageboard.scoped.empty?
       '/3'
-    elsif User.any? && Site.scoped.empty?
+    elsif User.any? && AppConfig.scoped.empty?
       '/2'
     elsif User.scoped.empty?
       '/1'
@@ -96,7 +89,7 @@ class SetupsController < ApplicationController
       when '1'
         @setting_up = 'User'
       when '2'
-        @setting_up = 'Site'
+        @setting_up = 'App Configuration'
       when '3'
         @setting_up = 'Messageboard'
     end

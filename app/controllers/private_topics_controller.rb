@@ -9,7 +9,7 @@ class PrivateTopicsController < ApplicationController
 
     unless can? :create, @private_topic
       error = 'Sorry, you are not authorized to post on this messageboard.'
-      redirect_to messageboard_topics_url(messageboard, host: site.cached_domain),
+      redirect_to messageboard_topics_url(messageboard),
         flash: { error: error }
     end
   end
@@ -18,6 +18,6 @@ class PrivateTopicsController < ApplicationController
     params[:topic][:user_id] << current_user.id
     merge_default_topics_params
     @private_topic = PrivateTopic.create(params[:topic])
-    redirect_to messageboard_topics_url(messageboard, host: site.cached_domain)
+    redirect_to messageboard_topics_url(messageboard)
   end
 end

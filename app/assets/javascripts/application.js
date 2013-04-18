@@ -8,4 +8,12 @@
 //= require jquery_ujs
 //= require rails.validations
 //= require pseudohelp/pseudohelp
-//= require_tree .
+//= require keymaster
+//= require jquery.easing
+//= require jquery.chaves
+//= require jquery.chosen
+//= require jquery.fitvids
+//= require jquery.nested_form
+//= require jquery.scrollTo
+//= require jquery.timeago
+//= require script

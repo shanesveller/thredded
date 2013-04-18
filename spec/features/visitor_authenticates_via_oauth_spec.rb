@@ -1,8 +1,8 @@
 require 'spec_helper'
-require_relative '../support/page_objects/visitor'
 
 feature 'Visitor authenticates w/Oauth' do
   before do
+    create(:app_config)
     create_messageboard
   end
 

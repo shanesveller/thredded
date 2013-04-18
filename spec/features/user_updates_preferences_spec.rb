@@ -2,7 +2,7 @@ require 'spec_helper'
 
 feature 'User updating preferences' do
   before do
-    create_default_site
+    create_default_config
     create_default_messageboard
     user = create_member_of_messageboard
     sign_in_as(user)

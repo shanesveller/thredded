@@ -1,6 +1,6 @@
 <% content_for :page_id do %>topics_new<% end %>
 <% content_for :page_title do %>
-  <%= site.title %> | <%= messageboard.title %> | start a new topic
+  <%= app_config.title %> | <%= messageboard.title %> | start a new topic
 <% end %>
 
 <header>
@@ -16,8 +16,7 @@
 
 <div class="forms">
   <%= nested_form_for( [messageboard, @topic],
-    url: create_messageboard_topic_url(messageboard, @topic,
-      host: site.cached_domain),
+    url: create_messageboard_topic_url(messageboard, @topic),
     html: { multipart: true, class: :topic_form }) do |f| %>
 
     <ul>

@@ -27,12 +27,11 @@ module PageObject
     end
 
     def submit_step_two
-      fill_in 'Title', with: 'Messageboards'
-      fill_in 'Description', with: 'another internet forum'
-      fill_in 'Site Domain', with: 'www.example.com'
-      fill_in 'site_email_from', with: 'board@example.com'
-      fill_in 'site_email_subject_prefix', with: '[Board]'
-      fill_in 'site_incoming_email_host', with: 'reply.example.com'
+      fill_in 'app_config_title', with: 'Messageboards'
+      fill_in 'app_config_description', with: 'another internet forum'
+      fill_in 'app_config_email_from', with: 'board@example.com'
+      fill_in 'app_config_email_subject_prefix', with: '[Board]'
+      fill_in 'app_config_incoming_email_host', with: 'reply.example.com'
       click_button 'Continue'
     end
 
@@ -48,7 +47,7 @@ module PageObject
     end
 
     def on_step_two?
-      has_css? 'form#new_site'
+      has_css? 'form#new_app_config'
     end
 
     def on_step_three?

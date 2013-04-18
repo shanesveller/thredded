@@ -4,8 +4,7 @@ Feature: Sign in
   Should be able to sign in
 
  Background: Default site
-   Given the default "public" website domain is "example.com"
-     And the default website has a messageboard named "thredded"
+   Given there is a messageboard named "thredded"
 
    Scenario: User is not signed up
     When I go to the sign in page

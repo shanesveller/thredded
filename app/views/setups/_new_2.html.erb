@@ -1,6 +1,5 @@
-<%= form_for(@site, validate: true, as: :site,
+<%= form_for(@app_config, validate: true, as: :app_config,
   url: create_setup_path(step: step || '2'), method: :post) do |f| %>
-  <%= f.hidden_field :default_site, value: true %>
 
   <div id="setup-container">
     <p class="setup-overview-text">
@@ -15,9 +14,6 @@
 
       <dt><%= f.label :description %></dt>
       <dd><%= f.text_field :description %></dd>
-
-      <dt><%= f.label :cname_alias, 'Site Domain' %></dt>
-      <dd><%= f.text_field :cname_alias, value: request.host %></dd>
 
       <dt><%= f.label :email_from, 'Emails from this site will come from' %></dt>
       <dd><%= f.text_field :email_from %>
@@ -47,6 +43,6 @@
       </dd>
     </dl>
 
-    <%= f.submit 'Continue', :class => 'btn setup-continue-btn' %>
+    <%= f.submit 'Continue', class: 'btn setup-continue-btn' %>
   </div>
 <% end %>

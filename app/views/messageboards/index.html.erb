@@ -1,5 +1,5 @@
 <% content_for :page_id do %>messageboard_listing<% end %>
-<% content_for :page_title do %><%= site.title %> | Messageboard Listing<% end %>
+<% content_for :page_title do %><%= app_config.title %> | Messageboard Listing<% end %>
 
 <header>
   <nav>
@@ -8,9 +8,9 @@
     </ul>
   </nav>
   <h2>
-    <%= number_to_human(site.messageboards.count).downcase %> messageboards,
-    <%= number_to_human(site.topics_count, precision: 4).downcase %> topics,
-    and <%= number_to_human(site.posts_count, precision: 5).downcase %> posts</h2>
+    <%= number_to_human(app_config.messageboards_count).downcase %> messageboards,
+    <%= number_to_human(app_config.topics_count, precision: 4).downcase %> topics,
+    and <%= number_to_human(app_config.posts_count, precision: 5).downcase %> posts</h2>
 </header>
 
 <section id="messageboards">

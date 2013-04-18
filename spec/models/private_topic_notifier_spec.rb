@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe PrivateTopicNotifier, '#private_topic_recipients' do
   before do
+    create(:app_config)
     @john = build_stubbed(:user)
     @joel = build_stubbed(:user)
     @sam  = build_stubbed(:user)
@@ -40,8 +41,7 @@ describe PrivateTopicNotifier, '#private_topic_recipients' do
     joel = create(:user, email: 'joel@example.com')
     sam = create(:user, email: 'sam@example.com')
     john = create(:user)
-    site = create(:site)
-    messageboard = create(:messageboard, site: site)
+    messageboard = create(:messageboard)
     private_topic = create(:private_topic, user: john,
       users: [john, joel, sam], messageboard: messageboard)
     create(:post, content: 'hi', topic: private_topic)

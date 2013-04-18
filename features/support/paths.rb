@@ -19,47 +19,47 @@ module NavigationHelpers
       new_user_password_path
 
     when /the messageboard "([^\"]+)"/i
-      messageboard = @site.messageboards.find_by_name($1)
-      messageboard_topics_url(messageboard, host: @site.cached_domain)
+      messageboard = Messageboard.where(name: $1).first
+      messageboard_topics_url(messageboard)
 
     when /the new thread page for "([^\"]+)"/i
-      messageboard = @site.messageboards.find_by_name($1)
-      new_messageboard_topic_url(messageboard, host: @site.cached_domain)
+      messageboard = Messageboard.where(name: $1).first
+      new_messageboard_topic_url(messageboard)
 
     when /the new private thread page for "([^\"]+)"/i
-      messageboard = @site.messageboards.find_by_name($1)
-      new_messageboard_private_topic_url(messageboard, host: @site.cached_domain)
+      messageboard = Messageboard.where(name: $1).first
+      new_messageboard_private_topic_url(messageboard)
 
     when /the forum listing page/i
-      messageboards_url(host: @site.cached_domain)
+      messageboards_path
 
     when /the topic listing page/i
-      messageboard = @site.messageboards.first
-      messageboard_topics_url(messageboard, host: @site.cached_domain)
+      messageboard = Messageboard.first
+      messageboard_topics_url(messageboard)
 
     when /edit the latest thread/i
       messageboard = Messageboard.first
       topic = messageboard.topics.first
-      edit_messageboard_topic_url(messageboard, topic, host: @site.cached_domain)
+      edit_messageboard_topic_url(messageboard, topic)
 
     when /the latest thread/i
       messageboard = Messageboard.first
       topic = messageboard.topics.first
-      messageboard_topic_url(messageboard, topic, host: @site.cached_domain)
+      messageboard_topic_url(messageboard, topic)
 
     when /the most recently updated thread on "([^\"]+)"/i
-      messageboard = @site.messageboards.find_by_name($1)
+      messageboard = Messageboard.where(name: $1).first
       topic = messageboard.topics.first
-      messageboard_topic_posts_url(messageboard.name, topic.slug, host: @site.cached_domain)
+      messageboard_topic_posts_url(messageboard.name, topic.slug)
 
     when /the sign up page/i
-      new_user_registration_url( host: @site.cached_domain )
+      new_user_registration_path
 
     when /the sign in page/i
-      new_user_session_url( host: @site.cached_domain )
+      new_user_session_path
 
     when /the password reset request page/i
-      new_user_password_url( host: @site.cached_domain )
+      new_user_password_path
 
     else
       begin

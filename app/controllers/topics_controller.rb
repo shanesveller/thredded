@@ -28,7 +28,7 @@ class TopicsController < ApplicationController
 
     unless can? :create, @topic
       error = 'Sorry, you are not authorized to post on this messageboard.'
-      redirect_to messageboard_topics_url(messageboard, host: site.cached_domain),
+      redirect_to messageboard_topics_url(messageboard),
         flash: { error: error }
     end
   end
@@ -42,7 +42,7 @@ class TopicsController < ApplicationController
   def create
     merge_default_topics_params
     @topic = Topic.create(params[:topic])
-    redirect_to messageboard_topics_url(messageboard, host: site.cached_domain)
+    redirect_to messageboard_topics_url(messageboard)
   end
 
   def edit
@@ -58,7 +58,7 @@ class TopicsController < ApplicationController
     })
 
     topic.update_attributes(params[:topic])
-    redirect_to messageboard_topic_posts_url(messageboard, topic, host: site.cached_domain)
+    redirect_to messageboard_topic_posts_url(messageboard, topic)
   end
 
   private

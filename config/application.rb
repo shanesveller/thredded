@@ -1,7 +1,7 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
-require "carrierwave"
+require 'carrierwave'
 
 # If you have a Gemfile, require the gems listed there, including any gems
 # you've limited to :test, :development, or :production.
@@ -39,10 +39,10 @@ module Thredded
       g.stylesheets         false
       g.orm                 :active_record
       g.template_engine     :erb
-      g.test_framework      :rspec, :fixture => true,
-                            :views => false,
-                            :fixture => true
-      g.fixture_replacement :factory_girl, :dir => "spec/factories"
+      g.test_framework      :rspec, fixture: true,
+                            views: false,
+                            fixture: true
+      g.fixture_replacement :factory_girl, dir: 'spec/factories'
     end
 
     # Asset Pipeline
@@ -54,22 +54,14 @@ module Thredded
     # config.action_view.javascript_expansions[:jquery]   = ["jquery", "jquery-ui"]
 
     # Configure the default encoding used in templates for Ruby 1.9.
-    config.encoding = "utf-8"
+    config.encoding = 'utf-8'
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password, :password_confirmation]
 
-    # Send the devise mailer class our domain helper
-    config.to_prepare do
-      Devise::Mailer.class_eval do
-        helper :domain
-      end
-    end
-
     ### Part of a Spork hack. See http://bit.ly/arY19y
     if Rails.env.test?
-      initializer :after => :initialize_dependency_mechanism do
-        # Work around initializer in railties/lib/rails/application/bootstrap.rb
+      initializer after: :initialize_dependency_mechanism do
         ActiveSupport::Dependencies.mechanism = :load
       end
     end
@@ -77,7 +69,6 @@ module Thredded
 end
 
 ActionDispatch::Callbacks.after do
-  # Reload the factories
   return unless (Rails.env.test?)
 
   unless FactoryGirl.factories.blank?
