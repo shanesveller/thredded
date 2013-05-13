@@ -14,4 +14,12 @@ module UsersHelper
   def app_config
     @app_config ||= AppConfig.first
   end
+  
+  def site
+    @site ||= Site.find_by_slug(params[:site_id])
+  end
+
+  def formatted_user_profile_date(date)
+    date.strftime('%e %b %Y')
+  end
 end

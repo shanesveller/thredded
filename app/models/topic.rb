@@ -42,6 +42,10 @@ class Topic < ActiveRecord::Base
     self.hash_id = SecureRandom.hex(10) if self.hash_id.nil?
   end
 
+  def self.recent
+    limit(10)
+  end
+
   def self.stuck
     where('sticky = true')
   end

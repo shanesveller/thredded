@@ -22,12 +22,43 @@ module PageObject
       self
     end
 
+    def create_topic(title)
+      board = create(:messageboard, name: 'yup')
+      topic = create(:topic,
+        user: @user,
+        title: title,
+        messageboard: board,
+      )
+    end
+
+    def create_private_topic(title)
+      board = create(:messageboard, name: 'yup')
+      topic = create(:private_topic,
+        user: @user,
+        title: title,
+        messageboard: board,
+      )
+    end
+
+    def create_unreadable_topic_in_private_messageboard(title)
+      board = create(:messageboard, :private, name: 'private')
+      topic = create(:topic,
+        user: @user,
+        title: title,
+        messageboard: board,
+      )
+    end
+
     def load_page
       visit user_path(@user)
     end
 
     def displaying_the_profile?
       has_content?(@user.name)
+    end
+
+    def has_topic?(title)
+      has_content?(title)
     end
 
     def has_redirected_with_error?

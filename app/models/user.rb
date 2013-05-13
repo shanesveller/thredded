@@ -1,5 +1,9 @@
 class User < ActiveRecord::Base
+  require 'gravtastic'
+  include Gravtastic
   include ActiveModel::Dirty
+
+  gravtastic :email, :size => 142
 
   has_many :identities
   has_many :sites
@@ -107,6 +111,10 @@ class User < ActiveRecord::Base
     ( messageboard.restricted_to_private? && self.member_of?(messageboard) ) ||
     ( messageboard.restricted_to_logged_in? && self.valid? ) ||
       messageboard.public?
+  end
+
+  def post_history_by_month
+    Post.find(:all).group_by { |post| post.created_at.strftime("%B") }
   end
 
   private

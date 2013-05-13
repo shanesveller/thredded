@@ -1,0 +1,69 @@
+$sans-font-stack: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+body#user-profile {
+  font-family: $sans-font-stack;
+
+  section#contentwrap,
+  section#content {
+    border: none !important;
+  }
+
+  #content header {
+    background: #ededed;
+    color: #646363;
+    padding: 10px 10px 5px 10px;
+    font-size: 15px;
+    line-height: 29px;
+
+    img {
+      float: left;
+      padding-right: 10px;
+    }
+
+    ul {
+      list-style: none;
+      font-size: .9em;
+      min-height: 147px;
+    }
+  }
+
+  #user-profile-recent-posts {
+    padding: 15px;
+
+    h2 {
+      float: left;
+      color: #646363;
+      font-size: 22px;
+      font-weight: 500;
+      padding: 10px 0 20px;
+    }
+
+    th {
+      background-color: #dff0f9;
+      text-align: center;
+      color: #0070ad;
+      font-weight: 500;
+      font-size: 15px;
+      padding: 10px 7px;
+    }
+
+    td {
+      color: #646363;
+      padding: 8px;
+      border: 1px solid #dff0f9;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .table-first-column {
+      text-align: left !important;
+    }
+
+    p {
+      float: right;
+      font-size: 14px;
+      padding: 10px 0 20px;
+      color: #646363;
+    }
+  }
+}
