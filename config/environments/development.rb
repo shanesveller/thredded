@@ -1,4 +1,5 @@
 Thredded::Application.configure do
+  config.force_ssl = false
   config.cache_classes = false
   config.whiny_nils = true
   config.consider_all_requests_local = true
@@ -6,13 +7,12 @@ Thredded::Application.configure do
   config.active_support.deprecation = :log
   config.action_dispatch.best_standards_support = :builtin
 
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.default_url_options = { host: 'localhost:3000' }
   config.action_mailer.delivery_method = :letter_opener
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default charset: 'utf-8'
 
-  %w[topic private_topic].each do |c|
-    require_dependency File.join('app','models',"#{c}.rb")
-  end
+  config.i18n.fallbacks = true
+  config.active_support.deprecation = :notify
 end
