@@ -1,6 +1,4 @@
-<%= form_for(@messageboard, validate: true, as: :messageboard,
-  url: create_setup_path(step: step || '3'), method: :post) do |f| %>
-
+<%= form_for(@messageboard, as: :messageboard, url: create_setup_path(step: step || '3'), method: :post) do |f| %>
   <div id="setup-container">
     <p class="setup-overview-text">
       These will be the settings and permissions for your first thredded
@@ -46,6 +44,6 @@
       </dd>
     </dl>
 
-    <%= f.submit 'Continue', :class => 'btn setup-continue-btn' %>
+    <%= f.submit 'Continue', class: 'btn setup-continue-btn' %>
   </div>
 <% end %>

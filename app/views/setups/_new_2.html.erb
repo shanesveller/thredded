@@ -1,6 +1,4 @@
-<%= form_for(@app_config, validate: true, as: :app_config,
-  url: create_setup_path(step: step || '2'), method: :post) do |f| %>
-
+<%= form_for(@app_config, as: :app_config, url: create_setup_path(step: step || '2'), method: :post) do |f| %>
   <div id="setup-container">
     <p class="setup-overview-text">
       Below are the global configuration options for your messageboard.

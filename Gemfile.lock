@@ -70,7 +70,6 @@ GEM
       compass (>= 0.11)
     chronic (0.9.0)
     chunky_png (1.2.6)
-    client_side_validations (3.1.4)
     coderay (1.0.6)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -344,7 +343,6 @@ DEPENDENCIES
   carrierwave (= 0.7.1)
   chosen.scss (= 1.0.8)
   chronic
-  client_side_validations
   coderay (~> 1.0.6)
   coffee-rails (~> 3.2.2)
   compass-rails
