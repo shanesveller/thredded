@@ -6,7 +6,6 @@ class Messageboard < ActiveRecord::Base
     :name,
     :posting_permission,
     :security,
-    :theme,
     :title
 
   default_scope where(closed: false).order('topics_count DESC')

@@ -11,9 +11,6 @@ if defined?(Bundler)
 end
 
 module Thredded
-  mattr_accessor :themes
-  self.themes = {}
-
   class Application < Rails::Application
     config.autoload_paths << Rails.root.join('app').to_s
     config.autoload_paths += %W(#{config.root}/lib)

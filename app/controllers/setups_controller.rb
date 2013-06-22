@@ -37,7 +37,7 @@ class SetupsController < ApplicationController
     when '3'
       @user = User.last
       @site = AppConfig.first
-      messageboard_params = params[:messageboard].merge!({theme: 'default'})
+      messageboard_params = params[:messageboard]
       @messageboard = Messageboard.create(messageboard_params)
 
       if @messageboard.valid?

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130416131541) do
+ActiveRecord::Schema.define(:version => 20130622162742) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -42,8 +42,8 @@ ActiveRecord::Schema.define(:version => 20130416131541) do
     t.string   "content_type"
     t.integer  "file_size"
     t.integer  "post_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   add_index "attachments", ["post_id"], :name => "index_attachments_on_post_id"
@@ -52,8 +52,8 @@ ActiveRecord::Schema.define(:version => 20130416131541) do
     t.integer  "messageboard_id"
     t.string   "name",            :null => false
     t.string   "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   add_index "categories", ["messageboard_id"], :name => "index_categories_on_messageboard_id"
@@ -74,19 +74,18 @@ ActiveRecord::Schema.define(:version => 20130416131541) do
     t.integer  "height"
     t.string   "orientation"
     t.integer  "post_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "messageboards", :force => true do |t|
     t.string   "name"
     t.text     "description"
-    t.string   "theme"
     t.string   "security",           :default => "public"
     t.string   "posting_permission", :default => "anonymous"
     t.integer  "site_id",            :default => 0
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
     t.integer  "topics_count",       :default => 0
     t.integer  "posts_count",        :default => 0
     t.string   "title"
@@ -112,8 +111,8 @@ ActiveRecord::Schema.define(:version => 20130416131541) do
     t.string   "ip"
     t.string   "filter",          :default => "bbcode"
     t.string   "source",          :default => "web"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
     t.integer  "topic_id"
     t.integer  "messageboard_id"
   end
@@ -135,8 +134,8 @@ ActiveRecord::Schema.define(:version => 20130416131541) do
   create_table "private_users", :force => true do |t|
     t.integer  "private_topic_id"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   add_index "private_users", ["user_id", "private_topic_id"], :name => "index_private_users_on_user_id_and_private_topic_id"
@@ -145,8 +144,8 @@ ActiveRecord::Schema.define(:version => 20130416131541) do
     t.string   "level"
     t.integer  "user_id"
     t.integer  "messageboard_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.datetime "last_seen"
   end
 
@@ -156,8 +155,8 @@ ActiveRecord::Schema.define(:version => 20130416131541) do
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false
     t.text     "data"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
@@ -174,16 +173,16 @@ ActiveRecord::Schema.define(:version => 20130416131541) do
     t.integer  "user_id",                                 :null => false
     t.integer  "last_user_id",                            :null => false
     t.string   "title",                                   :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
     t.integer  "messageboard_id",                         :null => false
     t.string   "type"
     t.integer  "posts_count",     :default => 0
     t.string   "attribs",         :default => "[]"
     t.boolean  "sticky",          :default => false
     t.boolean  "locked"
-    t.string   "slug"
     t.string   "hash_id",                                 :null => false
+    t.string   "slug"
     t.string   "state",           :default => "approved", :null => false
   end
 
@@ -212,7 +211,6 @@ ActiveRecord::Schema.define(:version => 20130416131541) do
     t.string   "email",                                 :default => "",                           :null => false
     t.string   "encrypted_password",     :limit => 128, :default => "",                           :null => false
     t.string   "reset_password_token"
-    t.string   "remember_token"
     t.datetime "remember_created_at"
     t.integer  "sign_in_count",                         :default => 0
     t.datetime "current_sign_in_at"
@@ -223,8 +221,8 @@ ActiveRecord::Schema.define(:version => 20130416131541) do
     t.string   "name"
     t.boolean  "superadmin",                            :default => false,                        :null => false
     t.integer  "posts_count",                           :default => 0
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                                                      :null => false
+    t.datetime "updated_at",                                                                      :null => false
     t.integer  "topics_count",                          :default => 0
     t.string   "time_zone",                             :default => "Eastern Time (US & Canada)"
     t.string   "post_filter"
