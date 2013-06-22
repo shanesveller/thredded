@@ -14,3 +14,7 @@ test:
 production:
   <<: *defaults
   database: thredded_dev
+
+staging:
+  <<: *defaults
+  database: thredded_dev

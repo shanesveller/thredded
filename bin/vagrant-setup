@@ -12,10 +12,21 @@ read -p 'To continue press [ENTER]:'
 echo ''
 echo "${txtgreen}* Installing core dependencies.${txtreset}"
 echo ''
-sudo apt-get -y install build-essential zlib1g-dev curl \
-git-core libtool libyaml-dev libssl-dev libssl0.9.8 libxslt-dev \
-libxml2-dev libreadline6-dev xclip
+sudo apt-get -y install build-essential zlib1g-dev curl libxslt-dev \
+libxml2-dev git-core libtool libyaml-dev libssl-dev libssl0.9.8 libxslt-dev \
+libxml2-dev libreadline6-dev xclip libyaml-dev python-software-properties \
+redis-server
 
+echo ''
+echo "${txtgreen}* Installing ruby.${txtreset}"
+echo ''
+
+sudo apt-add-repository ppa:brightbox/ruby-ng -y
+sudo apt-get update -y
+sudo apt-get install ruby rubygems ruby-switch ruby1.9.3 -y
+cd ~
+sudo gem install bundler
+sudo bundle install
 
 echo "${txtgreen}* Checking for SSH key pair.${txtreset}"
 
@@ -28,29 +39,11 @@ else
 fi
 
 echo ''
-echo "${txtgreen}* Installing ruby.${txtreset}"
-echo ''
-
-cd ~
-
-DOWNLOAD_RUBY=ruby-1.9.3-p392
-curl -O ftp://ftp.ruby-lang.org/pub/ruby/$DOWNLOAD_RUBY.tar.gz
-tar -xzf $DOWNLOAD_RUBY.tar.gz
-cd ~/$DOWNLOAD_RUBY/ext/openssl && ruby extconf.rb
-cd ~/$DOWNLOAD_RUBY/ext/readline && ruby extconf.rb
-cd ~/$DOWNLOAD_RUBY
-./configure && make && sudo make install && cd ~
-export PATH=/usr/local/bin:$PATH
-echo "export PATH=/usr/local/bin:\$PATH" >> ~/.bashrc
-sudo gem install bundler
-
-
-echo ''
 echo "${txtgreen}* Installing postgres.${txtreset}"
 echo ''
-sudo apt-add-repository -y ppa:pitti/postgresql
-sudo apt-get -y update
-sudo apt-get -y install postgresql-9.2 libpq-dev
+sudo apt-add-repository ppa:pitti/postgresql -y
+sudo apt-get update -y
+sudo apt-get install postgresql-9.2 libpq-dev -y
 sudo -u postgres createuser --superuser vagrant
 
 echo ""
@@ -62,3 +55,4 @@ heroku keys:add ~/.ssh/id_rsa.pub
 
 echo ""
 echo "${txtgreen}Done!${txtreset}"
+echo ""
