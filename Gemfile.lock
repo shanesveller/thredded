@@ -198,7 +198,7 @@ GEM
       metaclass (~> 0.0.1)
     multi_json (1.7.7)
     multipart-post (1.1.5)
-    nested_form (0.2.0)
+    nested_form (0.3.2)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
     net-ssh (2.5.2)
@@ -369,7 +369,7 @@ DEPENDENCIES
   letter_opener
   mini_magick (= 3.2.1)
   multi_json
-  nested_form (~> 0.2.0)
+  nested_form
   nokogiri (= 1.5.0)
   omniauth-github
   pg
