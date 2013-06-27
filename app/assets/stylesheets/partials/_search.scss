@@ -23,12 +23,15 @@
 
   @include respond-to(lts) {
     #q { display: none; }
+
     #q.toggle {
+      border-bottom: dotted 1px silver;
+      border-radius: 0px;
       display: block;
       position: absolute;
       left: 20px;
       width: 88%;
-      top: 80px;
+      top: 57px;
     }
   }
 }

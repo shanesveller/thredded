@@ -1,29 +1,42 @@
 %action_item {
-  color: black;
-  font-size: 13px;
-  padding: 8px 8px 11px;
+  margin-right: 10px;
+  margin-top: 4px;
   text-decoration: none;
   text-transform: lowercase;
-  @include font-icon-base(entypo, 1.1em, .6em);
+  @extend .btn;
+  @extend .btn-round;
+  @extend .btn-small;
+}
 
-  &:hover {
-    background-color: #fbfbfb;
+.actions {
+  @include respond-to(lts) {
+    clear: both;
+    margin: 0px 20px 10px 20px;
+    overflow: hidden;
+    padding: 0px;
   }
-}
 
-%new_topic {
-  @extend %action_item;
-  @extend %entypo-comment;
-}
+  li {
+    display: block;
+    float: left;
+    padding: 0;
 
-%new_private {
-  @extend %action_item;
-  @extend %entypo-chat;
-}
+    @include respond-to(lts) {
+      display: block;
+      float: left;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      width: 50%;
 
-%search_label {
-  @extend %action_item;
-  @extend %entypo-search;
+      a, label {
+        display: block;
+        padding: 8px 0 11px !important;
+      }
+    }
+  }
+
+  a { @extend %action_item; }
 }
 
 %top_border_bar {
@@ -108,19 +121,15 @@
     }
   }
 
-  .topic_nav {
-    ul {
-      border-bottom: solid 4px #999;
-      list-style: none;
-      display: block;
-      padding: 0px;
-      margin: 0px 20px;
-      overflow: hidden;
+  .topic_nav .listings {
 
-      @include respond-to(lts) {
-        margin: 0 5px;
-      }
-    }
+      list-style: none;
+    display: block;
+    padding: 0px;
+    margin: 0px 20px;
+    overflow: hidden;
+
+    @include respond-to(lts) { margin: 0 5px; }
 
     li {
       float: left;
@@ -135,13 +144,14 @@
       overflow: hidden;
 
       @include respond-to(lts) {
-        background: #9f9f9f;
-        color: white;
+        background: #f9f9f9;
+        color: black;
         display: inline-block;
         font-weight: normal;
         letter-spacing: 1px;
         padding: 10px 15px;
         text-decoration: none;
+        text-transform: lowercase;
       }
     }
 
@@ -206,7 +216,7 @@
 .online {
   clear: both;
   display: block;
-  padding: 10px 20px;
+  padding: 15px 30px;
 
   @include respond-to(lts) {
     visibility: hidden;
@@ -236,44 +246,4 @@
     font-size: 11px;
     font-weight: bold;
   }
-}
-
-.actions {
-  padding: 20px 20px;
-
-  @include respond-to(lts) {
-    padding: 0px;
-    clear: both;
-    overflow: hidden;
-  }
-
-  li {
-    display: block;
-    float: left;
-    padding: 0;
-
-    a {
-      display: block;
-    }
-
-    @include respond-to(lts) {
-      display: block;
-      float: left;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-      width: 50%;
-
-      a, label {
-        display: block;
-        padding: 8px 0 11px !important;
-      }
-    }
-
-    // for search_form see _search.scss
-  }
-
-  a { @extend %new_topic; }
-  .new_private_topic a { @extend %new_private; }
-  .search_form label { @extend %search_label; }
 }

@@ -1,6 +1,7 @@
 $topic-padding: 10px;
 
 section.topics > div {
+  border-top: solid 4px #999;
   margin: 0px 20px 10px;
 
   @include respond-to(lts) { margin: 0 5px 10px; }

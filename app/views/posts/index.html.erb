@@ -19,14 +19,6 @@
         </span>
       </li>
     </ul>
-    <ul class="actions">
-      <% if messageboard.postable_by?(current_user) -%>
-        <li class='new_topic'><%= link_to 'new topic',
-          new_messageboard_topic_path(messageboard) %></li>
-        <li class='new_private_topic'><%= link_to 'private topic',
-          new_messageboard_topic_path(messageboard, type: 'private') %></li>
-      <%- end -%>
-    </ul>
   </nav>
 
   <% if topic.users_to_sentence.present? %>
