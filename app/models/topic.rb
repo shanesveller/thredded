@@ -10,7 +10,7 @@ class Topic < ActiveRecord::Base
   has_many   :categories, through: :topic_categories
 
   belongs_to :last_user, class_name: 'User', foreign_key: 'last_user_id'
-  belongs_to :user, counter_cache: true
+  belongs_to :user, counter_cache: true, touch: true
   belongs_to :messageboard, counter_cache: true, touch: true
 
   validates_inclusion_of :state, in: STATES

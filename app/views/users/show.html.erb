@@ -1,39 +1,41 @@
 <% content_for :page_id do %>user-profile<% end %>
 <% content_for :page_title do %><%= @user.name %> | Users<% end %>
 
-<header>
-  <%= image_tag @user.gravatar_url %>
+<% cache @user do %>
+  <header>
+    <%= image_tag @user.gravatar_url %>
 
-  <ul class="info">
-    <li><strong>Username:</strong> <%= @user.name %></li>
-    <li><strong>Last activity:</strong> <%= time_ago_in_words(@user.last_sign_in_at) %> ago</li>
-    <li><strong>Join date:</strong> <%= time_ago_in_words(@user.created_at) %> ago</li>
-    <li><strong>Total posts:</strong> <%= @user.posts_count %></li>
-    <li><strong>Total topics started:</strong> <%= @user.topics_count %></li>
-  </ul>
-</header>
+    <ul class="info">
+      <li><strong>Username:</strong> <%= @user.name %></li>
+      <li><strong>Last activity:</strong> <%= time_ago_in_words(@user.last_sign_in_at) %> ago</li>
+      <li><strong>Join date:</strong> <%= time_ago_in_words(@user.created_at) %> ago</li>
+      <li><strong>Total posts:</strong> <%= @user.posts_count %></li>
+      <li><strong>Total topics started:</strong> <%= @user.topics_count %></li>
+    </ul>
+  </header>
 
-<div id="user-profile-recent-posts">
-  <h2>Recent Forum History</h2>
+  <div id="user-profile-recent-posts">
+    <h2>Recent Forum History</h2>
 
-  <p>
-    <%= @user.topics_count %> topics started and <%= @user.posts_count %>
-    posts since joining on <%= formatted_user_profile_date(@user.created_at) %>
-  </p>
+    <p>
+      <%= @user.topics_count %> topics started and <%= @user.posts_count %>
+      posts since joining on <%= formatted_user_profile_date(@user.created_at) %>
+    </p>
 
-  <% if @user.topics_count > 0 %>
-    <table width="100%">
-      <thead>
-        <tr>
-          <th class="title table-first-column"> Title </th>
-          <th class="replies" width="100"> # Replies </th>
-          <th class="created" width="130"> Topic created </th>
-          <th class="updated" width="130"> Last update </th>
-        </tr>
-      </thead>
+    <% if @user.topics_count > 0 %>
+      <table width="100%">
+        <thead>
+          <tr>
+            <th class="title table-first-column"> Title </th>
+            <th class="replies" width="100"> # Replies </th>
+            <th class="created" width="130"> Topic created </th>
+            <th class="updated" width="130"> Last update </th>
+          </tr>
+        </thead>
 
-      <%= render partial: 'topics/recent_topics_by_user',
-        collection: @recent_topics, as: :topic %>
-    </table>
-  <% end %>
-</div>
+        <%= render partial: 'topics/recent_topics_by_user',
+          collection: @recent_topics, as: :topic %>
+      </table>
+    <% end %>
+  </div>
+<% end %>

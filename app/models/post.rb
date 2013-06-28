@@ -24,9 +24,9 @@ class Post  < ActiveRecord::Base
 
   default_scope order: 'id ASC'
 
-  belongs_to :messageboard, counter_cache: true
+  belongs_to :messageboard, counter_cache: true, touch: true
   belongs_to :topic, counter_cache: true
-  belongs_to :user, counter_cache: true
+  belongs_to :user, counter_cache: true, touch: true
   has_many   :attachments
   has_many   :post_notifications
 
