@@ -113,14 +113,6 @@
     label {
       display: none;
     }
-
-    textarea {
-      @extend .content_input;
-    }
-
-    input[type="submit"] {
-      @extend .submit_button;
-    }
   }
 }
 
