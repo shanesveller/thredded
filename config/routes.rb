@@ -1,6 +1,4 @@
 Thredded::Application.routes.draw do
-  ActiveAdmin.routes(self)
-
   mount_sextant if Rails.env.development?
   devise_for :users, controllers: { registrations: 'registrations', sessions: 'sessions' }
   resources :users

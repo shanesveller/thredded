@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
 
+ruby '1.9.3'
+
 gem 'RedCloth', '4.2.9'
-gem 'activeadmin', '~> 0.5.0'
 gem 'bb-ruby', '0.9.5'
 gem 'cancan', '1.6.8'
 gem 'carrierwave', '0.7.1'
