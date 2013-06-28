@@ -39,30 +39,17 @@
 
       cite {
         font-style: normal;
-        @include after-bullet;
 
         a {
           text-decoration: none;
           text-transform: capitalize;
         }
-      }
 
-      span.roles {
-        @include after-bullet;
-
-        @include respond-to(xs) {
-          display: none;
+        abbr {
+          @include before-bullet;
+          display: inline;
+          border-bottom: none;
         }
-      }
-
-      abbr {
-        display: block;
-        border-bottom: none;
-      }
-
-      .meta {
-        display: inline;
-        color: gray;
       }
     }
 

@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '1.9.3'
+ruby '2.0.0'
 
 gem 'RedCloth', '4.2.9'
 gem 'bb-ruby', '0.9.5'
@@ -38,8 +38,8 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.2'
   gem 'font-icons', '~> 1.0.3.beta', require: 'font-icons'
   gem 'jquery-rails'
-  gem 'sass', '3.2.1'
-  gem 'sass-rails', '3.2.5'
+  gem 'sass'
+  gem 'sass-rails'
   gem 'therubyracer'
   gem 'uglifier'
 end

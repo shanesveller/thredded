@@ -10,7 +10,10 @@ class PostsController < ApplicationController
   def index
     authorize! :show, topic
     @post = Post.new(filter: current_user.try(:post_filter))
-    @posts = Post.where(topic_id: topic).page(page)
+    @posts = Post
+      .where(topic_id: topic)
+      .includes(user: :roles)
+      .page(page)
 
     @read_status = UserTopicRead.find_or_create_by_user_and_topic(current_user, topic, page)
 

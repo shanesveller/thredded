@@ -1,5 +1,5 @@
 class Attachment < ActiveRecord::Base
-  belongs_to :post
+  belongs_to :post, touch: true
   validates_presence_of :attachment
   attr_accessible :attachment
   mount_uploader :attachment, AttachmentUploader

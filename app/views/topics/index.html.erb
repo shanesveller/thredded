@@ -10,29 +10,24 @@
       <li><span><%= messageboard.title %></span></li>
     </ul>
   </nav>
+
   <%= render partial: 'shared/currently_online' %>
   <%= render partial: 'shared/topic_nav' %>
 </header>
 
-  <section class="topics">
-    <% if @sticky.first %>
-      <% cache(['sticky_topic_list', @sticky.first, @tracked_user_reads.first]) do %>
-        <div class="stuck">
-          <%= render partial: 'topics/topic_condensed',
-            collection: @sticky, as: :t %>
-        </div>
-      <%- end -%>
-    <%- end -%>
+<section class="topics">
+  <% if @sticky.first %>
+    <div class="stuck">
+      <%= render partial: 'topics/topic_condensed', collection: @sticky, as: :t %>
+    </div>
+  <% end %>
 
-    <% if @topics.first %>
-      <% cache(['public_topic_list', @topics.first, @tracked_user_reads.first]) do %>
-        <div class="currently">
-          <%= render partial: 'topics/topic_condensed',
-            collection: @topics, as: :t %>
-        </div>
-      <% end -%>
-    <% end -%>
-  </section>
+  <% if @topics.first %>
+    <div class="currently">
+      <%= render partial: 'topics/topic_condensed', collection: @topics, as: :t %>
+    </div>
+  <% end %>
+</section>
 
 <footer>
   <%= paginate @topics %>

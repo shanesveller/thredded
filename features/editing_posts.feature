@@ -10,6 +10,7 @@ Background: Default site and messageboard
       And "thredded" is "public"
       And the latest thread on "thredded" has several posts
 
+      @wip
   Scenario: The member edits his own post
      Given the last post on the most recent thread is mine
       When I go to the most recently updated thread on "thredded"
@@ -18,6 +19,7 @@ Background: Default site and messageboard
        And I update it to "edited this"
       Then I should see "edited this" in the last post
 
+      @wip
   Scenario: The edited post retains its filter
      Given the last post on the most recent thread is mine
        And the last post is formatted with "markdown"
@@ -25,6 +27,7 @@ Background: Default site and messageboard
        And I click the edit link for the last post
       Then the selected post filter is "markdown"
 
+      @wip
   Scenario: The member tries to edit someone elses thread
      Given the first post on the most recent thread is not mine
        And the last post on the most recent thread is mine
@@ -32,6 +35,7 @@ Background: Default site and messageboard
       Then I should see an edit link for the last post
        And I should not see an edit link for the first post
 
+      @wip
   Scenario: An admin edits someone elses thread
      Given I am an admin for "thredded"
        And the last post on the most recent thread is not mine

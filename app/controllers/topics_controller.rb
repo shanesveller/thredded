@@ -29,8 +29,7 @@ class TopicsController < ApplicationController
 
     unless can? :create, @topic
       error = 'Sorry, you are not authorized to post on this messageboard.'
-      redirect_to messageboard_topics_url(messageboard),
-        flash: { error: error }
+      redirect_to messageboard_topics_url(messageboard), flash: { error: error }
     end
   end
 
@@ -74,6 +73,8 @@ class TopicsController < ApplicationController
       .unstuck
       .for_messageboard(messageboard)
       .for_user(current_user)
+      .includes(:user)
+      .includes(:last_user)
       .order_by_updated
       .on_page(params[:page])
   end
@@ -84,6 +85,8 @@ class TopicsController < ApplicationController
       .for_messageboard(messageboard)
       .for_user(current_user)
       .public
+      .includes(:user)
+      .includes(:last_user)
       .on_page(params[:page])
   end
 
@@ -93,6 +96,8 @@ class TopicsController < ApplicationController
         .stuck
         .for_messageboard(messageboard)
         .for_user(current_user)
+        .includes(:user)
+        .includes(:last_user)
         .order('id DESC')
     else
       []
