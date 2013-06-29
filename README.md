@@ -22,19 +22,22 @@ If you just want to know how to install - please head to [the Installation instr
 
 ## Requirements:
 
-* postgres (search currently only works with pg, using pg's fulltext search capabilities)
-* sendgrid (for incoming email)
+* Postgres. Search currently only works with pg, using pg's fulltext search capabilities.
+
+## Optional:
+
+* SendGrid. For incoming email thredded has built-in support for the SendGrid parse api using [griddler](https://github.com/thoughtbot/griddler).
+* Resque. Emails will be queued thanks to the `resque_mailer` gem if you add the [thredded_resque](https://github.com/jayroh/thredded_resque) gem to thredded's Gemfile.
 
 ## Features:
 
-Whatever's stricken out still needs to be implemented
+Stricken text must still be implemented.
 
-* Multi-tenanted - by full domain or subdomain.
 * Security per messageboard - private, public or logged in users only
 * Permissions to post - anonymous, members or logged in users only
 * Attaching images to posts
 * Attaching documents to posts
-* Content Filters - bbcode, textile, markdown
+* Content Filters - bbcode, markdown
 * Locking topics
 * Sticky / Pinned topics
 * Private topics
@@ -42,9 +45,15 @@ Whatever's stricken out still needs to be implemented
 * Logging in via github <del>twitter, facebook, linked in, and Gmail</del>
 * Full-text search
 
-## Testing w/Zeus
+## Deploying
 
-I prefer [zeus](https://github.com/burke/zeus) over spork. To run the test suite with zeus visit the zeus repo on github for how to do so: <https://github.com/burke/zeus>
+The following are the ENV's that need to be set for deployment.
+
+* `ENV['GOOGLE_ANALYTICS_ID']` - eg: 'UA-#######-1'
+* `ENV['GITHUB_ID']` - for authentication via github, using omniauth, you'll need an app set up. Place the ID here...
+* `ENV['GITHUB_SECRET']` - ... and the secret.
+* `ENV['SECRET_TOKEN']` - the application secret token needs to be generated for environments other than test and development. See `./config/initializers/secret_token.rb`
+* `ENV['CANONICAL_HOST']` - if set this will use *rack-canonical-host* to redirect requests to one canonical host
 
 ## Contributing
 
