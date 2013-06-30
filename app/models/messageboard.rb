@@ -44,6 +44,18 @@ class Messageboard < ActiveRecord::Base
     User.find_by_sql [sql, self.id, 5.minutes.ago]
   end
 
+  def add_member(user, as='member')
+    roles.create(user_id: user.id, level: as)
+  end
+
+  def has_member?(user)
+    roles.where(user_id: user.id).exists?
+  end
+
+  def member_is_a?(user, as)
+    roles.where(user_id: user.id, level: as).exists?
+  end
+
   def members_from_list(user_list)
     self.users.where('lower(name) in (?)', user_list.map(&:downcase))
   end

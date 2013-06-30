@@ -1,19 +1,18 @@
 <div class="topic_nav">
-  <ul class="actions">
-    <% if messageboard.postable_by?(current_user) %>
-      <li class='new_topic'>
-        <%= link_to 'new topic', new_messageboard_topic_path(messageboard) %>
-      </li>
-      <li class='new_private_topic'>
-        <%= link_to 'private topic',
-          new_messageboard_private_topic_path(messageboard) %>
-      </li>
-    <% end %>
-  </ul>
+  <% if can? :create, Topic.new %>
+    <ul class="actions">
+      <li class='new_topic'><%= link_to 'new topic', new_messageboard_topic_path(messageboard) %></li>
+      <li class='new_private_topic'><%= link_to 'private topic', new_messageboard_private_topic_path(messageboard) %></li>
+    </ul>
+  <% end %>
 
   <ul class="listings">
     <li class="topic_list"><%= link_to 'topics', messageboard_topics_path %></li>
-    <li class="private_topic_list"><%= link_to 'private topics', messageboard_private_topics_path %></li>
-    <%= render partial: 'search/form' %>
+
+    <% if can? :read, PrivateTopic.new %>
+      <li class="private_topic_list"><%= link_to 'private topics', messageboard_private_topics_path %></li>
+    <% end %>
+
+    <%= render 'search/form' %>
   </ul>
 </div>

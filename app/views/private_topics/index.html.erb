@@ -6,7 +6,7 @@
 <header>
   <nav>
     <ul class="breadcrumbs">
-      <li><a href="/">Forums</a></li>
+      <li><%= link_to 'Forums', root_path %></li>
       <li><span><%= messageboard.title %></span></li>
     </ul>
   </nav>
@@ -16,26 +16,23 @@
 </header>
 
 <section class="topics">
-<% if @private_topics.first %>
-  <% cache(['private_topic_list', @private_topics.first, @tracked_user_reads.first]) do %>
-      <div class="currently">
-        <%= render partial: 'topics/topic_condensed', collection: @private_topics, as: :t %>
-      </div>
+  <% if @private_topics.any? %>
+    <div class="currently">
+      <%= render partial: 'topics/topic_condensed', collection: @private_topics, as: :t %>
+    </div>
   <% end %>
-<% end %>
 </section>
 
 <footer>
   <%= paginate @private_topics %>
   <nav>
-    <% if messageboard.postable_by?(current_user) %>
+    <% if can? :create, Topic.new %>
       <ul class="actions">
-        <li><%= link_to 'Create a New Topic',
-          new_messageboard_topic_path(messageboard) %></li>
+        <li><%= link_to 'Create a New Topic', new_messageboard_topic_path(messageboard) %></li>
       </ul>
     <% end %>
     <ul class="breadcrumbs">
-      <li><a href="/">Forums</a></li>
+      <li><%= link_to 'Forums', root_path %></li>
       <li><span><%= messageboard.title %></span></li>
     </ul>
   </nav>

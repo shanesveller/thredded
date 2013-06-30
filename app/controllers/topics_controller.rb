@@ -72,8 +72,6 @@ class TopicsController < ApplicationController
       .topics
       .unstuck
       .for_messageboard(messageboard)
-      .for_user(current_user)
-      .includes(:user)
       .includes(:last_user)
       .order_by_updated
       .on_page(params[:page])
@@ -83,7 +81,6 @@ class TopicsController < ApplicationController
     Topic
       .unstuck
       .for_messageboard(messageboard)
-      .for_user(current_user)
       .public
       .includes(:user)
       .includes(:last_user)
@@ -95,9 +92,6 @@ class TopicsController < ApplicationController
       Topic
         .stuck
         .for_messageboard(messageboard)
-        .for_user(current_user)
-        .includes(:user)
-        .includes(:last_user)
         .order('id DESC')
     else
       []

@@ -62,12 +62,8 @@ class Topic < ActiveRecord::Base
     where(messageboard_id: messageboard.id)
   end
 
-  def self.for_user(user)
-    if user.present?
-      joins(messageboard: :roles).where(roles: {user_id: user.id})
-    else
-      self
-    end
+  def self.including_roles_for(user)
+    joins(messageboard: :roles).where(roles: {user_id: user.id})
   end
 
   def self.public

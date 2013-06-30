@@ -1,40 +1,35 @@
 <% content_for :page_id do %>topics_listing<% end %>
 <% content_for :page_title do %><%= app_config.title %> | <%= messageboard.title %> | Recent Topics<% end %>
-<% content_for :header_nav do %>
-    <nav>
-      <ul>
-        <% if messageboard.postable_by?(current_user) %>
-          <li class="new_topic"><%= link_to 'new topic', new_messageboard_topic_path(messageboard) %></li>
-          <li class="new_private_topic"><%= link_to 'private topic', new_messageboard_topic_path(messageboard, type: 'private') %></li>
-        <% end %>
-      </ul>
-    </nav>
-<% end %>
 
 <header>
   <nav>
-    <ul>
-      <li><a href="/">Forums</a> &rarr; </li>
+    <ul class="breadcrumbs">
+      <li><%= link_to 'Forums', root_path %></li>
       <li><%= link_to messageboard.title, messageboard_topics_path(messageboard) %></li>
+      <li><span><%= @category_name %></span></li>
     </ul>
   </nav>
-  <h1><%= messageboard.title %> - <%= @category_name %></h1>
-  <h2>Recent Updates</h2>
-  <%= paginate @topics %>
 
-  <div class="title">Topic Title</div>
-  <div class="posts">Posts</div>
-  <div class="started">Started</div>
-  <div class="updated">Updated</div>
+  <%= render 'shared/currently_online' %>
+  <%= render 'shared/topic_nav' %>
 </header>
 
 <section class="topics">
-  <%= render partial: 'topics/topic_condensed', collection: @sticky, as: :t %>
-  <%= render partial: 'topics/topic_condensed', collection: @topics, as: :t %>
+  <% if @sticky.any? %>
+    <div class="stuck">
+      <%= render partial: 'topics/topic_condensed', collection: @sticky, as: :t %>
+    </div>
+  <% end %>
+
+  <% if @topics.any? %>
+    <div class="currently">
+      <%= render partial: 'topics/topic_condensed', collection: @topics, as: :t %>
+    </div>
+  <% end %>
 </section>
 
 <footer>
-  <% if messageboard.postable_by?(current_user) %>
+  <% if can? :create, Topic.new %>
     <%= link_to 'Create a New Topic', new_messageboard_topic_path(messageboard) %>
   <% end %>
 </footer>

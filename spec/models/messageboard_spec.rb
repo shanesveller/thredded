@@ -26,97 +26,156 @@ describe Messageboard do
     all_boards.last.should == @m
   end
 
-  describe ".active_users" do
-    it "returns a list of users active in this messageboard" do
-      @john = create(:user, name: "John")
-      @joe  = create(:user, name: "Joe")
+  describe '.add_member' do
+    it 'creates a membership role for a provided user' do
+      user = create(:user)
+      messageboard = create(:messageboard)
+      messageboard.add_member(user)
+      role = Role.first
+
+      role.messageboard.should eq messageboard
+      role.user.should eq user
+      role.level.should eq 'member'
+    end
+
+    it 'assigns a user as an admin for this board' do
+      user = create(:user)
+      messageboard = create(:messageboard)
+      messageboard.add_member(user, 'admin')
+      role = Role.first
+
+      role.messageboard.should eq messageboard
+      role.user.should eq user
+      role.level.should eq 'admin'
+    end
+  end
+
+  describe '#has_member?' do
+    it 'is true if a user is a member of a messageboard' do
+      user = create(:user)
+      messageboard = create(:messageboard)
+      messageboard.add_member(user)
+
+      messageboard.has_member?(user).should be_true
+    end
+
+    it 'is false if user is not a member' do
+      user = create(:user)
+      messageboard = create(:messageboard)
+
+      messageboard.has_member?(user).should be_false
+    end
+  end
+
+  describe '#member_is_a?' do
+    it 'is true when checking that an admin is an admin' do
+      user = create(:user)
+      messageboard = create(:messageboard)
+      messageboard.add_member(user, 'admin')
+
+      messageboard.member_is_a?(user, 'admin').should be_true
+    end
+
+    it 'is false when checking that a member is an admin' do
+      user = create(:user)
+      messageboard = create(:messageboard)
+      messageboard.add_member(user, 'member')
+
+      messageboard.member_is_a?(user, 'admin').should_not be_true
+    end
+  end
+
+  describe '.active_users' do
+    it 'returns a list of users active in this messageboard' do
+      @john = create(:user, name: 'John')
+      @joe  = create(:user, name: 'Joe')
       @john.member_of @m
       @joe.member_of @m
       @john.mark_active_in!(@m)
       @joe.mark_active_in!(@m)
 
-      @m.active_users[0].name.should == "Joe"
-      @m.active_users[1].name.should == "John"
+      @m.active_users[0].name.should == 'Joe'
+      @m.active_users[1].name.should == 'John'
     end
   end
 
-  describe ".postable_by?" do
+  describe '.postable_by?' do
     before(:each) do
       @current_user = create(:user)
     end
 
-    describe "for public boards" do
+    describe 'for public boards' do
       before(:each) do
         @m.security = 'public'
       end
-      it "should be true if allows anonymous" do
+      it 'should be true if allows anonymous' do
         @current_user = nil
         @m.postable_by?(@current_user).should be_true
       end
-      it "should be false if for logged_in" do
+      it 'should be false if for logged_in' do
         @m.postable_by?(@current_user).should be_true
       end
-      it "should be false if for members" do
+      it 'should be false if for members' do
         @current_user.member_of(@m)
         @m.postable_by?(@current_user).should be_true
       end
     end
 
-    describe "for logged_in boards" do
+    describe 'for logged_in boards' do
       before(:each) do
         @m.security = 'logged_in'
       end
-      it "should be false if anonymous and allows anonymous posting" do
+      it 'should be false if anonymous and allows anonymous posting' do
         @current_user = nil
         @m.postable_by?(@current_user).should be_false
       end
-      it "should be true if logged in and allows logged_in posting" do
-        @m.posting_permission = "logged_in"
+      it 'should be true if logged in and allows logged_in posting' do
+        @m.posting_permission = 'logged_in'
         @m.postable_by?(@current_user).should be_true
       end
-      it "should be true if a member and allows logged_in posting" do
-        @m.posting_permission = "logged_in"
+      it 'should be true if a member and allows logged_in posting' do
+        @m.posting_permission = 'logged_in'
         @current_user.member_of(@m)
         @m.postable_by?(@current_user).should be_true
       end
     end
 
-    describe "for private boards" do
+    describe 'for private boards' do
       before(:each) do
         @m.security = 'private'
       end
-      it "should be false if anonymous and allows anonymous" do
+      it 'should be false if anonymous and allows anonymous' do
         @current_user = nil
         @m.postable_by?(@current_user).should be_false
       end
-      it "should be false if user is not a member and posting permission is logged in" do
-        @m.posting_permission = "members"
+      it 'should be false if user is not a member and posting permission is logged in' do
+        @m.posting_permission = 'members'
         @m.postable_by?(@current_user).should be_false
       end
-      it "should be true if a member and allows member posting" do
-        @m.posting_permission = "members"
+      it 'should be true if a member and allows member posting' do
+        @m.posting_permission = 'members'
         @current_user.member_of(@m)
         @m.postable_by?(@current_user).should be_true
       end
     end
   end
 
-  describe "#restricted_to_private?" do
-    it "checks whether a messageboard is private and restricted to members" do
+  describe '#restricted_to_private?' do
+    it 'checks whether a messageboard is private and restricted to members' do
       @m.security = 'private'
       @m.restricted_to_private?.should == true
     end
   end
 
-  describe "#restricted_to_logged_in?" do
-    it "checks whether a messageboard is restricted to only those that are logged in" do
+  describe '#restricted_to_logged_in?' do
+    it 'checks whether a messageboard is restricted to only those that are logged in' do
       @m.security = 'logged_in'
       @m.restricted_to_logged_in?.should == true
     end
   end
 
-  describe "#public?" do
-    it "checks whether a messageboard is open for all to read" do
+  describe '#public?' do
+    it 'checks whether a messageboard is open for all to read' do
       @m.security = 'public'
       @m.public?.should == true
     end

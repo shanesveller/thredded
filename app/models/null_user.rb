@@ -19,6 +19,10 @@ class NullUser
     'Anonymous User'
   end
 
+  def private_topics
+    []
+  end
+
   def superadmin?
     false
   end

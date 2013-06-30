@@ -9,7 +9,13 @@ class PostsController < ApplicationController
 
   def index
     authorize! :show, topic
-    @post = Post.new(filter: current_user.try(:post_filter))
+
+    @post = Post.new(
+      topic: topic,
+      messageboard: messageboard,
+      filter: current_user.try(:post_filter)
+    )
+
     @posts = Post
       .where(topic_id: topic)
       .includes(user: :roles)
@@ -18,7 +24,7 @@ class PostsController < ApplicationController
     @read_status = UserTopicRead.find_or_create_by_user_and_topic(current_user, topic, page)
 
     if not_inside_topic_and_in_an_old_page?
-      redirect_to_later_page and return
+      redirect_to_later_page
     else
       UserTopicRead.update_read_status!(current_user, topic, page)
     end

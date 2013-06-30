@@ -83,8 +83,24 @@ FactoryGirl.define do
     security 'public'
     posting_permission  'anonymous'
 
+    trait :logged_in do
+      security 'logged_in'
+    end
+
     trait :private do
       security 'private'
+    end
+
+    trait :public do
+      security 'public'
+    end
+
+    trait :restricted_to_logged_in do
+      security 'logged_in'
+    end
+
+    trait :postable_for_logged_in do
+      posting_permission 'logged_in'
     end
   end
 
@@ -166,6 +182,14 @@ FactoryGirl.define do
     title 'New topic started here'
     hash_id { FactoryGirl.generate(:topic_hash) }
 
+    trait :locked do
+      locked 't'
+    end
+
+    trait :unlocked do
+      locked 'f'
+    end
+
     after(:create) do |topic, evaluator|
       evaluator.with_posts.times do
         create(:post, topic: topic, messageboard: topic.messageboard)
@@ -196,6 +220,10 @@ FactoryGirl.define do
     factory :last_user do
       email              { FactoryGirl.generate(:other_email) }
       name               { FactoryGirl.generate(:other_name) }
+    end
+
+    trait :superadmin do
+      superadmin 't'
     end
   end
 
