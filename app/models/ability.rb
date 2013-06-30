@@ -28,6 +28,10 @@ class Ability
     cannot :manage, PrivateTopic
     cannot :read, PrivateTopic
 
+    can :list, PrivateTopic do |private_topic|
+      PrivateTopicUserPermissions.new(private_topic, user).listable?
+    end
+
     can :manage, PrivateTopic do |private_topic|
       PrivateTopicUserPermissions.new(private_topic, user).manageable?
     end
@@ -37,7 +41,6 @@ class Ability
     end
 
     can :read, PrivateTopic do |private_topic|
-      PrivateTopicUserPermissions.new(private_topic, user).indexable? &&
       PrivateTopicUserPermissions.new(private_topic, user).readable?
     end
 

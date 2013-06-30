@@ -9,7 +9,7 @@
   <ul class="listings">
     <li class="topic_list"><%= link_to 'topics', messageboard_topics_path %></li>
 
-    <% if can? :read, messageboard.private_topics.build %>
+    <% if can? :list, messageboard.private_topics.build %>
       <li class="private_topic_list"><%= link_to 'private topics', messageboard_private_topics_path %></li>
     <% end %>
 

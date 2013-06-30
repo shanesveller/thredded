@@ -162,18 +162,21 @@ describe User, 'abilities' do
 
   context 'for listing of private topics' do
     it 'will not allow someone with no private messages' do
-      user = build_stubbed(:user, private_topics: [])
+      user = create(:user)
       ability = Ability.new(user)
 
-      ability.should_not be_able_to(:read, PrivateTopic.new)
+      ability.should_not be_able_to(:list, PrivateTopic.new)
     end
 
     it 'will allow someone with private messages to list them' do
-      user = stubs(:user)
-      user.stubs(private_topics: ['shh'], superadmin?: false)
+      user = create(:user)
+      private_topic = create(:private_topic,
+        user: user,
+        users: [user]
+      )
       ability = Ability.new(user)
 
-      ability.should be_able_to(:read, PrivateTopic.new)
+      ability.should be_able_to(:list, PrivateTopic.new)
     end
   end
 

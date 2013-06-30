@@ -37,8 +37,8 @@ class PrivateTopicsController < ApplicationController
   def get_private_topics
     PrivateTopic
       .for_messageboard(messageboard)
-      .for_user(current_user)
       .including_roles_for(current_user)
+      .for_user(current_user)
       .on_page(params[:page])
   end
 end

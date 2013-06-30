@@ -7,6 +7,10 @@ class PrivateTopicUserPermissions
     @user = user
   end
 
+  def listable?
+    user.private_topics.any?
+  end
+
   def manageable?
     user_started_topic?
   end
@@ -18,10 +22,6 @@ class PrivateTopicUserPermissions
   def creatable?
     TopicUserPermissions
       .new(private_topic, user).creatable?
-  end
-
-  def indexable?
-    user.private_topics.any?
   end
 
   private

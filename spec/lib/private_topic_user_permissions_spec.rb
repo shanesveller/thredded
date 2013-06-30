@@ -45,14 +45,14 @@ describe PrivateTopicUserPermissions do
     end
   end
 
-  describe '#indexable?' do
+  describe '#listable?' do
     it 'allows users with private messages to list them' do
       user = build_stubbed(:user)
       user.stubs(private_topics: ['topic', 'topic'])
       private_topic = PrivateTopic.new
       permissions = PrivateTopicUserPermissions.new(private_topic, user)
 
-      permissions.should be_indexable
+      permissions.should be_listable
     end
 
     it 'does not allow users with no private messages to list them' do
@@ -61,7 +61,7 @@ describe PrivateTopicUserPermissions do
       private_topic = PrivateTopic.new
       permissions = PrivateTopicUserPermissions.new(private_topic, user)
 
-      permissions.should_not be_indexable
+      permissions.should_not be_listable
     end
   end
 end
