@@ -29,7 +29,7 @@
 </section>
 
 <footer>
-  <% if can? :create, Topic.new %>
+  <% if can? :create, messageboard.topics.build %>
     <%= link_to 'Create a New Topic', new_messageboard_topic_path(messageboard) %>
   <% end %>
 </footer>

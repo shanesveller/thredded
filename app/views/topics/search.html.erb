@@ -24,7 +24,7 @@
 
 <footer>
   <nav>
-    <% if can? :create, Topic.new %>
+    <% if can? :create, messageboard.topics.build %>
       <ul class="actions">
         <li><%= link_to 'Create a New Topic', new_messageboard_topic_path(messageboard) %></li>
       </ul>

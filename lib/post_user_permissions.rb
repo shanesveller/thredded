@@ -9,7 +9,9 @@ class PostUserPermissions
   end
 
   def manageable?
-    user.id == post.user_id || user.superadmin?
+    (user.id == post.user_id) ||
+      user.superadmin? ||
+      messageboard.member_is_a?(user, 'admin')
   end
 
   def creatable?

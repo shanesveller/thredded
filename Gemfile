@@ -68,6 +68,7 @@ group :development do
   gem 'hub'
   gem 'letter_opener'
   gem 'pry'
-  gem 'sextant'
+  gem 'quiet_assets'
   gem 'rack-mini-profiler'
+  gem 'sextant'
 end

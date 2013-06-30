@@ -205,6 +205,8 @@ GEM
       bb-ruby
       rails (~> 3.2.0)
       redcarpet
+    quiet_assets (1.0.2)
+      railties (>= 3.1, < 5.0)
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -348,6 +350,7 @@ DEPENDENCIES
   pg
   pry
   pseudohelp
+  quiet_assets
   rack
   rack-mini-profiler
   rack-test (= 0.6.1)

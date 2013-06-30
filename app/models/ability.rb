@@ -4,6 +4,8 @@ class Ability
   def initialize(user)
     user ||= NullUser.new
 
+    alias_action :edit, to: :update
+
     can :manage, :all if user.superadmin?
 
     can :read, Messageboard do |messageboard|
@@ -15,7 +17,8 @@ class Ability
     end
 
     can :read, Topic do |topic|
-      TopicUserPermissions.new(topic, user).readable?
+      (topic.private? && PrivateTopicUserPermissions.new(topic, user).readable?) ||
+        TopicUserPermissions.new(topic, user).readable?
     end
 
     can :create, Topic do |topic|
@@ -34,10 +37,7 @@ class Ability
     end
 
     can :read, PrivateTopic do |private_topic|
-      PrivateTopicUserPermissions.new(private_topic, user).indexable?
-    end
-
-    can :read, PrivateTopic do |private_topic|
+      PrivateTopicUserPermissions.new(private_topic, user).indexable? &&
       PrivateTopicUserPermissions.new(private_topic, user).readable?
     end
 
@@ -46,7 +46,7 @@ class Ability
         TopicUserPermissions.new(post.topic, user).creatable?
     end
 
-    can :edit, Post do |post|
+    can :update, Post do |post|
       PostUserPermissions.new(post, user).manageable?
     end
 

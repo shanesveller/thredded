@@ -8,7 +8,7 @@ class PostsController < ApplicationController
   layout 'application'
 
   def index
-    authorize! :show, topic
+    authorize! :read, topic
 
     @post = Post.new(
       topic: topic,
@@ -36,20 +36,21 @@ class PostsController < ApplicationController
   end
 
   def edit
-    authorize! :update, post
-  end
-
-  def post
-    post = topic.posts.find(params[:post_id])
-    @post ||= post
+    authorize! :edit, post
   end
 
   def update
+    authorize! :update, post
     post.update_attributes(params[:post])
     redirect_to messageboard_topic_posts_url(messageboard, topic)
   end
 
   private
+
+  def post
+    post = topic.posts.find(params[:post_id])
+    @post ||= post
+  end
 
   def not_inside_topic_and_in_an_old_page?
     !internal_to_topic? && page == 1 && @read_status.page > 1

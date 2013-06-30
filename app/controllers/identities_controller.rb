@@ -21,12 +21,12 @@ class IdentitiesController < ApplicationController
     sign_in existing_user
   end
 
-  def existing_user
-    @existing_user ||= User.where(email: params[:identity][:email]).first
-  end
-
   def user_exists?
     existing_user.valid_password?(params[:identity][:password])
+  end
+
+  def existing_user
+    @existing_user ||= User.where(email: params[:identity][:email]).first
   end
 
   def clear_out_session_var

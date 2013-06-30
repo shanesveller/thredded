@@ -18,6 +18,16 @@ describe PostUserPermissions do
 
       permissions.should be_manageable
     end
+
+    it 'can be managed by an admin' do
+      user = build_stubbed(:user)
+      messageboard = build_stubbed(:messageboard)
+      post = build_stubbed(:post, messageboard: messageboard)
+      messageboard.stubs(member_is_a?: true)
+      permissions = PostUserPermissions.new(post, user)
+
+      permissions.should be_manageable
+    end
   end
 
   describe '#topic_locked?' do
