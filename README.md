@@ -22,6 +22,7 @@ If you just want to know how to install - please head to [the Installation instr
 
 ## Requirements:
 
+* Ruby 2.0. This will work with 1.9.3 but the Gemfile will have to be updated by you to accommodate that.
 * Postgres. Search currently only works with pg, using pg's fulltext search capabilities.
 
 ## Optional:
