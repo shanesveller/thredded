@@ -46,6 +46,10 @@ feature 'User profile' do
   end
 
   def other_user
-    PageObject::User.new.user('john', 'john@example.com')
+    @other_user ||= begin
+      user = PageObject::User.new
+      user.create_user('john', 'john@example.com')
+      user
+    end
   end
 end

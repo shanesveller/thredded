@@ -128,10 +128,10 @@ FactoryGirl.define do
   end
 
   factory :private_topic do
-    title 'New private topic started here'
     user
-    association :last_user, factory: :user
     messageboard
+    title 'New private topic started here'
+    association :last_user, factory: :user
   end
 
   factory :private_user do
