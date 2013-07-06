@@ -24,7 +24,7 @@
     <li class="submit">
       <%= f.submit 'Sign in' %>
       <%= link_to 'Sign in with Github', '/auth/github', class: 'provider github' %>
-      <%= render partial: 'devise/shared/links' %>
+      <%= render 'devise/shared/links' %>
     </li>
   </ul>
 <% end %>

@@ -18,13 +18,13 @@
 <section class="topics">
   <% if @sticky.first %>
     <div class="stuck">
-      <%= render partial: 'topics/topic_condensed', collection: @sticky, as: :t %>
+      <%= render partial: 'topics/topic_condensed', collection: @sticky, as: :topic %>
     </div>
   <% end %>
 
   <% if @topics.first %>
     <div class="currently">
-      <%= render partial: 'topics/topic_condensed', collection: @topics, as: :t %>
+      <%= render partial: 'topics/topic_condensed', collection: @topics, as: :topic %>
     </div>
   <% end %>
 </section>

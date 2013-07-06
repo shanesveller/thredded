@@ -24,8 +24,7 @@
       url: messageboard_topic_path(@messageboard, @topic),
       html: { method: :put, class: :topic_form, multipart: true } do |f| %>
 
-      <%= render partial: 'form', locals: { f: f,
-        messageboard: MessageboardDecorator.new(messageboard) } %>
+      <%= render 'form', f: f, messageboard: MessageboardDecorator.new(messageboard) %>
 
       <li class="submit">
         <%= f.submit 'Update Topic' %>

@@ -20,11 +20,10 @@
     html: { multipart: true, class: :topic_form }) do |f| %>
 
     <ul>
-      <%= render partial: 'form', locals: { f: f,
-        messageboard: MessageboardDecorator.new(messageboard) } %>
+      <%= render 'form', f: f, messageboard: MessageboardDecorator.new(messageboard) %>
 
       <li class="submit">
-        <%= f.submit "Create New Private Topic", { tabindex: 3 } %>
+        <%= f.submit 'Create New Private Topic', { tabindex: 3 } %>
       </li>
     </ul>
   <% end %>

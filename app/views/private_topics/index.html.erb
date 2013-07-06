@@ -11,14 +11,14 @@
     </ul>
   </nav>
 
-  <%= render partial: 'shared/currently_online' %>
-  <%= render partial: 'shared/topic_nav' %>
+  <%= render 'shared/currently_online' %>
+  <%= render 'shared/topic_nav' %>
 </header>
 
 <section class="topics">
   <% if @private_topics.any? %>
     <div class="currently">
-      <%= render partial: 'topics/topic_condensed', collection: @private_topics, as: :t %>
+      <%= render partial: 'topics/topic_condensed', collection: @private_topics, as: :topic %>
     </div>
   <% end %>
 </section>

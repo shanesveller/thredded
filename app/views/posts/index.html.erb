@@ -41,15 +41,14 @@
         url: create_messageboard_topic_post_path(messageboard, topic, @post),
         html: { multipart: true }) do |f| %>
         <ul>
-          <%= render partial: 'form', locals: { f: f } %>
+          <%= render 'form', f: f %>
           <li class="submit"><%= f.submit 'Submit reply', { tabindex: 3 } %></li>
         </ul>
       <% end %>
     </div>
   <% elsif !signed_in? %>
     <div class="sign_in_to_post">
-      <%= render partial: 'login_form',
-        locals: { resource: User.new, resource_name: :user } %>
+      <%= render 'login_form', resource: User.new, resource_name: :user %>
     </div>
   <% end %>
 

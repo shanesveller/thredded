@@ -100,9 +100,9 @@
 <fieldset data-section='preferences'>
   <legend>Update Preferences For Your Messageboards</legend>
   <% unless params['messageboard'] %>
-    <%= render partial: 'form_selecting_messageboard' %>
+    <%= render 'form_selecting_messageboard' %>
   <% else %>
-    <%= render partial: 'form_preferences', locals: { preference: @preference } %>
+    <%= render 'form_preferences', preference: @preference %>
   <% end %>
 </fieldset>
 

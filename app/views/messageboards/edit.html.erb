@@ -7,7 +7,7 @@
   url: admin_site_messageboard_path(@messageboard),
   html: { method: :put, class: :topic_form, multipart: true } do |f| %>
 
-  <%= render partial: 'form', locals: { f: f } %>
+  <%= render 'form', f: f %>
 
   <p><%= f.submit 'Edit Messageboard' %></p>
 <% end %>

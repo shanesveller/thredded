@@ -37,8 +37,8 @@
     </header>
 
     <section id="contentwrap">
-      <%= render partial: 'shared/error_msgs' %>
-      <%= render partial: 'pseudohelp/help' %>
+      <%= render 'shared/error_msgs' %>
+      <%= render 'pseudohelp/help' %>
       <section id="content">
         <%= yield %>
       </section>
@@ -52,6 +52,6 @@
     </footer>
 
     <%= javascript_include_tag 'application' %>
-    <%= render partial: 'shared/google_analytics' %>
+    <%= render 'shared/google_analytics' %>
   </body>
 </html>
