@@ -20,37 +20,37 @@ module NavigationHelpers
 
     when /the messageboard "([^\"]+)"/i
       messageboard = Messageboard.where(name: $1).first
-      messageboard_topics_url(messageboard)
+      messageboard_topics_path(messageboard)
 
     when /the new thread page for "([^\"]+)"/i
       messageboard = Messageboard.where(name: $1).first
-      new_messageboard_topic_url(messageboard)
+      new_messageboard_topic_path(messageboard)
 
     when /the new private thread page for "([^\"]+)"/i
       messageboard = Messageboard.where(name: $1).first
-      new_messageboard_private_topic_url(messageboard)
+      new_messageboard_private_topic_path(messageboard)
 
     when /the forum listing page/i
       messageboards_path
 
     when /the topic listing page/i
       messageboard = Messageboard.first
-      messageboard_topics_url(messageboard)
+      messageboard_topics_path(messageboard)
 
     when /edit the latest thread/i
       messageboard = Messageboard.first
       topic = messageboard.topics.first
-      edit_messageboard_topic_url(messageboard, topic)
+      edit_messageboard_topic_path(messageboard, topic)
 
     when /the latest thread/i
       messageboard = Messageboard.first
       topic = messageboard.topics.first
-      messageboard_topic_url(messageboard, topic)
+      messageboard_topic_path(messageboard, topic)
 
     when /the most recently updated thread on "([^\"]+)"/i
       messageboard = Messageboard.where(name: $1).first
       topic = messageboard.topics.first
-      messageboard_topic_posts_url(messageboard.name, topic.slug)
+      messageboard_topic_posts_path(messageboard.name, topic.slug)
 
     when /the sign up page/i
       new_user_registration_path

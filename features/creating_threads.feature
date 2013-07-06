@@ -30,24 +30,6 @@ Background: Default site and messageboard
           | topic 2     | 1     | Joel    | Joel    |
           | topic 1     | 1     | Joel    | Joel    |
 
-  Scenario: The user adds a private thread
-    Given another member named "john" exists
-      And "john" is a member of "thredded"
-     When I go to the new private thread page for "thredded"
-      And I enter a recipient named "john", a title "sup john" and content "This is a private thread"
-      And I submit the form
-      And I go to the most recently updated thread on "thredded"
-     Then I should see "Joel and John"
-      And I should see "sup john"
-      And I should see "This is a private thread"
-      And "john@email.com" should receive an email
-      And "joel@email.com" should receive no emails
-
-  Scenario: A user cannot see a private thread
-    Given a private thread exists between "Sal" and "John" titled "sal and john only please"
-     When I go to the topic listing page
-     Then I should not see "sal and john only please"
-
   Scenario: An admin can lock or pin a new thread
     Given I am a admin of "thredded"
      When I go to the new thread page for "thredded"

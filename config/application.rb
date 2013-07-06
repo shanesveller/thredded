@@ -12,10 +12,10 @@ end
 
 module Thredded
   class Application < Rails::Application
-    config.autoload_paths << Rails.root.join('app').to_s
+    config.autoload_paths += %W(#{config.root}/app)
+    config.autoload_paths += %W(#{config.root}/app/decorators)
     config.autoload_paths += %W(#{config.root}/lib)
     config.autoload_paths += Dir["#{config.root}/lib/**/"]
-    config.active_record.observers = :post_observer, :topic_observer
     config.time_zone = 'Eastern Time (US & Canada)'
 
     config.generators do |g|

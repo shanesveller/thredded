@@ -28,6 +28,7 @@ RSpec.configure do |config|
   config.mock_with :mocha
   config.use_transactional_fixtures = false
   config.include Features, type: :feature
+  config.treat_symbols_as_metadata_keys_with_true_values = true
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction

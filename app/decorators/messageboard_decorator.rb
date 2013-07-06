@@ -6,6 +6,10 @@ class MessageboardDecorator < SimpleDelegator
     @messageboard = messageboard
   end
 
+  def original
+    messageboard
+  end
+
   def category_options
     messageboard.categories.collect { |cat| [cat.name, cat.id] }
   end

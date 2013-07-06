@@ -7,6 +7,10 @@ end
 
 describe Post, 'associations' do
   it { should have_many(:post_notifications) }
+  it { should have_many(:attachments) }
+  it { should belong_to(:user) }
+  it { should belong_to(:topic) }
+  it { should belong_to(:messageboard) }
 end
 
 describe Post, '#create' do
@@ -19,49 +23,70 @@ describe Post, '#create' do
     Timecop.return
   end
 
+  it 'Notifies @ users', :notifiers do
+    notifier = mock('notifier')
+    notifier.stubs(notifications_for_at_users: true)
+    AtNotifier.stubs(new: notifier)
+
+    post = create(:post)
+
+    expect(AtNotifier).to have_received(:new).with(post)
+    expect(notifier).to have_received(:notifications_for_at_users)
+  end
+
   it 'updates the parent topic with the latest post author' do
     joel  = create(:user)
     topic = create(:topic)
     post = create(:post, user: joel, topic: topic)
 
-    topic.reload.last_user.should eq joel
+    expect(topic.reload.last_user).to eq joel
   end
 
-  it "increments the topic's and user's post counts" do
+  it 'increments the topic and user post counts' do
     joel  = create(:user)
     topic = create(:topic)
+    create_list(:post, 3,
+      topic: topic,
+      user: joel,
+      messageboard: topic.messageboard,
+    )
 
-    3.times do
-      topic.posts.create!(user: joel, last_user: joel, content: 'content',
-        messageboard: topic.messageboard)
-    end
-
-    topic.reload.posts_count.should eq 3
-    joel.reload.posts_count.should eq 3
+    expect(topic.reload.posts_count).to eq 3
+    expect(joel.reload.posts_count).to eq 3
   end
 
   it 'updates the topic updated_at field to that of the new post' do
     joel  = create(:user)
     topic = create(:topic)
     messageboard = topic.messageboard
+    noontime = Chronic.parse('Jan 1st 2012 at noon')
+    three_pm = Chronic.parse('Jan 1st 2012 at 3pm')
 
-    Timecop.travel(Chronic.parse('Jan 1st 2012 at noon')) do
-      create(:post, topic: topic, messageboard: messageboard, user: joel, content: 'posting here')
+    Timecop.travel(noontime) do
+      create(:post,
+        topic: topic,
+        messageboard: messageboard,
+        user: joel
+      )
     end
 
-    Timecop.travel(Chronic.parse('Jan 1st 2012 at 3pm')) do
-      create(:post, topic: topic, messageboard: messageboard, user: joel, content: 'posting more')
+    Timecop.travel(three_pm) do
+      create(:post,
+        topic: topic,
+        messageboard: messageboard,
+        user: joel
+      )
     end
 
-    topic.updated_at.to_s.should eq Chronic.parse('Jan 1st 2012 at 3pm').to_s
+    expect(topic.updated_at.to_s).to eq three_pm.to_s
   end
 
   it 'sets the post user email on creation' do
-    shaun = create(:user)
+    shaun = create(:user, email: 'shaun@example.com')
     topic = create(:topic, last_user: shaun)
     post = create(:post, user: shaun, topic: topic)
 
-    post.user_email.should eq post.user.email
+    expect(post.user_email).to eq 'shaun@example.com'
   end
 end
 

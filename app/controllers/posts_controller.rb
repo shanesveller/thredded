@@ -42,7 +42,7 @@ class PostsController < ApplicationController
   def update
     authorize! :update, post
     post.update_attributes(params[:post])
-    redirect_to messageboard_topic_posts_url(messageboard, topic)
+    redirect_to messageboard_topic_posts_path(messageboard, topic)
   end
 
   private

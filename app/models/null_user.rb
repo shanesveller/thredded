@@ -19,6 +19,10 @@ class NullUser
     'Anonymous User'
   end
 
+  def email
+    'anonymous@0.0.0.0'
+  end
+
   def private_topics
     []
   end

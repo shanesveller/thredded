@@ -39,7 +39,9 @@ class Topic < ActiveRecord::Base
   delegate :name, :name=, :email, :email=, to: :user, prefix: true
 
   before_validation do
-    self.hash_id = SecureRandom.hex(10) if self.hash_id.nil?
+    if hash_id.nil?
+      self.hash_id = SecureRandom.hex(10)
+    end
   end
 
   def self.recent

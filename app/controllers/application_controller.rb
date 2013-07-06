@@ -17,13 +17,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  protected
+  private
 
   def merge_default_topics_params
     params.deep_merge!({
       topic: {
         last_user: current_user,
-        messageboard: messageboard,
         user: current_user,
         posts_attributes: {
           '0' => {
@@ -35,8 +34,6 @@ class ApplicationController < ActionController::Base
       }
     })
   end
-
-  private
 
   def extra_data
     ''
@@ -59,7 +56,7 @@ class ApplicationController < ActionController::Base
   end
 
   def default_home
-    root_url
+    root_path
   end
 
   def messageboard

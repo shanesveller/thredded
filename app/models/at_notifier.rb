@@ -11,6 +11,8 @@ class AtNotifier
       PostMailer.at_notification(post.id, user_emails).deliver
       mark_notified(members)
     end
+
+    true
   end
 
   def at_notifiable_members

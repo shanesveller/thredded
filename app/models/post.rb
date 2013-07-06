@@ -1,6 +1,8 @@
 class Post  < ActiveRecord::Base
   require 'gravtastic'
   include Gravtastic
+  gravtastic :user_email
+
   include BaseFilter
   include TextileFilter
   include BbcodeFilter
@@ -10,7 +12,6 @@ class Post  < ActiveRecord::Base
   include EmojiFilter
   include AtNotificationFilter
 
-  gravtastic :user_email
   paginates_per 50
 
   attr_accessible :attachments_attributes,
@@ -22,8 +23,9 @@ class Post  < ActiveRecord::Base
     :topic,
     :user
 
-  default_scope order: 'id ASC'
+  cattr_accessor(:notification_enabled) { true }
 
+  default_scope order: 'id ASC'
   belongs_to :messageboard, counter_cache: true, touch: true
   belongs_to :topic, counter_cache: true
   belongs_to :user, counter_cache: true, touch: true
@@ -32,21 +34,18 @@ class Post  < ActiveRecord::Base
 
   accepts_nested_attributes_for :attachments
 
-  validates_presence_of :content, :messageboard_id
+  validates :content, presence: true
+  validates :messageboard_id, presence: true
 
-  before_validation :set_user_email
-  after_create  :modify_parent_topic
-
-  def created_date
-    created_at.strftime("%b %d, %Y %I:%M:%S %Z") if created_at
+  def create
+    super &&
+      modify_parent_topic
   end
 
-  def created_timestamp
-    created_at.strftime("%Y-%m-%dT%H:%M:%S") if created_at
-  end
-
-  def gravatar_url
-    super.gsub /http:/, ''
+  def create_or_update
+    set_user_email &&
+      super &&
+      notify_at_users
   end
 
   private
@@ -58,8 +57,14 @@ class Post  < ActiveRecord::Base
   end
 
   def set_user_email
-    if user
-      self.user_email = user.email
+    self.user_email = user.email
+  end
+
+  def notify_at_users
+    if self.notification_enabled
+      AtNotifier.new(self).notifications_for_at_users
+    else
+      true
     end
   end
 end
