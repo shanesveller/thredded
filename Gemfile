@@ -67,7 +67,7 @@ group :development do
   gem 'git_remote_branch'
   gem 'hub'
   gem 'letter_opener'
-  gem 'pry'
+  gem 'pry-rails'
   gem 'quiet_assets'
   gem 'rack-mini-profiler'
   gem 'sextant'
