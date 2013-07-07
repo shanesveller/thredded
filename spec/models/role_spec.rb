@@ -1,31 +1,25 @@
 require 'spec_helper'
 
-describe Role do
-
-  before(:each) do
-    @admin_user = create(:user, :email => "role@admin.com", :name => "adminUser")
-    @admin = create(:role_admin)
-    @messageboard = @admin.messageboard
-    @admin_user.roles << @admin
-    @admin_user.roles.reload
+describe Role, '#.for(messageboard)' do
+  it 'filters down roles only for this messagebaord' do
+    admin = create(:role, :admin)
+    messageboard = admin.messageboard
+    expect(Role.for(messageboard)).to include(admin)
   end
+end
 
-  describe "#.for(messageboard)" do
-    it "filters down roles only for this messagebaord" do
-      Role.for(@messageboard).should include(@admin)
-    end
+describe Role, '#.as(role)' do
+  it 'filters down roles only for this particular role' do
+    superadmin = create(:role, :superadmin)
+    messageboard = superadmin.messageboard
+    expect(Role.as('superadmin')).to include(superadmin)
   end
+end
 
-  describe "#.as(role)" do
-    it "filters down roles only for this particular role" do
-      Role.as('admin').should include(@admin)
-    end
+describe Role, '#for(messageboard).as(role)' do
+  it 'filters down roles for this messageboard' do
+    moderator = create(:role, :moderator)
+    messageboard = moderator.messageboard
+    expect(Role.for(messageboard).as('moderator')).to include(moderator)
   end
-
-  describe "#for(messageboard).as(role)" do
-    it "filters down roles for this messageboard" do
-      Role.for(@messageboard).as('admin').should include(@admin)
-    end
-  end
-
 end

@@ -125,6 +125,8 @@ FactoryGirl.define do
   factory :preference do
     notify_on_mention false
     notify_on_message false
+    user
+    messageboard
   end
 
   factory :private_topic do
@@ -142,20 +144,25 @@ FactoryGirl.define do
   factory :role do
     level 'admin'
     messageboard
+    user
 
-    factory :role_admin do
+    trait :inactive do
+      last_seen 3.days.ago
+    end
+
+    trait :admin do
       level 'admin'
     end
 
-    factory :role_superadmin do
+    trait :superadmin do
       level 'superadmin'
     end
 
-    factory :role_moderator do
+    trait :moderator do
       level 'moderator'
     end
 
-    factory :role_member do
+    trait :member do
       level 'member'
     end
   end
