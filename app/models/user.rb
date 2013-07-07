@@ -59,6 +59,13 @@ class User < ActiveRecord::Base
       message: 'invalid email address'
     }
 
+  def self.recently_active_in(messageboard)
+    joins(:roles)
+      .where(roles: { messageboard_id: messageboard.id })
+      .where('roles.last_seen > ?', 5.minutes.ago)
+      .order('roles.last_seen')
+  end
+
   def self.from_omniauth(auth_hash)
     where(email: auth_hash['info']['email']).first ||
       create_from_omniauth(auth_hash)

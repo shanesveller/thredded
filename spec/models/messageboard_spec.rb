@@ -85,20 +85,6 @@ describe Messageboard do
     end
   end
 
-  describe '.active_users' do
-    it 'returns a list of users active in this messageboard' do
-      @john = create(:user, name: 'John')
-      @joe  = create(:user, name: 'Joe')
-      @john.member_of @m
-      @joe.member_of @m
-      @john.mark_active_in!(@m)
-      @joe.mark_active_in!(@m)
-
-      @m.active_users[0].name.should == 'Joe'
-      @m.active_users[1].name.should == 'John'
-    end
-  end
-
   describe '.postable_by?' do
     before(:each) do
       @current_user = create(:user)

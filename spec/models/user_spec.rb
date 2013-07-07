@@ -6,6 +6,20 @@ describe User, 'associations' do
   it { should eager_load(:roles) }
 end
 
+describe User, '.recently_active_in' do
+  it 'returns users who were active as of 5 minutes ago' do
+    messageboard = create(:messageboard)
+    phil = create(:role, :inactive, messageboard: messageboard)
+    tom = create(:role, messageboard: messageboard, last_seen: 1.minute.ago)
+    joel = create(:role, messageboard: messageboard, last_seen: 2.minutes.ago)
+    active_users = User.recently_active_in(messageboard)
+
+    expect(active_users).to include(joel.user)
+    expect(active_users).to include(tom.user)
+    expect(active_users).not_to include(phil.user)
+  end
+end
+
 describe User, '#from_omniauth' do
   let(:auth_github) {
     {
@@ -33,35 +47,34 @@ describe User, '#from_omniauth' do
   end
 end
 
-describe User do
-  describe '#at_notifications_for?' do
-    it 'is true for those without any preference' do
-      user = build_stubbed(:user)
-      messageboard = build_stubbed(:messageboard)
-      user.at_notifications_for?(messageboard).should be_true
-    end
+describe User, '#at_notifications_for?' do
+  it 'is true for those without any preference' do
+    user = build_stubbed(:user)
+    messageboard = build_stubbed(:messageboard)
 
-    it 'is false for those who un-check it in their preferences' do
-      user = build_stubbed(:user)
-      messageboard = build_stubbed(:messageboard)
-      preference = build_stubbed(:preference, notify_on_mention: false, user: user, messageboard: messageboard)
-      user.stubs(preference_for: preference)
-
-      user.at_notifications_for?(messageboard).should be_false
-    end
-
-    it 'is true for those who check it in their preferences' do
-      user = build_stubbed(:user)
-      messageboard = build_stubbed(:messageboard)
-      preference = build_stubbed(:preference, notify_on_mention: true, user: user, messageboard: messageboard)
-      user.stubs(preference_for: preference)
-
-      user.at_notifications_for?(messageboard).should be_true
-    end
+    expect(user.at_notifications_for?(messageboard)).to eq true
   end
 
-  describe ".mark_active_in!" do
-    it "updates last_seen to now" do
+  it 'is false for those who un-check it in their preferences' do
+    preference = create(:preference, notify_on_mention: false)
+    user = preference.user
+    messageboard = preference.messageboard
+
+    expect(user.at_notifications_for?(messageboard)).to eq false
+  end
+
+  it 'is true for those who check it in their preferences' do
+    preference = build_stubbed(:preference, notify_on_mention: true)
+    user = preference.user
+    messageboard = preference.messageboard
+
+    expect(user.at_notifications_for?(messageboard)).to eq true
+  end
+end
+
+describe User do
+  describe '.mark_active_in!' do
+    it 'updates last_seen to now' do
       @now_time = Time.local(2011, 9, 1, 12, 0, 0)
       @messageboard = create(:messageboard)
       @user = create(:user)
@@ -69,119 +82,119 @@ describe User do
 
       Timecop.freeze(@now_time) do
         @user.mark_active_in!(@messageboard)
-        @user.roles.for(@messageboard).first.last_seen.should == @now_time
+        @user.roles.for(@messageboard).first.last_seen.should eq @now_time
       end
     end
   end
 
-  describe "#admins?(messageboard)" do
-     it "returns true for an admin" do
-       stu = create(:user, :email => "stu@stu.com", :name => "stu")
-       admin = create(:role, :level => "admin")
-       messageboard = admin.messageboard
-       stu.roles << admin
-       stu.roles.reload
+  describe '#admins?(messageboard)' do
+    it 'returns true for an admin' do
+      admin = create(:role, :admin)
+      stu = admin.user
+      messageboard = admin.messageboard
 
-       stu.admins?(messageboard).should == true
-     end
-
-     it "returns true for a superadmin" do
-       joel = build_stubbed(:user, :email => "jo@joel.com", :name => "jo", :superadmin => true)
-       messageboard = build_stubbed(:messageboard)
-       joel.admins?(messageboard).should == true
-     end
-
-     it "returns false for carl" do
-       carl = build_stubbed(:user, :email => "carl@carl.com", :name => "carl")
-       board = build_stubbed(:messageboard)
-       carl.admins?(board).should == false
-     end
-  end
-
-  describe "#superadmin?" do
-    it "checks that a I can manage *everything*" do
-      joel = build_stubbed(:user, :superadmin => true)
-      joel.superadmin?.should == true
+      expect(stu.admins?(messageboard)).to eq true
     end
 
-    it "makes sure a regular user cannot" do
+    it 'returns true for a superadmin' do
+      joel = build_stubbed(:user, :superadmin)
+      messageboard = build_stubbed(:messageboard)
+
+      expect(joel.admins?(messageboard)).to eq true
+    end
+
+    it 'returns false for carl' do
       carl = build_stubbed(:user)
-      carl.superadmin?.should == false
+      messageboard = build_stubbed(:messageboard)
+
+      expect(carl.admins?(messageboard)).to eq false
     end
   end
 
-  describe "#moderates?(messageboard)" do
-    it "returns true for a moderator" do
-      norah = create(:user, :email => "norah@norah.com", :name => "norah")
-      moderator =create(:role, :level => 'moderator')
-      norah.roles << moderator
+  describe '#superadmin?' do
+    it 'checks that a superadmin can manage everything' do
+      joel = build_stubbed(:user, superadmin: true)
+
+      expect(joel.superadmin?).to eq true
+    end
+
+    it 'makes sure a regular user cannot' do
+      carl = build_stubbed(:user)
+
+      expect(carl.superadmin?).to eq false
+    end
+  end
+
+  describe '#moderates?(messageboard)' do
+    it 'returns true for a moderator' do
+      moderator = create(:role, :moderator)
+      norah = moderator.user
       messageboard = moderator.messageboard
-      norah.reload
 
-      norah.moderates?(messageboard).should == true
+      expect(norah.moderates?(messageboard)).to eq true
     end
 
-    it "returns false for joel" do
-      joel = create(:user, :email => "joel@joel.com", :name => "joel")
+    it 'returns false for joel' do
+      joel = create(:user, email: 'joel@joel.com', name: 'joel')
       messageboard = create(:messageboard)
-      joel.moderates?(messageboard).should == false
+
+      expect(joel.moderates?(messageboard)).to eq false
     end
   end
 
-  describe "#member_of?(messageboard)" do
-    it "returns true for a member" do
-      john = create(:user)
-      member = create(:role, :level => 'member')
+  describe '#member_of?(messageboard)' do
+    it 'returns true for a member' do
+      member = create(:role, :member)
       messageboard = member.messageboard
-      john.roles << member
-      john.reload
+      john = member.user
 
-      john.member_of?(messageboard).should == true
+      expect(john.member_of?(messageboard)).to eq true
     end
   end
 
-  describe "#member_of(messageboard)" do
-    it "sets the user as a member of messageboard" do
-      tam = create(:user, :email => "tam@tam.com", :name => "tam")
+  describe '#member_of(messageboard)' do
+    it 'sets the user as a member of messageboard' do
+      tam = create(:user)
       messageboard = create(:messageboard)
       tam.member_of(messageboard)
       tam.reload
-      tam.member_of?(messageboard).should == true
+
+      expect(tam.member_of?(messageboard)).to eq true
     end
 
-    it "makes the user an admin" do
-      stephen = create(:user, :email => "steve@stephen.com", :name => "stephen")
+    it 'makes the user an admin' do
+      stephen = create(:user)
       messageboard = create(:messageboard)
       stephen.member_of(messageboard, 'admin')
       stephen.reload
-      stephen.admins?(messageboard).should == true
+
+      stephen.admins?(messageboard).should eq true
     end
   end
 
-  describe "#after_save" do
-    it "will update posts.user_email" do
-      @shaun = create(:user, :name => "shaun", :email => "shaun@thredded.com")
-      @topic = create(:topic, :last_user => @shaun)
-      @post  = create(:post, :user => @shaun, :topic => @topic)
-      @post.save
+  describe '#after_save' do
+    it 'will update posts.user_email' do
+      shaun = create(:user, name: 'shaun', email: 'shaun@example.com')
+      post  = create(:post, user: shaun)
+      post.save
 
-      @shaun.email = "shaun@notthredded.com"
-      @shaun.save
+      shaun.email = 'boffe@example.com'
+      shaun.save
 
-      @post.reload
-      @post.user_email.should == @shaun.email
+      post.reload
+      post.user_email.should eq shaun.email
     end
   end
 
-  describe ".email" do
-    it "will be valid" do
-      @shaun = build_stubbed(:user, :name => "shaun", :email => "shaun@thredded.com")
-      @shaun.should be_valid
+  describe '.email' do
+    it 'will be valid' do
+      shaun = build_stubbed(:user, email: 'shaun@example.com')
+      shaun.should be_valid
     end
 
-    it "will not be valid" do
-      @shaun = build_stubbed(:user, :name => "shaun", :email => "shaun@.com")
-      @shaun.should_not be_valid
+    it 'will not be valid' do
+      shaun = build_stubbed(:user, email: 'shaun.com')
+      shaun.should_not be_valid
     end
   end
 end

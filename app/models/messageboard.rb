@@ -29,21 +29,6 @@ class Messageboard < ActiveRecord::Base
   has_many :private_topics
   has_many :users, through: :roles
 
-  def active_users
-    sql = <<-SQL
-      SELECT u.id,
-             u.name,
-             u.email
-        FROM users u, roles r
-       WHERE r.messageboard_id = ?
-         AND r.last_seen       > ?
-         AND r.user_id         = u.id
-       ORDER BY lower(u.name)
-    SQL
-
-    User.find_by_sql [sql, self.id, 5.minutes.ago]
-  end
-
   def add_member(user, as='member')
     roles.create(user_id: user.id, level: as)
   end
