@@ -6,6 +6,14 @@ class PostDecorator < SimpleDelegator
     @post = post
   end
 
+  def user_name
+    if user
+      user.name
+    else
+      'Anonymous'
+    end
+  end
+
   def original
     post
   end
