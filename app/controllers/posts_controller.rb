@@ -16,8 +16,8 @@ class PostsController < ApplicationController
       filter: current_user.try(:post_filter)
     )
 
-    @posts = Post
-      .where(topic_id: topic)
+    @posts = topic
+      .posts
       .includes(user: :roles)
       .page(page)
 

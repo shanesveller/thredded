@@ -1,17 +1,21 @@
+<% topic = TopicDecorator.new(topic) %>
+
 <article <%= topic.css_class %>>
   <div  class="post_count"><%= topic.posts_count %></div>
 
-  <h1><%= link_to topic.title, messageboard_topic_posts_path(messageboard, topic), class: already_read(topic, @tracked_user_reads) %></h1>
+  <h1>
+    <%= link_to topic.title,
+      messageboard_topic_posts_path(messageboard, topic),
+      class: already_read(topic, @tracked_user_reads) %>
+  </h1>
 
   <cite class="updated_by">
-    <abbr class="updated_at timeago" title="<%= topic.updated_at.strftime('%Y-%m-%dT%H:%M:%S') %>"> <%= topic.updated_at.strftime('%b %d, %Y %I:%M:%S %Z') %> </abbr>
-    <%= link_to topic.last_user.name, user_path(topic.last_user) %>
+    <%= topic.updated_at_timeago %>
+    <%= topic.last_user_link %>
   </cite>
 
   <cite class="started_by">
-    <abbr class="started_at timeago" title="<%= topic.created_at.strftime('%Y-%m-%dT%H:%M:%S') %>">
-      <%= topic.created_at.strftime('%b %d, %Y %I:%M:%S %Z') %>
-    </abbr>
-    <%= link_to topic.user_name, user_path(topic.user) %>
+    <%= topic.created_at_timeago %>
+    <%= topic.user_link %>
   </cite>
 </article>

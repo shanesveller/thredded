@@ -1,16 +1,33 @@
 <% content_for :page_id do %>user-profile<% end %>
 <% content_for :page_title do %><%= @user.name %> | Users<% end %>
 
+<% @user = UserDecorator.new(@user) %>
+
 <% cache @user do %>
   <header>
     <%= image_tag @user.gravatar_url %>
 
     <ul class="info">
-      <li><strong>Username:</strong> <%= @user.name %></li>
-      <li><strong>Last activity:</strong> <%= time_ago_in_words(@user.last_sign_in_at) %> ago</li>
-      <li><strong>Join date:</strong> <%= time_ago_in_words(@user.created_at) %> ago</li>
-      <li><strong>Total posts:</strong> <%= @user.posts_count %></li>
-      <li><strong>Total topics started:</strong> <%= @user.topics_count %></li>
+      <li>
+        <strong>Username:</strong>
+        <%= @user.name %>
+      </li>
+      <li>
+        <strong>Last activity:</strong>
+        <%= @user.last_active_timeago %>
+      </li>
+      <li>
+        <strong>Join date:</strong>
+        <%= @user.created_at_timeago %>
+      </li>
+      <li>
+        <strong>Total posts:</strong>
+        <%= @user.posts_count %>
+      </li>
+      <li>
+        <strong>Total topics started:</strong>
+        <%= @user.topics_count %>
+      </li>
     </ul>
   </header>
 
@@ -18,11 +35,12 @@
     <h2>Recent Forum History</h2>
 
     <p>
-      <%= @user.topics_count %> topics started and <%= @user.posts_count %>
-      posts since joining on <%= formatted_user_profile_date(@user.created_at) %>
+      <%= @user.topics_count %> topics started
+      and <%= @user.posts_count %> posts
+      since joining on <%= @user.created_at_timeago %>
     </p>
 
-    <% if @user.topics_count > 0 %>
+    <% if @recent_topics.any? %>
       <table width="100%">
         <thead>
           <tr>

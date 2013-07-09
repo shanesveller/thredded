@@ -103,14 +103,6 @@ class Topic < ActiveRecord::Base
     state == 'pending'
   end
 
-  def css_class
-    classes = []
-    classes << 'locked' if locked
-    classes << 'sticky' if sticky
-    classes << 'private' if private?
-    classes.empty? ?  '' : "class=\"#{classes.join(' ')}\"".html_safe
-  end
-
   def users
     []
   end

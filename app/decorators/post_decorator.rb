@@ -18,15 +18,33 @@ class PostDecorator < SimpleDelegator
     post
   end
 
-  def created_date
-    created_at.strftime("%b %d, %Y %I:%M:%S %Z") if created_at
-  end
-
-  def created_timestamp
-    created_at.strftime("%Y-%m-%dT%H:%M:%S") if created_at
+  def created_at_timeago
+    if created_at.nil?
+      <<-eohtml.strip_heredoc.html_safe
+        <abbr>
+          a little while ago
+        </abbr>
+      eohtml
+    else
+      <<-eohtml.strip_heredoc.html_safe
+        <abbr class="timeago" title="#{created_at_utc}">
+          #{created_at_str}
+        </abbr>
+      eohtml
+    end
   end
 
   def gravatar_url
     super.gsub /http:/, ''
+  end
+
+  private
+
+  def created_at_str
+    created_at.to_s
+  end
+
+  def created_at_utc
+    created_at.getutc.iso8601
   end
 end
