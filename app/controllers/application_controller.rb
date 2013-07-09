@@ -3,8 +3,7 @@ class ApplicationController < ActionController::Base
   before_filter :touch_last_seen
   helper_method :extra_data,
     :messageboard,
-    :topic,
-    :tz_offset
+    :topic
 
   rescue_from CanCan::AccessDenied do |exception|
     flash[:error] = exception.message
@@ -68,14 +67,6 @@ class ApplicationController < ActionController::Base
     if messageboard
       @topic ||= messageboard.topics.find(params[:topic_id])
     end
-  end
-
-  def tz_offset
-    if current_user
-      Time.zone = current_user.time_zone
-    end
-
-    @tz_offset ||= Time.zone.now.utc_offset / 1.hour
   end
 
   def touch_last_seen

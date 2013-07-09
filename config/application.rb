@@ -16,7 +16,7 @@ module Thredded
     config.autoload_paths += %W(#{config.root}/app/decorators)
     config.autoload_paths += %W(#{config.root}/lib)
     config.autoload_paths += Dir["#{config.root}/lib/**/"]
-    config.time_zone = 'Eastern Time (US & Canada)'
+    config.time_zone = 'UTC'
 
     config.generators do |g|
       g.stylesheets         false

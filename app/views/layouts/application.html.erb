@@ -20,7 +20,7 @@
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <%= csrf_meta_tag %>
   </head>
-  <body id="<%= yield :page_id %>" data-tz-offset="<%= tz_offset %>" class="layout-application" <%= extra_data %>>
+  <body id="<%= yield :page_id %>" class="layout-application" <%= extra_data %>>
     <header>
       <nav id="site_wide">
         <% if app_config %>
