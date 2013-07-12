@@ -1,29 +1,14 @@
 module MessageboardHelper
-  def link_or_text_to(messageboard)
-    @link_or_text = ''
-
-    if can? :read, messageboard
-      @link_or_text = link_to messageboard.title, messageboard_topics_path(messageboard)
-    else
-      @link_or_text = messageboard.title
-    end
-
-    @link_or_text
+  def messageboard_count
+    number_to_human(app_config.messageboards_count).downcase
   end
 
-  def meta_for(messageboard)
-    topics = messageboard.topics_count
-    posts  = messageboard.posts_count
-    "#{number_to_human topics} topics,
-      #{number_to_human posts} posts".downcase
+  def topics_count
+    number_to_human(app_config.topics_count, precision: 4).downcase
   end
 
-  def admin_link_for(messageboard)
-    if can? :manage, messageboard
-      '<p class="admin"><a href="#edit">Edit</a></p>'
-    else
-      ''
-    end
+  def posts_count
+    number_to_human(app_config.posts_count, precision: 5).downcase
   end
 
   def latest_thread_for(messageboard)
@@ -39,14 +24,6 @@ module MessageboardHelper
       else
         abbr
       end
-    else
-      ''
-    end
-  end
-
-  def latest_user_for(messageboard)
-    if messageboard.topics.first.present? && messageboard.topics.first.user.present?
-      messageboard.topics.first.last_user.name
     else
       ''
     end

@@ -55,7 +55,7 @@ module PageObject
     end
 
     def done?
-      has_css? '#messageboards h2 a', text: 'chat'
+      has_css? '#messageboards h2 a', text: 'Chat'
     end
   end
 end

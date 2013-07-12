@@ -1,16 +1,21 @@
 <% if can? :read, messageboard %>
+  <% messageboard = MessageboardDecorator.new(messageboard) %>
+
   <div class="messageboard">
     <header>
-      <h2><%= link_or_text_to(messageboard) %></h2>
-      <div class="meta"><%= meta_for(messageboard) %></div>
+      <h2>
+        <%= link_to messageboard.name, messageboard_topics_path(messageboard) %>
+      </h2>
+
+      <div class="meta">
+        <%= messageboard.meta %>
+      </div>
     </header>
-    <% content_tag :p, messageboard.description if messageboard.description %>
-    <% admin_link_for(messageboard) %>
 
     <footer>
       <p>
-        <%= latest_thread_for(messageboard) %>
-        <cite>by <%= latest_user_for(messageboard) %></cite>
+        <%= messageboard.updated_at_timeago %>
+        <cite>by <%= messageboard.latest_user %></cite>
       </p>
     </footer>
   </div>
