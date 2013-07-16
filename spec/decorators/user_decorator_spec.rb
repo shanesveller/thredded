@@ -14,8 +14,8 @@ describe UserDecorator, '#last_active_timeago' do
   end
 
   it 'prints a human readable/formatted date' do
-    new_years = Chronic.parse('Jan 1 2013')
-    feb_first = Chronic.parse('Feb 1 2013')
+    new_years = Chronic.parse('Jan 1 2013 at 3:00pm')
+    feb_first = Chronic.parse('Feb 1 2013 at 3:00pm')
     user = build_stubbed(:user, last_sign_in_at: new_years)
     decorated_user = UserDecorator.new(user)
     last_active_html = <<-eohtml.strip_heredoc.html_safe
@@ -43,8 +43,8 @@ describe UserDecorator, '#created_at_timeago' do
   end
 
   it 'prints a human readable/formatted date' do
-    new_years = Chronic.parse('Jan 1 2013')
-    feb_first = Chronic.parse('Feb 1 2013')
+    new_years = Chronic.parse('Jan 1 2013 at 3:00pm')
+    feb_first = Chronic.parse('Feb 1 2013 at 3:00pm')
     user = build_stubbed(:user, created_at: new_years)
     decorated_user = UserDecorator.new(user)
     created_at_html = <<-eohtml.strip_heredoc.html_safe

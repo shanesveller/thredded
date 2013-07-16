@@ -32,8 +32,8 @@ describe PostDecorator, '#created_at_timeago' do
   end
 
   it 'prints a human readable/formatted date' do
-    new_years = Chronic.parse('Jan 1 2013')
-    feb_first = Chronic.parse('Feb 1 2013')
+    new_years = Chronic.parse('Jan 1 2013 at 3:00pm')
+    feb_first = Chronic.parse('Feb 1 2013 at 3:00pm')
     post = build_stubbed(:post, created_at: new_years)
     decorated_post = PostDecorator.new(post)
     created_at_html = <<-eohtml.strip_heredoc.html_safe
