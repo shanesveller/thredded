@@ -8,7 +8,7 @@ require 'shoulda-matchers'
 require 'chronic'
 require 'timecop'
 
-Dir[Rails.root.join('spec/support/**/*.rb')].each {|file| require file }
+Dir[Rails.root.join('spec/support/**/*.rb')].sort.each { |file| require file }
 
 counter = -1
 

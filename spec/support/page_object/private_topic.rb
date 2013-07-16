@@ -1,7 +1,7 @@
 module PageObject
   class PrivateTopic
-    include Capybara::DSL
     include PageObject::Authentication
+    include Capybara::DSL
     include Rails.application.routes.url_helpers
     include FactoryGirl::Syntax::Methods
 
