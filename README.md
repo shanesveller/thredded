@@ -1,4 +1,4 @@
-# Thredded [![Build Status](https://secure.travis-ci.org/jayroh/thredded.png?branch=master)](https://travis-ci.org/jayroh/thredded) [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/jayroh/thredded)
+# Thredded [![Build Status](https://secure.travis-ci.org/jayroh/thredded.png?branch=master)](https://travis-ci.org/jayroh/thredded) [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/jayroh/thredded) [![Stories in Ready](https://badge.waffle.io/jayroh/thredded_app.png)](http://waffle.io/jayroh/thredded_app)
 
 The vast majority of messageboard, or "forum", software out there is garbage. Either it's old, bloated or boring. Thredded is an effort to be a modern take on the forum/messageboard space with a modern stack, using modern methodologies - ruby, rails, pg, test-driven.
 
