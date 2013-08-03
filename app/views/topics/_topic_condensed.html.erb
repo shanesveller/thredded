@@ -5,7 +5,7 @@
 
   <h1>
     <%= link_to topic.title,
-      messageboard_topic_posts_path(messageboard, topic),
+      messageboard_topic_posts_path(messageboard.name, topic.slug),
       class: already_read(topic, @tracked_user_reads) %>
   </h1>
 

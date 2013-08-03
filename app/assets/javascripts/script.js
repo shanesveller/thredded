@@ -98,8 +98,9 @@ jQuery(document).ready(function() {
     post_bindings = [
       ['shift+t', 'New Topic', function(){ window.location.href = $('a:contains("new topic")').attr('href'); }],
       ['shift+r', 'Post Reply', function(){
-        window.location.hash = '#post_content';
-        setTimeout("jQuery('#post_content').focus()", 100);
+        $.scrollTo('#post_content', 1000, {easing: 'easeInQuart'});
+        jQuery('#post_content').focus();
+        return false;
       }],
       ['t', 'Go to topic listing', function(){ window.location.href = $('.topic_nav .topic_list a').attr('href'); }],
       ['p', 'Go to private topic listing', function(){ window.location.href = $('.topic_nav .private_topic_list a').attr('href'); }],

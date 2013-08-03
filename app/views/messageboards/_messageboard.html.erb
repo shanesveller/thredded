@@ -4,7 +4,8 @@
   <div class="messageboard">
     <header>
       <h2>
-        <%= link_to messageboard.name, messageboard_topics_path(messageboard) %>
+        <%= link_to messageboard.title,
+          messageboard_topics_path(messageboard.name) %>
       </h2>
 
       <div class="meta">
