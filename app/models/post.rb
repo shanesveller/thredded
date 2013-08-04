@@ -7,7 +7,6 @@ class Post  < ActiveRecord::Base
   include TextileFilter
   include BbcodeFilter
   include MarkdownFilter
-  include SyntaxFilter
   include AttachmentFilter
   include EmojiFilter
   include AtNotificationFilter

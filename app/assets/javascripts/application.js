@@ -15,4 +15,7 @@
 //= require jquery.fitvids
 //= require jquery.scrollTo
 //= require jquery.timeago
+//= require prism
+//= require prism.ruby
+//= require prism.vim
 //= require script

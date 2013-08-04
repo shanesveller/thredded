@@ -147,7 +147,7 @@ describe Post, '.filtered_content' do
       }[/code]
     EOCODE
 
-    expected_output = %Q(<div class="CodeRay">\n  <div class="code"><pre><span class="keyword">def</span> <span class="function">hello</span>\nputs <span class="string"><span class="delimiter">'</span><span class="content">world</span><span class="delimiter">'</span></span>\n<span class="keyword">end</span></pre></div>\n</div>\n<br />\n<br />\n<div class="CodeRay">\n  <div class="code"><pre><span class="keyword">function</span>(){\nconsole.log(<span class="string"><span class="delimiter">'</span><span class="content">hi</span><span class="delimiter">'</span></span>);\n}</pre></div>\n</div>\n<br />\n)
+    expected_output = %Q(<pre><code class=\"language-ruby\" lang=\"ruby\">def hello<br />\nputs 'world'<br />\nend</code></pre><br />\n<br />\n<pre><code class=\"language-javascript\" lang=\"javascript\">function(){<br />\nconsole.log('hi');<br />\n}</code></pre><br />\n)
 
     @post.filter = 'bbcode'
     @post.content = input
@@ -164,7 +164,7 @@ describe Post, '.filtered_content' do
       that was code
     EOCODE
 
-    expected_output = %Q(<div class="CodeRay">\n  <div class="code"><pre><span class="keyword">function</span>(){\nconsole.log(<span class="string"><span class="delimiter">'</span><span class="content">hi</span><span class="delimiter">'</span></span>);\n}</pre></div>\n</div>\n<br />\n<br />\nthat was code<br />\n)
+    expected_output = %Q(<pre><code class=\"language-javascript\" lang=\"javascript\">function(){<br />\nconsole.log('hi');<br />\n}</code></pre><br />\n<br />\nthat was code<br />\n)
 
     @post.filter = 'bbcode'
     @post.content = input
@@ -186,7 +186,7 @@ describe Post, '.filtered_content' do
 
 right here"
 
-    expected_output = "<p>this is code</p>\n\n<div class=\"CodeRay\">\n  <div class=\"code\"><pre><span class=\"keyword\">def</span> <span class=\"function\">hello</span>; puts <span class=\"string\"><span class=\"delimiter\">'</span><span class=\"content\">world</span><span class=\"delimiter\">'</span></span>; <span class=\"keyword\">end</span>\n</pre></div>\n</div>\n\n\n<p>right here</p>\n"
+    expected_output = %Q(<p>this is code</p>\n\n<pre><code>def hello; puts &#39;world&#39;; end\n</code></pre>\n\n<p>right here</p>\n)
 
     @post.content = input
     @post.filter = 'markdown'
