@@ -11,4 +11,8 @@ class UsersController < ApplicationController
       @recent_topics = @user.topics.recent
     end
   end
+
+  def index
+    @users = messageboard.users.order('lower(name)')
+  end
 end

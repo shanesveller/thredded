@@ -34,6 +34,8 @@ Thredded::Application.routes.draw do
     get '/:messageboard_id(.:format)' => 'topics#search', as: :messageboard_search
   end
 
+  get '/:messageboard_id/users' => 'users#index', as: :messageboard_users
+
   get '/:messageboard_id(.:format)' => 'topics#index', as: :messageboard_topics
   get '/:messageboard_id/topics/new/(:type)' => 'topics#new', as: :new_messageboard_topic
   get '/:messageboard_id/topics/category/:category_id' => 'topics#by_category', as: :messageboard_topics_by_category

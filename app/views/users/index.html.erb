@@ -5,17 +5,20 @@
 
 <table cellpadding="0" cellspacing="0" border="0" id="users">
   <tr>
-    <th>Name</th>
-    <th>Email</th>
-    <th>Messageboards</th>
     <th>&nbsp;</th>
+    <th>Name</th>
+    <th># of Posts</th>
+    <th>Last Active</th>
+    <th>Member Since</th>
   </tr>
   <% @users.each do |user| %>
+    <% user = UserDecorator.new(user) %>
     <tr>
+      <td><%= image_tag user.gravatar_url, class: 'avatar' %></td>
       <td><%= user.name %></td>
-      <td><%= user.email %></td>
-      <td><%= user.roles.count %></td>
-      <td><%= link_to 'edit', edit_user_path(user) %></td>
+      <td><%= user.posts_count %></td>
+      <td><%= user.last_active_timeago %></td>
+      <td><%= user.created_at_timeago %></td>
     </tr>
   <% end %>
 </table>
