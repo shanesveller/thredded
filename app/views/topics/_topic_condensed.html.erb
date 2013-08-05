@@ -4,8 +4,7 @@
   <div  class="post_count"><%= topic.posts_count %></div>
 
   <h1>
-    <%= link_to topic.title,
-      messageboard_topic_posts_path(messageboard.name, topic.slug),
+    <%= link_to topic.title, [messageboard, topic],
       class: already_read(topic, @tracked_user_reads) %>
   </h1>
 
