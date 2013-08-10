@@ -33,16 +33,19 @@ describe PostDecorator, '#created_at_timeago' do
 
   it 'prints a human readable/formatted date' do
     new_years = Chronic.parse('Jan 1 2013 at 3:00pm')
-    feb_first = Chronic.parse('Feb 1 2013 at 3:00pm')
-    post = build_stubbed(:post, created_at: new_years)
-    decorated_post = PostDecorator.new(post)
-    created_at_html = <<-eohtml.strip_heredoc.html_safe
-      <abbr class="timeago" title="2013-01-01T20:00:00Z">
-        2013-01-01 20:00:00 UTC
-      </abbr>
-    eohtml
 
-    expect(decorated_post.created_at_timeago).to eq created_at_html
+    Timecop.freeze(new_years) do
+      post = build_stubbed(:post)
+      decorated_post = PostDecorator.new(post)
+
+      created_at_html = <<-eohtml.strip_heredoc.html_safe
+        <abbr class="timeago" title="2013-01-01T20:00:00Z">
+          2013-01-01 20:00:00 UTC
+        </abbr>
+      eohtml
+
+      expect(decorated_post.created_at_timeago).to eq created_at_html
+    end
   end
 end
 

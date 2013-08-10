@@ -41,7 +41,7 @@ class UserDecorator < SimpleDelegator
   private
 
   def created_at_str
-    created_at.to_s
+    created_at.getutc.to_s
   end
 
   def created_at_utc
@@ -49,7 +49,7 @@ class UserDecorator < SimpleDelegator
   end
 
   def last_active_str
-    last_sign_in_at.to_s
+    last_sign_in_at.getutc.to_s
   end
 
   def last_active_utc
