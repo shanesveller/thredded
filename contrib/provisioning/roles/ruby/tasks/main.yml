@@ -1,0 +1,45 @@
+---
+- name: Install build-essential and other Ruby deps
+  apt: pkg={{ item }} state=latest
+  with_items:
+    - autoconf
+    - build-essential
+    - libcurl4-openssl-dev
+    - libssl-dev
+    - libxml2-dev
+    - libxslt1-dev
+    - libyaml-dev
+    - zlib1g-dev
+    - libreadline6-dev
+    - git-core
+
+- name: Disable ri/rdoc in /etc/gemrc
+  copy: src=gemrc
+        dest=/etc/gemrc
+        owner=root
+        group=root
+        mode=0644
+
+- name: Set Ruby in PATH
+  template: src=profile.j2
+        dest=/etc/profile.d/ruby.sh
+        owner=root
+        group=root
+        mode=0755
+
+
+- name: Create rubies directory
+  file: path=/opt/rubies
+        state=directory
+
+- name: Checkout ruby-build code
+  git: repo=git://github.com/sstephenson/ruby-build.git
+       dest=/opt/ruby-build
+       version=${ruby-build_version}
+       update=yes
+
+- name: "Install ruby {{ global_ruby_version }}"
+  command: /opt/ruby-build/bin/ruby-build ${global_ruby_version} ${ruby_location} creates=${ruby_location}/bin/ruby
+
+- name: "Install some necessary gems"
+  command: ${ruby_location}/bin/gem install bundler creates=${ruby_location}/bin/bundle

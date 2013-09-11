@@ -1,7 +1,4 @@
 ---
-- apt: update_cache=yes cache_valid_time=3600
-  name: Refresh APT cache
-
 - apt_key: url=http://keyserver.ubuntu.com/pks/lookup?op=get&search=0x561F9B9CAC40B2F7
   name: Receive Phusion APT signing key
 
