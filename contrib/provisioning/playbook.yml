@@ -1,0 +1,9 @@
+---
+- hosts: all
+  vars:
+    phusion_key_id: 561F9B9CAC40B2F7
+    thredded_path: /vagrant_thredded
+
+  roles:
+  - passenger-nginx
+

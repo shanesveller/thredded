@@ -1,0 +1,23 @@
+---
+- apt: update_cache=yes cache_valid_time=3600
+  name: Refresh APT cache
+
+- apt_key: url=http://keyserver.ubuntu.com/pks/lookup?op=get&search=0x561F9B9CAC40B2F7
+  name: Receive Phusion APT signing key
+
+- apt: pkg=python-software-properties state=installed
+  name: Install software-properties-common for add-apt-repository command
+
+- apt_repository: repo="deb https://oss-binaries.phusionpassenger.com/apt/passenger $ansible_distribution_release main" state=present
+  name: Add Phusion binary APT repo
+  notify:
+  - Refresh APT cache
+
+- meta: flush_handlers
+
+- apt: pkg=$item state=latest
+  name: Install Phusion Passenger + nginx
+  with_items:
+  - nginx-full
+  - passenger
+
