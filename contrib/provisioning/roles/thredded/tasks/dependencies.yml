@@ -1,0 +1,9 @@
+---
+- name: Install imagemagick
+  apt: pkg=imagemagick state=installed
+
+- name: Install redis for Resque
+  apt: pkg=redis-server state=installed
+
+- name: Enable and start Redis
+  service: name=redis-server state=started enabled=yes

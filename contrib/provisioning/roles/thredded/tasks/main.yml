@@ -1,38 +1,21 @@
 ---
-- name: Install imagemagick
-  apt: pkg=imagemagick state=installed
-
-- name: Install redis for Resque
-  apt: pkg=redis-server state=installed
-
-- name: Enable and start Redis
-  service: name=redis-server state=started enabled=yes
+- include: dependencies.yml
+- include: db.yml
 
 - name: Check out thredded code
   git: repo=https://github.com/jayroh/thredded_app.git dest=$thredded_path
 
+- name: Add thredded_resque gem
+  lineinfile: dest=$thredded_path/Gemfile state=present line="gem 'thredded_resque'" regexp="^gem 'thredded_resque'"
+
+# Cannot use --deployment without thredded_resque being in Gemfile.lock already
 - name: Bundle install
-  command: $ruby_location/bin/bundle install --deployment chdir=$thredded_path
-
-- name: Create thredded database
-  postgresql_db: db=$thredded_db
-  sudo: yes
-  sudo_user: postgres
-
-- name: Create thredded database user
-  postgresql_user: db=$thredded_db user=$thredded_db_user password=$thredded_db_password priv=ALL
-  sudo: yes
-  sudo_user: postgres
-
-- name: Remove extraneous thredded database user privileges
-  postgresql_user: user=$thredded_db_user role_attr_flags=NOSUPERUSER,NOCREATEDB
-  sudo: yes
-  sudo_user: postgres
+  command: $ruby_location/bin/bundle install chdir=$thredded_path
 
 - name: Create config/database.yml
   template: src=database.yml.j2 dest=$thredded_path/config/database.yml
 
-- name: Generate Rake binstub
+- name: Generate binstub
   shell: chdir=$thredded_path $ruby_location/bin/bundle binstub rake
 
 - name: Generate secret token
@@ -48,33 +31,6 @@
 - name: Precompile assets
   shell: cd $thredded_path && RAILS_ENV=production PATH=$ruby_location/bin:$PATH bin/rake assets:precompile
 
-- name: Create Thredded site in nginx
-  template: src=nginx.j2 dest=/etc/nginx/sites-available/thredded owner=root group=root mode=0644
-  notify:
-  - reload nginx
-
-- name: Enable Thredded site in nginx
-  file: src=/etc/nginx/sites-available/thredded dest=/etc/nginx/sites-enabled/thredded state=link
-  notify:
-  - reload nginx
-
-- name: Set ownership to deploy user
-  file: dest=$thredded_path state=directory recurse=yes owner=deploy group=deploy
-
-- name: Set logs dir to public writable for Passenger logs
-  file: dest=$thredded_path/logs state=directory mode=0666
-
-- name: Restart Passenger
-  command: chdir=$thredded_path /bin/touch tmp/restart.txt
-
-- name: Install Foreman gem
-  command: $ruby_location/bin/gem install foreman
-
-- name: Generate Procfile
-  template: src=Procfile.j2 dest=$thredded_path/Procfile
-
-- name: Generate Resque upstart script
-  command: chdir=$thredded_path $ruby_location/bin/foreman export upstart /etc/init/ -a thredded -u deploy
-
-- name: Enable and start Resque service
-  service: name=thredded state=started enabled=yes
+- include: resque.yml
+- include: nginx.yml
+- include: passenger.yml

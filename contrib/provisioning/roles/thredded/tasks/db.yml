@@ -1,0 +1,15 @@
+---
+- name: Create thredded database
+  postgresql_db: db=$thredded_db
+  sudo: yes
+  sudo_user: postgres
+
+- name: Create thredded database user
+  postgresql_user: db=$thredded_db user=$thredded_db_user password=$thredded_db_password priv=ALL
+  sudo: yes
+  sudo_user: postgres
+
+- name: Remove extraneous thredded database user privileges
+  postgresql_user: user=$thredded_db_user role_attr_flags=NOSUPERUSER,NOCREATEDB
+  sudo: yes
+  sudo_user: postgres

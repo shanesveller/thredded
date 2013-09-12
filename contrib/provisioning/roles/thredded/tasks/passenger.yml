@@ -1,0 +1,9 @@
+---
+- name: Set ownership to deploy user
+  file: dest=$thredded_path state=directory recurse=yes owner=deploy group=deploy
+
+- name: Set logs dir to public writable for Passenger logs
+  file: dest=$thredded_path/logs state=directory mode=0666
+
+- name: Restart Passenger
+  command: chdir=$thredded_path /bin/touch tmp/restart.txt
