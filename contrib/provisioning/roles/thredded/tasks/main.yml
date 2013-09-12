@@ -1,4 +1,51 @@
 ---
+
+- name: Install imagemagick
+  apt: pkg=imagemagick state=installed
+
+- name: Install redis for Resque
+  apt: pkg=redis-server state=installed
+
+- name: Enable and start Redis
+  service: name=redis-server state=started enabled=yes
+
+- name: Check out thredded code
+  git: repo=https://github.com/jayroh/thredded_app.git dest=$thredded_path
+
+- name: Bundle install
+  command: $ruby_location/bin/bundle install --deployment chdir=$thredded_path
+
+- name: Create thredded database
+  postgresql_db: db=$thredded_db
+  sudo: yes
+  sudo_user: postgres
+
+- name: Create thredded database user
+  postgresql_user: db=$thredded_db user=$thredded_db_user password=$thredded_db_password priv=ALL
+  sudo: yes
+  sudo_user: postgres
+
+- name: Remove extraneous thredded database user privileges
+  postgresql_user: user=$thredded_db_user role_attr_flags=NOSUPERUSER,NOCREATEDB
+  sudo: yes
+  sudo_user: postgres
+
+- name: Create config/database.yml
+  template: src=database.yml.j2 dest=$thredded_path/config/database.yml
+
+- name: Generate secret token
+  shell: cd $thredded_path && RAILS_ENV=production PATH=$ruby_location/bin:$PATH bundle exec rake secret
+  register: thredded_secret_token
+
+- name: Save secret token
+  template: src=secret_token.rb.j2 dest=$thredded_path/config/initializers/secret_token.rb
+
+- name: Migrate thredded DB
+  shell: cd $thredded_path && RAILS_ENV=production PATH=$ruby_location/bin:$PATH bundle exec rake db:migrate
+
+- name: Precompile assets
+  shell: cd $thredded_path && RAILS_ENV=production PATH=$ruby_location/bin:$PATH bundle exec rake assets:precompile
+
 - name: Create Thredded site in nginx
   template: src=nginx.j2 dest=/etc/nginx/sites-available/thredded owner=root group=root mode=0644
   notify:
@@ -9,4 +56,8 @@
   notify:
   - reload nginx
 
+- name: Set logs dir to public writable for Passenger logs
+  file: dest=$thredded_path/logs state=directory mode=0666
 
+- name: Restart Passenger
+  command: chdir=$thredded_path /bin/touch tmp/restart.txt

@@ -1,0 +1,24 @@
+defaults: &defaults
+  adapter: postgresql
+  encoding: UTF8
+  host: localhost
+  port: 5432
+  min_messages: WARNING
+
+development:
+  <<: *defaults
+  database: thredded_dev
+  username: username
+  password: password
+
+test:
+  <<: *defaults
+  database: thredded_test
+  username: username
+  password: password
+
+production:
+  <<: *defaults
+  database: $thredded_db
+  username: $thredded_db_user
+  password: $thredded_db_password
