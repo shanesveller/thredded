@@ -1,4 +1,4 @@
-- Use a deployment user, i.e. 'deploy', for nearly everything instead of root
+- ~~Use a deployment user, i.e. 'deploy', for nearly everything instead of root~~
 - Use `foreman export` to create an upstart script for Resque
 - Use dotenv for deployment env vars?
 - Add ansible vars for tuning Passenger performance
