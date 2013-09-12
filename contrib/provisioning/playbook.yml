@@ -13,6 +13,7 @@
 
   roles:
   - common
+  - deploy-user
   - postgresql
   - passenger-nginx
   - ruby
