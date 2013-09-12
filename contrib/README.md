@@ -1,4 +1,4 @@
-Requires [Vagrant](http://vagrantup.com/) and [Ansible](www.ansibleworks.com/)
+Requires [Vagrant](http://vagrantup.com/) and [Ansible](http://www.ansibleworks.com/)
 
 Provides:
 - Ubuntu 12.04
