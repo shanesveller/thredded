@@ -5,6 +5,9 @@
 - name: Generate Procfile
   template: src=Procfile.j2 dest=$thredded_path/Procfile
 
+- name: Set RAILS_ENV=production for Resque
+  template: src=env.j2 dest=$thredded_path/.env
+
 - name: Generate Resque upstart script
   command: chdir=$thredded_path $ruby_location/bin/foreman export upstart /etc/init/ -a thredded -u deploy
 
