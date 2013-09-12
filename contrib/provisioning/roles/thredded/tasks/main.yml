@@ -1,0 +1,12 @@
+---
+- name: Create Thredded site in nginx
+  template: src=nginx.j2 dest=/etc/nginx/sites-available/thredded owner=root group=root mode=0644
+  notify:
+  - reload nginx
+
+- name: Enable Thredded site in nginx
+  file: src=/etc/nginx/sites-available/thredded dest=/etc/nginx/sites-enabled/thredded state=link
+  notify:
+  - reload nginx
+
+

@@ -18,3 +18,7 @@
   - nginx-full
   - passenger
 
+- name: Configure nginx for Passenger
+  template: src=passenger.conf.j2 dest=/etc/nginx/conf.d/passenger.conf owner=root group=root mode=0644
+  notify:
+  - restart nginx
