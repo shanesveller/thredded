@@ -1,0 +1,11 @@
+---
+- name: Install Postgres
+  apt: pkg=$item state=installed
+  with_items:
+  - postgresql
+  - postgresql-client
+  - libpq-dev
+  - python-psycopg2
+
+- name: Enable and start Postgres
+  service: name=postgresql state=started enabled=yes
