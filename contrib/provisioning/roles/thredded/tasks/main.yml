@@ -33,18 +33,21 @@
 - name: Create config/database.yml
   template: src=database.yml.j2 dest=$thredded_path/config/database.yml
 
+- name: Generate Rake binstub
+  shell: chdir=$thredded_path $ruby_location/bin/bundle binstub rake
+
 - name: Generate secret token
-  shell: cd $thredded_path && RAILS_ENV=production PATH=$ruby_location/bin:$PATH bundle exec rake secret
+  shell: cd $thredded_path && RAILS_ENV=production PATH=$ruby_location/bin:$PATH bin/rake secret
   register: thredded_secret_token
 
 - name: Save secret token
   template: src=secret_token.rb.j2 dest=$thredded_path/config/initializers/secret_token.rb
 
 - name: Migrate thredded DB
-  shell: cd $thredded_path && RAILS_ENV=production PATH=$ruby_location/bin:$PATH bundle exec rake db:migrate
+  shell: cd $thredded_path && RAILS_ENV=production PATH=$ruby_location/bin:$PATH bin/rake db:migrate
 
 - name: Precompile assets
-  shell: cd $thredded_path && RAILS_ENV=production PATH=$ruby_location/bin:$PATH bundle exec rake assets:precompile
+  shell: cd $thredded_path && RAILS_ENV=production PATH=$ruby_location/bin:$PATH bin/rake assets:precompile
 
 - name: Create Thredded site in nginx
   template: src=nginx.j2 dest=/etc/nginx/sites-available/thredded owner=root group=root mode=0644
